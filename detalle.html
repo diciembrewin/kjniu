@@ -241,10 +241,10 @@ body{
       <span class="off">5% OFF</span>
       $ <span id="totalOff">0</span>
     </div>
+<button class="btn" onclick="irResumen()">
+  Seguir
+</button>
 
-    <button class="btn">
-      Seguir
-    </button>
 
   </div>
 
@@ -384,6 +384,24 @@ document.getElementById("detalleVuelta").innerHTML =
 
 
 calcular();
+
+  function irResumen(){
+
+  let total = document.getElementById("total").innerText.replace(/\./g,"");
+  let totalOff = document.getElementById("totalOff").innerText.replace(/\./g,"");
+
+  let url = "resumen.html?" +
+    "origen=" + getParam("origen") +
+    "&destino=" + getParam("destino") +
+    "&ida=" + getParam("ida") +
+    "&vuelta=" + getParam("vuelta") +
+    "&tipo=" + getParam("tipo") +
+    "&precioFinal=" + total +
+    "&precioOff=" + totalOff;
+
+  window.location.href = url;
+}
+
 
 </script>
 

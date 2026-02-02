@@ -22,8 +22,45 @@ body{
   border-bottom:1px solid #ddd;
 }
 
-.container{
+.actions{
+  display:flex;
+  gap:10px;
   padding:14px;
+  background:#fff;
+}
+
+.btn-dark{
+  background:#2b2b2b;
+  color:#fff;
+  border:none;
+  padding:10px 14px;
+  border-radius:30px;
+}
+
+.btn-light{
+  background:#fff;
+  color:#000;
+  border:1px solid #000;
+  padding:10px 14px;
+  border-radius:30px;
+}
+
+.title{
+  padding:10px 14px;
+  font-size:18px;
+  font-weight:bold;
+}
+
+.resumen{
+  background:#3b3b3b;
+  color:#fff;
+  margin:10px 14px;
+  padding:14px;
+  border-radius:12px;
+}
+
+.container{
+  padding:10px 14px;
 }
 
 .card{
@@ -34,29 +71,25 @@ body{
   box-shadow:0 2px 8px rgba(0,0,0,.1);
 }
 
-.resumen{
-  background:#3b3b3b;
-  color:#fff;
-  padding:14px;
-  border-radius:12px;
-  margin-bottom:14px;
-}
-
-.item{
+.flight{
   display:flex;
-  align-items:center;
   gap:10px;
   margin-bottom:10px;
+  font-size:14px;
+  color:#555;
+}
+
+.flight b{
+  color:#000;
 }
 
 .total{
   text-align:right;
-  font-size:20px;
   margin-top:10px;
 }
 
 .big{
-  font-size:24px;
+  font-size:22px;
   font-weight:bold;
 }
 
@@ -65,7 +98,6 @@ body{
   color:#fff;
   padding:4px 8px;
   border-radius:8px;
-  margin-right:5px;
 }
 
 .btn{
@@ -79,6 +111,11 @@ body{
   margin-top:10px;
 }
 
+.small{
+  font-size:13px;
+  color:#666;
+}
+
 </style>
 </head>
 
@@ -89,30 +126,41 @@ body{
   <div>Menu</div>
 </div>
 
-<div class="container">
+<div class="actions">
+  <button class="btn-dark" onclick="window.history.back()">Nueva búsqueda</button>
+  <button class="btn-light">Filtrar</button>
+</div>
 
-  <div class="resumen">
-    <b>El precio incluye:</b>
-    <p id="textoIncluye"></p>
-  </div>
+<div class="title" id="titulo"></div>
+
+<div class="resumen">
+  <b>El precio incluye:</b>
+  <p id="textoIncluye"></p>
+</div>
+
+<div class="container">
 
   <div class="card">
 
-    <h3>Resumen de tu viaje</h3>
+    <h4>Vuelos seleccionados:</h4>
 
-    <div class="item">
+    <div class="flight">
       ✈️
       <div>
-        <b id="rutaIda"></b><br>
-        <span id="fechaIda"></span>
+        <span id="rutaIda"></span><br>
+        <b id="detalleIda"></b><br>
+        <span class="small" id="duracionIda"></span>
       </div>
     </div>
 
-    <div class="item" id="bloqueVuelta">
+    <hr id="separador">
+
+    <div class="flight" id="bloqueVuelta">
       ✈️
       <div>
-        <b id="rutaVuelta"></b><br>
-        <span id="fechaVuelta"></span>
+        <span id="rutaVuelta"></span><br>
+        <b id="detalleVuelta"></b><br>
+        <span class="small" id="duracionVuelta"></span>
       </div>
     </div>
 
@@ -162,23 +210,36 @@ let tipo = getParam("tipo");
 let precio = getParam("precioFinal");
 let precioOff = getParam("precioOff");
 
+document.getElementById("titulo").innerText =
+  "Paquete a " + destino + ", Colombia";
+
 document.getElementById("rutaIda").innerText =
   origen + " → " + destino;
 
-document.getElementById("fechaIda").innerText =
-  "Fecha: " + ida;
+document.getElementById("detalleIda").innerText =
+  "Salida: " + ida;
+
+document.getElementById("duracionIda").innerText =
+  "Duración aproximada: 1h 10m";
 
 if(tipo === "oneway"){
+
   document.getElementById("bloqueVuelta").style.display = "none";
+  document.getElementById("separador").style.display = "none";
+
   document.getElementById("textoIncluye").innerText =
     "Vuelo solo ida para tu viaje";
+
 }else{
 
   document.getElementById("rutaVuelta").innerText =
     destino + " → " + origen;
 
-  document.getElementById("fechaVuelta").innerText =
-    "Fecha: " + vuelta;
+  document.getElementById("detalleVuelta").innerText =
+    "Regreso: " + vuelta;
+
+  document.getElementById("duracionVuelta").innerText =
+    "Duración aproximada: 1h 10m";
 
   document.getElementById("textoIncluye").innerText =
     "Vuelos de ida y vuelta para tu viaje";

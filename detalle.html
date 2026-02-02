@@ -523,24 +523,32 @@ body{
     </div>
 
     <div class="tarifas">
-      <div class="tarifa basico selected" onclick="selectTarifa('ida','basico',0,this)">
+      <div class="tarifa basico selected" onclick="selectTarifa('ida',0,this)">
         Básico
       </div>
 
-      <div class="tarifa travel" onclick="selectTarifa('ida','travel',75783,this)">
+      <div class="tarifa travel" onclick="selectTarifa('ida',75783,this)">
         Travel + COP 75.783
       </div>
 
-      <div class="tarifa standar" onclick="selectTarifa('ida','standar',87150,this)">
+      <div class="tarifa standar" onclick="selectTarifa('ida',87150,this)">
         Standard + COP 87.150
       </div>
 
-      <div class="tarifa premium" onclick="selectTarifa('ida','premium',130102,this)">
+      <div class="tarifa premium" onclick="selectTarifa('ida',130102,this)">
         Premium + COP 130.102
       </div>
     </div>
 
-    <div class="detalle" id="detalleIda"></div>
+    <div class="detalle">
+      <div>Mochila o artículo personal <span>✔</span></div>
+      <div>Equipaje de mano <span>con recargo</span></div>
+      <div>Equipaje facturado <span>con recargo</span></div>
+      <div>Selección de asiento <span>con recargo</span></div>
+      <div>Embarque prioritario <span>✖</span></div>
+      <div>Ticket <span>✔</span></div>
+      <div>FlexiSmart <span>✖</span></div>
+    </div>
 
   </div>
 
@@ -554,24 +562,32 @@ body{
     </div>
 
     <div class="tarifas">
-      <div class="tarifa basico selected" onclick="selectTarifa('vuelta','basico',0,this)">
+      <div class="tarifa basico selected" onclick="selectTarifa('vuelta',0,this)">
         Básico
       </div>
 
-      <div class="tarifa travel" onclick="selectTarifa('vuelta','travel',75783,this)">
+      <div class="tarifa travel" onclick="selectTarifa('vuelta',75783,this)">
         Travel + COP 75.783
       </div>
 
-      <div class="tarifa standar" onclick="selectTarifa('vuelta','standar',87150,this)">
+      <div class="tarifa standar" onclick="selectTarifa('vuelta',87150,this)">
         Standard + COP 87.150
       </div>
 
-      <div class="tarifa premium" onclick="selectTarifa('vuelta','premium',130102,this)">
+      <div class="tarifa premium" onclick="selectTarifa('vuelta',130102,this)">
         Premium + COP 130.102
       </div>
     </div>
 
-    <div class="detalle" id="detalleVuelta"></div>
+    <div class="detalle">
+      <div>Mochila o artículo personal <span>✔</span></div>
+      <div>Equipaje de mano <span>con recargo</span></div>
+      <div>Equipaje facturado <span>con recargo</span></div>
+      <div>Selección de asiento <span>con recargo</span></div>
+      <div>Embarque prioritario <span>✖</span></div>
+      <div>Ticket <span>✔</span></div>
+      <div>FlexiSmart <span>✖</span></div>
+    </div>
 
   </div>
 
@@ -604,43 +620,6 @@ body{
 
 </div>
 
-<!-- ===== FOOTER ===== -->
-
-<div style="background:#2b2b2b; color:#fff; padding:20px; font-size:14px;">
-
-  <h2>Tu360 Compras</h2>
-
-  <p>Operado por NETVIAJES RNT 72357</p>
-
-  <p>Netactica Colombia SAS . Nit 900132867-1</p>
-
-  <p>Cra 15 # 88 -21 Of 502 Bogotá</p>
-
-  <hr>
-
-  <p>¿Tienes dudas?</p>
-  <p>¿Necesitas financiación?</p>
-  <p>Documentos legales</p>
-
-  <hr>
-
-  <p>Superintendencia de industria y comercio</p>
-  <p>Supertransporte</p>
-  <p>Derechos de los pasajeros</p>
-  <p>Consultar RNT</p>
-  <p>Contra la pornografía infantil</p>
-  <p>Aerocivil</p>
-
-  <div style="margin-top:20px; text-align:center;">
-    Powered by <b>netactica</b>
-  </div>
-
-  <div style="margin-top:10px; text-align:center;">
-    placetopay by evertec
-  </div>
-
-</div>
-
 
 <script>
 
@@ -667,54 +646,7 @@ if(tipo === "oneway"){
 let extraIda = 0;
 let extraVuelta = 0;
 
-
-// ===== DETALLES POR TARIFA =====
-
-const beneficios = {
-
-  basico: `
-    <div>Mochila o artículo personal <span>✔</span></div>
-    <div>Equipaje de mano <span>con recargo</span></div>
-    <div>Equipaje facturado <span>con recargo</span></div>
-    <div>Selección de asiento <span>con recargo</span></div>
-    <div>Embarque prioritario <span>✖</span></div>
-    <div>Ticket <span>✔</span></div>
-    <div>FlexiSmart <span>✖</span></div>
-  `,
-
-  travel: `
-    <div>Mochila o artículo personal <span>✔</span></div>
-    <div>Equipaje de mano <span>✔</span></div>
-    <div>Equipaje facturado <span>con recargo</span></div>
-    <div>Selección de asiento <span>✔</span></div>
-    <div>Embarque prioritario <span>✖</span></div>
-    <div>Ticket <span>✔</span></div>
-    <div>FlexiSmart <span>✖</span></div>
-  `,
-
-  standar: `
-    <div>Mochila o artículo personal <span>✔</span></div>
-    <div>Equipaje de mano <span>✔</span></div>
-    <div>Equipaje facturado <span>✔</span></div>
-    <div>Selección de asiento <span>✔</span></div>
-    <div>Embarque prioritario <span>✔</span></div>
-    <div>Ticket <span>✔</span></div>
-    <div>FlexiSmart <span>✖</span></div>
-  `,
-
-  premium: `
-    <div>Mochila o artículo personal <span>✔</span></div>
-    <div>Equipaje de mano <span>✔</span></div>
-    <div>Equipaje facturado <span>✔</span></div>
-    <div>Selección de asiento <span>✔</span></div>
-    <div>Embarque prioritario <span>✔</span></div>
-    <div>Ticket <span>✔</span></div>
-    <div>FlexiSmart <span>✔</span></div>
-  `
-};
-
-
-function selectTarifa(tramo, tipoTarifa, valor, elem){
+function selectTarifa(tipo, valor, elem){
 
   let cont = elem.parentElement;
 
@@ -724,15 +656,8 @@ function selectTarifa(tramo, tipoTarifa, valor, elem){
 
   elem.classList.add("selected");
 
-  if(tramo === "ida"){
-    extraIda = valor;
-    document.getElementById("detalleIda").innerHTML = beneficios[tipoTarifa];
-  }
-
-  if(tramo === "vuelta"){
-    extraVuelta = valor;
-    document.getElementById("detalleVuelta").innerHTML = beneficios[tipoTarifa];
-  }
+  if(tipo === "ida") extraIda = valor;
+  if(tipo === "vuelta") extraVuelta = valor;
 
   calcular();
 }
@@ -756,11 +681,6 @@ function calcular(){
   document.getElementById("totalOff").innerText =
     Math.floor(conOff).toLocaleString();
 }
-
-
-// Cargar por defecto detalles básicos
-document.getElementById("detalleIda").innerHTML = beneficios.basico;
-document.getElementById("detalleVuelta").innerHTML = beneficios.basico;
 
 calcular();
 

@@ -215,8 +215,7 @@ const opciones = [
     vueltaHora: "18:10",
     vueltaLlegada: "19:20",
     duracionIda: "1h 10m",
-    duracionVuelta: "1h 10m",
-    precio: 320000
+    duracionVuelta: "1h 10m"
   },
   {
     aerolinea: "Avianca",
@@ -225,8 +224,7 @@ const opciones = [
     vueltaHora: "20:00",
     vueltaLlegada: "21:15",
     duracionIda: "1h 15m",
-    duracionVuelta: "1h 15m",
-    precio: 350000
+    duracionVuelta: "1h 15m"
   },
   {
     aerolinea: "JetSMART",
@@ -235,20 +233,41 @@ const opciones = [
     vueltaHora: "16:20",
     vueltaLlegada: "17:30",
     duracionIda: "1h 10m",
-    duracionVuelta: "1h 10m",
-    precio: 290000
+    duracionVuelta: "1h 10m"
   },
   {
     aerolinea: "Wingo",
-    idaHora: "06:15",
-    idaLlegada: "07:25",
-    vueltaHora: "22:10",
-    vueltaLlegada: "23:20",
+    idaHora: "22:15",
+    idaLlegada: "23:25",
+    vueltaHora: "06:10",
+    vueltaLlegada: "07:20",
     duracionIda: "1h 10m",
-    duracionVuelta: "1h 10m",
-    precio: 270000
+    duracionVuelta: "1h 10m"
   }
 ];
+
+function calcularPrecioSegunHora(hora) {
+
+  let h = parseInt(hora.split(":")[0]);
+
+  // MAÑANA: 05:00 – 11:59
+  if (h >= 5 && h < 12) {
+    return 110999;
+  }
+
+  // TARDE: 12:00 – 17:59
+  if (h >= 12 && h < 18) {
+    return 168500;
+  }
+
+  // NOCHE: 18:00 – 23:59
+  if (h >= 18 || h < 5) {
+    // rango variable entre 240.454 y 386.458
+    return Math.floor(Math.random() * (386458 - 240454)) + 240454;
+  }
+
+  return 168500;
+}
 
 function cargarResultados(){
 

@@ -18,6 +18,7 @@ body{
   background:#f4f4f4;
 }
 
+/* HEADER */
 .header{
   display:flex;
   justify-content:space-between;
@@ -31,10 +32,12 @@ body{
   height:28px;
 }
 
+/* HERO */
 .hero{
   position:relative;
   background:url("https://viajestu360compras.bancolombia.com/portals/27/Images/Genericas/Vuelos-Mobile.webp") no-repeat center/cover;
   height:320px;
+  overflow:visible;
 }
 
 .hero::before{
@@ -45,13 +48,28 @@ body{
   mix-blend-mode:multiply;
 }
 
+.hero-content{
+  position:absolute;
+  top:40px;
+  left:20px;
+  right:20px;
+  color:#000;
+}
+
+.hero-content h1{
+  font-size:30px;
+  margin:0;
+}
+
+/* ICON TABS */
 .tabs{
   display:flex;
   justify-content:space-around;
   position:absolute;
-  bottom:-28px;
+  bottom:-32px;
   left:0;
   right:0;
+  z-index:3;
 }
 
 .tab{
@@ -69,14 +87,17 @@ body{
   background:#ffd100;
 }
 
+/* FORM */
 .form-container{
   background:#fff;
-  margin:4px auto 20px;
-  padding:28px 20px 32px;
+  margin:-10px auto 20px;
+  padding:32px 20px;
   max-width:360px;
   width:100%;
   border-radius:30px;
   box-shadow:0 4px 14px rgba(0,0,0,.08);
+  position:relative;
+  z-index:2;
 }
 
 .field{
@@ -85,13 +106,11 @@ body{
   margin-bottom:18px;
   border-bottom:1px solid #ccc;
   padding-bottom:8px;
-  position:relative;
+  cursor:pointer;
 }
 
 .field i{
   margin-right:10px;
-  font-size:18px;
-  color:#333;
 }
 
 .field input{
@@ -99,32 +118,16 @@ body{
   outline:none;
   width:100%;
   font-size:16px;
-}
-
-.suggestions{
-  position:absolute;
-  top:40px;
-  left:0;
-  right:0;
-  background:white;
-  border:1px solid #ccc;
-  z-index:20;
-  max-height:200px;
-  overflow:auto;
-}
-
-.suggestions div{
-  padding:10px;
-  cursor:pointer;
-}
-
-.suggestions div:hover{
-  background:#eee;
+  background:none;
 }
 
 .row{
   display:flex;
   gap:20px;
+}
+
+.checks{
+  margin:20px 0;
 }
 
 .btn{
@@ -135,6 +138,84 @@ body{
   padding:14px;
   font-size:18px;
   font-weight:600;
+}
+
+/* AFTER SEARCH */
+.section{
+  background:#fff;
+  margin:30px auto 0;
+  padding:20px;
+  max-width:720px;
+}
+
+.banner{
+  width:100%;
+  margin:20px 0;
+  border-radius:20px;
+}
+
+/* FOOTER */
+footer{
+  background:#111;
+  color:#fff;
+  text-align:center;
+  padding:20px;
+}
+
+/* MODALS */
+.origin-modal{
+  position:fixed;
+  inset:0;
+  background:#f4f4f4;
+  z-index:9999;
+  display:none;
+  flex-direction:column;
+}
+
+.origin-modal.active{
+  display:flex;
+}
+
+.origin-header{
+  background:#2b2b2b;
+  color:#fff;
+  padding:16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.origin-header button{
+  background:none;
+  border:none;
+  color:#fff;
+  font-size:22px;
+}
+
+.origin-search{
+  background:#2b2b2b;
+  padding:12px;
+  display:flex;
+  align-items:center;
+}
+
+.origin-search input{
+  width:100%;
+  padding:10px;
+  border-radius:8px;
+}
+
+.origin-list{
+  background:#fff;
+  margin:12px;
+  border-radius:12px;
+}
+
+.city{
+  padding:14px;
+  border-bottom:1px solid #eee;
+  display:flex;
+  gap:10px;
   cursor:pointer;
 }
 </style>
@@ -148,6 +229,10 @@ body{
 </div>
 
 <div class="hero">
+  <div class="hero-content">
+    <h1>Vuelo + Hotel</h1>
+  </div>
+
   <div class="tabs">
     <div class="tab"><i class="fa fa-suitcase"></i></div>
     <div class="tab"><i class="fa fa-bed"></i></div>
@@ -158,98 +243,111 @@ body{
 </div>
 
 <div class="form-container">
-  <h2>Paquetes turísticos (Vuelo + Hotel)</h2>
 
-  <div class="field">
+  <h2>Paquetes turísticos</h2>
+
+  <div class="field" onclick="openOriginModal()">
     <i class="fa fa-dot-circle-o"></i>
-    <input id="origen" placeholder="Origen">
-    <div id="sugOrigen" class="suggestions"></div>
+    <input id="originInput" placeholder="Origen" readonly>
   </div>
 
-  <div class="field">
+  <div class="field" onclick="openDestinationModal()">
     <i class="fa fa-map-marker"></i>
-    <input id="destino" placeholder="Destino">
-    <div id="sugDestino" class="suggestions"></div>
+    <input id="destinationInput" placeholder="Destino" readonly>
   </div>
 
   <div class="row">
     <div class="field">
-      <i class="fa fa-calendar-check-o"></i>
-      <input type="date" id="ida">
+      <i class="fa fa-calendar"></i>
+      <input placeholder="Ida">
     </div>
-
     <div class="field">
-      <i class="fa fa-calendar-check-o"></i>
-      <input type="date" id="vuelta">
+      <i class="fa fa-calendar"></i>
+      <input placeholder="Vuelta">
     </div>
   </div>
 
   <div class="field">
     <i class="fa fa-user"></i>
-    <input type="number" value="1" min="1">
+    <input value="1">
   </div>
 
   <button class="btn">Buscar</button>
 </div>
 
+<div class="section">
+  <img class="banner" src="https://viajestu360compras.bancolombia.com/portals/27/Images/diatu360/01/dia_tu360_BannerOfertas1-720x400.webp">
+  <h2>Los destinos más buscados</h2>
+  <img class="banner" src="https://viajestu360compras.bancolombia.com/portals/27/Images/Consumo/Tarjeta-Debito-Mastercard-Mobile.png">
+</div>
+
+<footer>© Tu360Compras</footer>
+
+<!-- ORIGIN MODAL -->
+<div class="origin-modal" id="originModal">
+  <div class="origin-header">
+    <span>Ciudad de Origen</span>
+    <button onclick="closeOriginModal()">✕</button>
+  </div>
+
+  <div class="origin-search">
+    <input placeholder="Buscar" onkeyup="filterCities(this.value)">
+  </div>
+
+  <div class="origin-list">
+    <div class="city" onclick="selectCity('Cali (CLO)')">Cali (CLO)</div>
+    <div class="city" onclick="selectCity('Bogotá (BOG)')">Bogotá (BOG)</div>
+    <div class="city" onclick="selectCity('Medellín (MDE)')">Medellín (MDE)</div>
+  </div>
+</div>
+
+<!-- DESTINATION MODAL -->
+<div class="origin-modal" id="destinationModal">
+  <div class="origin-header">
+    <span>Ciudad de Destino</span>
+    <button onclick="closeDestinationModal()">✕</button>
+  </div>
+
+  <div class="origin-search">
+    <input placeholder="Buscar" onkeyup="filterDestinationCities(this.value)">
+  </div>
+
+  <div class="origin-list">
+    <div class="city" onclick="selectDestination('Cartagena (CTG)')">Cartagena (CTG)</div>
+    <div class="city" onclick="selectDestination('Cancún (CUN)')">Cancún (CUN)</div>
+    <div class="city" onclick="selectDestination('Miami (MIA)')">Miami (MIA)</div>
+  </div>
+</div>
+
 <script>
-
-// AEROPUERTOS REALES DE COLOMBIA
-const aeropuertos = [
-"Bogotá - El Dorado (BOG)",
-"Medellín - José María Córdova (MDE)",
-"Cali - Alfonso Bonilla Aragón (CLO)",
-"Cartagena - Rafael Núñez (CTG)",
-"Barranquilla - Ernesto Cortissoz (BAQ)",
-"Bucaramanga - Palonegro (BGA)",
-"Pereira - Matecaña (PEI)",
-"Santa Marta - Simón Bolívar (SMR)",
-"Cúcuta - Camilo Daza (CUC)",
-"Montería - Los Garzones (MTR)",
-"Valledupar - Alfonso López (VUP)",
-"Armenia - El Edén (AXM)",
-"Manizales - La Nubia (MZL)",
-"Neiva - Benito Salas (NVA)",
-"Villavicencio - Vanguardia (VVC)",
-"Ibagué - Perales (IBE)",
-"Leticia - Alfredo Vásquez Cobo (LET)",
-"San Andrés - Gustavo Rojas Pinilla (ADZ)",
-"Pasto - Antonio Nariño (PSO)",
-"Riohacha - Almirante Padilla (RCH)"
-];
-
-function activarAutocomplete(inputId, boxId) {
-  const input = document.getElementById(inputId);
-  const box = document.getElementById(boxId);
-
-  input.addEventListener("keyup", () => {
-    let valor = input.value.toLowerCase();
-    box.innerHTML = "";
-
-    if (!valor) return;
-
-    aeropuertos
-      .filter(a => a.toLowerCase().includes(valor))
-      .forEach(a => {
-        let div = document.createElement("div");
-        div.textContent = a;
-        div.onclick = () => {
-          input.value = a;
-          box.innerHTML = "";
-        };
-        box.appendChild(div);
-      });
-  });
+function openOriginModal(){
+  document.getElementById('originModal').classList.add('active');
 }
 
-activarAutocomplete("origen", "sugOrigen");
-activarAutocomplete("destino", "sugDestino");
+function closeOriginModal(){
+  document.getElementById('originModal').classList.remove('active');
+}
 
-// Fechas lógicas
-document.getElementById("ida").addEventListener("change", function() {
-  document.getElementById("vuelta").min = this.value;
-});
+function selectCity(city){
+  document.getElementById('originInput').value = city;
+  closeOriginModal();
+}
 
+function openDestinationModal(){
+  document.getElementById('destinationModal').classList.add('active');
+}
+
+function closeDestinationModal(){
+  document.getElementById('destinationModal').classList.remove('active');
+}
+
+function selectDestination(city){
+  document.getElementById('destinationInput').value = city;
+  closeDestinationModal();
+}
+
+function filterCities(t){}
+function filterDestinationCities(t){}
 </script>
 
 </body>

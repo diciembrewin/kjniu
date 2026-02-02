@@ -385,16 +385,27 @@ function calcular(){
 
   let baseUnitario = precioIda + precioVuelta + extraIda + extraVuelta;
 
-  let base = baseUnitario * pasajeros;
-
-  document.getElementById("base").innerText =
-    base.toLocaleString();
-
   let impuestosPorPersona = 62740;
+
+  let precioPorPasajero = baseUnitario + impuestosPorPersona;
+
+  let subtotal = baseUnitario * pasajeros;
 
   let impuestosTotales = impuestosPorPersona * pasajeros;
 
-  let total = base + impuestosTotales;
+  let total = subtotal + impuestosTotales;
+
+  document.getElementById("numPasajeros").innerText = pasajeros;
+  document.getElementById("numPasajeros2").innerText = pasajeros;
+
+  document.getElementById("precioPorPasajero").innerText =
+    precioPorPasajero.toLocaleString();
+
+  document.getElementById("impuestosPorPasajero").innerText =
+    impuestosPorPersona.toLocaleString();
+
+  document.getElementById("subtotal").innerText =
+    subtotal.toLocaleString();
 
   document.getElementById("total").innerText =
     total.toLocaleString();

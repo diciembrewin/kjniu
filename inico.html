@@ -2,170 +2,208 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Tu360 Compras – UI</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tu360 – Vuelos</title>
 
+<!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <style>
-*{box-sizing:border-box;font-family:Roboto, Arial, sans-serif}
-body{margin:0;background:#f4f4f4;color:#000}
+*{
+  box-sizing:border-box;
+  font-family:'Roboto', Arial, sans-serif;
+}
+
+body{
+  margin:0;
+  background:#f4f4f4;
+}
 
 /* HEADER */
 .header{
-  background:#fff;
-  padding:14px 16px;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  font-weight:bold;
+  padding:14px 18px;
+  background:#fff;
+  font-weight:600;
+}
+
+.header img{
+  height:28px;
 }
 
 /* HERO */
 .hero{
-  height:260px;
-  overflow:hidden;
-}
-.hero img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
+  position:relative;
+  background:url("https://viajestu360compras.bancolombia.com/portals/27/Images/Genericas/Vuelos-Mobile.webp") no-repeat center/cover;
+  height:320px;
 }
 
-/* TABS */
-#widget-tabs{
-  list-style:none;
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:#00c6d7;
+  mix-blend-mode:multiply;
+}
+
+.hero-content{
+  position:absolute;
+  top:40px;
+  left:20px;
+  right:20px;
+  color:#000;
+}
+
+.hero-content h1{
+  font-size:30px;
+  margin:0 0 10px;
+}
+
+.hero-content p{
+  font-size:18px;
+  margin:0;
+}
+
+/* ICON TABS */
+.tabs{
   display:flex;
   justify-content:space-around;
-  padding:0;
-  margin:-35px 0 0;
-  position:relative;
-  z-index:5;
-}
-#widget-tabs li{text-align:center}
-#widget-tabs li a{
-  text-decoration:none;
-  color:#000;
-  font-size:12px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-}
-#widget-tabs li a i{
-  width:60px;
-  height:60px;
-  border-radius:50%;
-  background:#fff;
-  border:1px solid #ddd;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:24px;
-  margin-bottom:6px;
-}
-#widget-tabs li.active a i{
-  background:#FFD400;
-  border:none;
-}
-@media(max-width:768px){
-  #widget-tabs li a span{display:none}
+  position:absolute;
+  bottom:-28px;
+  left:0;
+  right:0;
 }
 
-/* ===== FORMULARIO ===== */
+.tab{
+  width:64px;
+  height:64px;
+  background:#fff;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 4px 10px rgba(0,0,0,.15);
+}
+
+.tab.active{
+  background:#ffd100;
+}
+
+/* FORM CONTAINER */
 .form-container{
   background:#fff;
-  margin:20px auto;          /* separado del resto */
-  padding:28px 20px 32px;
 
-  max-width:360px;           /* 👈 MÁS ANGOSTO */
+  /* 👇 SUBE el formulario (clave) */
+  margin:-20px auto 20px;
+
+  padding:28px 20px 32px;
+  max-width:360px;
   width:100%;
 
-  border-radius:30px;        /* 👈 TODOS LOS BORDES */
+  border-radius:30px;
   box-shadow:0 4px 14px rgba(0,0,0,.08);
 }
 
+.form-container h2{
+  margin:0 0 20px;
+  font-size:22px;
+}
+
+/* INPUTS */
 .field{
   display:flex;
   align-items:center;
-  gap:12px;
-  padding:12px 0;
-  border-bottom:1px solid #000;
   margin-bottom:18px;
+  border-bottom:1px solid #ccc;
+  padding-bottom:8px;
 }
-.field i{font-size:20px}
+
+.field i{
+  margin-right:10px;
+  font-size:18px;
+  color:#333;
+}
+
 .field input{
   border:none;
   outline:none;
-  font-size:16px;
   width:100%;
+  font-size:16px;
 }
 
-.dates{
+/* DATE ROW */
+.row{
   display:flex;
-  gap:12px;
+  gap:20px;
 }
-.half{width:50%}
 
+/* CHECKS */
 .checks{
-  margin:18px 0;
+  margin:20px 0;
   font-size:14px;
 }
+
 .checks label{
   display:block;
-  margin-bottom:12px;
+  margin-bottom:10px;
 }
 
-.btn-search{
+/* BUTTON */
+.btn{
   width:100%;
-  background:#FFD400;
+  background:#ffd100;
   border:none;
-  padding:16px;
+  border-radius:30px;
+  padding:14px;
   font-size:18px;
-  font-weight:bold;
-  border-radius:40px;
+  font-weight:600;
   cursor:pointer;
 }
 
-/* ===== SECCIONES INFERIORES ===== */
+/* SECTION AFTER SEARCH */
 .section{
   background:#fff;
-  padding:30px 20px;
+  margin:30px auto 0;
+  padding:20px;
+  max-width:720px;
 }
 
-.banner img,
-.card-banner img{
-  width:100%;
-  border-radius:20px;
+.section h2{
+  margin-bottom:8px;
 }
 
-.section-title h2{margin:0 0 5px}
-.section-title p{margin:0;color:#555}
-
-/* MENU DESTINOS */
 .menuItems{
-  list-style:none;
   display:flex;
   gap:20px;
+  list-style:none;
   padding:0;
-  margin:20px 0;
-  border-bottom:1px solid #ddd;
 }
+
 .menuItems__items{
-  padding:10px 0;
   cursor:pointer;
   font-weight:500;
 }
+
 .menuItems__items.active{
-  border-bottom:3px solid #FFD400;
+  border-bottom:3px solid #ffd100;
+}
+
+/* BANNERS */
+.banner{
+  width:100%;
+  margin:20px 0;
+  border-radius:20px;
 }
 
 /* FOOTER */
-.footer{
-  background:#2c2a29;
+footer{
+  background:#111;
   color:#fff;
-  padding:30px 20px;
   text-align:center;
-  font-size:14px;
+  padding:20px;
+  margin-top:40px;
 }
 </style>
 </head>
@@ -174,27 +212,29 @@ body{margin:0;background:#f4f4f4;color:#000}
 
 <!-- HEADER -->
 <div class="header">
-  <div><strong>Tu360</strong>Compras</div>
-  <div>Menu ⋮</div>
+  <img src="https://viajestu360compras.bancolombia.com/Portals/27/logo-tu360compras.png">
+  <span>Menu</span>
 </div>
 
 <!-- HERO -->
 <div class="hero">
-  <img src="https://viajestu360compras.bancolombia.com/portals/27/Images/Genericas/Vuelos-Mobile.webp">
+  <div class="hero-content">
+    <h1>Vuelo + Hotel</h1>
+    <p>Descubre el paraíso del Caribe y vive unas <b>vacaciones inolvidables</b></p>
+  </div>
+
+  <div class="tabs">
+    <div class="tab"><i class="fa fa-suitcase"></i></div>
+    <div class="tab"><i class="fa fa-bed"></i></div>
+    <div class="tab active"><i class="fa fa-plane"></i></div>
+    <div class="tab"><i class="fa fa-ticket"></i></div>
+    <div class="tab"><i class="fa fa-car"></i></div>
+  </div>
 </div>
 
-<!-- TABS -->
-<ul id="widget-tabs">
-  <li><a href="#"><i class="fa fa-suitcase"></i><span>Paquetes</span></a></li>
-  <li><a href="#"><i class="fa fa-h-square"></i><span>Hotel</span></a></li>
-  <li class="active"><a href="#"><i class="fa fa-plane"></i><span>Vuelos</span></a></li>
-  <li><a href="#"><i class="fa fa-ticket"></i><span>Actividades</span></a></li>
-  <li><a href="#"><i class="fa fa-car"></i><span>Autos</span></a></li>
-</ul>
-
-<!-- FORMULARIO -->
+<!-- FORM -->
 <div class="form-container">
-  <h2>Vuelos</h2>
+  <h2>Paquetes turísticos (Vuelo + Hotel)</h2>
 
   <div class="field">
     <i class="fa fa-dot-circle-o"></i>
@@ -206,12 +246,12 @@ body{margin:0;background:#f4f4f4;color:#000}
     <input placeholder="Destino">
   </div>
 
-  <div class="dates">
-    <div class="field half">
+  <div class="row">
+    <div class="field">
       <i class="fa fa-calendar-check-o"></i>
       <input placeholder="Ida">
     </div>
-    <div class="field half">
+    <div class="field">
       <i class="fa fa-calendar-check-o"></i>
       <input placeholder="Vuelta">
     </div>
@@ -219,7 +259,7 @@ body{margin:0;background:#f4f4f4;color:#000}
 
   <div class="field">
     <i class="fa fa-user"></i>
-    <input type="number" value="1">
+    <input value="1">
   </div>
 
   <div class="checks">
@@ -227,49 +267,28 @@ body{margin:0;background:#f4f4f4;color:#000}
     <label><input type="checkbox"> Solo vuelos directos</label>
   </div>
 
-  <button class="btn-search">Buscar</button>
+  <button class="btn">Buscar</button>
 </div>
 
-<!-- CONTENIDO POSTERIOR -->
+<!-- AFTER SEARCH CONTENT -->
 <div class="section">
-  <div class="banner">
-    <img src="https://viajestu360compras.bancolombia.com/portals/27/Images/diatu360/01/dia_tu360_BannerOfertas1-720x400.webp">
-  </div>
+  <img class="banner" src="https://viajestu360compras.bancolombia.com/portals/27/Images/diatu360/01/dia_tu360_BannerOfertas1-720x400.webp">
 
-  <div class="section-title">
-    <h2>Los destinos más buscados</h2>
-    <p>Encuentra las rutas más populares con precios imperdibles</p>
-  </div>
+  <h2>Los destinos más buscados</h2>
+  <p>Encuentra las rutas más populares con precios imperdibles</p>
 
   <ul class="menuItems">
     <li class="menuItems__items active">Vuelos desde Bogotá</li>
     <li class="menuItems__items">Vuelos desde Medellín</li>
   </ul>
 
-  <div class="card-banner">
-    <img src="https://viajestu360compras.bancolombia.com/portals/27/Images/Consumo/Tarjeta-Debito-Mastercard-Mobile.png">
-  </div>
+  <img class="banner" src="https://viajestu360compras.bancolombia.com/portals/27/Images/Consumo/Tarjeta-Debito-Mastercard-Mobile.png">
 </div>
 
 <!-- FOOTER -->
-<div class="footer">
-  © 2026 Tu360 Compras · UI Demo
-</div>
-
-<script>
-document.querySelectorAll('#widget-tabs li').forEach(tab=>{
-  tab.onclick=()=>{
-    document.querySelectorAll('#widget-tabs li').forEach(t=>t.classList.remove('active'));
-    tab.classList.add('active');
-  };
-});
-document.querySelectorAll('.menuItems__items').forEach(item=>{
-  item.onclick=()=>{
-    document.querySelectorAll('.menuItems__items').forEach(i=>i.classList.remove('active'));
-    item.classList.add('active');
-  };
-});
-</script>
+<footer>
+  © Tu360Compras – Bancolombia
+</footer>
 
 </body>
 </html>

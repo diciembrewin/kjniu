@@ -127,6 +127,10 @@ body{
   height:20px;
 }
 
+.airline img{
+  width:24px;
+  height:auto;
+}
 
 </style>
 </head>
@@ -175,6 +179,14 @@ let textoResumen = tipo === "oneway"
   : "Vuelos de ida y vuelta para " + pasajeros + " pasajero(s)";
 
 document.getElementById("resumen").innerText = textoResumen;
+
+  const logosAerolineas = {
+  "LATAM Airlines": "https://reservas.bancolombia.com/Images/Airlines/air_LAlogo.gif",
+  "Avianca": "https://reservas.bancolombia.com/Images/Airlines/air_AVlogo.gif",
+  "JetSMART": "https://reservas.bancolombia.com/Images/Airlines/air_JAlogo.gif",
+  "Wingo": "https://reservas.bancolombia.com/Images/Airlines/air_P5logo.gif"
+};
+
 
 const opciones = [
   { aerolinea: "Avianca", idaHora: "06:30", idaLlegada: "07:40", vueltaHora: "10:10", vueltaLlegada: "11:20" },
@@ -242,10 +254,15 @@ function cargarResultados(){
     html += `
       <div class="option">
         <input type="radio" name="ida" onclick="seleccionarIda(${precio})">
-        <div>
-          <b>${v.aerolinea}</b><br>
-          ${origen} ${v.idaHora} → ${destino} ${v.idaLlegada}
+
+        <div class="airline-row">
+          <img src="${logosAerolineas[v.aerolinea]}" alt="">
+          <div>
+            <b>${v.aerolinea}</b><br>
+            ${origen} ${v.idaHora} → ${destino} ${v.idaLlegada}
+          </div>
         </div>
+
         <div style="margin-left:auto">
           COP $ ${precio.toLocaleString()}
         </div>
@@ -267,10 +284,15 @@ function cargarResultados(){
       html += `
         <div class="option">
           <input type="radio" name="vuelta" onclick="seleccionarVuelta(${precio})">
-          <div>
-            <b>${v.aerolinea}</b><br>
-            ${destino} ${v.vueltaHora} → ${origen} ${v.vueltaLlegada}
+
+          <div class="airline-row">
+            <img src="${logosAerolineas[v.aerolinea]}" alt="">
+            <div>
+              <b>${v.aerolinea}</b><br>
+              ${destino} ${v.vueltaHora} → ${origen} ${v.vueltaLlegada}
+            </div>
           </div>
+
           <div style="margin-left:auto">
             COP $ ${precio.toLocaleString()}
           </div>
@@ -281,27 +303,27 @@ function cargarResultados(){
     html += `</div>`;
   }
 
-html += `
-  <div class="card">
-    <div class="price" id="precioFinal">
+  html += `
+    <div class="card">
+      <div class="price" id="precioFinal">
 
-      <div class="price-row">
-        <img src="https://tu360compras.bancolombia.com/themes/child/img/favicon-bancolombia.svg">
-        <span class="promo-badge">5% Off</span>
-        <b>COP $ 0</b>
+        <div class="price-row">
+          <img src="https://tu360compras.bancolombia.com/themes/child/img/favicon-bancolombia.svg">
+          <span class="promo-badge">5% Off</span>
+          <b>COP $ 0</b>
+        </div>
+
       </div>
 
+      <button class="btn-select">Confirmar selección</button>
     </div>
-
-    <button class="btn-select">Confirmar selección</button>
-  </div>
-`;
-
+  `;
 
   box.innerHTML = html;
 }
 
 cargarResultados();
+
 
 </script>
 

@@ -5,8 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Detalle del vuelo – Tu360 Compras</title>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
 <style>
 
 body{
@@ -35,68 +33,77 @@ body{
   box-shadow:0 2px 8px rgba(0,0,0,.1);
 }
 
-.section-title{
-  font-weight:bold;
-  margin-bottom:10px;
-}
-
-.flight-box{
+.section{
   display:flex;
   justify-content:space-between;
   align-items:center;
+  background:#f0f0f0;
   padding:10px;
-  border-bottom:1px solid #eee;
-}
-
-.time{
-  font-size:20px;
-  font-weight:bold;
-}
-
-.badge{
-  background:#ffd100;
-  padding:4px 8px;
-  border-radius:8px;
-  font-size:12px;
+  border-radius:10px;
+  margin-bottom:10px;
 }
 
 .tarifas{
   display:flex;
-  gap:10px;
+  gap:8px;
   overflow-x:auto;
+  margin:10px 0;
 }
 
 .tarifa{
   padding:10px;
   border-radius:10px;
-  border:1px solid #ccc;
   min-width:120px;
   text-align:center;
   cursor:pointer;
+  font-size:14px;
+  color:#000;
+}
+
+.basico{
+  background:#ffa07a;
+}
+
+.travel{
+  background:#9b59b6;
+  color:#fff;
+}
+
+.standar{
+  background:#48c9b0;
+  color:#fff;
+}
+
+.premium{
+  background:#f39c12;
+  color:#fff;
 }
 
 .tarifa.selected{
-  background:#2b2b2b;
-  color:#fff;
+  background:#2b2b2b !important;
+  color:#fff !important;
+}
+
+.detalle{
+  border:1px solid #ddd;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.detalle div{
+  padding:10px;
+  border-bottom:1px solid #eee;
+  display:flex;
+  justify-content:space-between;
 }
 
 .total{
   text-align:right;
-  font-size:18px;
+  margin-top:10px;
 }
 
-.big-total{
+.big{
   font-size:22px;
-  font-weight:bold;
-}
-
-.btn{
-  width:100%;
-  background:#ffd100;
-  border:none;
-  border-radius:30px;
-  padding:14px;
-  font-size:18px;
   font-weight:bold;
 }
 
@@ -105,6 +112,17 @@ body{
   color:#fff;
   padding:4px 8px;
   border-radius:8px;
+}
+
+.btn{
+  width:100%;
+  background:#fff;
+  border:1px solid #000;
+  border-radius:30px;
+  padding:14px;
+  font-size:18px;
+  font-weight:bold;
+  margin-top:10px;
 }
 
 </style>
@@ -124,83 +142,102 @@ body{
     <p>Mejora las condiciones de tu tarifa</p>
   </div>
 
-  <!-- IDA -->
+  <!-- ===== IDA ===== -->
   <div class="card">
-    <div class="section-title">IDA</div>
 
-    <div class="flight-box">
-      <div>
-        <b id="origen"></b>
-        <div class="time" id="horaIda"></div>
-      </div>
-
-      <div>→</div>
-
-      <div>
-        <b id="destino"></b>
-        <div class="time" id="horaLlegadaIda"></div>
-      </div>
-
-      <span class="badge" id="lugaresIda"></span>
+    <div class="section">
+      <div><b>IDA</b></div>
+      <div id="fechaIda"></div>
     </div>
 
     <div class="tarifas">
-      <div class="tarifa selected" onclick="seleccionarTarifa(this, 0)">
+      <div class="tarifa basico selected" onclick="selectTarifa('ida',0,this)">
         Básico
       </div>
 
-      <div class="tarifa" onclick="seleccionarTarifa(this, 75783)">
+      <div class="tarifa travel" onclick="selectTarifa('ida',75783,this)">
         Travel + COP 75.783
       </div>
 
-      <div class="tarifa" onclick="seleccionarTarifa(this, 120000)">
-        Standar + COP 120.000
+      <div class="tarifa standar" onclick="selectTarifa('ida',87150,this)">
+        Standard + COP 87.150
       </div>
+
+      <div class="tarifa premium" onclick="selectTarifa('ida',130102,this)">
+        Premium + COP 130.102
+      </div>
+    </div>
+
+    <div class="detalle">
+      <div>Mochila o artículo personal <span>✔</span></div>
+      <div>Equipaje de mano <span>con recargo</span></div>
+      <div>Equipaje facturado <span>con recargo</span></div>
+      <div>Selección de asiento <span>con recargo</span></div>
+      <div>Embarque prioritario <span>✖</span></div>
+      <div>Ticket <span>✔</span></div>
+      <div>FlexiSmart <span>✖</span></div>
     </div>
 
   </div>
 
-  <!-- VUELTA -->
+
+  <!-- ===== VUELTA ===== -->
   <div class="card" id="boxVuelta">
 
-    <div class="section-title">VUELTA</div>
+    <div class="section">
+      <div><b>VUELTA</b></div>
+      <div id="fechaVuelta"></div>
+    </div>
 
-    <div class="flight-box">
-      <div>
-        <b id="destino2"></b>
-        <div class="time" id="horaVuelta"></div>
+    <div class="tarifas">
+      <div class="tarifa basico selected" onclick="selectTarifa('vuelta',0,this)">
+        Básico
       </div>
 
-      <div>→</div>
-
-      <div>
-        <b id="origen2"></b>
-        <div class="time" id="horaLlegadaVuelta"></div>
+      <div class="tarifa travel" onclick="selectTarifa('vuelta',75783,this)">
+        Travel + COP 75.783
       </div>
 
-      <span class="badge" id="lugaresVuelta"></span>
+      <div class="tarifa standar" onclick="selectTarifa('vuelta',87150,this)">
+        Standard + COP 87.150
+      </div>
+
+      <div class="tarifa premium" onclick="selectTarifa('vuelta',130102,this)">
+        Premium + COP 130.102
+      </div>
+    </div>
+
+    <div class="detalle">
+      <div>Mochila o artículo personal <span>✔</span></div>
+      <div>Equipaje de mano <span>con recargo</span></div>
+      <div>Equipaje facturado <span>con recargo</span></div>
+      <div>Selección de asiento <span>con recargo</span></div>
+      <div>Embarque prioritario <span>✖</span></div>
+      <div>Ticket <span>✔</span></div>
+      <div>FlexiSmart <span>✖</span></div>
     </div>
 
   </div>
 
-  <!-- TOTAL -->
+
+  <!-- ===== TOTAL ===== -->
   <div class="card">
 
     <div class="total">
-      Tarifa: COP $ <span id="tarifaBase">0</span>
+      Tarifa: COP $ <span id="base">0</span>
     </div>
 
     <div class="total">
-      Impuestos y tasas: COP $ <span id="impuestos">72.740</span>
+      Impuestos y tasas: COP $ 72.740
     </div>
 
-    <div class="total big-total">
+    <div class="total big">
       Total: COP $ <span id="total">0</span>
     </div>
 
-    <div class="total big-total">
+    <div class="total big">
       <span class="off">5% OFF</span>
-      COP $ <span id="totalOff">0</span>
+      $ <span id="totalOff">0</span>
     </div>
 
     <button class="btn">
@@ -218,60 +255,46 @@ function getParam(name){
   return new URL(window.location.href).searchParams.get(name);
 }
 
-let origen = getParam("origen");
-let destino = getParam("destino");
 let tipo = getParam("tipo");
 
-let horaIda = getParam("idaHora");
-let horaLlegadaIda = getParam("idaLlegada");
-
-let horaVuelta = getParam("vueltaHora");
-let horaLlegadaVuelta = getParam("vueltaLlegada");
-
-let precioIda = parseInt(getParam("precioIda"));
+let precioIda = parseInt(getParam("precioIda") || 0);
 let precioVuelta = parseInt(getParam("precioVuelta") || 0);
 
-document.getElementById("origen").innerText = origen;
-document.getElementById("destino").innerText = destino;
-document.getElementById("horaIda").innerText = horaIda;
-document.getElementById("horaLlegadaIda").innerText = horaLlegadaIda;
+document.getElementById("fechaIda").innerText =
+  getParam("ida") || "Fecha ida";
 
-document.getElementById("origen2").innerText = origen;
-document.getElementById("destino2").innerText = destino;
-document.getElementById("horaVuelta").innerText = horaVuelta;
-document.getElementById("horaLlegadaVuelta").innerText = horaLlegadaVuelta;
+document.getElementById("fechaVuelta").innerText =
+  getParam("vuelta") || "Fecha vuelta";
 
 if(tipo === "oneway"){
   document.getElementById("boxVuelta").style.display = "none";
+  precioVuelta = 0;
 }
 
-function lugaresRandom(){
-  return "Quedan " + Math.floor(Math.random() * 9 + 1) + " lugares";
-}
+let extraIda = 0;
+let extraVuelta = 0;
 
-document.getElementById("lugaresIda").innerText = lugaresRandom();
-document.getElementById("lugaresVuelta").innerText = lugaresRandom();
+function selectTarifa(tipo, valor, elem){
 
-let extraTarifa = 0;
+  let cont = elem.parentElement;
 
-function seleccionarTarifa(elem, valor){
-
-  document.querySelectorAll(".tarifa").forEach(t =>
+  cont.querySelectorAll(".tarifa").forEach(t =>
     t.classList.remove("selected")
   );
 
   elem.classList.add("selected");
 
-  extraTarifa = valor;
+  if(tipo === "ida") extraIda = valor;
+  if(tipo === "vuelta") extraVuelta = valor;
 
-  actualizarTotal();
+  calcular();
 }
 
-function actualizarTotal(){
+function calcular(){
 
-  let base = precioIda + precioVuelta + extraTarifa;
+  let base = precioIda + precioVuelta + extraIda + extraVuelta;
 
-  document.getElementById("tarifaBase").innerText =
+  document.getElementById("base").innerText =
     base.toLocaleString();
 
   let impuestos = 72740;
@@ -281,13 +304,13 @@ function actualizarTotal(){
   document.getElementById("total").innerText =
     total.toLocaleString();
 
-  let conDescuento = total - (total * 0.05);
+  let conOff = total - (total * 0.05);
 
   document.getElementById("totalOff").innerText =
-    Math.floor(conDescuento).toLocaleString();
+    Math.floor(conOff).toLocaleString();
 }
 
-actualizarTotal();
+calcular();
 
 </script>
 

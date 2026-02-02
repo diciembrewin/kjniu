@@ -262,8 +262,17 @@ let tipo = getParam("tipo");
 let precioIda = parseInt(getParam("precioIda") || 0);
 let precioVuelta = parseInt(getParam("precioVuelta") || 0);
 
-// 👇 AQUÍ ESTÁ LA LÍNEA CLAVE QUE TE FALTABA
-let pasajeros = parseInt(getParam("pasajeros") || 1);
+// LEER PASAJEROS CORRECTAMENTE
+let pasajerosTexto = getParam("pasajeros") || "1";
+
+let pasajeros = parseInt(pasajerosTexto.replace(/\D/g, ""));
+
+if(isNaN(pasajeros) || pasajeros < 1){
+  pasajeros = 1;
+}
+
+// Mostrar pasajeros en pantalla
+document.getElementById("numPasajeros").innerText = pasajeros;
 
 document.getElementById("fechaIda").innerText =
   getParam("ida") || "Fecha ida";
@@ -357,37 +366,7 @@ function selectTarifa(tramo, valor, elem){
 }
 
 
-function calcular(){
-
-  let base = (precioIda + precioVuelta + extraIda + extraVuelta) * pasajeros;
-
-  document.getElementById("base").innerText =
-    base.toLocaleString();
-
-  let impuestos = 62740;
-
-  let total = base + impuestos;
-
-  document.getElementById("total").innerText =
-    total.toLocaleString();
-
-  let conOff = total - (total * 0.05);
-
-  document.getElementById("totalOff").innerText =
-    Math.floor(conOff).toLocaleString();
-}
-
-
-// Cargar detalles por defecto (Básico)
-
-document.getElementById("detalleIda").innerHTML =
-  detallesTarifa.basico;
-
-document.getElementById("detalleVuelta").innerHTML =
-  detallesTarifa.basico;
-
-// 👇 MOSTRAR PASAJEROS EN PANTALLA
-document.getElementById("numPasajeros").innerText = pasajeros;
+// ===== FUNCIÓN ÚNICA DE CÁLCULO (CORRECTA) =====
 
 function calcular(){
 
@@ -413,7 +392,21 @@ function calcular(){
     Math.floor(conOff).toLocaleString();
 }
 
+
+// Cargar detalles por defecto (Básico)
+
+document.getElementById("detalleIda").innerHTML =
+  detallesTarifa.basico;
+
+document.getElementById("detalleVuelta").innerHTML =
+  detallesTarifa.basico;
+
+
+// EJECUTAR CÁLCULO INICIAL
+calcular();
+
 </script>
+
 
 
 </body>

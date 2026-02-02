@@ -162,6 +162,36 @@ body{
 .vuelta-bar{
   border-left:5px solid #ff6b00;
 }
+.option.selected{
+  background:#fff9d9;
+  border-left:5px solid #ffd100;
+}
+
+.lugares{
+  color:#c00;
+  font-style:italic;
+  font-size:12px;
+  text-align:right;
+}
+
+.maletas{
+  display:flex;
+  gap:6px;
+  justify-content:flex-end;
+  opacity:0.6;
+}
+
+.details{
+  font-size:13px;
+  color:#666;
+  margin-top:4px;
+  display:none;
+}
+
+.toggle{
+  cursor:pointer;
+  font-size:14px;
+}
 
 
 </style>
@@ -292,39 +322,62 @@ function cargarResultados(){
 
   let box = document.getElementById("resultBox");
 
- let html = `
-<div class="card">
+  let html = `
+  <div class="card">
 
-  <div class="flight-header">
-    <div class="flight-header-left ida-bar">
-      <i class="fa fa-plane"></i> IDA
+    <div class="flight-header">
+      <div class="flight-header-left ida-bar">
+        <i class="fa fa-plane"></i> IDA
+      </div>
+
+      <div class="flight-header-right">
+        ${ida}
+      </div>
     </div>
+  `;
 
-    <div class="flight-header-right">
-      ${ida}
-    </div>
-  </div>
-`;
-
-  opciones.forEach((v) => {
+  opciones.forEach((v,i) => {
 
     let precio = calcularPrecio(v.idaHora);
+    let lugares = lugaresAleatorios();
+    let detalleId = "detIda" + i;
 
     html += `
-      <div class="option">
-        <input type="radio" name="ida" onclick="seleccionarIda(${precio})">
+      <div class="option option-ida">
+
+        <input type="radio" name="ida"
+          onclick="seleccionarIda(${precio}); marcarSeleccion('option-ida', this)">
 
         <div class="airline-row">
           <img src="${logosAerolineas[v.aerolinea]}" alt="">
           <div>
             <b>${v.aerolinea}</b><br>
-            ${origen} ${v.idaHora} → ${destino} ${v.idaLlegada}
+            ${origen} <b>${v.idaHora}</b> → ${destino} <b>${v.idaLlegada}</b>
           </div>
         </div>
 
-        <div style="margin-left:auto">
+        <div style="margin-left:auto; text-align:right">
           COP $ ${precio.toLocaleString()}
+
+          <div class="maletas">
+            <i class="fa fa-suitcase"></i>
+            <i class="fa fa-briefcase"></i>
+          </div>
+
+          <div class="lugares">
+            quedan ${lugares} lugares
+          </div>
+
+          <div class="toggle" onclick="toggleDetalles('${detalleId}')">
+            Ver detalles ▼
+          </div>
+
         </div>
+
+      </div>
+
+      <div class="details" id="${detalleId}">
+        Duración estimada: 1h 10m – Vuelo directo
       </div>
     `;
   });
@@ -333,39 +386,62 @@ function cargarResultados(){
 
   if(tipo !== "oneway"){
 
-   html += `
-<div class="card">
+    html += `
+    <div class="card">
 
-  <div class="flight-header">
-    <div class="flight-header-left vuelta-bar">
-      <i class="fa fa-plane fa-rotate-180"></i> VUELTA
-    </div>
+      <div class="flight-header">
+        <div class="flight-header-left vuelta-bar">
+          <i class="fa fa-plane fa-rotate-180"></i> VUELTA
+        </div>
 
-    <div class="flight-header-right">
-      ${vuelta}
-    </div>
-  </div>
-`;
+        <div class="flight-header-right">
+          ${vuelta}
+        </div>
+      </div>
+    `;
 
-    opciones.forEach((v) => {
+    opciones.forEach((v,i) => {
 
       let precio = calcularPrecio(v.vueltaHora);
+      let lugares = lugaresAleatorios();
+      let detalleId = "detVuelta" + i;
 
       html += `
-        <div class="option">
-          <input type="radio" name="vuelta" onclick="seleccionarVuelta(${precio})">
+        <div class="option option-vuelta">
+
+          <input type="radio" name="vuelta"
+            onclick="seleccionarVuelta(${precio}); marcarSeleccion('option-vuelta', this)">
 
           <div class="airline-row">
             <img src="${logosAerolineas[v.aerolinea]}" alt="">
             <div>
               <b>${v.aerolinea}</b><br>
-              ${destino} ${v.vueltaHora} → ${origen} ${v.vueltaLlegada}
+              ${destino} <b>${v.vueltaHora}</b> → ${origen} <b>${v.vueltaLlegada}</b>
             </div>
           </div>
 
-          <div style="margin-left:auto">
+          <div style="margin-left:auto; text-align:right">
             COP $ ${precio.toLocaleString()}
+
+            <div class="maletas">
+              <i class="fa fa-suitcase"></i>
+              <i class="fa fa-briefcase"></i>
+            </div>
+
+            <div class="lugares">
+              quedan ${lugares} lugares
+            </div>
+
+            <div class="toggle" onclick="toggleDetalles('${detalleId}')">
+              Ver detalles ▼
+            </div>
+
           </div>
+
+        </div>
+
+        <div class="details" id="${detalleId}">
+          Duración estimada: 1h 10m – Vuelo directo
         </div>
       `;
     });
@@ -393,6 +469,24 @@ function cargarResultados(){
 }
 
 cargarResultados();
+
+  function lugaresAleatorios(){
+  return Math.floor(Math.random() * 10) + 1;
+}
+
+function toggleDetalles(id){
+  let d = document.getElementById(id);
+  d.style.display = d.style.display === "block" ? "none" : "block";
+}
+
+function marcarSeleccion(clase, elemento){
+  document.querySelectorAll("." + clase).forEach(e => {
+    e.classList.remove("selected");
+  });
+
+  elemento.closest(".option").classList.add("selected");
+}
+
 
 </script>
 

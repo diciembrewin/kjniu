@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resumen – Tu360 Compras</title>
+
+<style>
+
+body{
+  margin:0;
+  font-family:Arial;
+  background:#f2f2f2;
+}
+
+.header{
+  background:#fff;
+  padding:14px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #ddd;
+}
+
+.container{
+  padding:14px;
+}
+
+.card{
+  background:#fff;
+  border-radius:12px;
+  margin-bottom:14px;
+  padding:14px;
+  box-shadow:0 2px 8px rgba(0,0,0,.1);
+}
+
+.resumen{
+  background:#3b3b3b;
+  color:#fff;
+  padding:14px;
+  border-radius:12px;
+  margin-bottom:14px;
+}
+
+.item{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:10px;
+}
+
+.total{
+  text-align:right;
+  font-size:20px;
+  margin-top:10px;
+}
+
+.big{
+  font-size:24px;
+  font-weight:bold;
+}
+
+.off{
+  background:#2b2b2b;
+  color:#fff;
+  padding:4px 8px;
+  border-radius:8px;
+  margin-right:5px;
+}
+
+.btn{
+  width:100%;
+  background:#fff;
+  border:1px solid #000;
+  border-radius:30px;
+  padding:14px;
+  font-size:18px;
+  font-weight:bold;
+  margin-top:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <div><b>Tu360 Compras</b></div>
+  <div>Menu</div>
+</div>
+
+<div class="container">
+
+  <div class="resumen">
+    <b>El precio incluye:</b>
+    <p id="textoIncluye"></p>
+  </div>
+
+  <div class="card">
+
+    <h3>Resumen de tu viaje</h3>
+
+    <div class="item">
+      ✈️
+      <div>
+        <b id="rutaIda"></b><br>
+        <span id="fechaIda"></span>
+      </div>
+    </div>
+
+    <div class="item" id="bloqueVuelta">
+      ✈️
+      <div>
+        <b id="rutaVuelta"></b><br>
+        <span id="fechaVuelta"></span>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="card">
+
+    <div class="total">
+      Tarifa: COP $ <span id="precio"></span>
+    </div>
+
+    <div class="total">
+      Impuestos y tasas: COP $ 72.740
+    </div>
+
+    <div class="total big">
+      Total: COP $ <span id="total"></span>
+    </div>
+
+    <div class="total big">
+      <span class="off">5% OFF</span>
+      $ <span id="totalOff"></span>
+    </div>
+
+    <button class="btn">
+      Continuar al pago
+    </button>
+
+  </div>
+
+</div>
+
+
+<script>
+
+function getParam(name){
+  return new URL(window.location.href).searchParams.get(name);
+}
+
+let origen = getParam("origen");
+let destino = getParam("destino");
+let ida = getParam("ida");
+let vuelta = getParam("vuelta");
+let tipo = getParam("tipo");
+
+let precio = getParam("precioFinal");
+let precioOff = getParam("precioOff");
+
+document.getElementById("rutaIda").innerText =
+  origen + " → " + destino;
+
+document.getElementById("fechaIda").innerText =
+  "Fecha: " + ida;
+
+if(tipo === "oneway"){
+  document.getElementById("bloqueVuelta").style.display = "none";
+  document.getElementById("textoIncluye").innerText =
+    "Vuelo solo ida para tu viaje";
+}else{
+
+  document.getElementById("rutaVuelta").innerText =
+    destino + " → " + origen;
+
+  document.getElementById("fechaVuelta").innerText =
+    "Fecha: " + vuelta;
+
+  document.getElementById("textoIncluye").innerText =
+    "Vuelos de ida y vuelta para tu viaje";
+}
+
+document.getElementById("precio").innerText =
+  precio;
+
+document.getElementById("total").innerText =
+  (parseInt(precio) + 72740).toLocaleString();
+
+document.getElementById("totalOff").innerText =
+  precioOff;
+
+</script>
+
+</body>
+</html>

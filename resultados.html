@@ -186,7 +186,13 @@ let origen = getParam("origen");
 let destino = getParam("destino");
 let ida = getParam("ida");
 let vuelta = getParam("vuelta");
-let pasajeros = getParam("pasajeros") || 1;
+let pasajerosTexto = getParam("pasajeros") || "1";
+
+let pasajeros = parseInt(pasajerosTexto.replace(/\D/g, ""));
+
+if(isNaN(pasajeros) || pasajeros < 1){
+  pasajeros = 1;
+}
 
 // ===== TITULO DINÁMICO =====
 document.getElementById("titulo").innerText =

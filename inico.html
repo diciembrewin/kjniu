@@ -5,7 +5,6 @@
 <title>Tu360 Compras – UI</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Font Awesome 4 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <style>
@@ -33,7 +32,7 @@ body{margin:0;background:#f4f4f4;color:#000}
   object-fit:cover;
 }
 
-/* TABS SUPERIORES */
+/* TABS */
 #widget-tabs{
   list-style:none;
   display:flex;
@@ -75,12 +74,14 @@ body{margin:0;background:#f4f4f4;color:#000}
 /* ===== FORMULARIO ===== */
 .form-container{
   background:#fff;
-  margin:-10px auto 0;     /* centrado */
-  padding:30px 20px 40px;
-  border-radius:30px 30px 0 0;
+  margin:20px auto;          /* separado del resto */
+  padding:28px 20px 32px;
 
-  max-width:420px;        /* 👈 MÁS ANGOSTO */
+  max-width:360px;           /* 👈 MÁS ANGOSTO */
   width:100%;
+
+  border-radius:30px;        /* 👈 TODOS LOS BORDES */
+  box-shadow:0 4px 14px rgba(0,0,0,.08);
 }
 
 .field{
@@ -101,12 +102,12 @@ body{margin:0;background:#f4f4f4;color:#000}
 
 .dates{
   display:flex;
-  gap:15px;
+  gap:12px;
 }
 .half{width:50%}
 
 .checks{
-  margin:20px 0;
+  margin:18px 0;
   font-size:14px;
 }
 .checks label{
@@ -129,7 +130,6 @@ body{margin:0;background:#f4f4f4;color:#000}
 .section{
   background:#fff;
   padding:30px 20px;
-  margin-top:20px;
 }
 
 .banner img,
@@ -138,13 +138,8 @@ body{margin:0;background:#f4f4f4;color:#000}
   border-radius:20px;
 }
 
-.section-title h2{
-  margin:0 0 5px;
-}
-.section-title p{
-  margin:0;
-  color:#555;
-}
+.section-title h2{margin:0 0 5px}
+.section-title p{margin:0;color:#555}
 
 /* MENU DESTINOS */
 .menuItems{
@@ -197,7 +192,7 @@ body{margin:0;background:#f4f4f4;color:#000}
   <li><a href="#"><i class="fa fa-car"></i><span>Autos</span></a></li>
 </ul>
 
-<!-- FORMULARIO (MÁS ANGOSTO) -->
+<!-- FORMULARIO -->
 <div class="form-container">
   <h2>Vuelos</h2>
 
@@ -216,7 +211,6 @@ body{margin:0;background:#f4f4f4;color:#000}
       <i class="fa fa-calendar-check-o"></i>
       <input placeholder="Ida">
     </div>
-
     <div class="field half">
       <i class="fa fa-calendar-check-o"></i>
       <input placeholder="Vuelta">
@@ -236,7 +230,7 @@ body{margin:0;background:#f4f4f4;color:#000}
   <button class="btn-search">Buscar</button>
 </div>
 
-<!-- SECCIONES POSTERIORES (AFUERA DEL FORM) -->
+<!-- CONTENIDO POSTERIOR -->
 <div class="section">
   <div class="banner">
     <img src="https://viajestu360compras.bancolombia.com/portals/27/Images/diatu360/01/dia_tu360_BannerOfertas1-720x400.webp">
@@ -263,15 +257,12 @@ body{margin:0;background:#f4f4f4;color:#000}
 </div>
 
 <script>
-/* Tabs superiores */
 document.querySelectorAll('#widget-tabs li').forEach(tab=>{
   tab.onclick=()=>{
     document.querySelectorAll('#widget-tabs li').forEach(t=>t.classList.remove('active'));
     tab.classList.add('active');
   };
 });
-
-/* Menu destinos */
 document.querySelectorAll('.menuItems__items').forEach(item=>{
   item.onclick=()=>{
     document.querySelectorAll('.menuItems__items').forEach(i=>i.classList.remove('active'));

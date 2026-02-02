@@ -77,7 +77,7 @@ body{
   margin-bottom:18px;
   border-bottom:1px solid #ccc;
   padding-bottom:8px;
-  cursor:pointer;
+  position:relative;
 }
 
 .field i{
@@ -89,6 +89,28 @@ body{
   outline:none;
   width:100%;
   font-size:16px;
+}
+
+/* SUGERENCIAS AUTOCOMPLETE */
+.suggestions{
+  position:absolute;
+  top:40px;
+  left:0;
+  right:0;
+  background:white;
+  border:1px solid #ccc;
+  z-index:20;
+  max-height:200px;
+  overflow:auto;
+}
+
+.suggestions div{
+  padding:10px;
+  cursor:pointer;
+}
+
+.suggestions div:hover{
+  background:#eee;
 }
 
 .row{
@@ -186,16 +208,18 @@ body{
 </div>
 
 <div class="form-container">
-  <h2>Paquetes turísticos (Vuelo + Hotel)</h2>
+  <h2>Paquetes turísticos</h2>
 
   <div class="field">
     <i class="fa fa-dot-circle-o"></i>
     <input id="origen" placeholder="Origen">
+    <div id="sugOrigen" class="suggestions"></div>
   </div>
 
   <div class="field">
     <i class="fa fa-map-marker"></i>
     <input id="destino" placeholder="Destino">
+    <div id="sugDestino" class="suggestions"></div>
   </div>
 
   <div class="row">
@@ -225,6 +249,58 @@ body{
 
 <script>
 
+// AEROPUERTOS REALES DE COLOMBIA
+const aeropuertos = [
+"Bogotá - El Dorado (BOG)",
+"Medellín - José María Córdova (MDE)",
+"Cali - Alfonso Bonilla Aragón (CLO)",
+"Cartagena - Rafael Núñez (CTG)",
+"Barranquilla - Ernesto Cortissoz (BAQ)",
+"Bucaramanga - Palonegro (BGA)",
+"Pereira - Matecaña (PEI)",
+"Santa Marta - Simón Bolívar (SMR)",
+"Cúcuta - Camilo Daza (CUC)",
+"Montería - Los Garzones (MTR)",
+"Valledupar - Alfonso López (VUP)",
+"Armenia - El Edén (AXM)",
+"Manizales - La Nubia (MZL)",
+"Neiva - Benito Salas (NVA)",
+"Villavicencio - Vanguardia (VVC)",
+"Ibagué - Perales (IBE)",
+"Leticia - Alfredo Vásquez Cobo (LET)",
+"San Andrés - Gustavo Rojas Pinilla (ADZ)",
+"Pasto - Antonio Nariño (PSO)",
+"Riohacha - Almirante Padilla (RCH)"
+];
+
+function activarAutocomplete(inputId, boxId) {
+  const input = document.getElementById(inputId);
+  const box = document.getElementById(boxId);
+
+  input.addEventListener("keyup", () => {
+    let valor = input.value.toLowerCase();
+    box.innerHTML = "";
+
+    if (!valor) return;
+
+    aeropuertos
+      .filter(a => a.toLowerCase().includes(valor))
+      .forEach(a => {
+        let div = document.createElement("div");
+        div.textContent = a;
+        div.onclick = () => {
+          input.value = a;
+          box.innerHTML = "";
+        };
+        box.appendChild(div);
+      });
+  });
+}
+
+activarAutocomplete("origen", "sugOrigen");
+activarAutocomplete("destino", "sugDestino");
+
+// CALENDARIO
 let inputActivo = "";
 
 function openCalendar(input){

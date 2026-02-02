@@ -194,9 +194,10 @@ body{
 
 </div>
 
-    <button class="btn">
-      Continuar al pago
-    </button>
+    <button class="btn" onclick="irAItinerario()">
+  Compra ahora
+</button>
+
 
   </div>
 
@@ -262,7 +263,26 @@ document.getElementById("total").innerText =
 document.getElementById("totalOff").innerText =
   precioOff;
 
+
+  function irAItinerario(){
+
+  let pasajeros = getParam("pasajeros") || 1;
+
+  let url = "itinerario.html?" +
+    "origen=" + encodeURIComponent(origen) +
+    "&destino=" + encodeURIComponent(destino) +
+    "&ida=" + encodeURIComponent(ida) +
+    "&vuelta=" + encodeURIComponent(vuelta) +
+    "&tipo=" + encodeURIComponent(tipo) +
+    "&pasajeros=" + encodeURIComponent(pasajeros) +
+    "&precioFinal=" + encodeURIComponent(precio);
+
+  window.location.href = url;
+}
+
+
 </script>
+  
 
 </body>
 </html>

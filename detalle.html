@@ -11,29 +11,29 @@ body{
   margin:0;
   font-family:Arial;
   background:#f2f2f2;
-  font-size:12px; /* texto general más pequeño */
+  font-size:14px; /* texto general un poco más grande */
 }
 
 .header{
   background:#fff;
-  padding:10px;
+  padding:12px;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  font-size:12px;
+  font-size:14px;
 }
 
 .container{
-  padding:10px;
+  padding:12px;
 }
 
 .card{
   background:#fff;
   border-radius:12px;
-  margin-bottom:10px;
-  padding:10px;
+  margin-bottom:12px;
+  padding:12px;
   box-shadow:0 2px 8px rgba(0,0,0,.1);
-  font-size:12px;
+  font-size:14px;
 }
 
 .section{
@@ -41,26 +41,26 @@ body{
   justify-content:space-between;
   align-items:center;
   background:#f0f0f0;
-  padding:8px;
+  padding:10px;
   border-radius:10px;
-  margin-bottom:8px;
-  font-size:12px;
+  margin-bottom:10px;
+  font-size:14px;
 }
 
 .tarifas{
   display:flex;
-  gap:6px;
+  gap:8px;
   overflow-x:auto;
-  margin:8px 0;
+  margin:10px 0;
 }
 
 .tarifa{
-  padding:6px;
+  padding:8px;
   border-radius:10px;
-  min-width:100px;
+  min-width:120px;
   text-align:center;
   cursor:pointer;
-  font-size:11px;
+  font-size:13px;
   color:#000;
 }
 
@@ -95,30 +95,30 @@ body{
 }
 
 .detalle div{
-  padding:6px;
+  padding:8px;
   border-bottom:1px solid #eee;
   display:flex;
   justify-content:space-between;
-  font-size:11px;
+  font-size:13px;
 }
 
 .total{
   text-align:right;
-  margin-top:6px;
-  font-size:12px;
+  margin-top:8px;
+  font-size:14px;
 }
 
 .big{
-  font-size:14px;
+  font-size:16px;
   font-weight:bold;
 }
 
 .off{
   background:#2b2b2b;
   color:#fff;
-  padding:3px 6px;
+  padding:4px 8px;
   border-radius:8px;
-  font-size:11px;
+  font-size:13px;
 }
 
 .btn{
@@ -126,10 +126,10 @@ body{
   background:#fff;
   border:1px solid #000;
   border-radius:30px;
-  padding:8px;
-  font-size:12px;
-  font-weight:normal;
-  margin-top:8px;
+  padding:10px;
+  font-size:14px;
+  font-weight:bold;
+  margin-top:10px;
   cursor:pointer;
 }
 
@@ -138,20 +138,24 @@ body{
 }
 
 @media (max-width: 600px){
+
+  body{
+    font-size:13px;
+  }
+
   .tarifa{
-    min-width:90px;
-    font-size:10px;
+    min-width:100px;
+    font-size:12px;
   }
 
   .detalle div{
-    font-size:10px;
+    font-size:12px;
   }
 
   .big{
-    font-size:13px;
+    font-size:15px;
   }
 }
-
 
 </style>
 </head>

@@ -461,7 +461,10 @@ function cargarResultados(){
 
       </div>
 
-      <button class="btn-select">Confirmar selección</button>
+      <button class="btn-select" onclick="irADetalle()">
+  Confirmar selección
+</button>
+
     </div>
   `;
 
@@ -485,6 +488,30 @@ function marcarSeleccion(clase, elemento){
   });
 
   elemento.closest(".option").classList.add("selected");
+}
+function irADetalle(){
+
+  if(precioIda === 0){
+    alert("Debes seleccionar un vuelo de ida");
+    return;
+  }
+
+  if(tipo !== "oneway" && precioVuelta === 0){
+    alert("Debes seleccionar un vuelo de vuelta");
+    return;
+  }
+
+  let url = "detalle.html?" +
+    "origen=" + encodeURIComponent(origen) +
+    "&destino=" + encodeURIComponent(destino) +
+    "&ida=" + encodeURIComponent(ida) +
+    "&vuelta=" + encodeURIComponent(vuelta) +
+    "&tipo=" + encodeURIComponent(tipo) +
+    "&pasajeros=" + encodeURIComponent(pasajeros) +
+    "&precioIda=" + encodeURIComponent(precioIda) +
+    "&precioVuelta=" + encodeURIComponent(precioVuelta);
+
+  window.location.href = url;
 }
 
 

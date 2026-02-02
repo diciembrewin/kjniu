@@ -281,33 +281,6 @@ body{
   pointer-events:none;
 }
 
-  /* ===== RESULTADOS ===== */
-.flight-card{
-  background:#fff;
-  border-radius:16px;
-  padding:16px;
-  box-shadow:0 4px 12px rgba(0,0,0,.1);
-  margin-top:20px;
-}
-
-.flight-header{
-  display:flex;
-  justify-content:space-between;
-  font-weight:bold;
-  margin-bottom:10px;
-}
-
-.flight-body{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin:10px 0;
-}
-
-.price-box{
-  text-align:center;
-  margin-top:20px;
-}
 
 
 
@@ -375,68 +348,12 @@ body{
     <input id="passengerInput" value="1 pasajero" readonly>
   </div>
 
- <button class="btn" onclick="buscarVuelos()">Buscar</button>
+ <button class="btn" onclick="irAResultados()">Buscar</button>
 
 
-</div>
-
-  <!-- ===== RESULTADOS DE BÚSQUEDA ===== -->
-<div id="resultsView" style="display:none; padding:20px;">
-
-  <div class="flight-card">
-
-    <div class="flight-header">
-      <div><i class="fa fa-plane"></i> IDA</div>
-      <div id="resIdaFecha"></div>
-    </div>
-
-    <div class="flight-body">
-      <div>
-        <b id="resOrigen"></b><br>
-        <span>21:37</span>
-      </div>
-
-      <div>Directo</div>
-
-      <div>
-        <b id="resDestino"></b><br>
-        <span>22:30</span>
-      </div>
-    </div>
-
-    <hr>
-
-    <div id="vueltaBloque">
-
-      <div class="flight-header">
-        <div><i class="fa fa-plane"></i> VUELTA</div>
-        <div id="resVueltaFecha"></div>
-      </div>
-
-      <div class="flight-body">
-        <div>
-          <b id="resDestino2"></b><br>
-          <span>06:35</span>
-        </div>
-
-        <div>Directo</div>
-
-        <div>
-          <b id="resOrigen2"></b><br>
-          <span>07:37</span>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="price-box">
-      <h3 id="precioFinal"></h3>
-      <button class="btn">Seleccionar Vuelos</button>
-    </div>
-
-  </div>
 
 </div>
+
 
 
   <!-- ===== MODAL CIUDADES ===== -->
@@ -721,53 +638,7 @@ function selectDate(fecha){
   closeCalendar();
 }
 
-  function buscarVuelos(){
-
-  let origen = document.getElementById("origenInput").value;
-  let destino = document.getElementById("destinoInput").value;
-  let ida = document.getElementById("idaInput").value;
-  let vuelta = document.getElementById("vueltaInput").value;
-  let pasajeros = document.getElementById("passengerInput").value;
-
-  if(!origen || !destino || !ida){
-    alert("Completa origen, destino y fecha de ida");
-    return;
-  }
-
-  // Ocultar formulario
-  document.querySelector(".form-container").style.display = "none";
-
-  // Mostrar resultados
-  document.getElementById("resultsView").style.display = "block";
-
-  // Llenar datos
-  document.getElementById("resOrigen").innerText = origen;
-  document.getElementById("resDestino").innerText = destino;
-
-  document.getElementById("resOrigen2").innerText = origen;
-  document.getElementById("resDestino2").innerText = destino;
-
-  document.getElementById("resIdaFecha").innerText = ida;
-
-  if(tipoViaje === "round"){
-    document.getElementById("resVueltaFecha").innerText = vuelta;
-    document.getElementById("vueltaBloque").style.display = "block";
-  }else{
-    document.getElementById("vueltaBloque").style.display = "none";
-  }
-
-  // Simular precio según pasajeros
-  let base = 600000;
-  let totalPasajeros = parseInt(document.getElementById("adultos").innerText) +
-                       parseInt(document.getElementById("ninos").innerText);
-
-  let precio = base * totalPasajeros;
-
-  document.getElementById("precioFinal").innerText =
-    "COP $ " + precio.toLocaleString();
-}
-
-
+ 
 
 </script>
 

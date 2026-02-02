@@ -105,6 +105,29 @@ body{
   cursor:pointer;
 }
 
+  .promo-badge{
+  background:#2b2b2b;
+  color:#fff;
+  padding:4px 8px;
+  border-radius:8px;
+  font-size:12px;
+  margin-right:6px;
+}
+
+.price-row{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:8px;
+  margin-top:10px;
+}
+
+.price-row img{
+  width:20px;
+  height:20px;
+}
+
+
 </style>
 </head>
 
@@ -172,10 +195,28 @@ let precioIda = 0;
 let precioVuelta = 0;
 
 function actualizarPrecio(){
-  let total = (precioIda + precioVuelta) * pasajeros;
-  document.getElementById("precioFinal").innerText =
-    "COP $ " + total.toLocaleString();
+
+  let totalSinDescuento = (precioIda + precioVuelta) * pasajeros;
+
+  let descuento = totalSinDescuento * 0.05;
+
+  let totalConDescuento = totalSinDescuento - descuento;
+
+  document.getElementById("precioFinal").innerHTML = `
+
+    <div class="price-row">
+
+      <img src="https://tu360compras.bancolombia.com/themes/child/img/favicon-bancolombia.svg">
+
+      <span class="promo-badge">5% Off</span>
+
+      <b>COP $ ${totalConDescuento.toLocaleString()}</b>
+
+    </div>
+
+  `;
 }
+
 
 function seleccionarIda(valor){
   precioIda = parseInt(valor);
@@ -240,12 +281,22 @@ function cargarResultados(){
     html += `</div>`;
   }
 
-  html += `
-    <div class="card">
-      <div class="price" id="precioFinal">COP $ 0</div>
-      <button class="btn-select">Confirmar selección</button>
+html += `
+  <div class="card">
+    <div class="price" id="precioFinal">
+
+      <div class="price-row">
+        <img src="https://tu360compras.bancolombia.com/themes/child/img/favicon-bancolombia.svg">
+        <span class="promo-badge">5% Off</span>
+        <b>COP $ 0</b>
+      </div>
+
     </div>
-  `;
+
+    <button class="btn-select">Confirmar selección</button>
+  </div>
+`;
+
 
   box.innerHTML = html;
 }

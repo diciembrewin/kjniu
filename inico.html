@@ -92,8 +92,24 @@ body{
   background:none;
 }
 
-/* MODAL ORIGEN DESTINO */
-.city-modal{
+.row{
+  display:flex;
+  gap:20px;
+}
+
+/* BOTON */
+.btn{
+  width:100%;
+  background:#ffd100;
+  border:none;
+  border-radius:30px;
+  padding:14px;
+  font-size:18px;
+  font-weight:600;
+}
+
+/* MODALES GENERALES */
+.modal{
   position:fixed;
   inset:0;
   background:#f4f4f4;
@@ -102,7 +118,7 @@ body{
   flex-direction:column;
 }
 
-.city-modal.active{
+.modal.active{
   display:flex;
 }
 
@@ -122,6 +138,7 @@ body{
   font-size:22px;
 }
 
+/* LISTA CIUDADES */
 .modal-search{
   background:#2b2b2b;
   padding:12px;
@@ -148,19 +165,47 @@ body{
   cursor:pointer;
 }
 
-.city-item i{
-  color:#666;
+/* CALENDARIO */
+.calendar-container{
+  background:#fff;
+  padding:20px;
+  flex:1;
+  overflow:auto;
 }
 
-.btn{
-  width:100%;
-  background:#ffd100;
-  border:none;
-  border-radius:30px;
-  padding:14px;
-  font-size:18px;
-  font-weight:600;
+.calendar-month{
+  margin-bottom:30px;
 }
+
+.calendar-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:10px;
+  font-weight:bold;
+}
+
+.calendar-grid{
+  display:grid;
+  grid-template-columns:repeat(7, 1fr);
+  text-align:center;
+  gap:6px;
+}
+
+.day{
+  padding:10px;
+  cursor:pointer;
+  border-radius:8px;
+}
+
+.day:hover{
+  background:#ffd100;
+}
+
+.selected{
+  background:#ffd100;
+}
+
 </style>
 </head>
 
@@ -185,33 +230,57 @@ body{
 
   <h2>Paquetes turísticos</h2>
 
-  <div class="field" onclick="openModal('origen')">
+  <div class="field" onclick="openCityModal('origen')">
     <i class="fa fa-dot-circle-o"></i>
     <input id="origenInput" placeholder="Origen" readonly>
   </div>
 
-  <div class="field" onclick="openModal('destino')">
+  <div class="field" onclick="openCityModal('destino')">
     <i class="fa fa-map-marker"></i>
     <input id="destinoInput" placeholder="Destino" readonly>
+  </div>
+
+  <div class="row">
+    <div class="field" onclick="openCalendar('ida')">
+      <i class="fa fa-calendar"></i>
+      <input id="idaInput" placeholder="Ida" readonly>
+    </div>
+
+    <div class="field" onclick="openCalendar('vuelta')">
+      <i class="fa fa-calendar"></i>
+      <input id="vueltaInput" placeholder="Vuelta" readonly>
+    </div>
   </div>
 
   <button class="btn">Buscar</button>
 
 </div>
 
-<!-- MODAL -->
-<div class="city-modal" id="cityModal">
+<!-- MODAL CIUDADES -->
+<div class="modal" id="cityModal">
 
   <div class="modal-header">
-    <span id="modalTitle">Ciudad</span>
-    <button onclick="closeModal()">✕</button>
+    <span id="cityTitle"></span>
+    <button onclick="closeCityModal()">✕</button>
   </div>
 
   <div class="modal-search">
-    <input placeholder="Buscar ciudad" onkeyup="filtrarCiudades(this.value)">
+    <input placeholder="Buscar" onkeyup="filtrarCiudades(this.value)">
   </div>
 
   <div class="city-list" id="cityList"></div>
+
+</div>
+
+<!-- MODAL CALENDARIO -->
+<div class="modal" id="calendarModal">
+
+  <div class="modal-header">
+    <span id="calendarTitle"></span>
+    <button onclick="closeCalendar()">✕</button>
+  </div>
+
+  <div class="calendar-container" id="calendarBox"></div>
 
 </div>
 
@@ -225,79 +294,113 @@ const aeropuertos = [
 "Barranquilla - Ernesto Cortissoz (BAQ)",
 "Bucaramanga - Palonegro (BGA)",
 "Pereira - Matecaña (PEI)",
-"Santa Marta - Simón Bolívar (SMR)",
-"Cúcuta - Camilo Daza (CUC)",
-"Montería - Los Garzones (MTR)",
-"Valledupar - Alfonso López (VUP)",
-"Armenia - El Edén (AXM)",
-"Manizales - La Nubia (MZL)",
-"Neiva - Benito Salas (NVA)",
-"Villavicencio - Vanguardia (VVC)",
-"Ibagué - Perales (IBE)",
-"Leticia - Alfredo Vásquez Cobo (LET)",
-"San Andrés - Gustavo Rojas Pinilla (ADZ)",
-"Pasto - Antonio Nariño (PSO)",
-"Riohacha - Almirante Padilla (RCH)"
+"Santa Marta - Simón Bolívar (SMR)"
 ];
 
 let campoActivo = "";
 
-function openModal(tipo){
-
+function openCityModal(tipo){
   campoActivo = tipo;
 
-  document.getElementById("modalTitle").innerText =
+  document.getElementById("cityTitle").innerText =
     tipo === "origen" ? "Ciudad de Origen" : "Ciudad de Destino";
 
-  renderCiudades(aeropuertos);
+  renderCities(aeropuertos);
 
   document.getElementById("cityModal").classList.add("active");
 }
 
-function closeModal(){
+function closeCityModal(){
   document.getElementById("cityModal").classList.remove("active");
 }
 
-function renderCiudades(lista){
+function renderCities(lista){
 
   const box = document.getElementById("cityList");
   box.innerHTML = "";
 
-  lista.forEach(ciudad => {
-
-    const div = document.createElement("div");
-    div.className = "city-item";
-
-    div.innerHTML = `
-      <i class="fa fa-map-marker"></i>
-      <span>${ciudad}</span>
+  lista.forEach(c => {
+    box.innerHTML += `
+      <div class="city-item" onclick="selectCity('${c}')">
+        <i class="fa fa-map-marker"></i> ${c}
+      </div>
     `;
-
-    div.onclick = () => seleccionarCiudad(ciudad);
-
-    box.appendChild(div);
-
   });
 }
 
-function filtrarCiudades(texto){
-
-  const filtradas = aeropuertos.filter(a =>
-    a.toLowerCase().includes(texto.toLowerCase())
+function filtrarCiudades(t){
+  const f = aeropuertos.filter(a =>
+    a.toLowerCase().includes(t.toLowerCase())
   );
-
-  renderCiudades(filtradas);
+  renderCities(f);
 }
 
-function seleccionarCiudad(ciudad){
+function selectCity(c){
+  document.getElementById(
+    campoActivo === "origen" ? "origenInput" : "destinoInput"
+  ).value = c;
 
-  if(campoActivo === "origen"){
-    document.getElementById("origenInput").value = ciudad;
-  }else{
-    document.getElementById("destinoInput").value = ciudad;
+  closeCityModal();
+}
+
+/* CALENDARIO SIMPLE */
+
+let tipoFecha = "";
+
+function openCalendar(tipo){
+
+  tipoFecha = tipo;
+
+  document.getElementById("calendarTitle").innerText =
+    tipo === "ida" ? "Fecha de partida" : "Fecha de regreso";
+
+  generarCalendario();
+
+  document.getElementById("calendarModal").classList.add("active");
+}
+
+function closeCalendar(){
+  document.getElementById("calendarModal").classList.remove("active");
+}
+
+function generarCalendario(){
+
+  const box = document.getElementById("calendarBox");
+  box.innerHTML = "";
+
+  const hoy = new Date();
+
+  for(let m=0; m<2; m++){
+
+    const fecha = new Date(hoy.getFullYear(), hoy.getMonth() + m, 1);
+
+    box.innerHTML += `
+      <div class="calendar-month">
+        <div class="calendar-header">
+          ${fecha.toLocaleString('es',{month:'long'})} ${fecha.getFullYear()}
+        </div>
+
+        <div class="calendar-grid" id="grid${m}"></div>
+      </div>
+    `;
+
+    const grid = document.getElementById("grid"+m);
+
+    for(let d=1; d<=31; d++){
+      grid.innerHTML += `
+        <div class="day" onclick="selectDate('${d}/${m+1}/${fecha.getFullYear()}')">${d}</div>
+      `;
+    }
   }
+}
 
-  closeModal();
+function selectDate(f){
+
+  document.getElementById(
+    tipoFecha === "ida" ? "idaInput" : "vueltaInput"
+  ).value = f;
+
+  closeCalendar();
 }
 
 </script>

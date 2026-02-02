@@ -223,28 +223,41 @@ body{
 
 
   <!-- ===== TOTAL ===== -->
-  <div class="card">
+ <!-- ===== TOTAL ===== -->
+<div class="card">
 
-    <div class="total">
-  Pasajeros: <span id="numPasajeros"></span>
-     </div>
+  <div class="total">
+    Pasajeros: <span id="numPasajeros"></span>
+  </div>
 
+  <div class="total">
+    Precio por pasajero: COP $ <span id="precioPorPasajero"></span>
+  </div>
 
-    <div class="total">
-      Impuestos y tasas: COP $ 72.740
-    </div>
+  <div class="total">
+    Impuestos por pasajero: COP $ <span id="impuestosPorPasajero"></span>
+  </div>
 
-    <div class="total big">
-      Total: COP $ <span id="total">0</span>
-    </div>
+  <div class="total">
+    Subtotal pasajeros x <span id="numPasajeros2"></span>:
+    COP $ <span id="subtotal"></span>
+  </div>
 
-    <div class="total big">
-      <span class="off">5% OFF</span>
-      $ <span id="totalOff">0</span>
-    </div>
-<button class="btn" onclick="irResumen()">
-  Seguir
-</button>
+  <div class="total big">
+    Total: COP $ <span id="total"></span>
+  </div>
+
+  <div class="total big">
+    <span class="off">5% OFF</span>
+    COP $ <span id="totalOff"></span>
+  </div>
+
+  <button class="btn" onclick="irResumen()">
+    Seguir
+  </button>
+
+</div>
+
 
 
   </div>

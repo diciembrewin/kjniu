@@ -56,12 +56,6 @@ body{
   color:#000;
 }
 
-.hero-content h1{
-  font-size:30px;
-  margin:0;
-}
-
-/* ICON TABS */
 .tabs{
   display:flex;
   justify-content:space-around;
@@ -126,10 +120,6 @@ body{
   gap:20px;
 }
 
-.checks{
-  margin:20px 0;
-}
-
 .btn{
   width:100%;
   background:#ffd100;
@@ -140,30 +130,8 @@ body{
   font-weight:600;
 }
 
-/* AFTER SEARCH */
-.section{
-  background:#fff;
-  margin:30px auto 0;
-  padding:20px;
-  max-width:720px;
-}
-
-.banner{
-  width:100%;
-  margin:20px 0;
-  border-radius:20px;
-}
-
-/* FOOTER */
-footer{
-  background:#111;
-  color:#fff;
-  text-align:center;
-  padding:20px;
-}
-
 /* MODALS */
-.origin-modal{
+.modal{
   position:fixed;
   inset:0;
   background:#f4f4f4;
@@ -172,11 +140,11 @@ footer{
   flex-direction:column;
 }
 
-.origin-modal.active{
+.modal.active{
   display:flex;
 }
 
-.origin-header{
+.modal-header{
   background:#2b2b2b;
   color:#fff;
   padding:16px;
@@ -185,38 +153,44 @@ footer{
   align-items:center;
 }
 
-.origin-header button{
+.modal-header button{
   background:none;
   border:none;
   color:#fff;
   font-size:22px;
 }
 
-.origin-search{
+.modal-search{
   background:#2b2b2b;
   padding:12px;
-  display:flex;
-  align-items:center;
 }
 
-.origin-search input{
+.modal-search input{
   width:100%;
   padding:10px;
   border-radius:8px;
 }
 
-.origin-list{
+.list{
   background:#fff;
   margin:12px;
   border-radius:12px;
+  max-height:70vh;
+  overflow:auto;
 }
 
-.city{
+.item{
   padding:14px;
   border-bottom:1px solid #eee;
-  display:flex;
-  gap:10px;
   cursor:pointer;
+}
+
+/* DATE MODAL */
+.calendar-input{
+  width:100%;
+  padding:12px;
+  font-size:18px;
+  margin:20px;
 }
 </style>
 </head>
@@ -244,26 +218,27 @@ footer{
 
 <div class="form-container">
 
-  <h2>Paquetes turísticos</h2>
+  <h2>Vuelos</h2>
 
-  <div class="field" onclick="openOriginModal()">
+  <div class="field" onclick="openModal('originModal')">
     <i class="fa fa-dot-circle-o"></i>
     <input id="originInput" placeholder="Origen" readonly>
   </div>
 
-  <div class="field" onclick="openDestinationModal()">
+  <div class="field" onclick="openModal('destinationModal')">
     <i class="fa fa-map-marker"></i>
     <input id="destinationInput" placeholder="Destino" readonly>
   </div>
 
   <div class="row">
-    <div class="field">
+    <div class="field" onclick="openModal('dateFromModal')">
       <i class="fa fa-calendar"></i>
-      <input placeholder="Ida">
+      <input id="dateFrom" placeholder="Ida" readonly>
     </div>
-    <div class="field">
+
+    <div class="field" onclick="openModal('dateToModal')">
       <i class="fa fa-calendar"></i>
-      <input placeholder="Vuelta">
+      <input id="dateTo" placeholder="Vuelta" readonly>
     </div>
   </div>
 
@@ -275,79 +250,117 @@ footer{
   <button class="btn">Buscar</button>
 </div>
 
-<div class="section">
-  <img class="banner" src="https://viajestu360compras.bancolombia.com/portals/27/Images/diatu360/01/dia_tu360_BannerOfertas1-720x400.webp">
-  <h2>Los destinos más buscados</h2>
-  <img class="banner" src="https://viajestu360compras.bancolombia.com/portals/27/Images/Consumo/Tarjeta-Debito-Mastercard-Mobile.png">
-</div>
-
-<footer>© Tu360Compras</footer>
-
-<!-- ORIGIN MODAL -->
-<div class="origin-modal" id="originModal">
-  <div class="origin-header">
+<!-- ORIGEN MODAL -->
+<div class="modal" id="originModal">
+  <div class="modal-header">
     <span>Ciudad de Origen</span>
-    <button onclick="closeOriginModal()">✕</button>
+    <button onclick="closeModal('originModal')">✕</button>
   </div>
 
-  <div class="origin-search">
-    <input placeholder="Buscar" onkeyup="filterCities(this.value)">
+  <div class="modal-search">
+    <input placeholder="Buscar aeropuerto" onkeyup="filterList('originList', this.value)">
   </div>
 
-  <div class="origin-list">
-    <div class="city" onclick="selectCity('Cali (CLO)')">Cali (CLO)</div>
-    <div class="city" onclick="selectCity('Bogotá (BOG)')">Bogotá (BOG)</div>
-    <div class="city" onclick="selectCity('Medellín (MDE)')">Medellín (MDE)</div>
+  <div class="list" id="originList">
   </div>
 </div>
 
-<!-- DESTINATION MODAL -->
-<div class="origin-modal" id="destinationModal">
-  <div class="origin-header">
+<!-- DESTINO MODAL -->
+<div class="modal" id="destinationModal">
+  <div class="modal-header">
     <span>Ciudad de Destino</span>
-    <button onclick="closeDestinationModal()">✕</button>
+    <button onclick="closeModal('destinationModal')">✕</button>
   </div>
 
-  <div class="origin-search">
-    <input placeholder="Buscar" onkeyup="filterDestinationCities(this.value)">
+  <div class="modal-search">
+    <input placeholder="Buscar aeropuerto" onkeyup="filterList('destinationList', this.value)">
   </div>
 
-  <div class="origin-list">
-    <div class="city" onclick="selectDestination('Cartagena (CTG)')">Cartagena (CTG)</div>
-    <div class="city" onclick="selectDestination('Cancún (CUN)')">Cancún (CUN)</div>
-    <div class="city" onclick="selectDestination('Miami (MIA)')">Miami (MIA)</div>
+  <div class="list" id="destinationList">
   </div>
+</div>
+
+<!-- FECHAS -->
+<div class="modal" id="dateFromModal">
+  <div class="modal-header">
+    <span>Fecha de partida</span>
+    <button onclick="closeModal('dateFromModal')">✕</button>
+  </div>
+
+  <input class="calendar-input" type="date" onchange="setDate('dateFrom', this.value)">
+</div>
+
+<div class="modal" id="dateToModal">
+  <div class="modal-header">
+    <span>Fecha de regreso</span>
+    <button onclick="closeModal('dateToModal')">✕</button>
+  </div>
+
+  <input class="calendar-input" type="date" onchange="setDate('dateTo', this.value)">
 </div>
 
 <script>
-function openOriginModal(){
-  document.getElementById('originModal').classList.add('active');
+
+const airports = [
+"Bogotá – El Dorado (BOG)",
+"Medellín – José María Córdova (MDE)",
+"Medellín – Olaya Herrera (EOH)",
+"Cali – Alfonso Bonilla Aragón (CLO)",
+"Cartagena – Rafael Núñez (CTG)",
+"Barranquilla – Ernesto Cortissoz (BAQ)",
+"Bucaramanga – Palonegro (BGA)",
+"Pereira – Matecaña (PEI)",
+"Santa Marta – Simón Bolívar (SMR)",
+"Cúcuta – Camilo Daza (CUC)",
+"Montería – Los Garzones (MTR)",
+"San Andrés – Gustavo Rojas Pinilla (ADZ)",
+"Armenia – El Edén (AXM)",
+"Manizales – La Nubia (MZL)",
+"Neiva – Benito Salas (NVA)",
+"Ibagué – Perales (IBE)",
+"Villavicencio – Vanguardia (VVC)",
+"Riohacha – Almirante Padilla (RCH)",
+"Leticia – Alfredo Vásquez Cobo (LET)",
+"Pasto – Antonio Nariño (PSO)"
+];
+
+function loadAirports(){
+  const o = document.getElementById("originList");
+  const d = document.getElementById("destinationList");
+
+  airports.forEach(a=>{
+    o.innerHTML += `<div class='item' onclick="selectAirport('originInput','${a}')">${a}</div>`;
+    d.innerHTML += `<div class='item' onclick="selectAirport('destinationInput','${a}')">${a}</div>`;
+  });
 }
 
-function closeOriginModal(){
-  document.getElementById('originModal').classList.remove('active');
+function openModal(id){
+  document.getElementById(id).classList.add("active");
 }
 
-function selectCity(city){
-  document.getElementById('originInput').value = city;
-  closeOriginModal();
+function closeModal(id){
+  document.getElementById(id).classList.remove("active");
 }
 
-function openDestinationModal(){
-  document.getElementById('destinationModal').classList.add('active');
+function selectAirport(input, value){
+  document.getElementById(input).value = value;
+  closeModal(input === "originInput" ? "originModal" : "destinationModal");
 }
 
-function closeDestinationModal(){
-  document.getElementById('destinationModal').classList.remove('active');
+function filterList(listId, text){
+  text = text.toLowerCase();
+  document.querySelectorAll(`#${listId} .item`).forEach(i=>{
+    i.style.display = i.innerText.toLowerCase().includes(text) ? "block" : "none";
+  });
 }
 
-function selectDestination(city){
-  document.getElementById('destinationInput').value = city;
-  closeDestinationModal();
+function setDate(input, value){
+  document.getElementById(input).value = value;
+  closeModal(input === "dateFrom" ? "dateFromModal" : "dateToModal");
 }
 
-function filterCities(t){}
-function filterDestinationCities(t){}
+loadAirports();
+
 </script>
 
 </body>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Detalle del Vuelo – Tu360 Compras</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+
+body{
+  margin:0;
+  font-family:Arial;
+  background:#f2f2f2;
+}
+
+.header{
+  background:#fff;
+  padding:14px;
+  font-size:20px;
+  font-weight:bold;
+  border-bottom:1px solid #ddd;
+}
+
+.container{
+  padding:10px 14px;
+}
+
+.card{
+  background:#fff;
+  border-radius:12px;
+  margin-bottom:14px;
+  padding:14px;
+  box-shadow:0 2px 8px rgba(0,0,0,.1);
+}
+
+.title{
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.row{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:8px;
+}
+
+.price{
+  font-size:20px;
+  font-weight:bold;
+  text-align:right;
+}
+
+.btn{
+  width:100%;
+  background:#ffd100;
+  border:none;
+  border-radius:30px;
+  padding:14px;
+  font-size:16px;
+  margin-top:10px;
+  cursor:pointer;
+}
+
+.badge{
+  background:#2b2b2b;
+  color:#fff;
+  padding:4px 8px;
+  border-radius:6px;
+  font-size:12px;
+}
+
+.logo{
+  width:20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  Detalle de tu selección
+</div>
+
+<div class="container">
+
+  <div class="card">
+    <div class="title">Resumen del viaje</div>
+
+    <div class="row">
+      <div>Origen:</div>
+      <div id="origen"></div>
+    </div>
+
+    <div class="row">
+      <div>Destino:</div>
+      <div id="destino"></div>
+    </div>
+
+    <div class="row">
+      <div>Fecha ida:</div>
+      <div id="ida"></div>
+    </div>
+
+    <div class="row" id="bloqueVuelta">
+      <div>Fecha vuelta:</div>
+      <div id="vuelta"></div>
+    </div>
+
+    <div class="row">
+      <div>Pasajeros:</div>
+      <div id="pasajeros"></div>
+    </div>
+
+  </div>
+
+  <div class="card">
+
+    <div class="title">Precio final</div>
+
+    <div class="price" id="precioFinal"></div>
+
+    <div style="text-align:right;margin-top:10px">
+      <img class="logo" src="https://tu360compras.bancolombia.com/themes/child/img/favicon-bancolombia.svg">
+      <span class="badge">5% Off</span>
+    </div>
+
+  </div>
+
+  <button class="btn">
+    Continuar a pago
+  </button>
+
+</div>
+
+<script>
+
+function getParam(name){
+  let url = new URL(window.location.href);
+  return url.searchParams.get(name);
+}
+
+let origen = getParam("origen");
+let destino = getParam("destino");
+let ida = getParam("ida");
+let vuelta = getParam("vuelta");
+let tipo = getParam("tipo");
+let pasajeros = getParam("pasajeros");
+
+let precioIda = parseInt(getParam("precioIda"));
+let precioVuelta = parseInt(getParam("precioVuelta") || 0);
+
+document.getElementById("origen").innerText = origen;
+document.getElementById("destino").innerText = destino;
+document.getElementById("ida").innerText = ida;
+document.getElementById("pasajeros").innerText = pasajeros;
+
+if(tipo === "oneway"){
+  document.getElementById("bloqueVuelta").style.display = "none";
+}else{
+  document.getElementById("vuelta").innerText = vuelta;
+}
+
+let totalSinDescuento = (precioIda + precioVuelta) * pasajeros;
+
+let descuento = totalSinDescuento * 0.05;
+
+let total = totalSinDescuento - descuento;
+
+document.getElementById("precioFinal").innerText =
+  "COP $ " + total.toLocaleString();
+
+</script>
+
+</body>
+</html>

@@ -5,12 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Itinerario – Datos de Pasajeros</title>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <style>
 
 body{
   margin:0;
   font-family:Arial;
   background:#f2f2f2;
+  font-size:14px;
 }
 
 .header{
@@ -34,9 +37,14 @@ body{
 }
 
 .title{
-  font-size:18px;
+  font-size:17px;
   font-weight:bold;
   margin-bottom:10px;
+}
+
+.itinerario{
+  font-size:14px;
+  line-height:1.6;
 }
 
 .row{
@@ -46,16 +54,18 @@ body{
   flex-wrap:wrap;
 }
 
+.col{
+  flex:1;
+  min-width:140px;
+}
+
 input, select{
   padding:10px;
   border:1px solid #ddd;
   border-radius:8px;
   width:100%;
-}
-
-.col{
-  flex:1;
-  min-width:120px;
+  box-sizing:border-box;
+  font-size:14px;
 }
 
 .btn{
@@ -64,7 +74,7 @@ input, select{
   border:1px solid #000;
   border-radius:30px;
   padding:12px;
-  font-size:16px;
+  font-size:15px;
   margin-top:10px;
   cursor:pointer;
 }
@@ -74,9 +84,31 @@ input, select{
   color:#666;
 }
 
-.itinerario{
-  font-size:14px;
-  line-height:1.6;
+.flight-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:8px;
+}
+
+.icon-ida{
+  color:#00b5e2;
+}
+
+.icon-vuelta{
+  color:#ff6b00;
+}
+
+hr{
+  border:0;
+  border-top:1px solid #eee;
+  margin:10px 0;
+}
+
+@media(max-width:600px){
+  .row{
+    flex-direction:column;
+  }
 }
 
 </style>
@@ -90,20 +122,33 @@ input, select{
 
 <div class="container">
 
-  <!-- ===== ITINERARIO ARRIBA ===== -->
+  <!-- ===== ITINERARIO ===== -->
   <div class="card">
 
     <div class="title">Itinerario seleccionado</div>
 
     <div class="itinerario">
 
-      <b id="rutaIda"></b><br>
-      <span id="fechaIda"></span><br>
+      <div class="flight-row">
+        <i class="fa fa-plane icon-ida"></i>
+        <div>
+          <b id="rutaIda"></b><br>
+          <span id="fechaIda"></span>
+        </div>
+      </div>
 
       <div id="bloqueVuelta">
+
         <hr>
-        <b id="rutaVuelta"></b><br>
-        <span id="fechaVuelta"></span>
+
+        <div class="flight-row">
+          <i class="fa fa-plane fa-rotate-180 icon-vuelta"></i>
+          <div>
+            <b id="rutaVuelta"></b><br>
+            <span id="fechaVuelta"></span>
+          </div>
+        </div>
+
       </div>
 
       <hr>
@@ -129,9 +174,7 @@ input, select{
       <div class="col">
         <input type="email" id="email" placeholder="E-mail">
       </div>
-    </div>
 
-    <div class="row">
       <div class="col">
         <input type="tel" id="telefono" placeholder="Teléfono">
       </div>
@@ -147,8 +190,6 @@ input, select{
 
 
 <script>
-
-// ===== OBTENER PARÁMETROS =====
 
 function getParam(name){
   return new URL(window.location.href).searchParams.get(name);
@@ -239,8 +280,6 @@ function cargarFormularios(){
 }
 
 
-// ===== GUARDAR DATOS =====
-
 function guardarDatos(){
 
   let datos = [];
@@ -264,12 +303,7 @@ function guardarDatos(){
   console.log("Contacto:", email, telefono);
 
   alert("Datos guardados correctamente (demo)");
-
-  // Aquí iría el envío a backend real
 }
-
-
-// INICIAR
 
 cargarFormularios();
 

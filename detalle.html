@@ -389,24 +389,28 @@ document.getElementById("detalleVuelta").innerHTML =
 // 👇 MOSTRAR PASAJEROS EN PANTALLA
 document.getElementById("numPasajeros").innerText = pasajeros;
 
-calcular();
+function calcular(){
 
-function irResumen(){
+  let baseUnitario = precioIda + precioVuelta + extraIda + extraVuelta;
 
-  let total = document.getElementById("total").innerText.replace(/\./g,"");
-  let totalOff = document.getElementById("totalOff").innerText.replace(/\./g,"");
+  let base = baseUnitario * pasajeros;
 
-  let url = "resumen.html?" +
-    "origen=" + getParam("origen") +
-    "&destino=" + getParam("destino") +
-    "&ida=" + getParam("ida") +
-    "&vuelta=" + getParam("vuelta") +
-    "&tipo=" + getParam("tipo") +
-    "&pasajeros=" + pasajeros +
-    "&precioFinal=" + total +
-    "&precioOff=" + totalOff;
+  document.getElementById("base").innerText =
+    base.toLocaleString();
 
-  window.location.href = url;
+  let impuestosPorPersona = 62740;
+
+  let impuestosTotales = impuestosPorPersona * pasajeros;
+
+  let total = base + impuestosTotales;
+
+  document.getElementById("total").innerText =
+    total.toLocaleString();
+
+  let conOff = total - (total * 0.05);
+
+  document.getElementById("totalOff").innerText =
+    Math.floor(conOff).toLocaleString();
 }
 
 </script>

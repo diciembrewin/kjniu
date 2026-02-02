@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Itinerario – Datos de Pasajeros</title>
+
+<style>
+
+body{
+  margin:0;
+  font-family:Arial;
+  background:#f2f2f2;
+}
+
+.header{
+  background:#fff;
+  padding:14px;
+  font-size:18px;
+  font-weight:bold;
+  border-bottom:1px solid #ddd;
+}
+
+.container{
+  padding:14px;
+}
+
+.card{
+  background:#fff;
+  border-radius:12px;
+  margin-bottom:14px;
+  padding:14px;
+  box-shadow:0 2px 8px rgba(0,0,0,.1);
+}
+
+.title{
+  font-size:18px;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.row{
+  display:flex;
+  gap:10px;
+  margin-bottom:10px;
+  flex-wrap:wrap;
+}
+
+input, select{
+  padding:10px;
+  border:1px solid #ddd;
+  border-radius:8px;
+  width:100%;
+}
+
+.col{
+  flex:1;
+  min-width:120px;
+}
+
+.btn{
+  width:100%;
+  background:#fff;
+  border:1px solid #000;
+  border-radius:30px;
+  padding:12px;
+  font-size:16px;
+  margin-top:10px;
+  cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  Tu360 Compras – Datos de pasajeros
+</div>
+
+<div class="container" id="boxPasajeros"></div>
+
+<div class="container">
+
+  <div class="card">
+    <div class="title">Datos de Contacto</div>
+
+    <div class="row">
+      <div class="col">
+        <input type="email" id="email" placeholder="E-mail">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <input type="tel" id="telefono" placeholder="Teléfono">
+      </div>
+    </div>
+
+  </div>
+
+  <button class="btn" onclick="guardarDatos()">
+    Finalizar reserva
+  </button>
+
+</div>
+
+
+<script>
+
+function getParam(name){
+  return new URL(window.location.href).searchParams.get(name);
+}
+
+let pasajeros = parseInt(getParam("pasajeros") || 1);
+
+function cargarFormularios(){
+
+  let box = document.getElementById("boxPasajeros");
+
+  let html = "";
+
+  for(let i=1; i<=pasajeros; i++){
+
+    html += `
+
+    <div class="card">
+
+      <div class="title">
+        Pasajero ${i} – Adulto
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <input type="text" id="nombre${i}" placeholder="Nombre">
+        </div>
+
+        <div class="col">
+          <input type="text" id="apellido${i}" placeholder="Apellido">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <select id="tipoDoc${i}">
+            <option>Cédula</option>
+            <option>Pasaporte</option>
+          </select>
+        </div>
+
+        <div class="col">
+          <input type="text" id="documento${i}" placeholder="Número documento">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <input type="date" id="nacimiento${i}">
+        </div>
+      </div>
+
+    </div>
+
+    `;
+  }
+
+  box.innerHTML = html;
+}
+
+function guardarDatos(){
+
+  let datos = [];
+
+  for(let i=1; i<=pasajeros; i++){
+
+    let pasajero = {
+      nombre: document.getElementById("nombre"+i).value,
+      apellido: document.getElementById("apellido"+i).value,
+      documento: document.getElementById("documento"+i).value,
+      nacimiento: document.getElementById("nacimiento"+i).value
+    };
+
+    datos.push(pasajero);
+  }
+
+  let email = document.getElementById("email").value;
+  let telefono = document.getElementById("telefono").value;
+
+  console.log("Pasajeros:", datos);
+  console.log("Contacto:", email, telefono);
+
+  alert("Datos guardados correctamente (demo)");
+
+  // Aquí podrías enviarlo a un backend real
+}
+
+cargarFormularios();
+
+</script>
+
+</body>
+</html>

@@ -1,3 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resultados – Tu360 Compras</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+
+body{
+  margin:0;
+  font-family:Arial;
+  background:#f2f2f2;
+}
+
+.top-header{
+  background:#fff;
+  padding:14px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #ddd;
+}
+
+.logo{
+  font-size:22px;
+  font-weight:bold;
+}
+
+.actions{
+  display:flex;
+  gap:10px;
+  padding:14px;
+  background:#fff;
+}
+
+.btn-dark{
+  background:#2b2b2b;
+  color:#fff;
+  border:none;
+  padding:10px 14px;
+  border-radius:30px;
+  cursor:pointer;
+}
+
+.title{
+  padding:10px 14px;
+  font-size:18px;
+  font-weight:bold;
+}
+
+.summary{
+  background:#3b3b3b;
+  color:#fff;
+  margin:10px 14px;
+  padding:14px;
+  border-radius:12px;
+}
+
+.container{
+  padding:10px 14px;
+}
+
+.card{
+  background:#fff;
+  border-radius:12px;
+  margin-bottom:14px;
+  padding:14px;
+  box-shadow:0 2px 8px rgba(0,0,0,.1);
+}
+
+.option{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 0;
+  border-bottom:1px solid #eee;
+}
+
+.time{
+  font-size:18px;
+  font-weight:bold;
+}
+
+.airport{
+  font-weight:bold;
+}
+
+.price{
+  text-align:right;
+  margin-top:10px;
+  font-size:18px;
+}
+
+.btn-select{
+  width:100%;
+  background:#ffd100;
+  border:none;
+  border-radius:30px;
+  padding:12px;
+  font-size:16px;
+  margin-top:10px;
+  cursor:pointer;
+}
+
+  .promo-badge{
+  background:#2b2b2b;
+  color:#fff;
+  padding:4px 8px;
+  border-radius:8px;
+  font-size:12px;
+  margin-right:6px;
+}
+
+.price-row{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:8px;
+  margin-top:10px;
+}
+
+.price-row img{
+  width:20px;
+  height:20px;
+}
+
+.airline img{
+  width:24px;
+  height:auto;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="top-header">
+  <div class="logo">Tu360 Compras</div>
+</div>
+
+<div class="actions">
+  <button class="btn-dark" onclick="window.history.back()">Nueva búsqueda</button>
+</div>
+
+<div class="title" id="titulo"></div>
+
+<div class="summary" id="resumen"></div>
+
+<div class="container" id="resultBox"></div>
+
 <script>
 
 function getParam(name){
@@ -188,3 +341,7 @@ function cargarResultados(){
 cargarResultados();
 
 </script>
+
+
+</body>
+</html>

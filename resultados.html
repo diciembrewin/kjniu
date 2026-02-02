@@ -34,11 +34,6 @@ body{
   color:#666;
 }
 
-.menu{
-  font-size:16px;
-}
-
-/* BOTONES SUPERIORES */
 .actions{
   display:flex;
   gap:10px;
@@ -64,14 +59,12 @@ body{
   cursor:pointer;
 }
 
-/* TITULO */
 .title{
   padding:10px 14px;
   font-size:18px;
   font-weight:bold;
 }
 
-/* RESUMEN */
 .summary{
   background:#3b3b3b;
   color:#fff;
@@ -83,11 +76,6 @@ body{
   align-items:center;
 }
 
-.summary i{
-  font-size:22px;
-}
-
-/* RESULTADOS */
 .container{
   padding:10px 14px;
 }
@@ -98,13 +86,6 @@ body{
   margin-bottom:14px;
   padding:14px;
   box-shadow:0 2px 8px rgba(0,0,0,.1);
-}
-
-.airline{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  font-weight:bold;
 }
 
 .segment{
@@ -149,34 +130,26 @@ body{
 
 <body>
 
-<!-- HEADER -->
 <div class="top-header">
   <div class="logo">Tu360 <span>Compras</span></div>
-  <div class="menu">Menu ⋮</div>
 </div>
 
-<!-- BOTONES -->
 <div class="actions">
   <button class="btn-dark" onclick="window.history.back()">Nueva búsqueda</button>
   <button class="btn-light">Filtrar</button>
 </div>
 
-<!-- TITULO -->
 <div class="title" id="titulo"></div>
 
-<!-- RESUMEN -->
 <div class="summary">
   <i class="fa fa-bullhorn"></i>
   <div id="resumen"></div>
 </div>
 
-<!-- RESULTADOS -->
 <div class="container" id="resultBox"></div>
-
 
 <script>
 
-// ===== LEER DATOS DESDE URL =====
 function getParam(name){
   let url = new URL(window.location.href);
   return url.searchParams.get(name);
@@ -186,20 +159,17 @@ let origen = getParam("origen");
 let destino = getParam("destino");
 let ida = getParam("ida");
 let vuelta = getParam("vuelta");
-let pasajerosTexto = getParam("pasajeros") || "1";
+let tipo = getParam("tipo");
 
+let pasajerosTexto = getParam("pasajeros") || "1";
 let pasajeros = parseInt(pasajerosTexto.replace(/\D/g, ""));
 
 if(isNaN(pasajeros) || pasajeros < 1){
   pasajeros = 1;
 }
 
-// ===== TITULO DINÁMICO =====
 document.getElementById("titulo").innerText =
   "Paquete a " + destino;
-
-// ===== RESUMEN DINÁMICO =====
-let tipo = getParam("tipo");
 
 let textoResumen = "";
 
@@ -211,64 +181,26 @@ if(tipo === "oneway"){
 
 document.getElementById("resumen").innerText = textoResumen;
 
-// ===== OPCIONES SIMULADAS =====
-
 const opciones = [
-  {
-    aerolinea: "LATAM Airlines",
-    idaHora: "07:30",
-    idaLlegada: "08:40",
-    vueltaHora: "18:10",
-    vueltaLlegada: "19:20",
-    duracionIda: "1h 10m",
-    duracionVuelta: "1h 10m"
-  },
-  {
-    aerolinea: "Avianca",
-    idaHora: "10:20",
-    idaLlegada: "11:35",
-    vueltaHora: "20:00",
-    vueltaLlegada: "21:15",
-    duracionIda: "1h 15m",
-    duracionVuelta: "1h 15m"
-  },
-  {
-    aerolinea: "JetSMART",
-    idaHora: "13:40",
-    idaLlegada: "14:50",
-    vueltaHora: "16:20",
-    vueltaLlegada: "17:30",
-    duracionIda: "1h 10m",
-    duracionVuelta: "1h 10m"
-  },
-  {
-    aerolinea: "Wingo",
-    idaHora: "22:15",
-    idaLlegada: "23:25",
-    vueltaHora: "06:10",
-    vueltaLlegada: "07:20",
-    duracionIda: "1h 10m",
-    duracionVuelta: "1h 10m"
-  }
+  { aerolinea: "Avianca", idaHora: "06:30", idaLlegada: "07:40", vueltaHora: "10:10", vueltaLlegada: "11:20", duracionIda: "1h 10m", duracionVuelta: "1h 10m" },
+  { aerolinea: "LATAM Airlines", idaHora: "09:20", idaLlegada: "10:30", vueltaHora: "14:15", vueltaLlegada: "15:25", duracionIda: "1h 10m", duracionVuelta: "1h 10m" },
+  { aerolinea: "JetSMART", idaHora: "13:40", idaLlegada: "14:50", vueltaHora: "17:20", vueltaLlegada: "18:30", duracionIda: "1h 10m", duracionVuelta: "1h 10m" },
+  { aerolinea: "Wingo", idaHora: "21:30", idaLlegada: "22:40", vueltaHora: "22:50", vueltaLlegada: "23:59", duracionIda: "1h 10m", duracionVuelta: "1h 09m" }
 ];
 
 function calcularPrecioSegunHora(hora) {
 
   let h = parseInt(hora.split(":")[0]);
 
-  // MAÑANA: 05:00 – 11:59
   if (h >= 5 && h < 12) {
     return 110999;
   }
 
-  // TARDE: 12:00 – 17:59
   if (h >= 12 && h < 18) {
     return 168500;
   }
 
-  // NOCHE: 18:00 – 23:59
   if (h >= 18 || h < 5) {
-    // rango variable entre 240.454 y 386.458
     return Math.floor(Math.random() * (386458 - 240454)) + 240454;
   }
 
@@ -280,48 +212,52 @@ function cargarResultados(){
   let box = document.getElementById("resultBox");
   box.innerHTML = "";
 
+  let html = `<div class="card">`;
+
+  html += `<h3><i class="fa fa-plane"></i> IDA – ${ida}</h3><hr>`;
+
   opciones.forEach(v => {
 
-   let precioBase = calcularPrecioSegunHora(v.idaHora);
-let total = precioBase * pasajeros;
+    let precioBase = calcularPrecioSegunHora(v.idaHora);
+    let total = precioBase * pasajeros;
 
-    let html = `
-      <div class="card">
-
-        <div class="airline">
-          <i class="fa fa-plane"></i>
-          ${v.aerolinea}
+    html += `
+      <div class="segment">
+        <div>
+          <div class="airport">${origen}</div>
+          <div class="time">${v.idaHora}</div>
         </div>
 
-        <hr>
+        <div>Directo</div>
 
-        <!-- SEGMENTO DE IDA -->
-        <div class="segment">
-          <div>
-            <div class="airport">${origen}</div>
-            <div class="time">${v.idaHora}</div>
-          </div>
-
-          <div>Directo</div>
-
-          <div>
-            <div class="airport">${destino}</div>
-            <div class="time">${v.idaLlegada}</div>
-          </div>
+        <div>
+          <div class="airport">${destino}</div>
+          <div class="time">${v.idaLlegada}</div>
         </div>
+      </div>
 
-        <div class="duration">
-          Duración ida: ${v.duracionIda}
-        </div>
+      <div class="duration">
+        Duración: ${v.duracionIda}
+      </div>
+
+      <div class="price">
+        <b>COP $ ${total.toLocaleString()}</b>
+      </div>
+
+      <hr>
     `;
+  });
 
-    // 👇 SOLO SI ES IDA Y VUELTA SE MUESTRA ESTE BLOQUE
-    if(tipo !== "oneway"){
+  if(tipo !== "oneway"){
+
+    html += `<h3><i class="fa fa-plane"></i> VUELTA – ${vuelta}</h3><hr>`;
+
+    opciones.forEach(v => {
+
+      let precioBase = calcularPrecioSegunHora(v.vueltaHora);
+      let total = precioBase * pasajeros;
+
       html += `
-
-        <hr>
-
-        <!-- SEGMENTO DE VUELTA -->
         <div class="segment">
           <div>
             <div class="airport">${destino}</div>
@@ -337,30 +273,23 @@ let total = precioBase * pasajeros;
         </div>
 
         <div class="duration">
-          Duración vuelta: ${v.duracionVuelta}
+          Duración: ${v.duracionVuelta}
         </div>
 
-      `;
-    }
-
-    html += `
-
         <div class="price">
-          <small>Precio total</small>
           <b>COP $ ${total.toLocaleString()}</b>
         </div>
 
-        <button class="btn-select">
-          Seleccionar vuelos
-        </button>
+        <hr>
+      `;
+    });
+  }
 
-      </div>
-    `;
+  html += `<button class="btn-select">Seleccionar vuelos</button></div>`;
 
-    box.innerHTML += html;
-
-  });
+  box.innerHTML = html;
 }
+
 cargarResultados();
 
 </script>

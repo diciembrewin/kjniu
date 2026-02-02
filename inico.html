@@ -637,8 +637,28 @@ function selectDate(fecha){
 
   closeCalendar();
 }
+function irAResultados(){
 
- 
+  let origen = document.getElementById("origenInput").value;
+  let destino = document.getElementById("destinoInput").value;
+  let ida = document.getElementById("idaInput").value;
+  let vuelta = document.getElementById("vueltaInput").value;
+  let pasajeros = document.getElementById("passengerInput").value;
+
+  if(!origen || !destino || !ida){
+    alert("Completa origen, destino y fecha de ida");
+    return;
+  }
+
+  let url = "resultados.html?" +
+    "origen=" + encodeURIComponent(origen) +
+    "&destino=" + encodeURIComponent(destino) +
+    "&ida=" + encodeURIComponent(ida) +
+    "&vuelta=" + encodeURIComponent(vuelta) +
+    "&pasajeros=" + encodeURIComponent(pasajeros);
+
+  window.location.href = url;
+}
 
 </script>
 

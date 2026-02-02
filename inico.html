@@ -5,18 +5,12 @@
 <title>Tu360 Compras – UI</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Font Awesome 4 (como el original) -->
+<!-- Font Awesome 4 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <style>
-*{
-  box-sizing:border-box;
-  font-family:Roboto, Arial, sans-serif;
-}
-body{
-  margin:0;
-  background:#f4f4f4;
-}
+*{box-sizing:border-box;font-family:Roboto, Arial, sans-serif}
+body{margin:0;background:#f4f4f4;color:#000}
 
 /* HEADER */
 .header{
@@ -40,7 +34,7 @@ body{
   object-fit:cover;
 }
 
-/* TABS */
+/* TABS SUPERIORES */
 #widget-tabs{
   list-style:none;
   display:flex;
@@ -50,11 +44,7 @@ body{
   position:relative;
   z-index:5;
 }
-
-#widget-tabs li{
-  text-align:center;
-}
-
+#widget-tabs li{text-align:center}
 #widget-tabs li a{
   text-decoration:none;
   color:#000;
@@ -63,8 +53,6 @@ body{
   flex-direction:column;
   align-items:center;
 }
-
-/* CÍRCULOS */
 #widget-tabs li a i{
   width:60px;
   height:60px;
@@ -77,21 +65,15 @@ body{
   font-size:24px;
   margin-bottom:6px;
 }
-
-/* ACTIVO */
 #widget-tabs li.active a i{
   background:#FFD400;
   border:none;
 }
-
-/* TEXTO SOLO DESKTOP */
 @media(max-width:768px){
-  #widget-tabs li a span{
-    display:none;
-  }
+  #widget-tabs li a span{display:none}
 }
 
-/* CONTENEDOR */
+/* CONTENEDOR BLANCO */
 .container{
   background:#fff;
   margin-top:-10px;
@@ -100,10 +82,6 @@ body{
 }
 
 /* FORMULARIO */
-.flight-form{
-  margin-top:10px;
-}
-
 .field{
   display:flex;
   align-items:center;
@@ -112,46 +90,19 @@ body{
   border-bottom:1px solid #000;
   margin-bottom:18px;
 }
-
-.field i{
-  font-size:20px;
-  color:#000;
-}
-
+.field i{font-size:20px}
 .field input{
   border:none;
   outline:none;
   font-size:16px;
   width:100%;
 }
+.dates{display:flex;gap:15px}
+.half{width:50%}
 
-.field input::placeholder{
-  color:#9b9b9b;
-}
+.checks{margin:20px 0;font-size:14px}
+.checks label{display:block;margin-bottom:12px}
 
-.dates{
-  display:flex;
-  gap:15px;
-}
-
-.half{
-  width:50%;
-}
-
-/* CHECKS */
-.checks{
-  margin:20px 0;
-  font-size:14px;
-}
-.checks label{
-  display:block;
-  margin-bottom:12px;
-}
-.checks input{
-  margin-right:8px;
-}
-
-/* BOTÓN */
 .btn-search{
   width:100%;
   background:#FFD400;
@@ -161,7 +112,65 @@ body{
   font-weight:bold;
   border-radius:40px;
   cursor:pointer;
-  color:#000;
+}
+
+/* ===== SECCIONES INFERIORES ===== */
+
+/* BANNER */
+.banner{
+  margin:30px 0;
+}
+.banner img{
+  width:100%;
+  border-radius:20px;
+}
+
+/* TITULO + SUB */
+.section-title{
+  margin:30px 0 15px;
+}
+.section-title h2{
+  margin:0 0 5px;
+}
+.section-title p{
+  margin:0;
+  color:#555;
+}
+
+/* MENU DESTINOS */
+.menuItems{
+  list-style:none;
+  display:flex;
+  gap:20px;
+  padding:0;
+  margin:20px 0;
+  border-bottom:1px solid #ddd;
+}
+.menuItems__items{
+  padding:10px 0;
+  cursor:pointer;
+  font-weight:500;
+}
+.menuItems__items.active{
+  border-bottom:3px solid #FFD400;
+}
+
+/* TARJETA */
+.card-banner{
+  margin:40px 0;
+}
+.card-banner img{
+  width:100%;
+  border-radius:20px;
+}
+
+/* FOOTER */
+.footer{
+  background:#2c2a29;
+  color:#fff;
+  padding:30px 20px;
+  text-align:center;
+  font-size:14px;
 }
 </style>
 </head>
@@ -181,40 +190,11 @@ body{
 
 <!-- TABS -->
 <ul id="widget-tabs">
-  <li>
-    <a href="#">
-      <i class="fa fa-suitcase"></i>
-      <span>Paquetes turísticos</span>
-    </a>
-  </li>
-
-  <li>
-    <a href="#">
-      <i class="fa fa-h-square"></i>
-      <span>Alojamiento</span>
-    </a>
-  </li>
-
-  <li class="active">
-    <a href="#">
-      <i class="fa fa-plane"></i>
-      <span>Vuelos</span>
-    </a>
-  </li>
-
-  <li>
-    <a href="#">
-      <i class="fa fa-ticket"></i>
-      <span>Actividades</span>
-    </a>
-  </li>
-
-  <li>
-    <a href="#">
-      <i class="fa fa-car"></i>
-      <span>Autos</span>
-    </a>
-  </li>
+  <li><a href="#"><i class="fa fa-suitcase"></i><span>Paquetes</span></a></li>
+  <li><a href="#"><i class="fa fa-h-square"></i><span>Hotel</span></a></li>
+  <li class="active"><a href="#"><i class="fa fa-plane"></i><span>Vuelos</span></a></li>
+  <li><a href="#"><i class="fa fa-ticket"></i><span>Actividades</span></a></li>
+  <li><a href="#"><i class="fa fa-car"></i><span>Autos</span></a></li>
 </ul>
 
 <!-- CONTENIDO -->
@@ -222,60 +202,67 @@ body{
 
   <h2>Vuelos</h2>
 
-  <div class="flight-form">
+  <!-- FORM -->
+  <div class="field"><i class="fa fa-dot-circle-o"></i><input placeholder="Origen"></div>
+  <div class="field"><i class="fa fa-map-marker"></i><input placeholder="Destino"></div>
 
-    <div class="field">
-      <i class="fa fa-dot-circle-o"></i>
-      <input type="text" placeholder="Origen">
-    </div>
-
-    <div class="field">
-      <i class="fa fa-map-marker"></i>
-      <input type="text" placeholder="Destino">
-    </div>
-
-    <div class="dates">
-      <div class="field half">
-        <i class="fa fa-calendar-check-o"></i>
-        <input type="text" placeholder="Ida">
-      </div>
-
-      <div class="field half">
-        <i class="fa fa-calendar-check-o"></i>
-        <input type="text" placeholder="Vuelta">
-      </div>
-    </div>
-
-    <div class="field">
-      <i class="fa fa-user"></i>
-      <input type="number" value="1" min="1">
-    </div>
-
-    <div class="checks">
-      <label>
-        <input type="checkbox">
-        Solo vuelos que incluyan equipaje
-      </label>
-
-      <label>
-        <input type="checkbox">
-        Solo vuelos directos
-      </label>
-    </div>
-
-    <button class="btn-search">Buscar</button>
-
+  <div class="dates">
+    <div class="field half"><i class="fa fa-calendar-check-o"></i><input placeholder="Ida"></div>
+    <div class="field half"><i class="fa fa-calendar-check-o"></i><input placeholder="Vuelta"></div>
   </div>
+
+  <div class="field"><i class="fa fa-user"></i><input type="number" value="1"></div>
+
+  <div class="checks">
+    <label><input type="checkbox"> Solo vuelos que incluyan equipaje</label>
+    <label><input type="checkbox"> Solo vuelos directos</label>
+  </div>
+
+  <button class="btn-search">Buscar</button>
+
+  <!-- BANNER OFERTAS -->
+  <div class="banner">
+    <img src="https://viajestu360compras.bancolombia.com/portals/27/Images/diatu360/01/dia_tu360_BannerOfertas1-720x400.webp">
+  </div>
+
+  <!-- DESTINOS -->
+  <div class="section-title">
+    <h2>Los destinos más buscados</h2>
+    <p>Encuentra las rutas más populares con precios imperdibles</p>
+  </div>
+
+  <ul class="menuItems">
+    <li class="menuItems__items active">Vuelos desde Bogotá</li>
+    <li class="menuItems__items">Vuelos desde Medellín</li>
+  </ul>
+
+  <!-- TARJETA -->
+  <div class="card-banner">
+    <img src="https://viajestu360compras.bancolombia.com/portals/27/Images/Consumo/Tarjeta-Debito-Mastercard-Mobile.png">
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  © 2026 Tu360 Compras · Proyecto UI
 </div>
 
 <script>
-/* Tabs activo (solo visual) */
+/* Tabs superiores */
 document.querySelectorAll('#widget-tabs li').forEach(tab=>{
-  tab.addEventListener('click',()=>{
-    document.querySelectorAll('#widget-tabs li')
-      .forEach(t=>t.classList.remove('active'));
+  tab.onclick=()=>{
+    document.querySelectorAll('#widget-tabs li').forEach(t=>t.classList.remove('active'));
     tab.classList.add('active');
-  });
+  }
+});
+
+/* Menu destinos */
+document.querySelectorAll('.menuItems__items').forEach(item=>{
+  item.onclick=()=>{
+    document.querySelectorAll('.menuItems__items').forEach(i=>i.classList.remove('active'));
+    item.classList.add('active');
+  }
 });
 </script>
 

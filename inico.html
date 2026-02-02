@@ -1,43 +1,294 @@
-<div class="flight-form">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tu360 – Vuelos</title>
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+*{
+  box-sizing:border-box;
+  font-family:'Roboto', Arial, sans-serif;
+}
+
+body{
+  margin:0;
+  background:#f4f4f4;
+}
+
+/* HEADER */
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 18px;
+  background:#fff;
+  font-weight:600;
+}
+
+.header img{
+  height:28px;
+}
+
+/* HERO */
+.hero{
+  position:relative;
+  background:url("https://viajestu360compras.bancolombia.com/portals/27/Images/Genericas/Vuelos-Mobile.webp") no-repeat center/cover;
+  height:320px;
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:#00c6d7;
+  mix-blend-mode:multiply;
+}
+
+.hero-content{
+  position:absolute;
+  top:40px;
+  left:20px;
+  right:20px;
+  color:#000;
+}
+
+.hero-content h1{
+  font-size:30px;
+  margin:0 0 10px;
+}
+
+.hero-content p{
+  font-size:18px;
+  margin:0;
+}
+
+/* ICON TABS */
+.tabs{
+  display:flex;
+  justify-content:space-around;
+  position:absolute;
+  bottom:-28px;
+  left:0;
+  right:0;
+}
+
+.tab{
+  width:64px;
+  height:64px;
+  background:#fff;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 4px 10px rgba(0,0,0,.15);
+}
+
+.tab.active{
+  background:#ffd100;
+}
+
+/* FORM CONTAINER */
+.form-container{
+  background:#fff;
+
+  /* 👇 SUBE el formulario (clave) */
+  margin: 4px auto 20px;
+
+  padding:28px 20px 32px;
+  max-width:360px;
+  width:100%;
+
+  border-radius:30px;
+  box-shadow:0 4px 14px rgba(0,0,0,.08);
+}
+
+.form-container h2{
+  margin:0 0 20px;
+  font-size:22px;
+}
+
+/* INPUTS */
+.field{
+  display:flex;
+  align-items:center;
+  margin-bottom:18px;
+  border-bottom:1px solid #ccc;
+  padding-bottom:8px;
+}
+
+.field i{
+  margin-right:10px;
+  font-size:18px;
+  color:#333;
+}
+
+.field input{
+  border:none;
+  outline:none;
+  width:100%;
+  font-size:16px;
+}
+
+/* DATE ROW */
+.row{
+  display:flex;
+  gap:20px;
+}
+
+/* CHECKS */
+.checks{
+  margin:20px 0;
+  font-size:14px;
+}
+
+.checks label{
+  display:block;
+  margin-bottom:10px;
+}
+
+/* BUTTON */
+.btn{
+  width:100%;
+  background:#ffd100;
+  border:none;
+  border-radius:30px;
+  padding:14px;
+  font-size:18px;
+  font-weight:600;
+  cursor:pointer;
+}
+
+/* SECTION AFTER SEARCH */
+.section{
+  background:#fff;
+  margin:30px auto 0;
+  padding:20px;
+  max-width:720px;
+}
+
+.section h2{
+  margin-bottom:8px;
+}
+
+.menuItems{
+  display:flex;
+  gap:20px;
+  list-style:none;
+  padding:0;
+}
+
+.menuItems__items{
+  cursor:pointer;
+  font-weight:500;
+}
+
+.menuItems__items.active{
+  border-bottom:3px solid #ffd100;
+}
+
+/* BANNERS */
+.banner{
+  width:100%;
+  margin:20px 0;
+  border-radius:20px;
+}
+
+/* FOOTER */
+footer{
+  background:#111;
+  color:#fff;
+  text-align:center;
+  padding:20px;
+  margin-top:40px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <img src="https://viajestu360compras.bancolombia.com/Portals/27/logo-tu360compras.png">
+  <span>Menu</span>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <h1>Vuelo + Hotel</h1>
+    
+  </div>
+
+  <div class="tabs">
+    <div class="tab"><i class="fa fa-suitcase"></i></div>
+    <div class="tab"><i class="fa fa-bed"></i></div>
+    <div class="tab active"><i class="fa fa-plane"></i></div>
+    <div class="tab"><i class="fa fa-ticket"></i></div>
+    <div class="tab"><i class="fa fa-car"></i></div>
+  </div>
+</div>
+
+<!-- FORM -->
+<div class="form-container">
+  <h2>Paquetes turísticos (Vuelo + Hotel)</h2>
 
   <div class="field">
     <i class="fa fa-dot-circle-o"></i>
-    <input type="text" placeholder="Origen">
+    <input placeholder="Origen">
   </div>
 
   <div class="field">
     <i class="fa fa-map-marker"></i>
-    <input type="text" placeholder="Destino">
+    <input placeholder="Destino">
   </div>
 
-  <div class="dates">
-    <div class="field half">
+  <div class="row">
+    <div class="field">
       <i class="fa fa-calendar-check-o"></i>
-      <input type="text" placeholder="Ida">
+      <input placeholder="Ida">
     </div>
-
-    <div class="field half">
+    <div class="field">
       <i class="fa fa-calendar-check-o"></i>
-      <input type="text" placeholder="Vuelta">
+      <input placeholder="Vuelta">
     </div>
   </div>
 
   <div class="field">
     <i class="fa fa-user"></i>
-    <input type="number" value="1" min="1">
+    <input value="1">
   </div>
 
   <div class="checks">
-    <label>
-      <input type="checkbox">
-      Solo vuelos que incluyan equipaje
-    </label>
-
-    <label>
-      <input type="checkbox">
-      Solo vuelos directos
-    </label>
+    <label><input type="checkbox"> Solo vuelos que incluyan equipaje</label>
+    <label><input type="checkbox"> Solo vuelos directos</label>
   </div>
 
-  <button class="btn-search">Buscar</button>
+  <button class="btn">Buscar</button>
 </div>
+
+<!-- AFTER SEARCH CONTENT -->
+<div class="section">
+  <img class="banner" src="https://viajestu360compras.bancolombia.com/portals/27/Images/diatu360/01/dia_tu360_BannerOfertas1-720x400.webp">
+
+  <h2>Los destinos más buscados</h2>
+  <p>Encuentra las rutas más populares con precios imperdibles</p>
+
+  <ul class="menuItems">
+    <li class="menuItems__items active">Vuelos desde Bogotá</li>
+    <li class="menuItems__items">Vuelos desde Medellín</li>
+  </ul>
+
+  <img class="banner" src="https://viajestu360compras.bancolombia.com/portals/27/Images/Consumo/Tarjeta-Debito-Mastercard-Mobile.png">
+</div>
+
+<!-- FOOTER -->
+<footer>
+  © Tu360Compras – Bancolombia
+</footer>
+
+</body>
+</html>

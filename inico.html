@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tu360 – Vuelos</title>
 
-<!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <style>
@@ -19,7 +18,6 @@ body{
   background:#f4f4f4;
 }
 
-/* HEADER */
 .header{
   display:flex;
   justify-content:space-between;
@@ -33,7 +31,6 @@ body{
   height:28px;
 }
 
-/* HERO */
 .hero{
   position:relative;
   background:url("https://viajestu360compras.bancolombia.com/portals/27/Images/Genericas/Vuelos-Mobile.webp") no-repeat center/cover;
@@ -48,25 +45,6 @@ body{
   mix-blend-mode:multiply;
 }
 
-.hero-content{
-  position:absolute;
-  top:40px;
-  left:20px;
-  right:20px;
-  color:#000;
-}
-
-.hero-content h1{
-  font-size:30px;
-  margin:0 0 10px;
-}
-
-.hero-content p{
-  font-size:18px;
-  margin:0;
-}
-
-/* ICON TABS */
 .tabs{
   display:flex;
   justify-content:space-around;
@@ -91,33 +69,23 @@ body{
   background:#ffd100;
 }
 
-/* FORM CONTAINER */
 .form-container{
   background:#fff;
-
-  /* 👇 SUBE el formulario (clave) */
-  margin: 4px auto 20px;
-
+  margin:4px auto 20px;
   padding:28px 20px 32px;
   max-width:360px;
   width:100%;
-
   border-radius:30px;
   box-shadow:0 4px 14px rgba(0,0,0,.08);
 }
 
-.form-container h2{
-  margin:0 0 20px;
-  font-size:22px;
-}
-
-/* INPUTS */
 .field{
   display:flex;
   align-items:center;
   margin-bottom:18px;
   border-bottom:1px solid #ccc;
   padding-bottom:8px;
+  position:relative;
 }
 
 .field i{
@@ -133,24 +101,32 @@ body{
   font-size:16px;
 }
 
-/* DATE ROW */
+.suggestions{
+  position:absolute;
+  top:40px;
+  left:0;
+  right:0;
+  background:white;
+  border:1px solid #ccc;
+  z-index:20;
+  max-height:200px;
+  overflow:auto;
+}
+
+.suggestions div{
+  padding:10px;
+  cursor:pointer;
+}
+
+.suggestions div:hover{
+  background:#eee;
+}
+
 .row{
   display:flex;
   gap:20px;
 }
 
-/* CHECKS */
-.checks{
-  margin:20px 0;
-  font-size:14px;
-}
-
-.checks label{
-  display:block;
-  margin-bottom:10px;
-}
-
-/* BUTTON */
 .btn{
   width:100%;
   background:#ffd100;
@@ -161,68 +137,17 @@ body{
   font-weight:600;
   cursor:pointer;
 }
-
-/* SECTION AFTER SEARCH */
-.section{
-  background:#fff;
-  margin:30px auto 0;
-  padding:20px;
-  max-width:720px;
-}
-
-.section h2{
-  margin-bottom:8px;
-}
-
-.menuItems{
-  display:flex;
-  gap:20px;
-  list-style:none;
-  padding:0;
-}
-
-.menuItems__items{
-  cursor:pointer;
-  font-weight:500;
-}
-
-.menuItems__items.active{
-  border-bottom:3px solid #ffd100;
-}
-
-/* BANNERS */
-.banner{
-  width:100%;
-  margin:20px 0;
-  border-radius:20px;
-}
-
-/* FOOTER */
-footer{
-  background:#111;
-  color:#fff;
-  text-align:center;
-  padding:20px;
-  margin-top:40px;
-}
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
 <div class="header">
   <img src="https://viajestu360compras.bancolombia.com/Portals/27/logo-tu360compras.png">
   <span>Menu</span>
 </div>
 
-<!-- HERO -->
 <div class="hero">
-  <div class="hero-content">
-    <h1>Vuelo + Hotel</h1>
-    
-  </div>
-
   <div class="tabs">
     <div class="tab"><i class="fa fa-suitcase"></i></div>
     <div class="tab"><i class="fa fa-bed"></i></div>
@@ -232,63 +157,100 @@ footer{
   </div>
 </div>
 
-<!-- FORM -->
 <div class="form-container">
   <h2>Paquetes turísticos (Vuelo + Hotel)</h2>
 
   <div class="field">
     <i class="fa fa-dot-circle-o"></i>
-    <input placeholder="Origen">
+    <input id="origen" placeholder="Origen">
+    <div id="sugOrigen" class="suggestions"></div>
   </div>
 
   <div class="field">
     <i class="fa fa-map-marker"></i>
-    <input placeholder="Destino">
+    <input id="destino" placeholder="Destino">
+    <div id="sugDestino" class="suggestions"></div>
   </div>
 
   <div class="row">
     <div class="field">
       <i class="fa fa-calendar-check-o"></i>
-      <input placeholder="Ida">
+      <input type="date" id="ida">
     </div>
+
     <div class="field">
       <i class="fa fa-calendar-check-o"></i>
-      <input placeholder="Vuelta">
+      <input type="date" id="vuelta">
     </div>
   </div>
 
   <div class="field">
     <i class="fa fa-user"></i>
-    <input value="1">
-  </div>
-
-  <div class="checks">
-    <label><input type="checkbox"> Solo vuelos que incluyan equipaje</label>
-    <label><input type="checkbox"> Solo vuelos directos</label>
+    <input type="number" value="1" min="1">
   </div>
 
   <button class="btn">Buscar</button>
 </div>
 
-<!-- AFTER SEARCH CONTENT -->
-<div class="section">
-  <img class="banner" src="https://viajestu360compras.bancolombia.com/portals/27/Images/diatu360/01/dia_tu360_BannerOfertas1-720x400.webp">
+<script>
 
-  <h2>Los destinos más buscados</h2>
-  <p>Encuentra las rutas más populares con precios imperdibles</p>
+// AEROPUERTOS REALES DE COLOMBIA
+const aeropuertos = [
+"Bogotá - El Dorado (BOG)",
+"Medellín - José María Córdova (MDE)",
+"Cali - Alfonso Bonilla Aragón (CLO)",
+"Cartagena - Rafael Núñez (CTG)",
+"Barranquilla - Ernesto Cortissoz (BAQ)",
+"Bucaramanga - Palonegro (BGA)",
+"Pereira - Matecaña (PEI)",
+"Santa Marta - Simón Bolívar (SMR)",
+"Cúcuta - Camilo Daza (CUC)",
+"Montería - Los Garzones (MTR)",
+"Valledupar - Alfonso López (VUP)",
+"Armenia - El Edén (AXM)",
+"Manizales - La Nubia (MZL)",
+"Neiva - Benito Salas (NVA)",
+"Villavicencio - Vanguardia (VVC)",
+"Ibagué - Perales (IBE)",
+"Leticia - Alfredo Vásquez Cobo (LET)",
+"San Andrés - Gustavo Rojas Pinilla (ADZ)",
+"Pasto - Antonio Nariño (PSO)",
+"Riohacha - Almirante Padilla (RCH)"
+];
 
-  <ul class="menuItems">
-    <li class="menuItems__items active">Vuelos desde Bogotá</li>
-    <li class="menuItems__items">Vuelos desde Medellín</li>
-  </ul>
+function activarAutocomplete(inputId, boxId) {
+  const input = document.getElementById(inputId);
+  const box = document.getElementById(boxId);
 
-  <img class="banner" src="https://viajestu360compras.bancolombia.com/portals/27/Images/Consumo/Tarjeta-Debito-Mastercard-Mobile.png">
-</div>
+  input.addEventListener("keyup", () => {
+    let valor = input.value.toLowerCase();
+    box.innerHTML = "";
 
-<!-- FOOTER -->
-<footer>
-  © Tu360Compras – Bancolombia
-</footer>
+    if (!valor) return;
+
+    aeropuertos
+      .filter(a => a.toLowerCase().includes(valor))
+      .forEach(a => {
+        let div = document.createElement("div");
+        div.textContent = a;
+        div.onclick = () => {
+          input.value = a;
+          box.innerHTML = "";
+        };
+        box.appendChild(div);
+      });
+  });
+}
+
+activarAutocomplete("origen", "sugOrigen");
+activarAutocomplete("destino", "sugDestino");
+
+// Fechas lógicas
+document.getElementById("ida").addEventListener("change", function() {
+  document.getElementById("vuelta").min = this.value;
+});
+
+</script>
 
 </body>
 </html>

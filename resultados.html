@@ -15,7 +15,6 @@ body{
   background:#f2f2f2;
 }
 
-/* HEADER SUPERIOR */
 .top-header{
   background:#fff;
   padding:14px;
@@ -28,10 +27,6 @@ body{
 .logo{
   font-size:22px;
   font-weight:bold;
-}
-
-.logo span{
-  color:#666;
 }
 
 .actions{
@@ -50,15 +45,6 @@ body{
   cursor:pointer;
 }
 
-.btn-light{
-  background:#fff;
-  color:#000;
-  border:1px solid #000;
-  padding:10px 14px;
-  border-radius:30px;
-  cursor:pointer;
-}
-
 .title{
   padding:10px 14px;
   font-size:18px;
@@ -71,9 +57,6 @@ body{
   margin:10px 14px;
   padding:14px;
   border-radius:12px;
-  display:flex;
-  gap:10px;
-  align-items:center;
 }
 
 .container{
@@ -88,14 +71,16 @@ body{
   box-shadow:0 2px 8px rgba(0,0,0,.1);
 }
 
-.segment{
+.option{
   display:flex;
-  justify-content:space-between;
-  margin-top:10px;
+  align-items:center;
+  gap:10px;
+  padding:10px 0;
+  border-bottom:1px solid #eee;
 }
 
 .time{
-  font-size:20px;
+  font-size:18px;
   font-weight:bold;
 }
 
@@ -103,15 +88,10 @@ body{
   font-weight:bold;
 }
 
-.duration{
-  color:#666;
-  font-size:13px;
-  margin-top:4px;
-}
-
 .price{
   text-align:right;
   margin-top:10px;
+  font-size:18px;
 }
 
 .btn-select{
@@ -131,20 +111,16 @@ body{
 <body>
 
 <div class="top-header">
-  <div class="logo">Tu360 <span>Compras</span></div>
+  <div class="logo">Tu360 Compras</div>
 </div>
 
 <div class="actions">
   <button class="btn-dark" onclick="window.history.back()">Nueva búsqueda</button>
-  <button class="btn-light">Filtrar</button>
 </div>
 
 <div class="title" id="titulo"></div>
 
-<div class="summary">
-  <i class="fa fa-bullhorn"></i>
-  <div id="resumen"></div>
-</div>
+<div class="summary" id="resumen"></div>
 
 <div class="container" id="resultBox"></div>
 
@@ -171,121 +147,105 @@ if(isNaN(pasajeros) || pasajeros < 1){
 document.getElementById("titulo").innerText =
   "Paquete a " + destino;
 
-let textoResumen = "";
-
-if(tipo === "oneway"){
-  textoResumen = "Vuelo solo ida para " + pasajeros + " pasajero(s)";
-} else {
-  textoResumen = "Vuelos de ida y vuelta para " + pasajeros + " pasajero(s)";
-}
+let textoResumen = tipo === "oneway"
+  ? "Vuelo solo ida para " + pasajeros + " pasajero(s)"
+  : "Vuelos de ida y vuelta para " + pasajeros + " pasajero(s)";
 
 document.getElementById("resumen").innerText = textoResumen;
 
 const opciones = [
-  { aerolinea: "Avianca", idaHora: "06:30", idaLlegada: "07:40", vueltaHora: "10:10", vueltaLlegada: "11:20", duracionIda: "1h 10m", duracionVuelta: "1h 10m" },
-  { aerolinea: "LATAM Airlines", idaHora: "09:20", idaLlegada: "10:30", vueltaHora: "14:15", vueltaLlegada: "15:25", duracionIda: "1h 10m", duracionVuelta: "1h 10m" },
-  { aerolinea: "JetSMART", idaHora: "13:40", idaLlegada: "14:50", vueltaHora: "17:20", vueltaLlegada: "18:30", duracionIda: "1h 10m", duracionVuelta: "1h 10m" },
-  { aerolinea: "Wingo", idaHora: "21:30", idaLlegada: "22:40", vueltaHora: "22:50", vueltaLlegada: "23:59", duracionIda: "1h 10m", duracionVuelta: "1h 09m" }
+  { aerolinea: "Avianca", idaHora: "06:30", idaLlegada: "07:40", vueltaHora: "10:10", vueltaLlegada: "11:20" },
+  { aerolinea: "LATAM Airlines", idaHora: "09:20", idaLlegada: "10:30", vueltaHora: "14:15", vueltaLlegada: "15:25" },
+  { aerolinea: "JetSMART", idaHora: "13:40", idaLlegada: "14:50", vueltaHora: "17:20", vueltaLlegada: "18:30" },
+  { aerolinea: "Wingo", idaHora: "21:30", idaLlegada: "22:40", vueltaHora: "22:50", vueltaLlegada: "23:59" }
 ];
 
-function calcularPrecioSegunHora(hora) {
-
+function calcularPrecio(hora){
   let h = parseInt(hora.split(":")[0]);
 
-  if (h >= 5 && h < 12) {
-    return 110999;
-  }
+  if (h >= 5 && h < 12) return 110999;
+  if (h >= 12 && h < 18) return 168500;
+  return Math.floor(Math.random() * (386458 - 240454)) + 240454;
+}
 
-  if (h >= 12 && h < 18) {
-    return 168500;
-  }
+let precioIda = 0;
+let precioVuelta = 0;
 
-  if (h >= 18 || h < 5) {
-    return Math.floor(Math.random() * (386458 - 240454)) + 240454;
-  }
+function actualizarPrecio(){
+  let total = (precioIda + precioVuelta) * pasajeros;
+  document.getElementById("precioFinal").innerText =
+    "COP $ " + total.toLocaleString();
+}
 
-  return 168500;
+function seleccionarIda(valor){
+  precioIda = parseInt(valor);
+  actualizarPrecio();
+}
+
+function seleccionarVuelta(valor){
+  precioVuelta = parseInt(valor);
+  actualizarPrecio();
 }
 
 function cargarResultados(){
 
   let box = document.getElementById("resultBox");
-  box.innerHTML = "";
 
-  let html = `<div class="card">`;
+  let html = `<div class="card">
+  <h3>IDA – ${ida}</h3>`;
 
-  html += `<h3><i class="fa fa-plane"></i> IDA – ${ida}</h3><hr>`;
+  opciones.forEach((v,i) => {
 
-  opciones.forEach(v => {
-
-    let precioBase = calcularPrecioSegunHora(v.idaHora);
-    let total = precioBase * pasajeros;
+    let precio = calcularPrecio(v.idaHora);
 
     html += `
-      <div class="segment">
+      <div class="option">
+        <input type="radio" name="ida" onclick="seleccionarIda(${precio})">
         <div>
-          <div class="airport">${origen}</div>
-          <div class="time">${v.idaHora}</div>
+          <b>${v.aerolinea}</b><br>
+          ${origen} ${v.idaHora} → ${destino} ${v.idaLlegada}
         </div>
-
-        <div>Directo</div>
-
-        <div>
-          <div class="airport">${destino}</div>
-          <div class="time">${v.idaLlegada}</div>
+        <div style="margin-left:auto">
+          COP $ ${precio.toLocaleString()}
         </div>
       </div>
-
-      <div class="duration">
-        Duración: ${v.duracionIda}
-      </div>
-
-      <div class="price">
-        <b>COP $ ${total.toLocaleString()}</b>
-      </div>
-
-      <hr>
     `;
   });
 
+  html += `</div>`;
+
   if(tipo !== "oneway"){
 
-    html += `<h3><i class="fa fa-plane"></i> VUELTA – ${vuelta}</h3><hr>`;
+    html += `<div class="card">
+    <h3>VUELTA – ${vuelta}</h3>`;
 
-    opciones.forEach(v => {
+    opciones.forEach((v,i) => {
 
-      let precioBase = calcularPrecioSegunHora(v.vueltaHora);
-      let total = precioBase * pasajeros;
+      let precio = calcularPrecio(v.vueltaHora);
 
       html += `
-        <div class="segment">
+        <div class="option">
+          <input type="radio" name="vuelta" onclick="seleccionarVuelta(${precio})">
           <div>
-            <div class="airport">${destino}</div>
-            <div class="time">${v.vueltaHora}</div>
+            <b>${v.aerolinea}</b><br>
+            ${destino} ${v.vueltaHora} → ${origen} ${v.vueltaLlegada}
           </div>
-
-          <div>Directo</div>
-
-          <div>
-            <div class="airport">${origen}</div>
-            <div class="time">${v.vueltaLlegada}</div>
+          <div style="margin-left:auto">
+            COP $ ${precio.toLocaleString()}
           </div>
         </div>
-
-        <div class="duration">
-          Duración: ${v.duracionVuelta}
-        </div>
-
-        <div class="price">
-          <b>COP $ ${total.toLocaleString()}</b>
-        </div>
-
-        <hr>
       `;
     });
+
+    html += `</div>`;
   }
 
-  html += `<button class="btn-select">Seleccionar vuelos</button></div>`;
+  html += `
+    <div class="card">
+      <div class="price" id="precioFinal">COP $ 0</div>
+      <button class="btn-select">Confirmar selección</button>
+    </div>
+  `;
 
   box.innerHTML = html;
 }

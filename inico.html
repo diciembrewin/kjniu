@@ -655,11 +655,12 @@ function irAResultados(){
     "&destino=" + encodeURIComponent(destino) +
     "&ida=" + encodeURIComponent(ida) +
     "&vuelta=" + encodeURIComponent(vuelta) +
-    "&pasajeros=" + encodeURIComponent(pasajeros);
-    "&tipo=" + tipoViaje;
+    "&pasajeros=" + encodeURIComponent(pasajeros) +
+    "&tipo=" + tipoViaje;   // 👈 AQUÍ estaba el error
 
   window.location.href = url;
 }
+
 
 </script>
 

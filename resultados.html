@@ -13,26 +13,28 @@ body{
   margin:0;
   font-family:Arial;
   background:#f2f2f2;
+  font-size:14px;   /* 👈 tamaño base igual al otro */
 }
 
 .top-header{
   background:#fff;
-  padding:14px;
+  padding:12px;
   display:flex;
   justify-content:space-between;
   align-items:center;
   border-bottom:1px solid #ddd;
+  font-size:14px;
 }
 
 .logo{
-  font-size:22px;
+  font-size:18px;   /* antes 22, lo bajo para coherencia */
   font-weight:bold;
 }
 
 .actions{
   display:flex;
   gap:10px;
-  padding:14px;
+  padding:12px;
   background:#fff;
 }
 
@@ -43,11 +45,12 @@ body{
   padding:10px 14px;
   border-radius:30px;
   cursor:pointer;
+  font-size:14px;
 }
 
 .title{
   padding:10px 14px;
-  font-size:18px;
+  font-size:16px;   /* un poco más pequeño y consistente */
   font-weight:bold;
 }
 
@@ -55,8 +58,9 @@ body{
   background:#3b3b3b;
   color:#fff;
   margin:10px 14px;
-  padding:14px;
+  padding:12px;
   border-radius:12px;
+  font-size:14px;
 }
 
 .container{
@@ -66,9 +70,10 @@ body{
 .card{
   background:#fff;
   border-radius:12px;
-  margin-bottom:14px;
-  padding:14px;
+  margin-bottom:12px;
+  padding:12px;
   box-shadow:0 2px 8px rgba(0,0,0,.1);
+  font-size:14px;
 }
 
 .option{
@@ -77,21 +82,23 @@ body{
   gap:10px;
   padding:10px 0;
   border-bottom:1px solid #eee;
+  font-size:14px;
 }
 
 .time{
-  font-size:18px;
+  font-size:16px;   /* antes 18 */
   font-weight:bold;
 }
 
 .airport{
   font-weight:bold;
+  font-size:14px;
 }
 
 .price{
   text-align:right;
   margin-top:10px;
-  font-size:18px;
+  font-size:16px;   /* antes 18 */
 }
 
 .btn-select{
@@ -99,13 +106,13 @@ body{
   background:#ffd100;
   border:none;
   border-radius:30px;
-  padding:12px;
-  font-size:16px;
+  padding:10px;
+  font-size:14px;
   margin-top:10px;
   cursor:pointer;
 }
 
-  .promo-badge{
+.promo-badge{
   background:#2b2b2b;
   color:#fff;
   padding:4px 8px;
@@ -120,6 +127,7 @@ body{
   justify-content:flex-end;
   gap:8px;
   margin-top:10px;
+  font-size:14px;
 }
 
 .price-row img{
@@ -128,13 +136,15 @@ body{
 }
 
 .airline img{
-  width:24px;
+  width:22px;   /* un poco más pequeño */
   height:auto;
 }
-  .flight-header{
+
+.flight-header{
   display:flex;
   border-bottom:1px solid #ddd;
   margin-bottom:10px;
+  font-size:14px;
 }
 
 .flight-header-left{
@@ -146,6 +156,7 @@ body{
   display:flex;
   align-items:center;
   gap:6px;
+  font-size:14px;
 }
 
 .flight-header-right{
@@ -153,6 +164,7 @@ body{
   text-align:right;
   font-weight:bold;
   flex:1;
+  font-size:14px;
 }
 
 .ida-bar{
@@ -162,6 +174,7 @@ body{
 .vuelta-bar{
   border-left:5px solid #ff6b00;
 }
+
 .option.selected{
   background:#fff9d9;
   border-left:5px solid #ffd100;
@@ -179,6 +192,7 @@ body{
   gap:6px;
   justify-content:flex-end;
   opacity:0.6;
+  font-size:13px;
 }
 
 .details{
@@ -190,8 +204,37 @@ body{
 
 .toggle{
   cursor:pointer;
-  font-size:14px;
+  font-size:13px;
 }
+
+/* Ajustes responsivos */
+@media (max-width: 600px){
+
+  body{
+    font-size:13px;
+  }
+
+  .logo{
+    font-size:16px;
+  }
+
+  .title{
+    font-size:15px;
+  }
+
+  .time{
+    font-size:15px;
+  }
+
+  .price{
+    font-size:15px;
+  }
+
+  .btn-select{
+    font-size:13px;
+  }
+}
+
 
 
 </style>

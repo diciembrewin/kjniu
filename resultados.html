@@ -12,35 +12,45 @@ body{
   margin:0;
   font-family:Arial;
   background:#f2f2f2;
-  padding:10px;
+}
+
+.header{
+  background:#fff;
+  padding:14px;
+  text-align:center;
+  font-weight:bold;
+  border-bottom:1px solid #ddd;
+}
+
+.container{
+  padding:12px;
 }
 
 .card{
   background:#fff;
-  border-radius:14px;
-  padding:14px;
+  border-radius:12px;
   margin-bottom:14px;
-  box-shadow:0 4px 10px rgba(0,0,0,.1);
+  padding:14px;
+  box-shadow:0 2px 8px rgba(0,0,0,.1);
 }
 
-.header{
-  display:flex;
-  justify-content:space-between;
-  font-weight:bold;
-  margin-bottom:10px;
-}
-
-.segment{
+.row{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:10px 0;
 }
 
 .airline{
   display:flex;
   align-items:center;
-  gap:10px;
+  gap:8px;
+  font-weight:bold;
+}
+
+.segment{
+  display:flex;
+  justify-content:space-between;
+  margin-top:10px;
 }
 
 .time{
@@ -48,14 +58,24 @@ body{
   font-weight:bold;
 }
 
+.airport{
+  font-weight:bold;
+}
+
+.duration{
+  color:#666;
+  font-size:13px;
+  margin-top:4px;
+}
+
 .price{
-  text-align:center;
+  text-align:right;
   margin-top:10px;
 }
 
-.big-price{
-  font-size:24px;
-  font-weight:bold;
+.price small{
+  display:block;
+  color:#666;
 }
 
 .btn{
@@ -63,10 +83,10 @@ body{
   background:#ffd100;
   border:none;
   border-radius:30px;
-  padding:14px;
-  font-size:18px;
-  font-weight:600;
+  padding:12px;
+  font-size:16px;
   margin-top:10px;
+  cursor:pointer;
 }
 </style>
 
@@ -74,110 +94,159 @@ body{
 
 <body>
 
-<div class="card">
-
-  <div class="header">
-    <div><i class="fa fa-plane"></i> IDA</div>
-    <div id="fechaIda"></div>
-  </div>
-
-  <div class="airline">
-    <i class="fa fa-circle-o"></i>
-    LATAM Airlines
-  </div>
-
-  <div class="segment">
-    <div>
-      <div id="origen"></div>
-      <div class="time">21:37</div>
-    </div>
-
-    <div>Directo</div>
-
-    <div>
-      <div id="destino"></div>
-      <div class="time">22:30</div>
-    </div>
-  </div>
-
-  <div>Duración: 0h 53m</div>
-
+<div class="header">
+  Resultados de tu búsqueda
 </div>
 
-<div class="card" id="cardVuelta">
-
-  <div class="header">
-    <div><i class="fa fa-plane"></i> VUELTA</div>
-    <div id="fechaVuelta"></div>
-  </div>
-
-  <div class="airline">
-    <i class="fa fa-circle-o"></i>
-    LATAM Airlines
-  </div>
-
-  <div class="segment">
-    <div>
-      <div id="destino2"></div>
-      <div class="time">06:35</div>
-    </div>
-
-    <div>Directo</div>
-
-    <div>
-      <div id="origen2"></div>
-      <div class="time">07:37</div>
-    </div>
-  </div>
-
-  <div>Duración: 1h 02m</div>
-
-</div>
-
-<div class="card price">
-  <div>Precio del paquete con estos vuelos</div>
-  <div class="big-price" id="precio"></div>
-  <button class="btn">Seleccionar Vuelos</button>
-</div>
+<div class="container" id="resultBox"></div>
 
 <script>
 
-function getParams(){
-  let p = new URLSearchParams(window.location.search);
+// ===== LEER PARÁMETROS DE URL =====
+function getParam(name){
+  let url = new URL(window.location.href);
+  return url.searchParams.get(name);
+}
 
-  return {
-    origen: p.get("origen"),
-    destino: p.get("destino"),
-    ida: p.get("ida"),
-    vuelta: p.get("vuelta"),
-    pasajeros: p.get("pasajeros")
+let origen = getParam("origen");
+let destino = getParam("destino");
+let ida = getParam("ida");
+let vuelta = getParam("vuelta");
+let pasajeros = getParam("pasajeros") || 1;
+
+// ===== OPCIONES SIMULADAS =====
+
+const opciones = [
+  {
+    aerolinea: "LATAM Airlines",
+    logo: "fa fa-plane",
+    idaHora: "07:30",
+    idaLlegada: "08:40",
+    vueltaHora: "18:10",
+    vueltaLlegada: "19:20",
+    duracionIda: "1h 10m",
+    duracionVuelta: "1h 10m",
+    precio: 320000
+  },
+  {
+    aerolinea: "Avianca",
+    logo: "fa fa-plane",
+    idaHora: "10:20",
+    idaLlegada: "11:35",
+    vueltaHora: "20:00",
+    vueltaLlegada: "21:15",
+    duracionIda: "1h 15m",
+    duracionVuelta: "1h 15m",
+    precio: 350000
+  },
+  {
+    aerolinea: "JetSMART",
+    logo: "fa fa-plane",
+    idaHora: "13:40",
+    idaLlegada: "14:50",
+    vueltaHora: "16:20",
+    vueltaLlegada: "17:30",
+    duracionIda: "1h 10m",
+    duracionVuelta: "1h 10m",
+    precio: 290000
+  },
+  {
+    aerolinea: "Wingo",
+    logo: "fa fa-plane",
+    idaHora: "06:15",
+    idaLlegada: "07:25",
+    vueltaHora: "22:10",
+    vueltaLlegada: "23:20",
+    duracionIda: "1h 10m",
+    duracionVuelta: "1h 10m",
+    precio: 270000
   }
+];
+
+// ===== MOSTRAR RESULTADOS =====
+
+function cargarResultados(){
+
+  let box = document.getElementById("resultBox");
+  box.innerHTML = "";
+
+  opciones.forEach(v => {
+
+    let total = v.precio * pasajeros;
+
+    box.innerHTML += `
+      <div class="card">
+
+        <div class="row">
+          <div class="airline">
+            <i class="${v.logo}"></i>
+            ${v.aerolinea}
+          </div>
+
+          <div>
+            ${pasajeros} pasajero(s)
+          </div>
+        </div>
+
+        <hr>
+
+        <div class="segment">
+          <div>
+            <div class="airport">${origen}</div>
+            <div class="time">${v.idaHora}</div>
+          </div>
+
+          <div>
+            <small>Directo</small>
+          </div>
+
+          <div>
+            <div class="airport">${destino}</div>
+            <div class="time">${v.idaLlegada}</div>
+          </div>
+        </div>
+
+        <div class="duration">
+          Duración ida: ${v.duracionIda}
+        </div>
+
+        <hr>
+
+        <div class="segment">
+          <div>
+            <div class="airport">${destino}</div>
+            <div class="time">${v.vueltaHora}</div>
+          </div>
+
+          <div>
+            <small>Directo</small>
+          </div>
+
+          <div>
+            <div class="airport">${origen}</div>
+            <div class="time">${v.vueltaLlegada}</div>
+          </div>
+        </div>
+
+        <div class="duration">
+          Duración vuelta: ${v.duracionVuelta}
+        </div>
+
+        <div class="price">
+          <small>Precio total</small>
+          <b>COP $ ${total.toLocaleString()}</b>
+        </div>
+
+        <button class="btn">
+          Seleccionar vuelos
+        </button>
+
+      </div>
+    `;
+  });
 }
 
-let data = getParams();
-
-document.getElementById("origen").innerText = data.origen;
-document.getElementById("destino").innerText = data.destino;
-
-document.getElementById("origen2").innerText = data.origen;
-document.getElementById("destino2").innerText = data.destino;
-
-document.getElementById("fechaIda").innerText = data.ida;
-
-if(!data.vuelta){
-  document.getElementById("cardVuelta").style.display = "none";
-}else{
-  document.getElementById("fechaVuelta").innerText = data.vuelta;
-}
-
-// Precio simulado
-let base = 600000;
-let num = parseInt(data.pasajeros);
-
-let precio = base * num;
-
-document.getElementById("precio").innerText =
-  "COP $ " + precio.toLocaleString();
+cargarResultados();
 
 </script>
 

@@ -48,20 +48,6 @@ body{
   mix-blend-mode:multiply;
 }
 
-.hero-content{
-  position:absolute;
-  top:40px;
-  left:20px;
-  right:20px;
-  color:#000;
-}
-
-.hero-content h1{
-  font-size:30px;
-  margin:0;
-}
-
-/* ICON TABS */
 .tabs{
   display:flex;
   justify-content:space-around;
@@ -109,25 +95,12 @@ body{
   cursor:pointer;
 }
 
-.field i{
-  margin-right:10px;
-}
-
 .field input{
   border:none;
   outline:none;
   width:100%;
   font-size:16px;
   background:none;
-}
-
-.row{
-  display:flex;
-  gap:20px;
-}
-
-.checks{
-  margin:20px 0;
 }
 
 .btn{
@@ -137,33 +110,10 @@ body{
   border-radius:30px;
   padding:14px;
   font-size:18px;
-  font-weight:600;
-}
-
-/* AFTER SEARCH */
-.section{
-  background:#fff;
-  margin:30px auto 0;
-  padding:20px;
-  max-width:720px;
-}
-
-.banner{
-  width:100%;
-  margin:20px 0;
-  border-radius:20px;
-}
-
-/* FOOTER */
-footer{
-  background:#111;
-  color:#fff;
-  text-align:center;
-  padding:20px;
 }
 
 /* MODALS */
-.origin-modal{
+.modal{
   position:fixed;
   inset:0;
   background:#f4f4f4;
@@ -172,51 +122,49 @@ footer{
   flex-direction:column;
 }
 
-.origin-modal.active{
+.modal.active{
   display:flex;
 }
 
-.origin-header{
+.modal-header{
   background:#2b2b2b;
   color:#fff;
   padding:16px;
   display:flex;
   justify-content:space-between;
-  align-items:center;
 }
 
-.origin-header button{
-  background:none;
-  border:none;
-  color:#fff;
-  font-size:22px;
+.modal-search{
+  padding:10px;
 }
 
-.origin-search{
-  background:#2b2b2b;
-  padding:12px;
-  display:flex;
-  align-items:center;
-}
-
-.origin-search input{
+.modal-search input{
   width:100%;
   padding:10px;
-  border-radius:8px;
 }
 
-.origin-list{
+.list{
   background:#fff;
-  margin:12px;
+  margin:10px;
   border-radius:12px;
+  overflow:auto;
 }
 
-.city{
-  padding:14px;
+.item{
+  padding:12px;
   border-bottom:1px solid #eee;
-  display:flex;
-  gap:10px;
   cursor:pointer;
+}
+
+/* CALENDAR */
+.calendar{
+  padding:20px;
+}
+
+.calendar input{
+  width:100%;
+  padding:10px;
+  margin-bottom:10px;
 }
 </style>
 </head>
@@ -229,125 +177,131 @@ footer{
 </div>
 
 <div class="hero">
-  <div class="hero-content">
-    <h1>Vuelo + Hotel</h1>
-  </div>
-
   <div class="tabs">
-    <div class="tab"><i class="fa fa-suitcase"></i></div>
-    <div class="tab"><i class="fa fa-bed"></i></div>
     <div class="tab active"><i class="fa fa-plane"></i></div>
-    <div class="tab"><i class="fa fa-ticket"></i></div>
-    <div class="tab"><i class="fa fa-car"></i></div>
   </div>
 </div>
 
 <div class="form-container">
 
-  <h2>Paquetes turísticos</h2>
+  <h3>Buscar vuelos</h3>
 
-  <div class="field" onclick="openOriginModal()">
-    <i class="fa fa-dot-circle-o"></i>
+  <div class="field" onclick="openModal('originModal')">
     <input id="originInput" placeholder="Origen" readonly>
   </div>
 
-  <div class="field" onclick="openDestinationModal()">
-    <i class="fa fa-map-marker"></i>
+  <div class="field" onclick="openModal('destinationModal')">
     <input id="destinationInput" placeholder="Destino" readonly>
   </div>
 
-  <div class="row">
-    <div class="field">
-      <i class="fa fa-calendar"></i>
-      <input placeholder="Ida">
-    </div>
-    <div class="field">
-      <i class="fa fa-calendar"></i>
-      <input placeholder="Vuelta">
-    </div>
-  </div>
-
-  <div class="field">
-    <i class="fa fa-user"></i>
-    <input value="1">
+  <div class="field" onclick="openModal('dateModal')">
+    <input id="dateInput" placeholder="Seleccionar fechas" readonly>
   </div>
 
   <button class="btn">Buscar</button>
 </div>
 
-<div class="section">
-  <img class="banner" src="https://viajestu360compras.bancolombia.com/portals/27/Images/diatu360/01/dia_tu360_BannerOfertas1-720x400.webp">
-  <h2>Los destinos más buscados</h2>
-  <img class="banner" src="https://viajestu360compras.bancolombia.com/portals/27/Images/Consumo/Tarjeta-Debito-Mastercard-Mobile.png">
-</div>
-
-<footer>© Tu360Compras</footer>
-
 <!-- ORIGIN MODAL -->
-<div class="origin-modal" id="originModal">
-  <div class="origin-header">
+<div class="modal" id="originModal">
+  <div class="modal-header">
     <span>Ciudad de Origen</span>
-    <button onclick="closeOriginModal()">✕</button>
+    <button onclick="closeModal('originModal')">✕</button>
   </div>
 
-  <div class="origin-search">
-    <input placeholder="Buscar" onkeyup="filterCities(this.value)">
+  <div class="modal-search">
+    <input placeholder="Buscar departamento" onkeyup="filterList(this.value, 'originList')">
   </div>
 
-  <div class="origin-list">
-    <div class="city" onclick="selectCity('Cali (CLO)')">Cali (CLO)</div>
-    <div class="city" onclick="selectCity('Bogotá (BOG)')">Bogotá (BOG)</div>
-    <div class="city" onclick="selectCity('Medellín (MDE)')">Medellín (MDE)</div>
-  </div>
+  <div class="list" id="originList"></div>
 </div>
 
 <!-- DESTINATION MODAL -->
-<div class="origin-modal" id="destinationModal">
-  <div class="origin-header">
+<div class="modal" id="destinationModal">
+  <div class="modal-header">
     <span>Ciudad de Destino</span>
-    <button onclick="closeDestinationModal()">✕</button>
+    <button onclick="closeModal('destinationModal')">✕</button>
   </div>
 
-  <div class="origin-search">
-    <input placeholder="Buscar" onkeyup="filterDestinationCities(this.value)">
+  <div class="modal-search">
+    <input placeholder="Buscar departamento" onkeyup="filterList(this.value, 'destinationList')">
   </div>
 
-  <div class="origin-list">
-    <div class="city" onclick="selectDestination('Cartagena (CTG)')">Cartagena (CTG)</div>
-    <div class="city" onclick="selectDestination('Cancún (CUN)')">Cancún (CUN)</div>
-    <div class="city" onclick="selectDestination('Miami (MIA)')">Miami (MIA)</div>
+  <div class="list" id="destinationList"></div>
+</div>
+
+<!-- DATE MODAL -->
+<div class="modal" id="dateModal">
+  <div class="modal-header">
+    <span>Seleccionar Fechas</span>
+    <button onclick="closeModal('dateModal')">✕</button>
+  </div>
+
+  <div class="calendar">
+    <label>Fecha ida</label>
+    <input type="date" id="dateStart">
+
+    <label>Fecha regreso</label>
+    <input type="date" id="dateEnd">
+
+    <button class="btn" onclick="setDates()">Aplicar</button>
   </div>
 </div>
 
 <script>
-function openOriginModal(){
-  document.getElementById('originModal').classList.add('active');
+const departamentos = [
+"Amazonas","Antioquia","Arauca","Atlántico","Bolívar",
+"Boyacá","Caldas","Caquetá","Casanare","Cauca",
+"Cesar","Chocó","Córdoba","Cundinamarca","Guainía",
+"Guaviare","Huila","La Guajira","Magdalena","Meta",
+"Nariño","Norte de Santander","Putumayo","Quindío",
+"Risaralda","San Andrés","Santander","Sucre",
+"Tolima","Valle del Cauca","Vaupés","Vichada"
+];
+
+function loadLists(){
+  const origin = document.getElementById("originList");
+  const dest = document.getElementById("destinationList");
+
+  departamentos.forEach(dep=>{
+    origin.innerHTML += `<div class='item' onclick="select('originInput','${dep}','originModal')">${dep}</div>`;
+    dest.innerHTML += `<div class='item' onclick="select('destinationInput','${dep}','destinationModal')">${dep}</div>`;
+  });
 }
 
-function closeOriginModal(){
-  document.getElementById('originModal').classList.remove('active');
+function openModal(id){
+  document.getElementById(id).classList.add("active");
 }
 
-function selectCity(city){
-  document.getElementById('originInput').value = city;
-  closeOriginModal();
+function closeModal(id){
+  document.getElementById(id).classList.remove("active");
 }
 
-function openDestinationModal(){
-  document.getElementById('destinationModal').classList.add('active');
+function select(input, value, modal){
+  document.getElementById(input).value = value;
+  closeModal(modal);
 }
 
-function closeDestinationModal(){
-  document.getElementById('destinationModal').classList.remove('active');
+function filterList(text, listId){
+  text = text.toLowerCase();
+  document.querySelectorAll(`#${listId} .item`).forEach(i=>{
+    i.style.display = i.innerText.toLowerCase().includes(text) ? "block" : "none";
+  });
 }
 
-function selectDestination(city){
-  document.getElementById('destinationInput').value = city;
-  closeDestinationModal();
+function setDates(){
+  const start = document.getElementById("dateStart").value;
+  const end = document.getElementById("dateEnd").value;
+
+  if(!start || !end){
+    alert("Selecciona ambas fechas");
+    return;
+  }
+
+  document.getElementById("dateInput").value = `${start} → ${end}`;
+  closeModal("dateModal");
 }
 
-function filterCities(t){}
-function filterDestinationCities(t){}
+loadLists();
 </script>
 
 </body>

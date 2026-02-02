@@ -259,7 +259,7 @@ function cargarResultados(){
 
     let total = v.precio * pasajeros;
 
-    box.innerHTML += `
+    let html = `
       <div class="card">
 
         <div class="airline">
@@ -269,6 +269,7 @@ function cargarResultados(){
 
         <hr>
 
+        <!-- SEGMENTO DE IDA -->
         <div class="segment">
           <div>
             <div class="airport">${origen}</div>
@@ -286,9 +287,15 @@ function cargarResultados(){
         <div class="duration">
           Duración ida: ${v.duracionIda}
         </div>
+    `;
+
+    // 👇 SOLO SI ES IDA Y VUELTA SE MUESTRA ESTE BLOQUE
+    if(tipo !== "oneway"){
+      html += `
 
         <hr>
 
+        <!-- SEGMENTO DE VUELTA -->
         <div class="segment">
           <div>
             <div class="airport">${destino}</div>
@@ -307,6 +314,11 @@ function cargarResultados(){
           Duración vuelta: ${v.duracionVuelta}
         </div>
 
+      `;
+    }
+
+    html += `
+
         <div class="price">
           <small>Precio total</small>
           <b>COP $ ${total.toLocaleString()}</b>
@@ -318,10 +330,12 @@ function cargarResultados(){
 
       </div>
     `;
+
+    box.innerHTML += html;
+
   });
 }
 
-cargarResultados();
 
 </script>
 

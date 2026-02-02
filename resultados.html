@@ -193,8 +193,17 @@ document.getElementById("titulo").innerText =
   "Paquete a " + destino;
 
 // ===== RESUMEN DINÁMICO =====
-document.getElementById("resumen").innerText =
-  "Vuelos de ida y vuelta para " + pasajeros + " pasajero(s)";
+let tipo = getParam("tipo");
+
+let textoResumen = "";
+
+if(tipo === "oneway"){
+  textoResumen = "Vuelo solo ida para " + pasajeros + " pasajero(s)";
+} else {
+  textoResumen = "Vuelos de ida y vuelta para " + pasajeros + " pasajero(s)";
+}
+
+document.getElementById("resumen").innerText = textoResumen;
 
 // ===== OPCIONES SIMULADAS =====
 

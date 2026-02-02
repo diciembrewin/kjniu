@@ -1,156 +1,3 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Resultados – Tu360 Compras</title>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-<style>
-
-body{
-  margin:0;
-  font-family:Arial;
-  background:#f2f2f2;
-}
-
-.top-header{
-  background:#fff;
-  padding:14px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  border-bottom:1px solid #ddd;
-}
-
-.logo{
-  font-size:22px;
-  font-weight:bold;
-}
-
-.actions{
-  display:flex;
-  gap:10px;
-  padding:14px;
-  background:#fff;
-}
-
-.btn-dark{
-  background:#2b2b2b;
-  color:#fff;
-  border:none;
-  padding:10px 14px;
-  border-radius:30px;
-  cursor:pointer;
-}
-
-.title{
-  padding:10px 14px;
-  font-size:18px;
-  font-weight:bold;
-}
-
-.summary{
-  background:#3b3b3b;
-  color:#fff;
-  margin:10px 14px;
-  padding:14px;
-  border-radius:12px;
-}
-
-.container{
-  padding:10px 14px;
-}
-
-.card{
-  background:#fff;
-  border-radius:12px;
-  margin-bottom:14px;
-  padding:14px;
-  box-shadow:0 2px 8px rgba(0,0,0,.1);
-}
-
-.option{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:10px 0;
-  border-bottom:1px solid #eee;
-}
-
-.time{
-  font-size:18px;
-  font-weight:bold;
-}
-
-.airport{
-  font-weight:bold;
-}
-
-.price{
-  text-align:right;
-  margin-top:10px;
-  font-size:18px;
-}
-
-.btn-select{
-  width:100%;
-  background:#ffd100;
-  border:none;
-  border-radius:30px;
-  padding:12px;
-  font-size:16px;
-  margin-top:10px;
-  cursor:pointer;
-}
-
-  .promo-badge{
-  background:#2b2b2b;
-  color:#fff;
-  padding:4px 8px;
-  border-radius:8px;
-  font-size:12px;
-  margin-right:6px;
-}
-
-.price-row{
-  display:flex;
-  align-items:center;
-  justify-content:flex-end;
-  gap:8px;
-  margin-top:10px;
-}
-
-.price-row img{
-  width:20px;
-  height:20px;
-}
-
-.airline img{
-  width:24px;
-  height:auto;
-}
-
-</style>
-</head>
-
-<body>
-
-<div class="top-header">
-  <div class="logo">Tu360 Compras</div>
-</div>
-
-<div class="actions">
-  <button class="btn-dark" onclick="window.history.back()">Nueva búsqueda</button>
-</div>
-
-<div class="title" id="titulo"></div>
-
-<div class="summary" id="resumen"></div>
-
-<div class="container" id="resultBox"></div>
-
 <script>
 
 function getParam(name){
@@ -180,19 +27,40 @@ let textoResumen = tipo === "oneway"
 
 document.getElementById("resumen").innerText = textoResumen;
 
-  const logosAerolineas = {
+const logosAerolineas = {
   "LATAM Airlines": "https://reservas.bancolombia.com/Images/Airlines/air_LAlogo.gif",
   "Avianca": "https://reservas.bancolombia.com/Images/Airlines/air_AVlogo.gif",
   "JetSMART": "https://reservas.bancolombia.com/Images/Airlines/air_JAlogo.gif",
   "Wingo": "https://reservas.bancolombia.com/Images/Airlines/air_P5logo.gif"
 };
 
-
+// ===== MUCHAS HORAS POR AEROLÍNEA =====
 const opciones = [
-  { aerolinea: "Avianca", idaHora: "06:30", idaLlegada: "07:40", vueltaHora: "10:10", vueltaLlegada: "11:20" },
-  { aerolinea: "LATAM Airlines", idaHora: "09:20", idaLlegada: "10:30", vueltaHora: "14:15", vueltaLlegada: "15:25" },
-  { aerolinea: "JetSMART", idaHora: "13:40", idaLlegada: "14:50", vueltaHora: "17:20", vueltaLlegada: "18:30" },
-  { aerolinea: "Wingo", idaHora: "21:30", idaLlegada: "22:40", vueltaHora: "22:50", vueltaLlegada: "23:59" }
+
+  // ===== AVIANCAS =====
+  { aerolinea: "Avianca", idaHora: "06:00", idaLlegada: "07:10", vueltaHora: "09:30", vueltaLlegada: "10:40" },
+  { aerolinea: "Avianca", idaHora: "08:45", idaLlegada: "09:55", vueltaHora: "12:15", vueltaLlegada: "13:25" },
+  { aerolinea: "Avianca", idaHora: "14:20", idaLlegada: "15:30", vueltaHora: "17:40", vueltaLlegada: "18:50" },
+  { aerolinea: "Avianca", idaHora: "19:10", idaLlegada: "20:20", vueltaHora: "21:45", vueltaLlegada: "22:55" },
+
+  // ===== LATAM =====
+  { aerolinea: "LATAM Airlines", idaHora: "05:50", idaLlegada: "07:00", vueltaHora: "08:20", vueltaLlegada: "09:30" },
+  { aerolinea: "LATAM Airlines", idaHora: "11:15", idaLlegada: "12:25", vueltaHora: "15:10", vueltaLlegada: "16:20" },
+  { aerolinea: "LATAM Airlines", idaHora: "16:30", idaLlegada: "17:40", vueltaHora: "19:00", vueltaLlegada: "20:10" },
+  { aerolinea: "LATAM Airlines", idaHora: "20:50", idaLlegada: "22:00", vueltaHora: "22:40", vueltaLlegada: "23:50" },
+
+  // ===== JETSMART =====
+  { aerolinea: "JetSMART", idaHora: "06:15", idaLlegada: "07:25", vueltaHora: "10:10", vueltaLlegada: "11:20" },
+  { aerolinea: "JetSMART", idaHora: "12:40", idaLlegada: "13:50", vueltaHora: "15:20", vueltaLlegada: "16:30" },
+  { aerolinea: "JetSMART", idaHora: "15:50", idaLlegada: "17:00", vueltaHora: "18:40", vueltaLlegada: "19:50" },
+  { aerolinea: "JetSMART", idaHora: "22:10", idaLlegada: "23:20", vueltaHora: "23:40", vueltaLlegada: "00:50" },
+
+  // ===== WINGO =====
+  { aerolinea: "Wingo", idaHora: "07:10", idaLlegada: "08:20", vueltaHora: "09:40", vueltaLlegada: "10:50" },
+  { aerolinea: "Wingo", idaHora: "13:30", idaLlegada: "14:40", vueltaHora: "16:10", vueltaLlegada: "17:20" },
+  { aerolinea: "Wingo", idaHora: "18:45", idaLlegada: "19:55", vueltaHora: "20:30", vueltaLlegada: "21:40" },
+  { aerolinea: "Wingo", idaHora: "23:00", idaLlegada: "00:10", vueltaHora: "05:30", vueltaLlegada: "06:40" }
+
 ];
 
 function calcularPrecio(hora){
@@ -200,6 +68,7 @@ function calcularPrecio(hora){
 
   if (h >= 5 && h < 12) return 110999;
   if (h >= 12 && h < 18) return 168500;
+
   return Math.floor(Math.random() * (386458 - 240454)) + 240454;
 }
 
@@ -217,18 +86,12 @@ function actualizarPrecio(){
   document.getElementById("precioFinal").innerHTML = `
 
     <div class="price-row">
-
       <img src="https://tu360compras.bancolombia.com/themes/child/img/favicon-bancolombia.svg">
-
       <span class="promo-badge">5% Off</span>
-
       <b>COP $ ${totalConDescuento.toLocaleString()}</b>
-
     </div>
-
   `;
 }
-
 
 function seleccionarIda(valor){
   precioIda = parseInt(valor);
@@ -247,7 +110,7 @@ function cargarResultados(){
   let html = `<div class="card">
   <h3>IDA – ${ida}</h3>`;
 
-  opciones.forEach((v,i) => {
+  opciones.forEach((v) => {
 
     let precio = calcularPrecio(v.idaHora);
 
@@ -277,7 +140,7 @@ function cargarResultados(){
     html += `<div class="card">
     <h3>VUELTA – ${vuelta}</h3>`;
 
-    opciones.forEach((v,i) => {
+    opciones.forEach((v) => {
 
       let precio = calcularPrecio(v.vueltaHora);
 
@@ -324,8 +187,4 @@ function cargarResultados(){
 
 cargarResultados();
 
-
 </script>
-
-</body>
-</html>

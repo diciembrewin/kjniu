@@ -262,6 +262,9 @@ let tipo = getParam("tipo");
 let precioIda = parseInt(getParam("precioIda") || 0);
 let precioVuelta = parseInt(getParam("precioVuelta") || 0);
 
+// 👇 AQUÍ ESTÁ LA LÍNEA CLAVE QUE TE FALTABA
+let pasajeros = parseInt(getParam("pasajeros") || 1);
+
 document.getElementById("fechaIda").innerText =
   getParam("ida") || "Fecha ida";
 
@@ -375,7 +378,6 @@ function calcular(){
 }
 
 
-
 // Cargar detalles por defecto (Básico)
 
 document.getElementById("detalleIda").innerHTML =
@@ -384,10 +386,12 @@ document.getElementById("detalleIda").innerHTML =
 document.getElementById("detalleVuelta").innerHTML =
   detallesTarifa.basico;
 
+// 👇 MOSTRAR PASAJEROS EN PANTALLA
+document.getElementById("numPasajeros").innerText = pasajeros;
 
 calcular();
 
-  function irResumen(){
+function irResumen(){
 
   let total = document.getElementById("total").innerText.replace(/\./g,"");
   let totalOff = document.getElementById("totalOff").innerText.replace(/\./g,"");
@@ -398,12 +402,12 @@ calcular();
     "&ida=" + getParam("ida") +
     "&vuelta=" + getParam("vuelta") +
     "&tipo=" + getParam("tipo") +
+    "&pasajeros=" + pasajeros +
     "&precioFinal=" + total +
     "&precioOff=" + totalOff;
 
   window.location.href = url;
 }
-
 
 </script>
 

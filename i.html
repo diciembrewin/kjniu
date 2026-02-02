@@ -2,207 +2,420 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Tu360 Compras Tabs</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tu360 – Vuelos</title>
 
-<!-- Font Awesome (OBLIGATORIO para tus íconos) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <style>
-*{box-sizing:border-box;font-family:Arial,sans-serif}
-body{margin:0;background:#f5f5f5}
+*{
+  box-sizing:border-box;
+  font-family:'Roboto', Arial, sans-serif;
+}
 
-/* HEADER */
-header{
-  background:#fff;
-  padding:12px 16px;
+body{
+  margin:0;
+  background:#f4f4f4;
+}
+
+.header{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  font-weight:bold;
+  padding:14px 18px;
+  background:#fff;
+  font-weight:600;
 }
-header span{font-weight:900}
 
-/* HERO */
+.header img{
+  height:28px;
+}
+
 .hero{
   position:relative;
-  height:260px;
-  overflow:hidden;
-}
-.hero img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
+  background:url("https://viajestu360compras.bancolombia.com/portals/27/Images/Genericas/Vuelos-Mobile.webp") no-repeat center/cover;
+  height:320px;
 }
 
-/* TABS */
-.widget-tabs{
-  list-style:none;
+.tabs{
   display:flex;
   justify-content:space-around;
-  padding:0;
-  margin:-35px 0 0;
-  position:relative;
-  z-index:5;
-}
-.widget-tabs li{
-  text-align:center;
-}
-.widget-tabs li a{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  text-decoration:none;
-  color:#000;
-  font-size:12px;
+  position:absolute;
+  bottom:-28px;
+  left:0;
+  right:0;
 }
 
-/* CÍRCULO */
-.widget-tabs li a i{
-  width:60px;
-  height:60px;
+.tab{
+  width:64px;
+  height:64px;
+  background:#fff;
   border-radius:50%;
-  background:#fff;
-  border:1px solid #ddd;
   display:flex;
-  justify-content:center;
   align-items:center;
-  font-size:24px;
-  margin-bottom:6px;
+  justify-content:center;
+  box-shadow:0 4px 10px rgba(0,0,0,.15);
 }
 
-/* ACTIVO */
-.widget-tabs li.active a i{
-  background:#FFD400;
-  border:none;
+.tab.active{
+  background:#ffd100;
 }
 
-/* TEXTO OCULTO EN MOBILE (como el real) */
-@media(max-width:768px){
-  .widget-tabs li a span{display:none;}
-}
-
-/* CONTENEDOR BLANCO */
-.container{
+.form-container{
   background:#fff;
-  padding:40px 20px 25px;
-  margin-top:-10px;
-  border-radius:30px 30px 0 0;
-  position:relative;
-  z-index:6;
-}
-h2{margin-top:0}
-
-/* FORM */
-.field{
-  border-bottom:1px solid #ccc;
-  padding:10px 0;
-  margin-bottom:15px;
-}
-.field input{
+  margin:4px auto 20px;
+  padding:28px 20px 32px;
+  max-width:360px;
   width:100%;
+  border-radius:30px;
+  box-shadow:0 4px 14px rgba(0,0,0,.08);
+}
+
+.field{
+  display:flex;
+  align-items:center;
+  margin-bottom:18px;
+  border-bottom:1px solid #ccc;
+  padding-bottom:8px;
+  cursor:pointer;
+}
+
+.field i{
+  margin-right:10px;
+}
+
+.field input{
   border:none;
   outline:none;
+  width:100%;
   font-size:16px;
+  background:none;
 }
 
-.radio-group{
+.row{
   display:flex;
   gap:20px;
-  font-size:14px;
-  margin-bottom:20px;
 }
-.radio-group input{accent-color:#FFD400}
 
 .btn{
   width:100%;
-  background:#FFD400;
+  background:#ffd100;
   border:none;
-  padding:15px;
-  font-size:18px;
-  font-weight:bold;
   border-radius:30px;
+  padding:14px;
+  font-size:18px;
+  font-weight:600;
+}
+
+/* MODALES */
+.modal{
+  position:fixed;
+  inset:0;
+  background:#f4f4f4;
+  z-index:9999;
+  display:none;
+  flex-direction:column;
+}
+
+.modal.active{
+  display:flex;
+}
+
+.modal-header{
+  background:#2b2b2b;
+  color:#fff;
+  padding:16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.modal-search{
+  background:#2b2b2b;
+  padding:12px;
+}
+
+.modal-search input{
+  width:100%;
+  padding:10px;
+  border-radius:8px;
+}
+
+.city-list{
+  background:#fff;
+  margin:12px;
+  border-radius:12px;
+  overflow:auto;
+}
+
+.city-item{
+  padding:14px;
+  border-bottom:1px solid #eee;
   cursor:pointer;
 }
+
+/* CALENDARIO */
+.calendar-container{
+  background:#fff;
+  padding:20px;
+  flex:1;
+}
+
+.day{
+  display:inline-block;
+  width:13%;
+  padding:8px;
+  text-align:center;
+  cursor:pointer;
+}
+
+.day:hover{
+  background:#ffd100;
+}
+
+.passenger-modal{
+  position:fixed;
+  inset:0;
+  background:#fff;
+  z-index:9999;
+  display:none;
+  flex-direction:column;
+}
+
+.passenger-modal.active{
+  display:flex;
+}
+
+.counter-row{
+  display:flex;
+  justify-content:space-between;
+  padding:20px;
+}
+
 </style>
 </head>
 
 <body>
 
-<header>
-  <div><span>Tu360</span>Compras</div>
-  <div>Menu ⋮</div>
-</header>
-
-<!-- HERO -->
-<div class="hero">
-  <img src="https://viajestu360compras.bancolombia.com/portals/27/Images/Genericas/Vuelos-Mobile.webp">
+<div class="header">
+  <img src="https://viajestu360compras.bancolombia.com/Portals/27/logo-tu360compras.png">
+  <span>Menu</span>
 </div>
 
-<!-- 🔥 TABS (TU CÓDIGO, NO MODIFICADO) -->
-<ul id="widget-tabs" class="nav nav-tabs widget-tabs hidden-xs desktop-tabs" role="tablist">
-  <li role="presentation" data-sort="1">
-    <a href="#airhotel">
-      <i class="fa fa-suitcase"></i>
-      <span>Paquetes turísticos (Vuelo + Hotel)</span>
-    </a>
-  </li>
+<div class="hero">
+  <div class="tabs">
+    <div class="tab active"><i class="fa fa-plane"></i></div>
+  </div>
+</div>
 
-  <li role="presentation" data-sort="2">
-    <a href="#hotel">
-      <i class="fa fa-h-square"></i>
-      <span>Reserva tu alojamiento ideal</span>
-    </a>
-  </li>
+<div class="form-container">
 
-  <li role="presentation" data-sort="3" class="active">
-    <a href="#air">
-      <i class="fa fa-plane"></i>
-      <span>Vuelos</span>
-    </a>
-  </li>
-
-  <li role="presentation" data-sort="4">
-    <a href="#extra">
-      <i class="fa fa-ticket"></i>
-      <span>Encuentra actividades ideales para ti</span>
-    </a>
-  </li>
-
-  <li role="presentation" data-sort="5">
-    <a href="#car">
-      <i class="fa fa-car"></i>
-      <span>Autos</span>
-    </a>
-  </li>
-</ul>
-
-<!-- CONTENIDO -->
-<div class="container">
   <h2>Vuelos</h2>
 
-  <div class="radio-group">
-    <label><input type="radio" name="tipo" checked> Ida y vuelta</label>
-    <label><input type="radio" name="tipo"> Solo ida</label>
-    <label><input type="radio" name="tipo"> Multi destino</label>
+  <div class="field" onclick="openCityModal('origen')">
+    <i class="fa fa-dot-circle-o"></i>
+    <input id="origenInput" placeholder="Origen" readonly>
   </div>
 
-  <div class="field"><input placeholder="Origen"></div>
-  <div class="field"><input placeholder="Destino"></div>
+  <div class="field" onclick="openCityModal('destino')">
+    <i class="fa fa-map-marker"></i>
+    <input id="destinoInput" placeholder="Destino" readonly>
+  </div>
 
-  <div class="field"><input type="date"></div>
+  <div class="row">
+    <div class="field" onclick="openCalendar('ida')">
+      <i class="fa fa-calendar"></i>
+      <input id="idaInput" placeholder="Ida" readonly>
+    </div>
+
+    <div class="field" onclick="openCalendar('vuelta')">
+      <i class="fa fa-calendar"></i>
+      <input id="vueltaInput" placeholder="Vuelta" readonly>
+    </div>
+  </div>
+
+  <div class="field" onclick="openPassengerModal()">
+    <i class="fa fa-user"></i>
+    <input id="passengerInput" value="1 pasajero" readonly>
+  </div>
 
   <button class="btn">Buscar</button>
+
+</div>
+
+<!-- MODAL CIUDADES -->
+<div class="modal" id="cityModal">
+
+  <div class="modal-header">
+    <span id="cityTitle"></span>
+    <button onclick="closeCityModal()">✕</button>
+  </div>
+
+  <div class="modal-search">
+    <input placeholder="Buscar" onkeyup="filtrarCiudades(this.value)">
+  </div>
+
+  <div class="city-list" id="cityList"></div>
+
+</div>
+
+<!-- MODAL CALENDARIO -->
+<div class="modal" id="calendarModal">
+
+  <div class="modal-header">
+    <span id="calendarTitle"></span>
+    <button onclick="closeCalendar()">✕</button>
+  </div>
+
+  <div class="calendar-container" id="calendarBox"></div>
+
+</div>
+
+<!-- MODAL PASAJEROS -->
+<div class="passenger-modal" id="passengerModal">
+
+  <div class="modal-header">
+    <span>Pasajeros</span>
+    <button onclick="closePassengerModal()">✕</button>
+  </div>
+
+  <div class="counter-row">
+    <div>Adultos</div>
+    <div>
+      <button onclick="change('adultos',-1)">-</button>
+      <span id="adultos">1</span>
+      <button onclick="change('adultos',1)">+</button>
+    </div>
+  </div>
+
+  <div class="counter-row">
+    <div>Niños</div>
+    <div>
+      <button onclick="change('ninos',-1)">-</button>
+      <span id="ninos">0</span>
+      <button onclick="change('ninos',1)">+</button>
+    </div>
+  </div>
+
+  <button class="btn" onclick="applyPassengers()">Aplicar</button>
+
 </div>
 
 <script>
-/* ACTIVAR TAB */
-document.querySelectorAll('#widget-tabs li').forEach(li=>{
-  li.addEventListener('click',()=>{
-    document.querySelectorAll('#widget-tabs li').forEach(x=>x.classList.remove('active'));
-    li.classList.add('active');
+
+const aeropuertos = [
+"Bogotá (BOG)",
+"Medellín (MDE)",
+"Cali (CLO)",
+"Cartagena (CTG)",
+"Barranquilla (BAQ)",
+"Bucaramanga (BGA)"
+];
+
+let campoActivo = "";
+
+function openCityModal(tipo){
+  campoActivo = tipo;
+  document.getElementById("cityTitle").innerText =
+    tipo === "origen" ? "Ciudad de Origen" : "Ciudad de Destino";
+
+  renderCities(aeropuertos);
+  document.getElementById("cityModal").classList.add("active");
+}
+
+function closeCityModal(){
+  document.getElementById("cityModal").classList.remove("active");
+}
+
+function renderCities(lista){
+  const box = document.getElementById("cityList");
+  box.innerHTML = "";
+
+  lista.forEach(c => {
+    box.innerHTML += `
+      <div class="city-item" onclick="selectCity('${c}')">${c}</div>
+    `;
   });
-});
+}
+
+function filtrarCiudades(t){
+  renderCities(
+    aeropuertos.filter(a => a.toLowerCase().includes(t.toLowerCase()))
+  );
+}
+
+function selectCity(c){
+  document.getElementById(
+    campoActivo === "origen" ? "origenInput" : "destinoInput"
+  ).value = c;
+
+  closeCityModal();
+}
+
+/* CALENDARIO */
+let tipoFecha = "";
+
+function openCalendar(tipo){
+  tipoFecha = tipo;
+  document.getElementById("calendarTitle").innerText =
+    tipo === "ida" ? "Fecha de ida" : "Fecha de vuelta";
+
+  generarCalendario();
+  document.getElementById("calendarModal").classList.add("active");
+}
+
+function closeCalendar(){
+  document.getElementById("calendarModal").classList.remove("active");
+}
+
+function generarCalendario(){
+  let box = document.getElementById("calendarBox");
+  box.innerHTML = "";
+
+  for(let d=1; d<=31; d++){
+    box.innerHTML += `
+      <div class="day" onclick="selectDate('${d}/03/2025')">${d}</div>
+    `;
+  }
+}
+
+function selectDate(f){
+  document.getElementById(
+    tipoFecha === "ida" ? "idaInput" : "vueltaInput"
+  ).value = f;
+
+  closeCalendar();
+}
+
+/* PASAJEROS */
+function openPassengerModal(){
+  document.getElementById("passengerModal").classList.add("active");
+}
+
+function closePassengerModal(){
+  document.getElementById("passengerModal").classList.remove("active");
+}
+
+function change(id,v){
+  let e = document.getElementById(id);
+  let n = parseInt(e.innerText) + v;
+
+  if(id==="adultos" && n<1) return;
+  if(id==="ninos" && n<0) return;
+
+  e.innerText = n;
+}
+
+function applyPassengers(){
+  let a = document.getElementById("adultos").innerText;
+  let n = document.getElementById("ninos").innerText;
+
+  document.getElementById("passengerInput").value =
+    (parseInt(a)+parseInt(n)) + " pasajeros";
+
+  closePassengerModal();
+}
+
 </script>
 
 </body>

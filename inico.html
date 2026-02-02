@@ -97,16 +97,6 @@ body{
   gap:20px;
 }
 
-.btn{
-  width:100%;
-  background:#ffd100;
-  border:none;
-  border-radius:30px;
-  padding:14px;
-  font-size:18px;
-  font-weight:600;
-}
-
 /* MODALES */
 .modal{
   position:fixed;
@@ -145,7 +135,6 @@ body{
   background:#fff;
   margin:12px;
   border-radius:12px;
-  overflow:auto;
 }
 
 .city-item{
@@ -154,44 +143,54 @@ body{
   cursor:pointer;
 }
 
-/* CALENDARIO */
 .calendar-container{
   background:#fff;
   padding:20px;
-  flex:1;
+  height:calc(100vh - 70px);
+  overflow-y:scroll;
+}
+
+.calendar-month{
+  margin-bottom:30px;
+}
+
+.calendar-header{
+  font-weight:bold;
+  margin-bottom:10px;
+  text-transform:capitalize;
+}
+
+.calendar-grid{
+  display:grid;
+  grid-template-columns:repeat(7, 1fr);
+  gap:6px;
+  text-align:center;
 }
 
 .day{
-  display:inline-block;
-  width:13%;
-  padding:8px;
-  text-align:center;
+  padding:10px;
   cursor:pointer;
+  border-radius:6px;
 }
 
 .day:hover{
   background:#ffd100;
 }
 
-.passenger-modal{
-  position:fixed;
-  inset:0;
-  background:#fff;
-  z-index:9999;
-  display:none;
-  flex-direction:column;
+.day.disabled{
+  color:#ccc;
+  pointer-events:none;
 }
 
-.passenger-modal.active{
-  display:flex;
+.btn{
+  width:100%;
+  background:#ffd100;
+  border:none;
+  border-radius:30px;
+  padding:14px;
+  font-size:18px;
+  font-weight:600;
 }
-
-.counter-row{
-  display:flex;
-  justify-content:space-between;
-  padding:20px;
-}
-
 </style>
 </head>
 
@@ -210,7 +209,7 @@ body{
 
 <div class="form-container">
 
-  <h2>Vuelos</h2>
+  <h2>Paquetes turísticos</h2>
 
   <div class="field" onclick="openCityModal('origen')">
     <i class="fa fa-dot-circle-o"></i>
@@ -234,18 +233,12 @@ body{
     </div>
   </div>
 
-  <div class="field" onclick="openPassengerModal()">
-    <i class="fa fa-user"></i>
-    <input id="passengerInput" value="1 pasajero" readonly>
-  </div>
-
   <button class="btn">Buscar</button>
 
 </div>
 
 <!-- MODAL CIUDADES -->
 <div class="modal" id="cityModal">
-
   <div class="modal-header">
     <span id="cityTitle"></span>
     <button onclick="closeCityModal()">✕</button>
@@ -256,70 +249,40 @@ body{
   </div>
 
   <div class="city-list" id="cityList"></div>
-
 </div>
 
 <!-- MODAL CALENDARIO -->
 <div class="modal" id="calendarModal">
-
   <div class="modal-header">
     <span id="calendarTitle"></span>
     <button onclick="closeCalendar()">✕</button>
   </div>
 
   <div class="calendar-container" id="calendarBox"></div>
-
-</div>
-
-<!-- MODAL PASAJEROS -->
-<div class="passenger-modal" id="passengerModal">
-
-  <div class="modal-header">
-    <span>Pasajeros</span>
-    <button onclick="closePassengerModal()">✕</button>
-  </div>
-
-  <div class="counter-row">
-    <div>Adultos</div>
-    <div>
-      <button onclick="change('adultos',-1)">-</button>
-      <span id="adultos">1</span>
-      <button onclick="change('adultos',1)">+</button>
-    </div>
-  </div>
-
-  <div class="counter-row">
-    <div>Niños</div>
-    <div>
-      <button onclick="change('ninos',-1)">-</button>
-      <span id="ninos">0</span>
-      <button onclick="change('ninos',1)">+</button>
-    </div>
-  </div>
-
-  <button class="btn" onclick="applyPassengers()">Aplicar</button>
-
 </div>
 
 <script>
 
+// AEROPUERTOS
 const aeropuertos = [
-"Bogotá (BOG)",
-"Medellín (MDE)",
-"Cali (CLO)",
-"Cartagena (CTG)",
-"Barranquilla (BAQ)",
-"Bucaramanga (BGA)"
+"Bogotá - El Dorado (BOG)",
+"Medellín - José María Córdova (MDE)",
+"Cali - Alfonso Bonilla Aragón (CLO)",
+"Cartagena - Rafael Núñez (CTG)",
+"Barranquilla - Ernesto Cortissoz (BAQ)",
+"Bucaramanga - Palonegro (BGA)"
 ];
 
 let campoActivo = "";
 
 function openCityModal(tipo){
   campoActivo = tipo;
+
   document.getElementById("cityTitle").innerText =
     tipo === "origen" ? "Ciudad de Origen" : "Ciudad de Destino";
 
   renderCities(aeropuertos);
+
   document.getElementById("cityModal").classList.add("active");
 }
 
@@ -333,15 +296,18 @@ function renderCities(lista){
 
   lista.forEach(c => {
     box.innerHTML += `
-      <div class="city-item" onclick="selectCity('${c}')">${c}</div>
+      <div class="city-item" onclick="selectCity('${c}')">
+        ${c}
+      </div>
     `;
   });
 }
 
 function filtrarCiudades(t){
-  renderCities(
-    aeropuertos.filter(a => a.toLowerCase().includes(t.toLowerCase()))
+  const f = aeropuertos.filter(a =>
+    a.toLowerCase().includes(t.toLowerCase())
   );
+  renderCities(f);
 }
 
 function selectCity(c){
@@ -352,11 +318,13 @@ function selectCity(c){
   closeCityModal();
 }
 
-/* CALENDARIO */
+// CALENDARIO
 let tipoFecha = "";
+let fechaIdaSeleccionada = null;
 
 function openCalendar(tipo){
   tipoFecha = tipo;
+
   document.getElementById("calendarTitle").innerText =
     tipo === "ida" ? "Fecha de ida" : "Fecha de vuelta";
 
@@ -369,51 +337,85 @@ function closeCalendar(){
 }
 
 function generarCalendario(){
+
   let box = document.getElementById("calendarBox");
   box.innerHTML = "";
 
-  for(let d=1; d<=31; d++){
+  let hoy = new Date();
+  hoy.setHours(0,0,0,0);
+
+  for(let m = 0; m < 12; m++){
+
+    let mes = new Date(hoy.getFullYear(), hoy.getMonth() + m, 1);
+
+    let diasEnMes = new Date(
+      mes.getFullYear(),
+      mes.getMonth() + 1,
+      0
+    ).getDate();
+
+    let nombreMes = mes.toLocaleString("es", { month: "long" });
+    let anio = mes.getFullYear();
+
     box.innerHTML += `
-      <div class="day" onclick="selectDate('${d}/03/2025')">${d}</div>
+      <div class="calendar-month">
+        <div class="calendar-header">
+          ${nombreMes} ${anio}
+        </div>
+
+        <div class="calendar-grid" id="grid-${m}"></div>
+      </div>
     `;
+
+    let grid = document.getElementById(`grid-${m}`);
+
+    for(let d = 1; d <= diasEnMes; d++){
+
+      let fechaDia = new Date(anio, mes.getMonth(), d);
+      fechaDia.setHours(0,0,0,0);
+
+      let clase = "day";
+
+      if(fechaDia < hoy){
+        clase += " disabled";
+      }
+
+      if(tipoFecha === "vuelta" && fechaIdaSeleccionada){
+        if(fechaDia <= fechaIdaSeleccionada){
+          clase += " disabled";
+        }
+      }
+
+      grid.innerHTML += `
+        <div class="${clase}" onclick="selectDate('${anio}-${mes.getMonth()+1}-${d}')">
+          ${d}
+        </div>
+      `;
+    }
   }
 }
 
-function selectDate(f){
-  document.getElementById(
-    tipoFecha === "ida" ? "idaInput" : "vueltaInput"
-  ).value = f;
+function selectDate(fecha){
+
+  let partes = fecha.split("-");
+  let fechaReal = new Date(partes[0], partes[1]-1, partes[2]);
+
+  let texto = fechaReal.toLocaleDateString("es", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric"
+  });
+
+  if(tipoFecha === "ida"){
+    document.getElementById("idaInput").value = texto;
+    fechaIdaSeleccionada = fechaReal;
+    document.getElementById("vueltaInput").value = "";
+  } 
+  else {
+    document.getElementById("vueltaInput").value = texto;
+  }
 
   closeCalendar();
-}
-
-/* PASAJEROS */
-function openPassengerModal(){
-  document.getElementById("passengerModal").classList.add("active");
-}
-
-function closePassengerModal(){
-  document.getElementById("passengerModal").classList.remove("active");
-}
-
-function change(id,v){
-  let e = document.getElementById(id);
-  let n = parseInt(e.innerText) + v;
-
-  if(id==="adultos" && n<1) return;
-  if(id==="ninos" && n<0) return;
-
-  e.innerText = n;
-}
-
-function applyPassengers(){
-  let a = document.getElementById("adultos").innerText;
-  let n = document.getElementById("ninos").innerText;
-
-  document.getElementById("passengerInput").value =
-    (parseInt(a)+parseInt(n)) + " pasajeros";
-
-  closePassengerModal();
 }
 
 </script>

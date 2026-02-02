@@ -276,7 +276,8 @@ function cargarResultados(){
 
   opciones.forEach(v => {
 
-    let total = v.precio * pasajeros;
+   let precioBase = calcularPrecioSegunHora(v.idaHora);
+let total = precioBase * pasajeros;
 
     let html = `
       <div class="card">

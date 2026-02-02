@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tu360 – Vuelos</title>
 
-<!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <style>
@@ -38,6 +37,7 @@ body{
   position:relative;
   background:url("https://viajestu360compras.bancolombia.com/portals/27/Images/Genericas/Vuelos-Mobile.webp") no-repeat center/cover;
   height:320px;
+  overflow:visible;
 }
 
 .hero::before{
@@ -58,11 +58,6 @@ body{
 
 .hero-content h1{
   font-size:30px;
-  margin:0 0 10px;
-}
-
-.hero-content p{
-  font-size:18px;
   margin:0;
 }
 
@@ -71,9 +66,10 @@ body{
   display:flex;
   justify-content:space-around;
   position:absolute;
-  bottom:-28px;
+  bottom:-32px;
   left:0;
   right:0;
+  z-index:3;
 }
 
 .tab{
@@ -91,39 +87,30 @@ body{
   background:#ffd100;
 }
 
-/* FORM CONTAINER */
+/* FORM */
 .form-container{
   background:#fff;
-
-  /* 👇 SUBE el formulario (clave) */
-  margin: 4px auto 20px;
-
-  padding:28px 20px 32px;
+  margin:-10px auto 20px;
+  padding:32px 20px;
   max-width:360px;
   width:100%;
-
   border-radius:30px;
   box-shadow:0 4px 14px rgba(0,0,0,.08);
+  position:relative;
+  z-index:2;
 }
 
-.form-container h2{
-  margin:0 0 20px;
-  font-size:22px;
-}
-
-/* INPUTS */
 .field{
   display:flex;
   align-items:center;
   margin-bottom:18px;
   border-bottom:1px solid #ccc;
   padding-bottom:8px;
+  cursor:pointer;
 }
 
 .field i{
   margin-right:10px;
-  font-size:18px;
-  color:#333;
 }
 
 .field input{
@@ -131,26 +118,18 @@ body{
   outline:none;
   width:100%;
   font-size:16px;
+  background:none;
 }
 
-/* DATE ROW */
 .row{
   display:flex;
   gap:20px;
 }
 
-/* CHECKS */
 .checks{
   margin:20px 0;
-  font-size:14px;
 }
 
-.checks label{
-  display:block;
-  margin-bottom:10px;
-}
-
-/* BUTTON */
 .btn{
   width:100%;
   background:#ffd100;
@@ -159,10 +138,9 @@ body{
   padding:14px;
   font-size:18px;
   font-weight:600;
-  cursor:pointer;
 }
 
-/* SECTION AFTER SEARCH */
+/* AFTER SEARCH */
 .section{
   background:#fff;
   margin:30px auto 0;
@@ -170,27 +148,6 @@ body{
   max-width:720px;
 }
 
-.section h2{
-  margin-bottom:8px;
-}
-
-.menuItems{
-  display:flex;
-  gap:20px;
-  list-style:none;
-  padding:0;
-}
-
-.menuItems__items{
-  cursor:pointer;
-  font-weight:500;
-}
-
-.menuItems__items.active{
-  border-bottom:3px solid #ffd100;
-}
-
-/* BANNERS */
 .banner{
   width:100%;
   margin:20px 0;
@@ -203,24 +160,77 @@ footer{
   color:#fff;
   text-align:center;
   padding:20px;
-  margin-top:40px;
+}
+
+/* MODALS */
+.origin-modal{
+  position:fixed;
+  inset:0;
+  background:#f4f4f4;
+  z-index:9999;
+  display:none;
+  flex-direction:column;
+}
+
+.origin-modal.active{
+  display:flex;
+}
+
+.origin-header{
+  background:#2b2b2b;
+  color:#fff;
+  padding:16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.origin-header button{
+  background:none;
+  border:none;
+  color:#fff;
+  font-size:22px;
+}
+
+.origin-search{
+  background:#2b2b2b;
+  padding:12px;
+  display:flex;
+  align-items:center;
+}
+
+.origin-search input{
+  width:100%;
+  padding:10px;
+  border-radius:8px;
+}
+
+.origin-list{
+  background:#fff;
+  margin:12px;
+  border-radius:12px;
+}
+
+.city{
+  padding:14px;
+  border-bottom:1px solid #eee;
+  display:flex;
+  gap:10px;
+  cursor:pointer;
 }
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
 <div class="header">
   <img src="https://viajestu360compras.bancolombia.com/Portals/27/logo-tu360compras.png">
   <span>Menu</span>
 </div>
 
-<!-- HERO -->
 <div class="hero">
   <div class="hero-content">
     <h1>Vuelo + Hotel</h1>
-    
   </div>
 
   <div class="tabs">
@@ -232,27 +242,27 @@ footer{
   </div>
 </div>
 
-<!-- FORM -->
 <div class="form-container">
-  <h2>Paquetes turísticos (Vuelo + Hotel)</h2>
 
-  <div class="field">
+  <h2>Paquetes turísticos</h2>
+
+  <div class="field" onclick="openOriginModal()">
     <i class="fa fa-dot-circle-o"></i>
-    <input placeholder="Origen">
+    <input id="originInput" placeholder="Origen" readonly>
   </div>
 
-  <div class="field">
+  <div class="field" onclick="openDestinationModal()">
     <i class="fa fa-map-marker"></i>
-    <input placeholder="Destino">
+    <input id="destinationInput" placeholder="Destino" readonly>
   </div>
 
   <div class="row">
     <div class="field">
-      <i class="fa fa-calendar-check-o"></i>
+      <i class="fa fa-calendar"></i>
       <input placeholder="Ida">
     </div>
     <div class="field">
-      <i class="fa fa-calendar-check-o"></i>
+      <i class="fa fa-calendar"></i>
       <input placeholder="Vuelta">
     </div>
   </div>
@@ -262,33 +272,83 @@ footer{
     <input value="1">
   </div>
 
-  <div class="checks">
-    <label><input type="checkbox"> Solo vuelos que incluyan equipaje</label>
-    <label><input type="checkbox"> Solo vuelos directos</label>
-  </div>
-
   <button class="btn">Buscar</button>
 </div>
 
-<!-- AFTER SEARCH CONTENT -->
 <div class="section">
   <img class="banner" src="https://viajestu360compras.bancolombia.com/portals/27/Images/diatu360/01/dia_tu360_BannerOfertas1-720x400.webp">
-
   <h2>Los destinos más buscados</h2>
-  <p>Encuentra las rutas más populares con precios imperdibles</p>
-
-  <ul class="menuItems">
-    <li class="menuItems__items active">Vuelos desde Bogotá</li>
-    <li class="menuItems__items">Vuelos desde Medellín</li>
-  </ul>
-
   <img class="banner" src="https://viajestu360compras.bancolombia.com/portals/27/Images/Consumo/Tarjeta-Debito-Mastercard-Mobile.png">
 </div>
 
-<!-- FOOTER -->
-<footer>
-  © Tu360Compras – Bancolombia
-</footer>
+<footer>© Tu360Compras</footer>
+
+<!-- ORIGIN MODAL -->
+<div class="origin-modal" id="originModal">
+  <div class="origin-header">
+    <span>Ciudad de Origen</span>
+    <button onclick="closeOriginModal()">✕</button>
+  </div>
+
+  <div class="origin-search">
+    <input placeholder="Buscar" onkeyup="filterCities(this.value)">
+  </div>
+
+  <div class="origin-list">
+    <div class="city" onclick="selectCity('Cali (CLO)')">Cali (CLO)</div>
+    <div class="city" onclick="selectCity('Bogotá (BOG)')">Bogotá (BOG)</div>
+    <div class="city" onclick="selectCity('Medellín (MDE)')">Medellín (MDE)</div>
+  </div>
+</div>
+
+<!-- DESTINATION MODAL -->
+<div class="origin-modal" id="destinationModal">
+  <div class="origin-header">
+    <span>Ciudad de Destino</span>
+    <button onclick="closeDestinationModal()">✕</button>
+  </div>
+
+  <div class="origin-search">
+    <input placeholder="Buscar" onkeyup="filterDestinationCities(this.value)">
+  </div>
+
+  <div class="origin-list">
+    <div class="city" onclick="selectDestination('Cartagena (CTG)')">Cartagena (CTG)</div>
+    <div class="city" onclick="selectDestination('Cancún (CUN)')">Cancún (CUN)</div>
+    <div class="city" onclick="selectDestination('Miami (MIA)')">Miami (MIA)</div>
+  </div>
+</div>
+
+<script>
+function openOriginModal(){
+  document.getElementById('originModal').classList.add('active');
+}
+
+function closeOriginModal(){
+  document.getElementById('originModal').classList.remove('active');
+}
+
+function selectCity(city){
+  document.getElementById('originInput').value = city;
+  closeOriginModal();
+}
+
+function openDestinationModal(){
+  document.getElementById('destinationModal').classList.add('active');
+}
+
+function closeDestinationModal(){
+  document.getElementById('destinationModal').classList.remove('active');
+}
+
+function selectDestination(city){
+  document.getElementById('destinationInput').value = city;
+  closeDestinationModal();
+}
+
+function filterCities(t){}
+function filterDestinationCities(t){}
+</script>
 
 </body>
 </html>

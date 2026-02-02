@@ -3,27 +3,93 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Resultados de Vuelos</title>
+<title>Resultados – Tu360 Compras</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <style>
+
 body{
   margin:0;
   font-family:Arial;
   background:#f2f2f2;
 }
 
-.header{
+/* HEADER SUPERIOR */
+.top-header{
   background:#fff;
   padding:14px;
-  text-align:center;
-  font-weight:bold;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
   border-bottom:1px solid #ddd;
 }
 
+.logo{
+  font-size:22px;
+  font-weight:bold;
+}
+
+.logo span{
+  color:#666;
+}
+
+.menu{
+  font-size:16px;
+}
+
+/* BOTONES SUPERIORES */
+.actions{
+  display:flex;
+  gap:10px;
+  padding:14px;
+  background:#fff;
+}
+
+.btn-dark{
+  background:#2b2b2b;
+  color:#fff;
+  border:none;
+  padding:10px 14px;
+  border-radius:30px;
+  cursor:pointer;
+}
+
+.btn-light{
+  background:#fff;
+  color:#000;
+  border:1px solid #000;
+  padding:10px 14px;
+  border-radius:30px;
+  cursor:pointer;
+}
+
+/* TITULO */
+.title{
+  padding:10px 14px;
+  font-size:18px;
+  font-weight:bold;
+}
+
+/* RESUMEN */
+.summary{
+  background:#3b3b3b;
+  color:#fff;
+  margin:10px 14px;
+  padding:14px;
+  border-radius:12px;
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+
+.summary i{
+  font-size:22px;
+}
+
+/* RESULTADOS */
 .container{
-  padding:12px;
+  padding:10px 14px;
 }
 
 .card{
@@ -32,12 +98,6 @@ body{
   margin-bottom:14px;
   padding:14px;
   box-shadow:0 2px 8px rgba(0,0,0,.1);
-}
-
-.row{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
 }
 
 .airline{
@@ -54,7 +114,7 @@ body{
 }
 
 .time{
-  font-size:22px;
+  font-size:20px;
   font-weight:bold;
 }
 
@@ -73,12 +133,7 @@ body{
   margin-top:10px;
 }
 
-.price small{
-  display:block;
-  color:#666;
-}
-
-.btn{
+.btn-select{
   width:100%;
   background:#ffd100;
   border:none;
@@ -88,21 +143,40 @@ body{
   margin-top:10px;
   cursor:pointer;
 }
-</style>
 
+</style>
 </head>
 
 <body>
 
-<div class="header">
-  Resultados de tu búsqueda
+<!-- HEADER -->
+<div class="top-header">
+  <div class="logo">Tu360 <span>Compras</span></div>
+  <div class="menu">Menu ⋮</div>
 </div>
 
+<!-- BOTONES -->
+<div class="actions">
+  <button class="btn-dark" onclick="window.history.back()">Nueva búsqueda</button>
+  <button class="btn-light">Filtrar</button>
+</div>
+
+<!-- TITULO -->
+<div class="title" id="titulo"></div>
+
+<!-- RESUMEN -->
+<div class="summary">
+  <i class="fa fa-bullhorn"></i>
+  <div id="resumen"></div>
+</div>
+
+<!-- RESULTADOS -->
 <div class="container" id="resultBox"></div>
+
 
 <script>
 
-// ===== LEER PARÁMETROS DE URL =====
+// ===== LEER DATOS DESDE URL =====
 function getParam(name){
   let url = new URL(window.location.href);
   return url.searchParams.get(name);
@@ -114,12 +188,19 @@ let ida = getParam("ida");
 let vuelta = getParam("vuelta");
 let pasajeros = getParam("pasajeros") || 1;
 
+// ===== TITULO DINÁMICO =====
+document.getElementById("titulo").innerText =
+  "Paquete a " + destino;
+
+// ===== RESUMEN DINÁMICO =====
+document.getElementById("resumen").innerText =
+  "Vuelos de ida y vuelta para " + pasajeros + " pasajero(s)";
+
 // ===== OPCIONES SIMULADAS =====
 
 const opciones = [
   {
     aerolinea: "LATAM Airlines",
-    logo: "fa fa-plane",
     idaHora: "07:30",
     idaLlegada: "08:40",
     vueltaHora: "18:10",
@@ -130,7 +211,6 @@ const opciones = [
   },
   {
     aerolinea: "Avianca",
-    logo: "fa fa-plane",
     idaHora: "10:20",
     idaLlegada: "11:35",
     vueltaHora: "20:00",
@@ -141,7 +221,6 @@ const opciones = [
   },
   {
     aerolinea: "JetSMART",
-    logo: "fa fa-plane",
     idaHora: "13:40",
     idaLlegada: "14:50",
     vueltaHora: "16:20",
@@ -152,7 +231,6 @@ const opciones = [
   },
   {
     aerolinea: "Wingo",
-    logo: "fa fa-plane",
     idaHora: "06:15",
     idaLlegada: "07:25",
     vueltaHora: "22:10",
@@ -162,8 +240,6 @@ const opciones = [
     precio: 270000
   }
 ];
-
-// ===== MOSTRAR RESULTADOS =====
 
 function cargarResultados(){
 
@@ -177,15 +253,9 @@ function cargarResultados(){
     box.innerHTML += `
       <div class="card">
 
-        <div class="row">
-          <div class="airline">
-            <i class="${v.logo}"></i>
-            ${v.aerolinea}
-          </div>
-
-          <div>
-            ${pasajeros} pasajero(s)
-          </div>
+        <div class="airline">
+          <i class="fa fa-plane"></i>
+          ${v.aerolinea}
         </div>
 
         <hr>
@@ -196,9 +266,7 @@ function cargarResultados(){
             <div class="time">${v.idaHora}</div>
           </div>
 
-          <div>
-            <small>Directo</small>
-          </div>
+          <div>Directo</div>
 
           <div>
             <div class="airport">${destino}</div>
@@ -218,9 +286,7 @@ function cargarResultados(){
             <div class="time">${v.vueltaHora}</div>
           </div>
 
-          <div>
-            <small>Directo</small>
-          </div>
+          <div>Directo</div>
 
           <div>
             <div class="airport">${origen}</div>
@@ -237,7 +303,7 @@ function cargarResultados(){
           <b>COP $ ${total.toLocaleString()}</b>
         </div>
 
-        <button class="btn">
+        <button class="btn-select">
           Seleccionar vuelos
         </button>
 

@@ -226,8 +226,9 @@ body{
   <div class="card">
 
     <div class="total">
-      Tarifa: COP $ <span id="base">0</span>
-    </div>
+  Pasajeros: <span id="numPasajeros"></span>
+     </div>
+
 
     <div class="total">
       Impuestos y tasas: COP $ 72.740
@@ -355,12 +356,12 @@ function selectTarifa(tramo, valor, elem){
 
 function calcular(){
 
-  let base = precioIda + precioVuelta + extraIda + extraVuelta;
+  let base = (precioIda + precioVuelta + extraIda + extraVuelta) * pasajeros;
 
   document.getElementById("base").innerText =
     base.toLocaleString();
 
-  let impuestos = 72740;
+  let impuestos = 62740;
 
   let total = base + impuestos;
 
@@ -372,6 +373,7 @@ function calcular(){
   document.getElementById("totalOff").innerText =
     Math.floor(conOff).toLocaleString();
 }
+
 
 
 // Cargar detalles por defecto (Básico)

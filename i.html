@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Tu360 Compras Tabs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Font Awesome (OBLIGATORIO para tus íconos) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+*{box-sizing:border-box;font-family:Arial,sans-serif}
+body{margin:0;background:#f5f5f5}
+
+/* HEADER */
+header{
+  background:#fff;
+  padding:12px 16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-weight:bold;
+}
+header span{font-weight:900}
+
+/* HERO */
+.hero{
+  position:relative;
+  height:260px;
+  overflow:hidden;
+}
+.hero img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* TABS */
+.widget-tabs{
+  list-style:none;
+  display:flex;
+  justify-content:space-around;
+  padding:0;
+  margin:-35px 0 0;
+  position:relative;
+  z-index:5;
+}
+.widget-tabs li{
+  text-align:center;
+}
+.widget-tabs li a{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-decoration:none;
+  color:#000;
+  font-size:12px;
+}
+
+/* CÍRCULO */
+.widget-tabs li a i{
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  background:#fff;
+  border:1px solid #ddd;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:24px;
+  margin-bottom:6px;
+}
+
+/* ACTIVO */
+.widget-tabs li.active a i{
+  background:#FFD400;
+  border:none;
+}
+
+/* TEXTO OCULTO EN MOBILE (como el real) */
+@media(max-width:768px){
+  .widget-tabs li a span{display:none;}
+}
+
+/* CONTENEDOR BLANCO */
+.container{
+  background:#fff;
+  padding:40px 20px 25px;
+  margin-top:-10px;
+  border-radius:30px 30px 0 0;
+  position:relative;
+  z-index:6;
+}
+h2{margin-top:0}
+
+/* FORM */
+.field{
+  border-bottom:1px solid #ccc;
+  padding:10px 0;
+  margin-bottom:15px;
+}
+.field input{
+  width:100%;
+  border:none;
+  outline:none;
+  font-size:16px;
+}
+
+.radio-group{
+  display:flex;
+  gap:20px;
+  font-size:14px;
+  margin-bottom:20px;
+}
+.radio-group input{accent-color:#FFD400}
+
+.btn{
+  width:100%;
+  background:#FFD400;
+  border:none;
+  padding:15px;
+  font-size:18px;
+  font-weight:bold;
+  border-radius:30px;
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div><span>Tu360</span>Compras</div>
+  <div>Menu ⋮</div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <img src="https://viajestu360compras.bancolombia.com/portals/27/Images/Genericas/Vuelos-Mobile.webp">
+</div>
+
+<!-- 🔥 TABS (TU CÓDIGO, NO MODIFICADO) -->
+<ul id="widget-tabs" class="nav nav-tabs widget-tabs hidden-xs desktop-tabs" role="tablist">
+  <li role="presentation" data-sort="1">
+    <a href="#airhotel">
+      <i class="fa fa-suitcase"></i>
+      <span>Paquetes turísticos (Vuelo + Hotel)</span>
+    </a>
+  </li>
+
+  <li role="presentation" data-sort="2">
+    <a href="#hotel">
+      <i class="fa fa-h-square"></i>
+      <span>Reserva tu alojamiento ideal</span>
+    </a>
+  </li>
+
+  <li role="presentation" data-sort="3" class="active">
+    <a href="#air">
+      <i class="fa fa-plane"></i>
+      <span>Vuelos</span>
+    </a>
+  </li>
+
+  <li role="presentation" data-sort="4">
+    <a href="#extra">
+      <i class="fa fa-ticket"></i>
+      <span>Encuentra actividades ideales para ti</span>
+    </a>
+  </li>
+
+  <li role="presentation" data-sort="5">
+    <a href="#car">
+      <i class="fa fa-car"></i>
+      <span>Autos</span>
+    </a>
+  </li>
+</ul>
+
+<!-- CONTENIDO -->
+<div class="container">
+  <h2>Vuelos</h2>
+
+  <div class="radio-group">
+    <label><input type="radio" name="tipo" checked> Ida y vuelta</label>
+    <label><input type="radio" name="tipo"> Solo ida</label>
+    <label><input type="radio" name="tipo"> Multi destino</label>
+  </div>
+
+  <div class="field"><input placeholder="Origen"></div>
+  <div class="field"><input placeholder="Destino"></div>
+
+  <div class="field"><input type="date"></div>
+
+  <button class="btn">Buscar</button>
+</div>
+
+<script>
+/* ACTIVAR TAB */
+document.querySelectorAll('#widget-tabs li').forEach(li=>{
+  li.addEventListener('click',()=>{
+    document.querySelectorAll('#widget-tabs li').forEach(x=>x.classList.remove('active'));
+    li.classList.add('active');
+  });
+});
+</script>
+
+</body>
+</html>

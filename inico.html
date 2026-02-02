@@ -5,7 +5,6 @@
 <title>Tu360 Compras – UI</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Font Awesome 4 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <style>
@@ -23,18 +22,10 @@ body{margin:0;background:#f4f4f4;color:#000}
 }
 
 /* HERO */
-.hero{
-  position:relative;
-  height:260px;
-  overflow:hidden;
-}
-.hero img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
+.hero{height:260px;overflow:hidden}
+.hero img{width:100%;height:100%;object-fit:cover}
 
-/* TABS SUPERIORES */
+/* TABS */
 #widget-tabs{
   list-style:none;
   display:flex;
@@ -54,26 +45,17 @@ body{margin:0;background:#f4f4f4;color:#000}
   align-items:center;
 }
 #widget-tabs li a i{
-  width:60px;
-  height:60px;
-  border-radius:50%;
-  background:#fff;
-  border:1px solid #ddd;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:24px;
-  margin-bottom:6px;
+  width:60px;height:60px;border-radius:50%;
+  background:#fff;border:1px solid #ddd;
+  display:flex;align-items:center;justify-content:center;
+  font-size:24px;margin-bottom:6px;
 }
-#widget-tabs li.active a i{
-  background:#FFD400;
-  border:none;
-}
+#widget-tabs li.active a i{background:#FFD400;border:none}
 @media(max-width:768px){
   #widget-tabs li a span{display:none}
 }
 
-/* CONTENEDOR BLANCO */
+/* FORM CONTAINER */
 .container{
   background:#fff;
   margin-top:-10px;
@@ -81,114 +63,60 @@ body{margin:0;background:#f4f4f4;color:#000}
   border-radius:30px 30px 0 0;
 }
 
-/* FORMULARIO */
+/* FORM */
 .field{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:12px 0;
-  border-bottom:1px solid #000;
+  display:flex;align-items:center;gap:12px;
+  padding:12px 0;border-bottom:1px solid #000;
   margin-bottom:18px;
 }
 .field i{font-size:20px}
-.field input{
-  border:none;
-  outline:none;
-  font-size:16px;
-  width:100%;
-}
+.field input{border:none;outline:none;font-size:16px;width:100%}
 .dates{display:flex;gap:15px}
 .half{width:50%}
-
 .checks{margin:20px 0;font-size:14px}
 .checks label{display:block;margin-bottom:12px}
-
 .btn-search{
-  width:100%;
-  background:#FFD400;
-  border:none;
-  padding:16px;
-  font-size:18px;
-  font-weight:bold;
-  border-radius:40px;
-  cursor:pointer;
+  width:100%;background:#FFD400;border:none;
+  padding:16px;font-size:18px;font-weight:bold;
+  border-radius:40px;cursor:pointer;
 }
 
-/* ===== SECCIONES INFERIORES ===== */
+/* SECCIONES INFERIORES */
+.section{background:#fff;padding:30px 20px}
+.banner img,
+.card-banner img{width:100%;border-radius:20px}
 
-/* BANNER */
-.banner{
-  margin:30px 0;
-}
-.banner img{
-  width:100%;
-  border-radius:20px;
-}
+.section-title h2{margin:0 0 5px}
+.section-title p{margin:0;color:#555}
 
-/* TITULO + SUB */
-.section-title{
-  margin:30px 0 15px;
-}
-.section-title h2{
-  margin:0 0 5px;
-}
-.section-title p{
-  margin:0;
-  color:#555;
-}
-
-/* MENU DESTINOS */
 .menuItems{
-  list-style:none;
-  display:flex;
-  gap:20px;
-  padding:0;
-  margin:20px 0;
-  border-bottom:1px solid #ddd;
+  list-style:none;display:flex;gap:20px;
+  padding:0;margin:20px 0;border-bottom:1px solid #ddd;
 }
 .menuItems__items{
-  padding:10px 0;
-  cursor:pointer;
-  font-weight:500;
+  padding:10px 0;cursor:pointer;font-weight:500;
 }
-.menuItems__items.active{
-  border-bottom:3px solid #FFD400;
-}
-
-/* TARJETA */
-.card-banner{
-  margin:40px 0;
-}
-.card-banner img{
-  width:100%;
-  border-radius:20px;
-}
+.menuItems__items.active{border-bottom:3px solid #FFD400}
 
 /* FOOTER */
 .footer{
-  background:#2c2a29;
-  color:#fff;
-  padding:30px 20px;
-  text-align:center;
-  font-size:14px;
+  background:#2c2a29;color:#fff;
+  padding:30px 20px;text-align:center;font-size:14px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
 <div class="header">
   <div><strong>Tu360</strong>Compras</div>
   <div>Menu ⋮</div>
 </div>
 
-<!-- HERO -->
 <div class="hero">
   <img src="https://viajestu360compras.bancolombia.com/portals/27/Images/Genericas/Vuelos-Mobile.webp">
 </div>
 
-<!-- TABS -->
 <ul id="widget-tabs">
   <li><a href="#"><i class="fa fa-suitcase"></i><span>Paquetes</span></a></li>
   <li><a href="#"><i class="fa fa-h-square"></i><span>Hotel</span></a></li>
@@ -197,12 +125,10 @@ body{margin:0;background:#f4f4f4;color:#000}
   <li><a href="#"><i class="fa fa-car"></i><span>Autos</span></a></li>
 </ul>
 
-<!-- CONTENIDO -->
+<!-- FORMULARIO -->
 <div class="container">
-
   <h2>Vuelos</h2>
 
-  <!-- FORM -->
   <div class="field"><i class="fa fa-dot-circle-o"></i><input placeholder="Origen"></div>
   <div class="field"><i class="fa fa-map-marker"></i><input placeholder="Destino"></div>
 
@@ -219,13 +145,14 @@ body{margin:0;background:#f4f4f4;color:#000}
   </div>
 
   <button class="btn-search">Buscar</button>
+</div>
 
-  <!-- BANNER OFERTAS -->
+<!-- 👇 TODO ESTO YA ESTÁ AFUERA DEL FORM -->
+<div class="section">
   <div class="banner">
     <img src="https://viajestu360compras.bancolombia.com/portals/27/Images/diatu360/01/dia_tu360_BannerOfertas1-720x400.webp">
   </div>
 
-  <!-- DESTINOS -->
   <div class="section-title">
     <h2>Los destinos más buscados</h2>
     <p>Encuentra las rutas más populares con precios imperdibles</p>
@@ -236,28 +163,22 @@ body{margin:0;background:#f4f4f4;color:#000}
     <li class="menuItems__items">Vuelos desde Medellín</li>
   </ul>
 
-  <!-- TARJETA -->
   <div class="card-banner">
     <img src="https://viajestu360compras.bancolombia.com/portals/27/Images/Consumo/Tarjeta-Debito-Mastercard-Mobile.png">
   </div>
-
 </div>
 
-<!-- FOOTER -->
 <div class="footer">
-  © 2026 Tu360 Compras · Proyecto UI
+  © 2026 Tu360 Compras · UI Demo
 </div>
 
 <script>
-/* Tabs superiores */
 document.querySelectorAll('#widget-tabs li').forEach(tab=>{
   tab.onclick=()=>{
     document.querySelectorAll('#widget-tabs li').forEach(t=>t.classList.remove('active'));
     tab.classList.add('active');
   }
 });
-
-/* Menu destinos */
 document.querySelectorAll('.menuItems__items').forEach(item=>{
   item.onclick=()=>{
     document.querySelectorAll('.menuItems__items').forEach(i=>i.classList.remove('active'));

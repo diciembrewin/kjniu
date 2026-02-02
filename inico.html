@@ -2,10 +2,10 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Widget Tu360 – Solo Diseño</title>
+<title>Tu360 Compras – UI</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Font Awesome 4 (igual al original) -->
+<!-- Font Awesome 4 (como el original) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <style>
@@ -18,7 +18,7 @@ body{
   background:#f4f4f4;
 }
 
-/* HEADER SIMPLIFICADO */
+/* HEADER */
 .header{
   background:#fff;
   padding:14px 16px;
@@ -91,32 +91,95 @@ body{
   }
 }
 
-/* CONTENIDO BLANCO */
+/* CONTENEDOR */
 .container{
   background:#fff;
   margin-top:-10px;
-  padding:40px 20px;
+  padding:30px 20px 40px;
   border-radius:30px 30px 0 0;
 }
-h2{
-  margin-top:0;
+
+/* FORMULARIO */
+.flight-form{
+  margin-top:10px;
+}
+
+.field{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:12px 0;
+  border-bottom:1px solid #000;
+  margin-bottom:18px;
+}
+
+.field i{
+  font-size:20px;
+  color:#000;
+}
+
+.field input{
+  border:none;
+  outline:none;
+  font-size:16px;
+  width:100%;
+}
+
+.field input::placeholder{
+  color:#9b9b9b;
+}
+
+.dates{
+  display:flex;
+  gap:15px;
+}
+
+.half{
+  width:50%;
+}
+
+/* CHECKS */
+.checks{
+  margin:20px 0;
+  font-size:14px;
+}
+.checks label{
+  display:block;
+  margin-bottom:12px;
+}
+.checks input{
+  margin-right:8px;
+}
+
+/* BOTÓN */
+.btn-search{
+  width:100%;
+  background:#FFD400;
+  border:none;
+  padding:16px;
+  font-size:18px;
+  font-weight:bold;
+  border-radius:40px;
+  cursor:pointer;
+  color:#000;
 }
 </style>
 </head>
 
 <body>
 
+<!-- HEADER -->
 <div class="header">
   <div><strong>Tu360</strong>Compras</div>
   <div>Menu ⋮</div>
 </div>
 
-<!-- IMAGEN -->
+<!-- HERO -->
 <div class="hero">
   <img src="https://viajestu360compras.bancolombia.com/portals/27/Images/Genericas/Vuelos-Mobile.webp">
 </div>
 
-<!-- TABS (MISMA ESTRUCTURA QUE EL ORIGINAL) -->
+<!-- TABS -->
 <ul id="widget-tabs">
   <li>
     <a href="#">
@@ -156,12 +219,57 @@ h2{
 
 <!-- CONTENIDO -->
 <div class="container">
+
   <h2>Vuelos</h2>
-  <p>Este es solo el diseño del widget, sin lógica.</p>
+
+  <div class="flight-form">
+
+    <div class="field">
+      <i class="fa fa-dot-circle-o"></i>
+      <input type="text" placeholder="Origen">
+    </div>
+
+    <div class="field">
+      <i class="fa fa-map-marker"></i>
+      <input type="text" placeholder="Destino">
+    </div>
+
+    <div class="dates">
+      <div class="field half">
+        <i class="fa fa-calendar-check-o"></i>
+        <input type="text" placeholder="Ida">
+      </div>
+
+      <div class="field half">
+        <i class="fa fa-calendar-check-o"></i>
+        <input type="text" placeholder="Vuelta">
+      </div>
+    </div>
+
+    <div class="field">
+      <i class="fa fa-user"></i>
+      <input type="number" value="1" min="1">
+    </div>
+
+    <div class="checks">
+      <label>
+        <input type="checkbox">
+        Solo vuelos que incluyan equipaje
+      </label>
+
+      <label>
+        <input type="checkbox">
+        Solo vuelos directos
+      </label>
+    </div>
+
+    <button class="btn-search">Buscar</button>
+
+  </div>
 </div>
 
 <script>
-/* Solo para cambiar activo visual */
+/* Tabs activo (solo visual) */
 document.querySelectorAll('#widget-tabs li').forEach(tab=>{
   tab.addEventListener('click',()=>{
     document.querySelectorAll('#widget-tabs li')

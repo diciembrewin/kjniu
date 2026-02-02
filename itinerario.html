@@ -69,19 +69,59 @@ input, select{
   cursor:pointer;
 }
 
+.small{
+  font-size:13px;
+  color:#666;
+}
+
+.itinerario{
+  font-size:14px;
+  line-height:1.6;
+}
+
 </style>
 </head>
 
 <body>
 
 <div class="header">
-  Tu360 Compras – Datos de pasajeros
+  Tu360 Compras – Itinerario y Datos de Pasajeros
 </div>
-
-<div class="container" id="boxPasajeros"></div>
 
 <div class="container">
 
+  <!-- ===== ITINERARIO ARRIBA ===== -->
+  <div class="card">
+
+    <div class="title">Itinerario seleccionado</div>
+
+    <div class="itinerario">
+
+      <b id="rutaIda"></b><br>
+      <span id="fechaIda"></span><br>
+
+      <div id="bloqueVuelta">
+        <hr>
+        <b id="rutaVuelta"></b><br>
+        <span id="fechaVuelta"></span>
+      </div>
+
+      <hr>
+
+      <div class="small">
+        Pasajeros: <span id="numPasajeros"></span>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ===== FORMULARIOS DE PASAJEROS ===== -->
+  <div id="boxPasajeros"></div>
+
+
+  <!-- ===== DATOS DE CONTACTO ===== -->
   <div class="card">
     <div class="title">Datos de Contacto</div>
 
@@ -108,11 +148,42 @@ input, select{
 
 <script>
 
+// ===== OBTENER PARÁMETROS =====
+
 function getParam(name){
   return new URL(window.location.href).searchParams.get(name);
 }
 
+let origen = getParam("origen");
+let destino = getParam("destino");
+let ida = getParam("ida");
+let vuelta = getParam("vuelta");
+let tipo = getParam("tipo");
 let pasajeros = parseInt(getParam("pasajeros") || 1);
+
+
+// ===== MOSTRAR ITINERARIO =====
+
+document.getElementById("rutaIda").innerText =
+  origen + " → " + destino;
+
+document.getElementById("fechaIda").innerText =
+  "Salida: " + ida;
+
+if(tipo === "oneway"){
+  document.getElementById("bloqueVuelta").style.display = "none";
+}else{
+  document.getElementById("rutaVuelta").innerText =
+    destino + " → " + origen;
+
+  document.getElementById("fechaVuelta").innerText =
+    "Regreso: " + vuelta;
+}
+
+document.getElementById("numPasajeros").innerText = pasajeros;
+
+
+// ===== GENERAR FORMULARIOS =====
 
 function cargarFormularios(){
 
@@ -167,6 +238,9 @@ function cargarFormularios(){
   box.innerHTML = html;
 }
 
+
+// ===== GUARDAR DATOS =====
+
 function guardarDatos(){
 
   let datos = [];
@@ -191,8 +265,11 @@ function guardarDatos(){
 
   alert("Datos guardados correctamente (demo)");
 
-  // Aquí podrías enviarlo a un backend real
+  // Aquí iría el envío a backend real
 }
+
+
+// INICIAR
 
 cargarFormularios();
 

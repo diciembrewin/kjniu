@@ -158,10 +158,8 @@ body{
 .calendar-container{
   background:#fff;
   padding:20px;
-  height:calc(100vh - 70px);
-  overflow-y:scroll;
+  flex:1;
 }
-
 
 .day{
   display:inline-block;
@@ -306,45 +304,13 @@ body{
 <script>
 
 const aeropuertos = [
-  "Bogotá - El Dorado (BOG)",
-  "Medellín - José María Córdova (MDE)",
-  "Medellín - Olaya Herrera (EOH)",
-  "Cali - Alfonso Bonilla Aragón (CLO)",
-  "Cartagena - Rafael Núñez (CTG)",
-  "Barranquilla - Ernesto Cortissoz (BAQ)",
-  "Bucaramanga - Palonegro (BGA)",
-  "Pereira - Matecaña (PEI)",
-  "Santa Marta - Simón Bolívar (SMR)",
-  "Cúcuta - Camilo Daza (CUC)",
-  "Montería - Los Garzones (MTR)",
-  "Valledupar - Alfonso López (VUP)",
-  "Armenia - El Edén (AXM)",
-  "Manizales - La Nubia (MZL)",
-  "Neiva - Benito Salas (NVA)",
-  "Villavicencio - Vanguardia (VVC)",
-  "Ibagué - Perales (IBE)",
-  "Leticia - Alfredo Vásquez Cobo (LET)",
-  "San Andrés - Gustavo Rojas Pinilla (ADZ)",
-  "Pasto - Antonio Nariño (PSO)",
-  "Riohacha - Almirante Padilla (RCH)",
-  "Yopal - El Alcaraván (EYP)",
-  "Apartadó - Antonio Roldán (APO)",
-  "Florencia - Gustavo Artunduaga (FLA)",
-  "Quibdó - El Caraño (UIB)",
-  "Popayán - Guillermo León Valencia (PPN)",
-  "Barrancabermeja - Yariguíes (EJA)",
-  "Corozal - Las Brujas (CZU)",
-  "Tumaco - La Florida (TCO)",
-  "Puerto Carreño - Germán Olano (PCR)",
-  "Arauca - Santiago Pérez (AUC)",
-  "Mitú - Fabio Alberto León Bentley (MVP)",
-  "Puerto Asís - Tres de Mayo (PUU)",
-  "Guapi - Juan Casiano (GPI)",
-  "Ipiales - San Luis (IPI)",
-  "Nuquí - Reyes Murillo (NQU)",
-  "Bahía Solano - José Celestino Mutis (BSC)"
+"Bogotá (BOG)",
+"Medellín (MDE)",
+"Cali (CLO)",
+"Cartagena (CTG)",
+"Barranquilla (BAQ)",
+"Bucaramanga (BGA)"
 ];
-
 
 let campoActivo = "";
 
@@ -386,16 +352,15 @@ function selectCity(c){
   closeCityModal();
 }
 
+/* CALENDARIO */
 let tipoFecha = "";
-let fechaIdaSeleccionada = null;
 
 function openCalendar(tipo){
   tipoFecha = tipo;
-
   document.getElementById("calendarTitle").innerText =
     tipo === "ida" ? "Fecha de ida" : "Fecha de vuelta";
 
-  generarCalendario(new Date());
+  generarCalendario();
   document.getElementById("calendarModal").classList.add("active");
 }
 
@@ -403,101 +368,24 @@ function closeCalendar(){
   document.getElementById("calendarModal").classList.remove("active");
 }
 
-// GENERAR CALENDARIO REAL
-function generarCalendario(fechaBase){
-
+function generarCalendario(){
   let box = document.getElementById("calendarBox");
   box.innerHTML = "";
 
-  let mesActual = new Date(fechaBase.getFullYear(), fechaBase.getMonth(), 1);
-
-  // Mostrar 12 meses hacia adelante
-  for(let m = 0; m < 12; m++){
-
-    let mes = new Date(mesActual.getFullYear(), mesActual.getMonth() + m, 1);
-
-    let diasEnMes = new Date(
-      mes.getFullYear(),
-      mes.getMonth() + 1,
-      0
-    ).getDate();
-
-    let nombreMes = mes.toLocaleString("es", { month: "long" });
-    let anio = mes.getFullYear();
-
+  for(let d=1; d<=31; d++){
     box.innerHTML += `
-      <div class="calendar-month">
-        <div class="calendar-header">
-          ${nombreMes} ${anio}
-        </div>
-
-        <div class="calendar-grid" id="grid-${m}"></div>
-      </div>
+      <div class="day" onclick="selectDate('${d}/03/2025')">${d}</div>
     `;
-
-    let grid = document.getElementById(`grid-${m}`);
-
-    let hoy = new Date();
-    hoy.setHours(0,0,0,0);
-
-    for(let d = 1; d <= diasEnMes; d++){
-
-      let fechaDia = new Date(anio, mes.getMonth(), d);
-      fechaDia.setHours(0,0,0,0);
-
-      let clase = "day";
-      let bloqueado = false;
-
-      // Bloquear fechas pasadas
-      if(fechaDia < hoy){
-        clase += " disabled";
-        bloqueado = true;
-      }
-
-      // Si es vuelta, bloquear menores a ida
-      if(tipoFecha === "vuelta" && fechaIdaSeleccionada){
-        if(fechaDia <= fechaIdaSeleccionada){
-          clase += " disabled";
-          bloqueado = true;
-        }
-      }
-
-      grid.innerHTML += `
-        <div class="${clase}"
-             onclick="${bloqueado ? '' : `selectDate('${anio}-${mes.getMonth()+1}-${d}')`}">
-          ${d}
-        </div>
-      `;
-    }
   }
 }
 
-// SELECCIONAR FECHA
-function selectDate(fecha){
-
-  let partes = fecha.split("-");
-  let fechaReal = new Date(partes[0], partes[1]-1, partes[2]);
-
-  let texto = fechaReal.toLocaleDateString("es", {
-    day: "2-digit",
-    month: "long",
-    year: "numeric"
-  });
-
-  if(tipoFecha === "ida"){
-    document.getElementById("idaInput").value = texto;
-    fechaIdaSeleccionada = fechaReal;
-
-    // Limpiar vuelta si ya no es válida
-    document.getElementById("vueltaInput").value = "";
-
-  } else {
-    document.getElementById("vueltaInput").value = texto;
-  }
+function selectDate(f){
+  document.getElementById(
+    tipoFecha === "ida" ? "idaInput" : "vueltaInput"
+  ).value = f;
 
   closeCalendar();
 }
-
 
 /* PASAJEROS */
 function openPassengerModal(){

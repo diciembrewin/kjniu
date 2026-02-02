@@ -168,7 +168,8 @@ body{
       </div>
     </div>
 
-    <div class="detalle">
+    <div class="detalle" id="detalleIda">
+
       <div>Mochila o artículo personal <span>✔</span></div>
       <div>Equipaje de mano <span>con recargo</span></div>
       <div>Equipaje facturado <span>con recargo</span></div>
@@ -207,7 +208,8 @@ body{
       </div>
     </div>
 
-    <div class="detalle">
+   <div class="detalle" id="detalleVuelta">
+
       <div>Mochila o artículo personal <span>✔</span></div>
       <div>Equipaje de mano <span>con recargo</span></div>
       <div>Equipaje facturado <span>con recargo</span></div>
@@ -248,7 +250,6 @@ body{
 
 </div>
 
-
 <script>
 
 function getParam(name){
@@ -274,7 +275,54 @@ if(tipo === "oneway"){
 let extraIda = 0;
 let extraVuelta = 0;
 
-function selectTarifa(tipo, valor, elem){
+
+// ===== DETALLES POR TARIFA =====
+
+const detallesTarifa = {
+
+  basico: `
+    <div>Mochila o artículo personal <span>✔</span></div>
+    <div>Equipaje de mano <span>con recargo</span></div>
+    <div>Equipaje facturado <span>con recargo</span></div>
+    <div>Selección de asiento <span>con recargo</span></div>
+    <div>Embarque prioritario <span>✖</span></div>
+    <div>Ticket <span>✔</span></div>
+    <div>FlexiSmart <span>✖</span></div>
+  `,
+
+  travel: `
+    <div>Mochila o artículo personal <span>✔</span></div>
+    <div>Equipaje de mano <span>✔</span></div>
+    <div>Equipaje facturado <span>con recargo</span></div>
+    <div>Selección de asiento <span>✔</span></div>
+    <div>Embarque prioritario <span>✖</span></div>
+    <div>Ticket <span>✔</span></div>
+    <div>FlexiSmart <span>✖</span></div>
+  `,
+
+  standar: `
+    <div>Mochila o artículo personal <span>✔</span></div>
+    <div>Equipaje de mano <span>✔</span></div>
+    <div>Equipaje facturado <span>✔</span></div>
+    <div>Selección de asiento <span>✔</span></div>
+    <div>Embarque prioritario <span>✔</span></div>
+    <div>Ticket <span>✔</span></div>
+    <div>FlexiSmart <span>✖</span></div>
+  `,
+
+  premium: `
+    <div>Mochila o artículo personal <span>✔</span></div>
+    <div>Equipaje de mano <span>✔</span></div>
+    <div>Equipaje facturado <span>✔</span></div>
+    <div>Selección de asiento <span>✔</span></div>
+    <div>Embarque prioritario <span>✔</span></div>
+    <div>Ticket <span>✔</span></div>
+    <div>FlexiSmart <span>✔</span></div>
+  `
+};
+
+
+function selectTarifa(tramo, valor, elem){
 
   let cont = elem.parentElement;
 
@@ -284,11 +332,26 @@ function selectTarifa(tipo, valor, elem){
 
   elem.classList.add("selected");
 
-  if(tipo === "ida") extraIda = valor;
-  if(tipo === "vuelta") extraVuelta = valor;
+  let tipoTarifa = "";
+
+  if(elem.classList.contains("basico")) tipoTarifa = "basico";
+  if(elem.classList.contains("travel")) tipoTarifa = "travel";
+  if(elem.classList.contains("standar")) tipoTarifa = "standar";
+  if(elem.classList.contains("premium")) tipoTarifa = "premium";
+
+  if(tramo === "ida"){
+    extraIda = valor;
+    document.getElementById("detalleIda").innerHTML = detallesTarifa[tipoTarifa];
+  }
+
+  if(tramo === "vuelta"){
+    extraVuelta = valor;
+    document.getElementById("detalleVuelta").innerHTML = detallesTarifa[tipoTarifa];
+  }
 
   calcular();
 }
+
 
 function calcular(){
 
@@ -310,9 +373,20 @@ function calcular(){
     Math.floor(conOff).toLocaleString();
 }
 
+
+// Cargar detalles por defecto (Básico)
+
+document.getElementById("detalleIda").innerHTML =
+  detallesTarifa.basico;
+
+document.getElementById("detalleVuelta").innerHTML =
+  detallesTarifa.basico;
+
+
 calcular();
 
 </script>
+
 
 </body>
 </html>

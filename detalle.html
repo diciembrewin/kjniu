@@ -270,22 +270,13 @@ function getParam(name){
   return new URL(window.location.href).searchParams.get(name);
 }
 
+// LEER PARÁMETROS
 let tipo = getParam("tipo");
 
 let precioIda = parseInt(getParam("precioIda") || 0);
 let precioVuelta = parseInt(getParam("precioVuelta") || 0);
 
-// LEER PASAJEROS CORRECTAMENTE
-let pasajerosTexto = getParam("pasajeros") || "1";
-
-let pasajeros = parseInt(pasajerosTexto.replace(/\D/g, ""));
-
-if(isNaN(pasajeros) || pasajeros < 1){
-  pasajeros = 1;
-}
-
-// Mostrar pasajeros en pantalla
-document.getElementById("numPasajeros").innerText = pasajeros;
+let pasajeros = parseInt(getParam("pasajeros") || 1);
 
 document.getElementById("fechaIda").innerText =
   getParam("ida") || "Fecha ida";
@@ -301,11 +292,9 @@ if(tipo === "oneway"){
 let extraIda = 0;
 let extraVuelta = 0;
 
-
 // ===== DETALLES POR TARIFA =====
 
 const detallesTarifa = {
-
   basico: `
     <div>Mochila o artículo personal <span>✔</span></div>
     <div>Equipaje de mano <span>con recargo</span></div>
@@ -347,7 +336,6 @@ const detallesTarifa = {
   `
 };
 
-
 function selectTarifa(tramo, valor, elem){
 
   let cont = elem.parentElement;
@@ -367,27 +355,26 @@ function selectTarifa(tramo, valor, elem){
 
   if(tramo === "ida"){
     extraIda = valor;
-    document.getElementById("detalleIda").innerHTML = detallesTarifa[tipoTarifa];
+    document.getElementById("detalleIda").innerHTML =
+      detallesTarifa[tipoTarifa];
   }
 
   if(tramo === "vuelta"){
     extraVuelta = valor;
-    document.getElementById("detalleVuelta").innerHTML = detallesTarifa[tipoTarifa];
+    document.getElementById("detalleVuelta").innerHTML =
+      detallesTarifa[tipoTarifa];
   }
 
   calcular();
 }
 
-
-// ===== FUNCIÓN ÚNICA DE CÁLCULO (CORRECTA) =====
+// ===== CÁLCULO CORRECTO =====
 
 function calcular(){
 
   let baseUnitario = precioIda + precioVuelta + extraIda + extraVuelta;
 
   let impuestosPorPersona = 62740;
-
-  let precioPorPasajero = baseUnitario + impuestosPorPersona;
 
   let subtotal = baseUnitario * pasajeros;
 
@@ -399,7 +386,7 @@ function calcular(){
   document.getElementById("numPasajeros2").innerText = pasajeros;
 
   document.getElementById("precioPorPasajero").innerText =
-    precioPorPasajero.toLocaleString();
+    (baseUnitario + impuestosPorPersona).toLocaleString();
 
   document.getElementById("impuestosPorPasajero").innerText =
     impuestosPorPersona.toLocaleString();
@@ -416,8 +403,27 @@ function calcular(){
     Math.floor(conOff).toLocaleString();
 }
 
+// ===== FUNCIÓN DEL BOTÓN SEGUIR =====
 
-// Cargar detalles por defecto (Básico)
+function irResumen(){
+
+  let total = document.getElementById("total").innerText.replace(/\./g,"");
+  let totalOff = document.getElementById("totalOff").innerText.replace(/\./g,"");
+
+  let url = "resumen.html?" +
+    "origen=" + encodeURIComponent(getParam("origen")) +
+    "&destino=" + encodeURIComponent(getParam("destino")) +
+    "&ida=" + encodeURIComponent(getParam("ida")) +
+    "&vuelta=" + encodeURIComponent(getParam("vuelta")) +
+    "&tipo=" + encodeURIComponent(getParam("tipo")) +
+    "&pasajeros=" + encodeURIComponent(pasajeros) +
+    "&precioFinal=" + encodeURIComponent(total) +
+    "&precioOff=" + encodeURIComponent(totalOff);
+
+  window.location.href = url;
+}
+
+// INICIALIZAR
 
 document.getElementById("detalleIda").innerHTML =
   detallesTarifa.basico;
@@ -425,12 +431,9 @@ document.getElementById("detalleIda").innerHTML =
 document.getElementById("detalleVuelta").innerHTML =
   detallesTarifa.basico;
 
-
-// EJECUTAR CÁLCULO INICIAL
 calcular();
 
 </script>
-
 
 
 </body>

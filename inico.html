@@ -18,7 +18,6 @@ body{
   background:#f4f4f4;
 }
 
-/* HEADER */
 .header{
   display:flex;
   justify-content:space-between;
@@ -32,30 +31,19 @@ body{
   height:28px;
 }
 
-/* HERO */
 .hero{
   position:relative;
   background:url("https://viajestu360compras.bancolombia.com/portals/27/Images/Genericas/Vuelos-Mobile.webp") no-repeat center/cover;
   height:320px;
-  overflow:visible;
-}
-
-.hero::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:#00c6d7;
-  mix-blend-mode:multiply;
 }
 
 .tabs{
   display:flex;
   justify-content:space-around;
   position:absolute;
-  bottom:-32px;
+  bottom:-28px;
   left:0;
   right:0;
-  z-index:3;
 }
 
 .tab{
@@ -66,24 +54,18 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  box-shadow:0 4px 10px rgba(0,0,0,.15);
 }
 
 .tab.active{
   background:#ffd100;
 }
 
-/* FORM */
 .form-container{
   background:#fff;
-  margin:-10px auto 20px;
-  padding:32px 20px;
-  max-width:360px;
-  width:100%;
+  margin: 4px auto 20px;
+  padding:28px 20px 32px;
+  max-width:340px;
   border-radius:30px;
-  box-shadow:0 4px 14px rgba(0,0,0,.08);
-  position:relative;
-  z-index:2;
 }
 
 .field{
@@ -112,12 +94,25 @@ body{
   font-size:18px;
 }
 
+.section{
+  background:#fff;
+  margin:30px auto 0;
+  padding:20px;
+  max-width:720px;
+}
+
+.banner{
+  width:100%;
+  margin:20px 0;
+  border-radius:20px;
+}
+
 /* MODALS */
 .modal{
   position:fixed;
   inset:0;
   background:#f4f4f4;
-  z-index:9999;
+  z-index:999;
   display:none;
   flex-direction:column;
 }
@@ -134,20 +129,10 @@ body{
   justify-content:space-between;
 }
 
-.modal-search{
-  padding:10px;
-}
-
-.modal-search input{
-  width:100%;
-  padding:10px;
-}
-
 .list{
   background:#fff;
   margin:10px;
   border-radius:12px;
-  overflow:auto;
 }
 
 .item{
@@ -156,7 +141,6 @@ body{
   cursor:pointer;
 }
 
-/* CALENDAR */
 .calendar{
   padding:20px;
 }
@@ -184,66 +168,74 @@ body{
 
 <div class="form-container">
 
-  <h3>Buscar vuelos</h3>
+  <h2>Buscar vuelos</h2>
 
   <div class="field" onclick="openModal('originModal')">
+    <i class="fa fa-dot-circle-o"></i>
     <input id="originInput" placeholder="Origen" readonly>
   </div>
 
   <div class="field" onclick="openModal('destinationModal')">
+    <i class="fa fa-map-marker"></i>
     <input id="destinationInput" placeholder="Destino" readonly>
   </div>
 
   <div class="field" onclick="openModal('dateModal')">
+    <i class="fa fa-calendar"></i>
     <input id="dateInput" placeholder="Seleccionar fechas" readonly>
   </div>
 
   <button class="btn">Buscar</button>
+
 </div>
 
-<!-- ORIGIN MODAL -->
+<!-- CONTENIDO ORIGINAL -->
+<div class="section">
+  <img class="banner" src="https://viajestu360compras.bancolombia.com/portals/27/Images/diatu360/01/dia_tu360_BannerOfertas1-720x400.webp">
+
+  <h2>Los destinos más buscados</h2>
+
+  <ul class="menuItems">
+    <li>Vuelos desde Bogotá</li>
+    <li>Vuelos desde Medellín</li>
+  </ul>
+
+  <img class="banner" src="https://viajestu360compras.bancolombia.com/portals/27/Images/Consumo/Tarjeta-Debito-Mastercard-Mobile.png">
+</div>
+
+<!-- MODALES -->
 <div class="modal" id="originModal">
   <div class="modal-header">
     <span>Ciudad de Origen</span>
-    <button onclick="closeModal('originModal')">✕</button>
-  </div>
-
-  <div class="modal-search">
-    <input placeholder="Buscar departamento" onkeyup="filterList(this.value, 'originList')">
+    <button onclick="closeModal('originModal')">X</button>
   </div>
 
   <div class="list" id="originList"></div>
 </div>
 
-<!-- DESTINATION MODAL -->
 <div class="modal" id="destinationModal">
   <div class="modal-header">
     <span>Ciudad de Destino</span>
-    <button onclick="closeModal('destinationModal')">✕</button>
-  </div>
-
-  <div class="modal-search">
-    <input placeholder="Buscar departamento" onkeyup="filterList(this.value, 'destinationList')">
+    <button onclick="closeModal('destinationModal')">X</button>
   </div>
 
   <div class="list" id="destinationList"></div>
 </div>
 
-<!-- DATE MODAL -->
 <div class="modal" id="dateModal">
   <div class="modal-header">
     <span>Seleccionar Fechas</span>
-    <button onclick="closeModal('dateModal')">✕</button>
+    <button onclick="closeModal('dateModal')">X</button>
   </div>
 
   <div class="calendar">
-    <label>Fecha ida</label>
-    <input type="date" id="dateStart">
+    <label>Ida</label>
+    <input type="date" id="start">
 
-    <label>Fecha regreso</label>
-    <input type="date" id="dateEnd">
+    <label>Vuelta</label>
+    <input type="date" id="end">
 
-    <button class="btn" onclick="setDates()">Aplicar</button>
+    <button class="btn" onclick="applyDates()">Aplicar</button>
   </div>
 </div>
 
@@ -258,13 +250,13 @@ const departamentos = [
 "Tolima","Valle del Cauca","Vaupés","Vichada"
 ];
 
-function loadLists(){
-  const origin = document.getElementById("originList");
-  const dest = document.getElementById("destinationList");
+function load(){
+  const o = document.getElementById("originList");
+  const d = document.getElementById("destinationList");
 
   departamentos.forEach(dep=>{
-    origin.innerHTML += `<div class='item' onclick="select('originInput','${dep}','originModal')">${dep}</div>`;
-    dest.innerHTML += `<div class='item' onclick="select('destinationInput','${dep}','destinationModal')">${dep}</div>`;
+    o.innerHTML += `<div class='item' onclick="select('originInput','${dep}','originModal')">${dep}</div>`;
+    d.innerHTML += `<div class='item' onclick="select('destinationInput','${dep}','destinationModal')">${dep}</div>`;
   });
 }
 
@@ -281,27 +273,20 @@ function select(input, value, modal){
   closeModal(modal);
 }
 
-function filterList(text, listId){
-  text = text.toLowerCase();
-  document.querySelectorAll(`#${listId} .item`).forEach(i=>{
-    i.style.display = i.innerText.toLowerCase().includes(text) ? "block" : "none";
-  });
-}
+function applyDates(){
+  const s = start.value;
+  const e = end.value;
 
-function setDates(){
-  const start = document.getElementById("dateStart").value;
-  const end = document.getElementById("dateEnd").value;
-
-  if(!start || !end){
+  if(!s || !e){
     alert("Selecciona ambas fechas");
     return;
   }
 
-  document.getElementById("dateInput").value = `${start} → ${end}`;
+  dateInput.value = s + " → " + e;
   closeModal("dateModal");
 }
 
-loadLists();
+load();
 </script>
 
 </body>

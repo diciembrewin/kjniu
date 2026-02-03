@@ -325,6 +325,9 @@ function calcularPrecio(hora){
 
 let precioIda = 0;
 let precioVuelta = 0;
+  
+let horaIda = "";
+let horaVuelta = "";
 
 let horaIdaSeleccionada = "";
 let horaVueltaSeleccionada = "";
@@ -349,13 +352,13 @@ function actualizarPrecio(){
 
 function seleccionarIda(valor, hora){
   precioIda = parseInt(valor);
-  horaIdaSeleccionada = hora;
+  horaIda = hora;
   actualizarPrecio();
 }
 
 function seleccionarVuelta(valor, hora){
   precioVuelta = parseInt(valor);
-  horaVueltaSeleccionada = hora;
+  horaVuelta = hora;
   actualizarPrecio();
 }
 

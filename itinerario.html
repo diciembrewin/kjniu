@@ -91,6 +91,115 @@ small{
   margin-bottom:4px;
   color:#555;
 }
+/* ===== FOOTER TU360 ===== */
+
+.footer-net-3{
+  background:#2b2b2b;
+  color:#fff;
+  padding:30px 15px;
+  font-size:14px;
+}
+
+.footer-net{
+  max-width:1000px;
+  margin:0 auto;
+}
+
+.footer-net img{
+  max-width:180px;
+}
+
+.net-accordion__container{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.net-accordion__title{
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.net-accordion__body{
+  margin-top:8px;
+}
+
+.footer-net__list{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+
+.footer-net__list--row{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.footer-net__item{
+  margin-bottom:5px;
+}
+
+.footer-net__link{
+  color:#fff;
+  text-decoration:none;
+  font-size:13px;
+}
+
+.footer-net__link:hover{
+  text-decoration:underline;
+}
+
+.footer-net__text1{
+  font-size:13px;
+  margin-bottom:6px;
+}
+
+.footer-net hr{
+  margin:20px 0;
+  border:0;
+  border-top:1px solid #444;
+}
+
+.footer-net__list--logos{
+  text-align:center;
+}
+
+.footer-net__logo{
+  margin:10px;
+  max-width:160px;
+}
+
+.footer-info{
+  font-size:12px;
+  line-height:1.4;
+  margin-top:20px;
+  color:#ccc;
+}
+
+/* RESPONSIVE */
+
+@media(min-width:768px){
+
+  .net-accordion__container{
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content:space-between;
+  }
+
+  .net-accordion__child{
+    width:48%;
+  }
+
+  .footer-net__list--row{
+    flex-direction:row;
+    flex-wrap:wrap;
+  }
+
+  .footer-net__item{
+    width:48%;
+  }
+}
 
 </style>
 </head>
@@ -172,6 +281,124 @@ small{
   </button>
 
 </div>
+
+  <footer class=" footer-net-3 bg-custom">
+  <div class="footer-net">
+    <div class="net-accordion">
+      <div class="net-accordion__container">
+        <div class="">
+          <div class="net-accordion__title">
+            <img id="dnn_dnnLOGO_imgLogo" src="https://viajestu360compras.bancolombia.com/Portals/27/Skins/skin-bem/assets/images/logo-blanco-360.png" alt="Encuentra y compra viajes a destinos soñados | Tu360Compras">
+            <span>
+              <br>
+              Operado por NETVIAJES RNT 72357
+            </span>
+            <span>
+              <br>
+              Netactica Colombia SAS . Nit 900132867-1
+              <br>
+              Cra 15 # 88 -21 Of 502 Bogotá
+            </span>
+          </div>
+        </div>
+        <div class="net-accordion__child net-accordion__child--include">
+          <div class="net-accordion__title">
+            ¿Tienes dudas?
+          </div>
+          <div class="net-accordion__body">
+            <ul class="footer-net__list footer-net__list--row">
+              <li class="w-100 footer-net__item"><a href="https://viajestu360compras.zendesk.com/hc/es/requests/new" class="footer-net__link">Contáctanos</a></li>
+              <li class="w-100 footer-net__item"><a href="https://viajestu360compras.zendesk.com/" class="footer-net__link">Preguntas frecuentes</a></li>
+              <li class="w-100 footer-net__item"><a target="_blank" href="https://viajestu360compras.bancolombia.com/consultar-estado-requerimiento" class="footer-net__link">Consulta el estado de tus
+                  requerimientos</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="net-accordion__child net-accordion__child--include">
+          <div class="net-accordion__title">
+            ¿Necesitas financiación?
+          </div>
+          <div class="net-accordion__body">
+            <ul class="footer-net__list footer-net__list--row">
+              <li class="w-100 footer-net__item">
+                <p class="footer-net__text1">Bancolombia te ofrece productos de acuerdo a tu necesidad</p>
+                <a target="_blank" href="https://accesodigital.grupobancolombia.com/solicitud-de-producto/#/abreCuenta?code=RTC0022&amp;idapp=referidos&amp;urlOrigin=https:%2F%2Fwww.bancolombia.com%2Fpersonas%2Ftarjetas-de-credito%2Fmastercard%2Fideal&amp;_gl=1*36zroa*_gcl_aw*R0NMLjE3NDY3MTA2MDcuQ2owS0NRandyUEhBQmhDSUFSSXNBRlcyWEJQU1RDQllBLXVDbTlRUWxvNklrSHQ5YkNXWlN4cDVyVW9mVTlaMHRzWE9Zd1Nnam5Cczd1TWFBdjBERUFMd193Y0I.*_gcl_dc*R0NMLjE3NDY3MTA2MDcuQ2owS0NRandyUEhBQmhDSUFSSXNBRlcyWEJQU1RDQllBLXVDbTlRUWxvNklrSHQ5YkNXWlN4cDVyVW9mVTlaMHRzWE9Zd1Nnam5Cczd1TWFBdjBERUFMd193Y0I.*_gcl_au*MTA2NzY0MTMxOS4xNzQ2NDc2ODM3*_ga*Njg0MzM3OTQyLjE3MTAxODY3MDA.*_ga_B6YXBDTWFL*czE3NTE2NDU0ODUkbzQwJGcxJHQxNzUxNjYwNzE4JGozNyRsMCRoMA" class="footer-net__link">
+                  - Tarjetas de crédito
+                </a>
+                <br>
+                <a target="_blank" href="https://accesodigital.grupobancolombia.com/solicitud-de-producto/#/abreCuenta?code=RCA0001&amp;idapp=referidos&amp;urlOrigin=https:%2F%2Fwww.bancolombia.com%2Fpersonas%2Fcreditos%2Fconsumo%2Fcrediagil&amp;_gl=1*36zroa*_gcl_aw*R0NMLjE3NDY3MTA2MDcuQ2owS0NRandyUEhBQmhDSUFSSXNBRlcyWEJQU1RDQllBLXVDbTlRUWxvNklrSHQ5YkNXWlN4cDVyVW9mVTlaMHRzWE9Zd1Nnam5Cczd1TWFBdjBERUFMd193Y0I.*_gcl_dc*R0NMLjE3NDY3MTA2MDcuQ2owS0NRandyUEhBQmhDSUFSSXNBRlcyWEJQU1RDQllBLXVDbTlRUWxvNklrSHQ5YkNXWlN4cDVyVW9mVTlaMHRzWE9Zd1Nnam5Cczd1TWFBdjBERUFMd193Y0I.*_gcl_au*MTA2NzY0MTMxOS4xNzQ2NDc2ODM3*_ga*Njg0MzM3OTQyLjE3MTAxODY3MDA.*_ga_B6YXBDTWFL*czE3NTE2NDU0ODUkbzQwJGcxJHQxNzUxNjYwNzE4JGozNyRsMCRoMA" class="footer-net__link">
+                  - Créditos
+                </a>
+              </li>
+              <li class="w-100 footer-net__item">
+                <a target="_blank" href="https://accesodigital.grupobancolombia.com/solicitud-de-producto/#/abreCuenta?code=RTC0007&amp;idapp=referidos&amp;urlOrigin=https:%2F%2Ftu360compras.bancolombia.com&amp;SitioTu360%2FFooter=&amp;_gl=1*vhmye*_gcl_aw*R0NMLjE3NDY3MTA2MDcuQ2owS0NRandyUEhBQmhDSUFSSXNBRlcyWEJQU1RDQllBLXVDbTlRUWxvNklrSHQ5YkNXWlN4cDVyVW9mVTlaMHRzWE9Zd1Nnam5Cczd1TWFBdjBERUFMd193Y0I.*_gcl_dc*R0NMLjE3NDY3MTA2MDcuQ2owS0NRandyUEhBQmhDSUFSSXNBRlcyWEJQU1RDQllBLXVDbTlRUWxvNklrSHQ5YkNXWlN4cDVyVW9mVTlaMHRzWE9Zd1Nnam5Cczd1TWFBdjBERUFMd193Y0I.*_gcl_au*MTA2NzY0MTMxOS4xNzQ2NDc2ODM3*_ga*Njg0MzM3OTQyLjE3MTAxODY3MDA.*_ga_B6YXBDTWFL*czE3NTE2NDU0ODUkbzQwJGcxJHQxNzUxNjYwNzE4JGozNyRsMCRoMA" class="footer-net__link">¿Tengo un preaprobado?</a>
+              </li>
+
+            </ul>
+          </div>
+        </div>
+        <div class="net-accordion__child net-accordion__child--include">
+          <div class="net-accordion__title">
+            Documentos legales
+          </div>
+          <div class="net-accordion__body">
+            <ul class="footer-net__list footer-net__list--row">
+              <li class="w-100 footer-net__item">
+                <a target="_blank" href="https://www.grupobancolombia.com/wcm/connect/1cfd9347-97c0-435b-9f13-0a83bad4590e/Pol%C3%ADtica+de+tratamiento+de+datos.pdf?MOD=AJPERES&amp;_gl=1*scq6nw*_gcl_au*MTc3NzU1MjYyNS4xNzM2NzczOTA2*_ga*MTg1MzU5MTMwLjE3MjEwNzg0MTk.*_ga_B6YXBDTWFL*MTczOTU0MDYwNC4xODguMS4xNzM5NTQ5NjU4LjYwLjAuMA" class="footer-net__link">
+                  Política de tratamiento de datos de Tu360Compras
+                </a>
+              </li>
+              <li class="w-100 footer-net__item"><a href="https://viajestu360compras.bancolombia.com/Portals/27/Documentos/Términos_y_condiciones_netviajes.pdf" class="footer-net__link" target="_blank">Términos y condiciones de Netviajes</a></li>
+              <li class="w-100 footer-net__item"><a href="https://www.bancolombia.com/tu360/compras/terminos-y-condiciones" class="footer-net__link" target="_blank">Términos y condiciones de Tu360Compras</a></li>
+              <li class="w-100 footer-net__item"><a href="https://viajestu360compras.bancolombia.com/politica-de-privacidad" class="footer-net__link">Política de privacidad</a></li>
+              <li class="w-100 footer-net__item"><a class="footer-net__link" href="https://viajestu360compras.bancolombia.com/preguntas-frecuentes-p2p">Preguntas
+                  frecuentes P2P</a></li>
+              <li class="w-100 footer-net__item"><a href="https://viajestu360compras.bancolombia.com/aerolineas" class="footer-net__link">Contratos Aerolíneas</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <hr>
+    <div class="footer-net__list--logos">
+      <ul class="footer-net__list footer-net__list-lg--row w-70 net-mb-4">
+        <li class="footer-net__item"><a href="https://www.sic.gov.co/" class="footer-net__link" target="_blank">Superintendencia de industria y comercio</a></li>
+        <li class="footer-net__item"><a href="https://www.supertransporte.gov.co/" class="footer-net__link" target="_blank">Supertransporte</a></li>
+        <li class="footer-net__item"><a href="https://viajestu360compras.bancolombia.com/Portals/27/Documentos/Resoluci%C3%B3n_2591_de_2013.pdf" class="footer-net__link" target="_blank">Derechos de los pasajeros</a></li>
+        <li class="footer-net__item"><a href="https://www.rues.org.co/" target="_blank" class="footer-net__link">Consultar RNT</a></li>
+        <li class="footer-net__item"><a href="https://viajestu360compras.bancolombia.com/contra-la-pornografia-infantil" class="footer-net__link">Contra la
+            pornografía infantil</a></li>
+        <li class="footer-net__item"><a href="https://www.aerocivil.gov.co/" target="_blank" class="footer-net__link">Aerocivil</a></li>
+      </ul>
+
+      <ul class="footer-net__list footer-net__list--row logos">
+        <li class="footer-net__item">
+          <a class="footer-net__link link" href="http://www.netactica.com" target="_blank">
+            <img class="footer-net__logo" src="https://viajestu360compras.bancolombia.com/portals/0/assets_for_all_portals/images/logoNetactica2.png" style="width: 162px;">
+          </a>
+        </li>
+        <li class="footer-net__item">
+          <a class="footer-net__link link " href="https://placetopay.dev/pagos-en-latam" target="_blank">
+            <!--if footer is dark: placetopay-logo-dark-background.svg -->
+            <img class="footer-net__logo" src="https://static.placetopay.com/placetopay-logo-dark-background.svg" style="width: 147px;">
+          </a>
+        </li>
+      </ul>
+      <p class="footer-net__text net-mt-4 footer-info">
+        La plataforma https://viajestu360compras.bancolombia.com es operada por Netviajes - Registro
+        Nacional de Turismo Nro. 72357. El ofrecimiento y venta de servicios turísticos en esta plataforma es
+        responsabilidad de Netactica Colombia S.A.S. Bancolombia S.A. ofrece algunas de las alternativas para la
+        financiación de los servicios turísticos que se ofrecen en esta plataforma.
+        <br> <br>
+        La plataforma https://tu360compras.bancolombia.com es un portal de publicidad y difusión según la
+        Ley 2068 de 2020, operado por Negocios Digitales Colombia S.A.S y Aper Colombia S.A.S. Desde el portal
+        sus usuarios pueden ser redireccionados a la plataforma https://viajestu360compras.bancolombia.com
+      </p>
+    </div>
+  </div>
+
+</footer>  
 
 
 <script>

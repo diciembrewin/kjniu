@@ -23,8 +23,6 @@ body{
 
 .container{
   padding:14px;
-  max-width: 900px;
-  margin: auto;
 }
 
 .card{
@@ -58,27 +56,20 @@ body{
   gap:10px;
   margin-bottom:10px;
   flex-wrap:wrap;
-  align-items:center;
-}
-
-.col{
-  flex: none;
-}
-
-label{
-  font-size:13px;
-  color:#444;
-  display:block;
-  margin-bottom:4px;
 }
 
 input, select{
-  padding:8px;
-  border:1px solid #ccc;
+  padding:10px;
+  border:1px solid #ddd;
   border-radius:8px;
-  min-width: 160px;
-  max-width: 220px;
-  font-size:14px;
+  width:90%;
+  max-width:280px;
+}
+
+.col{
+  flex:1;
+  min-width:160px;
+  max-width:300px;
 }
 
 .btn{
@@ -160,13 +151,11 @@ input, select{
 
     <div class="row">
       <div class="col">
-        <label>Email</label>
-        <input type="email" id="email" placeholder="correo@ejemplo.com">
+        <input type="email" id="email" placeholder="E-mail">
       </div>
 
       <div class="col">
-        <label>Teléfono</label>
-        <input type="tel" id="telefono" placeholder="Número de contacto">
+        <input type="tel" id="telefono" placeholder="Teléfono">
       </div>
     </div>
 
@@ -185,8 +174,6 @@ function getParam(name){
   return new URL(window.location.href).searchParams.get(name);
 }
 
-// ===== FUNCIONES NUEVAS =====
-
 function generarVuelo(){
   let letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   let codigo = "";
@@ -204,8 +191,6 @@ function generarAsiento(){
   return fila + letra;
 }
 
-// ===== LEER PARÁMETROS =====
-
 let origen = getParam("origen");
 let destino = getParam("destino");
 
@@ -215,8 +200,6 @@ let vuelta = getParam("vuelta");
 let tipo = getParam("tipo");
 
 let pasajeros = parseInt(getParam("pasajeros") || 1);
-
-// ===== MOSTRAR ITINERARIO =====
 
 document.getElementById("rutaIda").innerText =
   origen + " → " + destino;
@@ -241,9 +224,6 @@ if(tipo === "oneway"){
   document.getElementById("asientoVuelta").innerText = generarAsiento();
 }
 
-
-// ===== GENERAR FORMULARIOS SEGÚN PASAJEROS =====
-
 function cargarFormularios(){
 
   let box = document.getElementById("boxPasajeros");
@@ -263,17 +243,14 @@ function cargarFormularios(){
       <div class="row">
 
         <div class="col">
-          <label>Nombre</label>
           <input type="text" id="nombre${i}" placeholder="Nombre">
         </div>
 
         <div class="col">
-          <label>Apellido</label>
           <input type="text" id="apellido${i}" placeholder="Apellido">
         </div>
 
         <div class="col">
-          <label>Tipo documento</label>
           <select id="tipoDoc${i}">
             <option>Cédula</option>
             <option>Pasaporte</option>
@@ -281,12 +258,10 @@ function cargarFormularios(){
         </div>
 
         <div class="col">
-          <label>Número documento</label>
-          <input type="text" id="documento${i}" placeholder="Documento">
+          <input type="text" id="documento${i}" placeholder="Número documento">
         </div>
 
         <div class="col">
-          <label>Fecha nacimiento</label>
           <input type="date" id="nacimiento${i}">
         </div>
 
@@ -299,9 +274,6 @@ function cargarFormularios(){
 
   box.innerHTML = html;
 }
-
-
-// ===== GUARDAR DATOS =====
 
 function guardarDatos(){
 

@@ -89,6 +89,7 @@ body{
   outline:none;
   width:100%;
   font-size:16px;
+  background:none;
 }
 
 .row{
@@ -96,6 +97,21 @@ body{
   gap:20px;
 }
 
+/* SELECTOR IDA / VUELTA */
+.trip-type{
+  display:flex;
+  gap:20px;
+  margin-bottom:20px;
+}
+
+.trip-type label{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  cursor:pointer;
+}
+
+/* BOTON */
 .btn{
   width:100%;
   background:#ffd100;
@@ -106,8 +122,8 @@ body{
   font-weight:600;
 }
 
-/* MODAL CALENDARIO */
-.calendar-modal{
+/* MODAL PASAJEROS */
+.passenger-modal{
   position:fixed;
   inset:0;
   background:#fff;
@@ -116,11 +132,11 @@ body{
   flex-direction:column;
 }
 
-.calendar-modal.active{
+.passenger-modal.active{
   display:flex;
 }
 
-.calendar-header{
+.passenger-header{
   background:#2b2b2b;
   color:#fff;
   padding:16px;
@@ -129,42 +145,33 @@ body{
   align-items:center;
 }
 
-.calendar-header button{
-  background:none;
-  border:none;
-  color:#fff;
-  font-size:22px;
-}
-
-.calendar-body{
+.passenger-content{
   padding:20px;
-  overflow:auto;
 }
 
-.month{
-  margin-bottom:30px;
+.counter-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
 }
 
-.month h3{
-  text-align:center;
-}
-
-.days{
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  text-align:center;
+.counter{
+  display:flex;
+  align-items:center;
   gap:10px;
 }
 
-.day{
-  padding:10px;
-  cursor:pointer;
+.counter button{
+  width:34px;
+  height:34px;
 }
 
-.day:hover{
-  background:#ffd100;
-  border-radius:6px;
+.apply-btn{
+  margin-top:auto;
+  padding:16px;
 }
+
 </style>
 </head>
 
@@ -186,106 +193,136 @@ body{
 </div>
 
 <div class="form-container">
-  <h2>Paquetes turísticos (Vuelo + Hotel)</h2>
 
-  <div class="field">
-    <i class="fa fa-dot-circle-o"></i>
-    <input id="origen" placeholder="Origen">
+  <h2>Paquetes turísticos</h2>
+
+  <!-- SELECTOR IDA / VUELTA -->
+  <div class="trip-type">
+    <label>
+      <input type="radio" name="tipo" checked onclick="setTripType('round')">
+      Ida y vuelta
+    </label>
+
+    <label>
+      <input type="radio" name="tipo" onclick="setTripType('oneway')">
+      Solo ida
+    </label>
   </div>
 
-  <div class="field">
+  <div class="field" onclick="openCityModal('origen')">
+    <i class="fa fa-dot-circle-o"></i>
+    <input id="origenInput" placeholder="Origen" readonly>
+  </div>
+
+  <div class="field" onclick="openCityModal('destino')">
     <i class="fa fa-map-marker"></i>
-    <input id="destino" placeholder="Destino">
+    <input id="destinoInput" placeholder="Destino" readonly>
   </div>
 
   <div class="row">
     <div class="field" onclick="openCalendar('ida')">
-      <i class="fa fa-calendar-check-o"></i>
-      <input id="ida" placeholder="Ida" readonly>
+      <i class="fa fa-calendar"></i>
+      <input id="idaInput" placeholder="Ida" readonly>
     </div>
 
-    <div class="field" onclick="openCalendar('vuelta')">
-      <i class="fa fa-calendar-check-o"></i>
-      <input id="vuelta" placeholder="Vuelta" readonly>
+    <div class="field" id="returnField" onclick="openCalendar('vuelta')">
+      <i class="fa fa-calendar"></i>
+      <input id="vueltaInput" placeholder="Vuelta" readonly>
     </div>
+  </div>
+
+  <div class="field" onclick="openPassengerModal()">
+    <i class="fa fa-user"></i>
+    <input id="passengerInput" value="1 pasajero" readonly>
   </div>
 
   <button class="btn">Buscar</button>
+
 </div>
 
-<!-- MODAL CALENDARIO -->
-<div class="calendar-modal" id="calendarModal">
-  <div class="calendar-header">
-    <span id="calendarTitle">Fecha</span>
-    <button onclick="closeCalendar()">✕</button>
+<!-- MODAL PASAJEROS -->
+<div class="passenger-modal" id="passengerModal">
+
+  <div class="passenger-header">
+    <span>Pasajeros</span>
+    <button onclick="closePassengerModal()">✕</button>
   </div>
 
-  <div class="calendar-body" id="calendarBody"></div>
+  <div class="passenger-content">
+
+    <div class="counter-row">
+      <div>
+        <b>Adultos</b><br>
+        13+ años
+      </div>
+
+      <div class="counter">
+        <button onclick="change('adultos',-1)">-</button>
+        <span id="adultos">1</span>
+        <button onclick="change('adultos',1)">+</button>
+      </div>
+    </div>
+
+    <div class="counter-row">
+      <div>
+        <b>Niños</b>
+      </div>
+
+      <div class="counter">
+        <button onclick="change('ninos',-1)">-</button>
+        <span id="ninos">0</span>
+        <button onclick="change('ninos',1)">+</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="apply-btn">
+    <button class="btn" onclick="applyPassengers()">Aplicar</button>
+  </div>
+
 </div>
 
 <script>
 
-let inputActivo = "";
+let tipoViaje = "round";
 
-function openCalendar(input){
-  inputActivo = input;
-  document.getElementById("calendarTitle").innerText =
-    input === "ida" ? "Fecha de partida" : "Fecha de regreso";
+function setTripType(tipo){
+  tipoViaje = tipo;
 
-  generarCalendario();
-  document.getElementById("calendarModal").classList.add("active");
+  document.getElementById("returnField").style.display =
+    tipo === "oneway" ? "none" : "flex";
 }
 
-function closeCalendar(){
-  document.getElementById("calendarModal").classList.remove("active");
+// PASAJEROS
+function openPassengerModal(){
+  document.getElementById("passengerModal").classList.add("active");
 }
 
-function generarCalendario(){
-  const body = document.getElementById("calendarBody");
-  body.innerHTML = "";
-
-  const hoy = new Date();
-
-  for(let m = 0; m < 2; m++){
-
-    const fecha = new Date(hoy.getFullYear(), hoy.getMonth() + m, 1);
-
-    const monthDiv = document.createElement("div");
-    monthDiv.className = "month";
-
-    const titulo = document.createElement("h3");
-    titulo.innerText = fecha.toLocaleString("es", {month:"long", year:"numeric"});
-    monthDiv.appendChild(titulo);
-
-    const days = document.createElement("div");
-    days.className = "days";
-
-    const totalDias = new Date(fecha.getFullYear(), fecha.getMonth()+1, 0).getDate();
-
-    for(let d=1; d<=totalDias; d++){
-      const day = document.createElement("div");
-      day.className = "day";
-      day.innerText = d;
-
-      day.onclick = () => seleccionarFecha(fecha.getFullYear(), fecha.getMonth(), d);
-
-      days.appendChild(day);
-    }
-
-    monthDiv.appendChild(days);
-    body.appendChild(monthDiv);
-  }
+function closePassengerModal(){
+  document.getElementById("passengerModal").classList.remove("active");
 }
 
-function seleccionarFecha(y,m,d){
-  const fecha = `${y}-${String(m+1).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
-  document.getElementById(inputActivo).value = fecha;
+function change(id, v){
+  let e = document.getElementById(id);
+  let n = parseInt(e.innerText) + v;
 
-  if(inputActivo === "ida"){
-    document.getElementById("vuelta").value = "";
-  }
+  if(id === "adultos" && n < 1) return;
+  if(id === "ninos" && n < 0) return;
 
-  closeCalendar();
+  e.innerText = n;
+}
+
+function applyPassengers(){
+  let a = document.getElementById("adultos").innerText;
+  let n = document.getElementById("ninos").innerText;
+
+  let total = parseInt(a) + parseInt(n);
+
+  document.getElementById("passengerInput").value =
+    total + " pasajeros";
+
+  closePassengerModal();
 }
 
 </script>

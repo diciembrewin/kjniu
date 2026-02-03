@@ -3,238 +3,310 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Resultados – Tu360 Compras</title>
+<title>Tu360 – Vuelos</title>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> tiene 639 lineas de codigo qeu son el base no quiero que borres nada pero integrale lo del boton buscar 
 
 <style>
+*{
+  box-sizing:border-box;
+  font-family:'Roboto', Arial, sans-serif;
+}
 
 body{
   margin:0;
-  font-family:Arial;
-  background:#f2f2f2;
-  font-size:14px;   /* 👈 tamaño base igual al otro */
+  background:#f4f4f4;
 }
 
-.top-header{
-  background:#fff;
-  padding:12px;
+.header{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  border-bottom:1px solid #ddd;
-  font-size:14px;
+  padding:14px 18px;
+  background:#fff;
+  font-weight:600;
 }
 
-.logo{
-  font-size:18px;   /* antes 22, lo bajo para coherencia */
-  font-weight:bold;
+.header img{
+  height:28px;
 }
 
-.actions{
+.hero{
+  position:relative;
+  background:url("https://viajestu360compras.bancolombia.com/portals/27/Images/Genericas/Vuelos-Mobile.webp") no-repeat center/cover;
+  height:320px;
+}
+
+.tabs{
   display:flex;
-  gap:10px;
-  padding:12px;
+  justify-content:space-around;
+  position:absolute;
+  bottom:-28px;
+  left:0;
+  right:0;
+}
+
+.tab{
+  width:64px;
+  height:64px;
   background:#fff;
-}
-
-.btn-dark{
-  background:#2b2b2b;
-  color:#fff;
-  border:none;
-  padding:10px 14px;
-  border-radius:30px;
-  cursor:pointer;
-  font-size:14px;
-}
-
-.title{
-  padding:10px 14px;
-  font-size:16px;   /* un poco más pequeño y consistente */
-  font-weight:bold;
-}
-
-.summary{
-  background:#3b3b3b;
-  color:#fff;
-  margin:10px 14px;
-  padding:12px;
-  border-radius:12px;
-  font-size:14px;
-}
-
-.container{
-  padding:10px 14px;
-}
-
-.card{
-  background:#fff;
-  border-radius:12px;
-  margin-bottom:12px;
-  padding:12px;
-  box-shadow:0 2px 8px rgba(0,0,0,.1);
-  font-size:14px;
-}
-
-.option{
+  border-radius:50%;
   display:flex;
   align-items:center;
-  gap:10px;
-  padding:10px 0;
-  border-bottom:1px solid #eee;
-  font-size:14px;
+  justify-content:center;
+  box-shadow:0 4px 10px rgba(0,0,0,.15);
 }
 
-.time{
-  font-size:16px;   /* antes 18 */
-  font-weight:bold;
+.tab.active{
+  background:#ffd100;
 }
 
-.airport{
-  font-weight:bold;
-  font-size:14px;
+.form-container{
+  background:#fff;
+  margin:4px auto 20px;
+  padding:28px 20px 32px;
+  max-width:360px;
+  width:100%;
+  border-radius:30px;
+  box-shadow:0 4px 14px rgba(0,0,0,.08);
 }
 
-.price{
-  text-align:right;
-  margin-top:10px;
-  font-size:16px;   /* antes 18 */
+.field{
+  display:flex;
+  align-items:center;
+  margin-bottom:18px;
+  border-bottom:1px solid #ccc;
+  padding-bottom:8px;
+  cursor:pointer;
 }
 
-.btn-select{
+.field i{
+  margin-right:10px;
+}
+
+.field input{
+  border:none;
+  outline:none;
+  width:100%;
+  font-size:16px;
+  background:none;
+}
+
+.row{
+  display:flex;
+  gap:20px;
+}
+
+/* SELECTOR IDA / VUELTA */
+.trip-type{
+  display:flex;
+  gap:20px;
+  margin-bottom:20px;
+}
+
+.trip-type label{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  cursor:pointer;
+}
+
+/* BOTON */
+.btn{
   width:100%;
   background:#ffd100;
   border:none;
   border-radius:30px;
+  padding:14px;
+  font-size:18px;
+  font-weight:600;
+}
+
+/* MODAL PASAJEROS */
+.passenger-modal{
+  position:fixed;
+  inset:0;
+  background:#fff;
+  z-index:9999;
+  display:none;
+  flex-direction:column;
+}
+
+.passenger-modal.active{
+  display:flex;
+}
+
+.passenger-header{
+  background:#2b2b2b;
+  color:#fff;
+  padding:16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.passenger-content{
+  padding:20px;
+}
+
+.counter-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.counter{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.counter button{
+  width:34px;
+  height:34px;
+}
+
+.apply-btn{
+  margin-top:auto;
+  padding:16px;
+}
+
+  /* -------- MODAL CIUDADES -------- */
+.city-modal{
+  position:fixed;
+  inset:0;
+  background:#f4f4f4;
+  z-index:9998;
+  display:none;
+  flex-direction:column;
+}
+
+.city-modal.active{
+  display:flex;
+}
+
+.city-header{
+  background:#2b2b2b;
+  color:#fff;
+  padding:16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.city-search{
+  background:#2b2b2b;
+  padding:12px;
+}
+
+.city-search input{
+  width:100%;
   padding:10px;
-  font-size:14px;
-  margin-top:10px;
+  border-radius:8px;
+}
+
+.city-list{
+  background:#fff;
+  margin:12px;
+  border-radius:12px;
+  overflow:auto;
+}
+
+.city-item{
+  padding:14px;
+  border-bottom:1px solid #eee;
   cursor:pointer;
 }
 
-.promo-badge{
+/* -------- MODAL CALENDARIO -------- */
+.calendar-modal{
+  position:fixed;
+  inset:0;
+  background:#f4f4f4;
+  z-index:9997;
+  display:none;
+  flex-direction:column;
+}
+
+.calendar-modal.active{
+  display:flex;
+}
+
+.calendar-header{
   background:#2b2b2b;
   color:#fff;
-  padding:4px 8px;
-  border-radius:8px;
-  font-size:12px;
-  margin-right:6px;
-}
-
-.price-row{
+  padding:16px;
   display:flex;
+  justify-content:space-between;
   align-items:center;
-  justify-content:flex-end;
-  gap:8px;
-  margin-top:10px;
-  font-size:14px;
 }
 
-.price-row img{
-  width:20px;
-  height:20px;
+.calendar-container{
+  background:#fff;
+  padding:20px;
+  height:calc(100vh - 70px);
+  overflow-y:scroll;
 }
 
-.airline img{
-  width:22px;   /* un poco más pequeño */
-  height:auto;
+.calendar-month{
+  margin-bottom:30px;
+}
+
+.calendar-title{
+  font-weight:bold;
+  margin-bottom:10px;
+  text-transform:capitalize;
+}
+
+.calendar-grid{
+  display:grid;
+  grid-template-columns:repeat(7, 1fr);
+  gap:6px;
+  text-align:center;
+}
+
+.day{
+  padding:10px;
+  cursor:pointer;
+  border-radius:6px;
+}
+
+.day:hover{
+  background:#ffd100;
+}
+
+.day.disabled{
+  color:#ccc;
+  pointer-events:none;
+}
+/* ===== RESULTADOS ===== */
+.flight-card{
+  background:#fff;
+  border-radius:16px;
+  padding:16px;
+  box-shadow:0 4px 12px rgba(0,0,0,.1);
+  margin-top:20px;
 }
 
 .flight-header{
   display:flex;
-  border-bottom:1px solid #ddd;
+  justify-content:space-between;
+  font-weight:bold;
   margin-bottom:10px;
-  font-size:14px;
 }
 
-.flight-header-left{
-  background:#f0f0f0;
-  padding:10px;
-  flex:1;
-  border-top-left-radius:10px;
-  font-weight:bold;
+.flight-body{
   display:flex;
+  justify-content:space-between;
   align-items:center;
-  gap:6px;
-  font-size:14px;
+  margin:10px 0;
 }
 
-.flight-header-right{
-  padding:10px;
-  text-align:right;
-  font-weight:bold;
-  flex:1;
-  font-size:14px;
+.price-box{
+  text-align:center;
+  margin-top:20px;
 }
-
-.ida-bar{
-  border-left:5px solid #00b5e2;
-}
-
-.vuelta-bar{
-  border-left:5px solid #ff6b00;
-}
-
-.option.selected{
-  background:#fff9d9;
-  border-left:5px solid #ffd100;
-}
-
-.lugares{
-  color:#c00;
-  font-style:italic;
-  font-size:12px;
-  text-align:right;
-}
-
-.maletas{
-  display:flex;
-  gap:6px;
-  justify-content:flex-end;
-  opacity:0.6;
-  font-size:13px;
-}
-
-.details{
-  font-size:13px;
-  color:#666;
-  margin-top:4px;
-  display:none;
-}
-
-.toggle{
-  cursor:pointer;
-  font-size:13px;
-}
-
-/* Ajustes responsivos */
-@media (max-width: 600px){
-
-  body{
-    font-size:13px;
-  }
-
-  .logo{
-    font-size:16px;
-  }
-
-  .title{
-    font-size:15px;
-  }
-
-  .time{
-    font-size:15px;
-  }
-
-  .price{
-    font-size:15px;
-  }
-
-  .btn-select{
-    font-size:13px;
-  }
-}
-
 
 
 </style>
@@ -242,325 +314,434 @@ body{
 
 <body>
 
-<div class="top-header">
-  <div class="logo">Tu360 Compras</div>
+<div class="header">
+  <img src="https://viajestu360compras.bancolombia.com/Portals/27/logo-tu360compras.png">
+  <span>Menu</span>
 </div>
 
-<div class="actions">
-  <button class="btn-dark" onclick="window.history.back()">Nueva búsqueda</button>
+<div class="hero">
+  <div class="tabs">
+    <div class="tab"><i class="fa fa-suitcase"></i></div>
+    <div class="tab"><i class="fa fa-bed"></i></div>
+    <div class="tab active"><i class="fa fa-plane"></i></div>
+    <div class="tab"><i class="fa fa-ticket"></i></div>
+    <div class="tab"><i class="fa fa-car"></i></div>
+  </div>
 </div>
 
-<div class="title" id="titulo"></div>
+<div class="form-container">
 
-<div class="summary" id="resumen"></div>
+  <h2>Paquetes turísticos</h2>
 
-<div class="container" id="resultBox"></div>
+  <!-- SELECTOR IDA / VUELTA -->
+  <div class="trip-type">
+    <label>
+      <input type="radio" name="tipo" checked onclick="setTripType('round')">
+      Ida y vuelta
+    </label>
+
+    <label>
+      <input type="radio" name="tipo" onclick="setTripType('oneway')">
+      Solo ida
+    </label>
+  </div>
+
+  <div class="field" onclick="openCityModal('origen')">
+    <i class="fa fa-dot-circle-o"></i>
+    <input id="origenInput" placeholder="Origen" readonly>
+  </div>
+
+  <div class="field" onclick="openCityModal('destino')">
+    <i class="fa fa-map-marker"></i>
+    <input id="destinoInput" placeholder="Destino" readonly>
+  </div>
+
+  <div class="row">
+    <div class="field" onclick="openCalendar('ida')">
+      <i class="fa fa-calendar"></i>
+      <input id="idaInput" placeholder="Ida" readonly>
+    </div>
+
+    <div class="field" id="returnField" onclick="openCalendar('vuelta')">
+      <i class="fa fa-calendar"></i>
+      <input id="vueltaInput" placeholder="Vuelta" readonly>
+    </div>
+  </div>
+
+  <div class="field" onclick="openPassengerModal()">
+    <i class="fa fa-user"></i>
+    <input id="passengerInput" value="1 pasajero" readonly>
+  </div>
+
+ <button class="btn" onclick="irAResultados()">Buscar</button>
+
+
+
+</div>
+<!-- ===== RESULTADOS DE BÚSQUEDA ===== -->
+<div id="resultsView" style="display:none; padding:20px;">
+
+  <div class="flight-card">
+
+    <div class="flight-header">
+      <div><i class="fa fa-plane"></i> IDA</div>
+      <div id="resIdaFecha"></div>
+    </div>
+
+    <div class="flight-body">
+      <div>
+        <b id="resOrigen"></b><br>
+        <span>21:37</span>
+      </div>
+
+      <div>Directo</div>
+
+      <div>
+        <b id="resDestino"></b><br>
+        <span>22:30</span>
+      </div>
+    </div>
+
+    <hr>
+
+    <div id="vueltaBloque">
+
+      <div class="flight-header">
+        <div><i class="fa fa-plane"></i> VUELTA</div>
+        <div id="resVueltaFecha"></div>
+      </div>
+
+      <div class="flight-body">
+        <div>
+          <b id="resDestino2"></b><br>
+          <span>06:35</span>
+        </div>
+
+        <div>Directo</div>
+
+        <div>
+          <b id="resOrigen2"></b><br>
+          <span>07:37</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="price-box">
+      <h3 id="precioFinal"></h3>
+      <button class="btn">Seleccionar Vuelos</button>
+    </div>
+
+  </div>
+
+</div>
+
+  <!-- ===== MODAL CIUDADES ===== -->
+<div class="city-modal" id="cityModal">
+
+  <div class="city-header">
+    <span id="cityTitle"></span>
+    <button onclick="closeCityModal()">✕</button>
+  </div>
+
+  <div class="city-search">
+    <input placeholder="Buscar ciudad" onkeyup="filtrarCiudades(this.value)">
+  </div>
+
+  <div class="city-list" id="cityList"></div>
+
+</div>
+
+<!-- ===== MODAL CALENDARIO ===== -->
+<div class="calendar-modal" id="calendarModal">
+
+  <div class="calendar-header">
+    <span id="calendarTitle"></span>
+    <button onclick="closeCalendar()">✕</button>
+  </div>
+
+  <div class="calendar-container" id="calendarBox"></div>
+
+</div>
+
+
+<!-- MODAL PASAJEROS -->
+<div class="passenger-modal" id="passengerModal">
+
+  <div class="passenger-header">
+    <span>Pasajeros</span>
+    <button onclick="closePassengerModal()">✕</button>
+  </div>
+
+  <div class="passenger-content">
+
+    <div class="counter-row">
+      <div>
+        <b>Adultos</b><br>
+        13+ años
+      </div>
+
+      <div class="counter">
+        <button onclick="change('adultos',-1)">-</button>
+        <span id="adultos">1</span>
+        <button onclick="change('adultos',1)">+</button>
+      </div>
+    </div>
+
+    <div class="counter-row">
+      <div>
+        <b>Niños</b>
+      </div>
+
+      <div class="counter">
+        <button onclick="change('ninos',-1)">-</button>
+        <span id="ninos">0</span>
+        <button onclick="change('ninos',1)">+</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="apply-btn">
+    <button class="btn" onclick="applyPassengers()">Aplicar</button>
+  </div>
+
+</div>
 
 <script>
 
-function getParam(name){
-  let url = new URL(window.location.href);
-  return url.searchParams.get(name);
+let tipoViaje = "round";
+
+function setTripType(tipo){
+  tipoViaje = tipo;
+
+  document.getElementById("returnField").style.display =
+    tipo === "oneway" ? "none" : "flex";
 }
 
-let origen = getParam("origen");
-let destino = getParam("destino");
-let ida = getParam("ida");
-let vuelta = getParam("vuelta");
-let tipo = getParam("tipo");
-
-let pasajerosTexto = getParam("pasajeros") || "1";
-let pasajeros = parseInt(pasajerosTexto.replace(/\D/g, ""));
-
-if(isNaN(pasajeros) || pasajeros < 1){
-  pasajeros = 1;
+// PASAJEROS
+function openPassengerModal(){
+  document.getElementById("passengerModal").classList.add("active");
 }
 
-document.getElementById("titulo").innerText =
-  "Paquete a " + destino;
+function closePassengerModal(){
+  document.getElementById("passengerModal").classList.remove("active");
+}
 
-let textoResumen = tipo === "oneway"
-  ? "Vuelo solo ida para " + pasajeros + " pasajero(s)"
-  : "Vuelos de ida y vuelta para " + pasajeros + " pasajero(s)";
+function change(id, v){
+  let e = document.getElementById(id);
+  let n = parseInt(e.innerText) + v;
 
-document.getElementById("resumen").innerText = textoResumen;
+  if(id === "adultos" && n < 1) return;
+  if(id === "ninos" && n < 0) return;
 
-const logosAerolineas = {
-  "LATAM Airlines": "https://reservas.bancolombia.com/Images/Airlines/air_LAlogo.gif",
-  "Avianca": "https://reservas.bancolombia.com/Images/Airlines/air_AVlogo.gif",
-  "JetSMART": "https://reservas.bancolombia.com/Images/Airlines/air_JAlogo.gif",
-  "Wingo": "https://reservas.bancolombia.com/Images/Airlines/air_P5logo.gif"
-};
+  e.innerText = n;
+}
 
-// ===== MUCHAS HORAS POR AEROLÍNEA =====
-const opciones = [
+function applyPassengers(){
+  let a = document.getElementById("adultos").innerText;
+  let n = document.getElementById("ninos").innerText;
 
-  // ===== AVIANCAS =====
-  { aerolinea: "Avianca", idaHora: "06:00", idaLlegada: "07:10", vueltaHora: "09:30", vueltaLlegada: "10:40" },
-  { aerolinea: "Avianca", idaHora: "08:45", idaLlegada: "09:55", vueltaHora: "12:15", vueltaLlegada: "13:25" },
-  { aerolinea: "Avianca", idaHora: "14:20", idaLlegada: "15:30", vueltaHora: "17:40", vueltaLlegada: "18:50" },
-  { aerolinea: "Avianca", idaHora: "19:10", idaLlegada: "20:20", vueltaHora: "21:45", vueltaLlegada: "22:55" },
+  let total = parseInt(a) + parseInt(n);
 
-  // ===== LATAM =====
-  { aerolinea: "LATAM Airlines", idaHora: "05:50", idaLlegada: "07:00", vueltaHora: "08:20", vueltaLlegada: "09:30" },
-  { aerolinea: "LATAM Airlines", idaHora: "11:15", idaLlegada: "12:25", vueltaHora: "15:10", vueltaLlegada: "16:20" },
-  { aerolinea: "LATAM Airlines", idaHora: "16:30", idaLlegada: "17:40", vueltaHora: "19:00", vueltaLlegada: "20:10" },
-  { aerolinea: "LATAM Airlines", idaHora: "20:50", idaLlegada: "22:00", vueltaHora: "22:40", vueltaLlegada: "23:50" },
+  document.getElementById("passengerInput").value =
+    total + " pasajeros";
 
-  // ===== JETSMART =====
-  { aerolinea: "JetSMART", idaHora: "06:15", idaLlegada: "07:25", vueltaHora: "10:10", vueltaLlegada: "11:20" },
-  { aerolinea: "JetSMART", idaHora: "12:40", idaLlegada: "13:50", vueltaHora: "15:20", vueltaLlegada: "16:30" },
-  { aerolinea: "JetSMART", idaHora: "15:50", idaLlegada: "17:00", vueltaHora: "18:40", vueltaLlegada: "19:50" },
-  { aerolinea: "JetSMART", idaHora: "22:10", idaLlegada: "23:20", vueltaHora: "23:40", vueltaLlegada: "00:50" },
+  closePassengerModal();
+}
 
-  // ===== WINGO =====
-  { aerolinea: "Wingo", idaHora: "07:10", idaLlegada: "08:20", vueltaHora: "09:40", vueltaLlegada: "10:50" },
-  { aerolinea: "Wingo", idaHora: "13:30", idaLlegada: "14:40", vueltaHora: "16:10", vueltaLlegada: "17:20" },
-  { aerolinea: "Wingo", idaHora: "18:45", idaLlegada: "19:55", vueltaHora: "20:30", vueltaLlegada: "21:40" },
-  { aerolinea: "Wingo", idaHora: "23:00", idaLlegada: "00:10", vueltaHora: "05:30", vueltaLlegada: "06:40" }
-
+  // ===== AEROPUERTOS DE COLOMBIA =====
+const aeropuertos = [
+"Bogotá - El Dorado (BOG)",
+"Medellín - José María Córdova (MDE)",
+"Cali - Alfonso Bonilla Aragón (CLO)",
+"Cartagena - Rafael Núñez (CTG)",
+"Barranquilla - Ernesto Cortissoz (BAQ)",
+"Bucaramanga - Palonegro (BGA)",
+"Pereira - Matecaña (PEI)",
+"Santa Marta - Simón Bolívar (SMR)",
+"Cúcuta - Camilo Daza (CUC)",
+"Montería - Los Garzones (MTR)",
+"Valledupar - Alfonso López (VUP)",
+"Armenia - El Edén (AXM)",
+"Manizales - La Nubia (MZL)",
+"Neiva - Benito Salas (NVA)",
+"Villavicencio - Vanguardia (VVC)",
+"San Andrés - Gustavo Rojas Pinilla (ADZ)"
 ];
 
-function calcularPrecio(hora){
-  let h = parseInt(hora.split(":")[0]);
+let campoActivo = "";
 
-  if (h >= 5 && h < 12) return 110999;
-  if (h >= 12 && h < 18) return 168500;
+function openCityModal(tipo){
+  campoActivo = tipo;
 
-  return Math.floor(Math.random() * (386458 - 240454)) + 240454;
+  document.getElementById("cityTitle").innerText =
+    tipo === "origen" ? "Ciudad de Origen" : "Ciudad de Destino";
+
+  renderCities(aeropuertos);
+
+  document.getElementById("cityModal").classList.add("active");
 }
 
-let precioIda = 0;
-let precioVuelta = 0;
-
-function actualizarPrecio(){
-
-  let totalSinDescuento = (precioIda + precioVuelta) * pasajeros;
-
-  let descuento = totalSinDescuento * 0.05;
-
-  let totalConDescuento = totalSinDescuento - descuento;
-
-  document.getElementById("precioFinal").innerHTML = `
-
-    <div class="price-row">
-      <img src="https://tu360compras.bancolombia.com/themes/child/img/favicon-bancolombia.svg">
-      <span class="promo-badge">5% Off</span>
-      <b>COP $ ${totalConDescuento.toLocaleString()}</b>
-    </div>
-  `;
+function closeCityModal(){
+  document.getElementById("cityModal").classList.remove("active");
 }
 
-function seleccionarIda(valor){
-  precioIda = parseInt(valor);
-  actualizarPrecio();
-}
+function renderCities(lista){
+  const box = document.getElementById("cityList");
+  box.innerHTML = "";
 
-function seleccionarVuelta(valor){
-  precioVuelta = parseInt(valor);
-  actualizarPrecio();
-}
-
-function cargarResultados(){
-
-  let box = document.getElementById("resultBox");
-
-  let html = `
-  <div class="card">
-
-    <div class="flight-header">
-      <div class="flight-header-left ida-bar">
-        <i class="fa fa-plane"></i> IDA
-      </div>
-
-      <div class="flight-header-right">
-        ${ida}
-      </div>
-    </div>
-  `;
-
-  opciones.forEach((v,i) => {
-
-    let precio = calcularPrecio(v.idaHora);
-    let lugares = lugaresAleatorios();
-    let detalleId = "detIda" + i;
-
-    html += `
-      <div class="option option-ida">
-
-        <input type="radio" name="ida"
-          onclick="seleccionarIda(${precio}); marcarSeleccion('option-ida', this)">
-
-        <div class="airline-row">
-          <img src="${logosAerolineas[v.aerolinea]}" alt="">
-          <div>
-            <b>${v.aerolinea}</b><br>
-            ${origen} <b>${v.idaHora}</b> → ${destino} <b>${v.idaLlegada}</b>
-          </div>
-        </div>
-
-        <div style="margin-left:auto; text-align:right">
-          COP $ ${precio.toLocaleString()}
-
-          <div class="maletas">
-            <i class="fa fa-suitcase"></i>
-            <i class="fa fa-briefcase"></i>
-          </div>
-
-          <div class="lugares">
-            quedan ${lugares} lugares
-          </div>
-
-          <div class="toggle" onclick="toggleDetalles('${detalleId}')">
-            Ver detalles ▼
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="details" id="${detalleId}">
-        Duración estimada: 1h 10m – Vuelo directo
+  lista.forEach(c => {
+    box.innerHTML += `
+      <div class="city-item" onclick="selectCity('${c}')">
+        ${c}
       </div>
     `;
   });
+}
 
-  html += `</div>`;
+function filtrarCiudades(t){
+  const f = aeropuertos.filter(a =>
+    a.toLowerCase().includes(t.toLowerCase())
+  );
+  renderCities(f);
+}
 
-  if(tipo !== "oneway"){
+function selectCity(c){
+  document.getElementById(
+    campoActivo === "origen" ? "origenInput" : "destinoInput"
+  ).value = c;
 
-    html += `
-    <div class="card">
+  closeCityModal();
+}
 
-      <div class="flight-header">
-        <div class="flight-header-left vuelta-bar">
-          <i class="fa fa-plane fa-rotate-180"></i> VUELTA
+// ===== CALENDARIO REAL =====
+
+let tipoFecha = "";
+let fechaIdaSeleccionada = null;
+
+function openCalendar(tipo){
+  tipoFecha = tipo;
+
+  document.getElementById("calendarTitle").innerText =
+    tipo === "ida" ? "Fecha de ida" : "Fecha de vuelta";
+
+  generarCalendario();
+
+  document.getElementById("calendarModal").classList.add("active");
+}
+
+function closeCalendar(){
+  document.getElementById("calendarModal").classList.remove("active");
+}
+
+function generarCalendario(){
+
+  let box = document.getElementById("calendarBox");
+  box.innerHTML = "";
+
+  let hoy = new Date();
+  hoy.setHours(0,0,0,0);
+
+  for(let m = 0; m < 12; m++){
+
+    let mes = new Date(hoy.getFullYear(), hoy.getMonth() + m, 1);
+
+    let diasEnMes = new Date(
+      mes.getFullYear(),
+      mes.getMonth() + 1,
+      0
+    ).getDate();
+
+    let nombreMes = mes.toLocaleString("es", { month: "long" });
+    let anio = mes.getFullYear();
+
+    box.innerHTML += `
+      <div class="calendar-month">
+        <div class="calendar-title">
+          ${nombreMes} ${anio}
         </div>
 
-        <div class="flight-header-right">
-          ${vuelta}
-        </div>
+        <div class="calendar-grid" id="grid-${m}"></div>
       </div>
     `;
 
-    opciones.forEach((v,i) => {
+    let grid = document.getElementById(`grid-${m}`);
 
-      let precio = calcularPrecio(v.vueltaHora);
-      let lugares = lugaresAleatorios();
-      let detalleId = "detVuelta" + i;
+    for(let d = 1; d <= diasEnMes; d++){
 
-      html += `
-        <div class="option option-vuelta">
+      let fechaDia = new Date(anio, mes.getMonth(), d);
+      fechaDia.setHours(0,0,0,0);
 
-          <input type="radio" name="vuelta"
-            onclick="seleccionarVuelta(${precio}); marcarSeleccion('option-vuelta', this)">
+      let clase = "day";
 
-          <div class="airline-row">
-            <img src="${logosAerolineas[v.aerolinea]}" alt="">
-            <div>
-              <b>${v.aerolinea}</b><br>
-              ${destino} <b>${v.vueltaHora}</b> → ${origen} <b>${v.vueltaLlegada}</b>
-            </div>
-          </div>
+      if(fechaDia < hoy){
+        clase += " disabled";
+      }
 
-          <div style="margin-left:auto; text-align:right">
-            COP $ ${precio.toLocaleString()}
+      if(tipoFecha === "vuelta" && fechaIdaSeleccionada){
+        if(fechaDia <= fechaIdaSeleccionada){
+          clase += " disabled";
+        }
+      }
 
-            <div class="maletas">
-              <i class="fa fa-suitcase"></i>
-              <i class="fa fa-briefcase"></i>
-            </div>
-
-            <div class="lugares">
-              quedan ${lugares} lugares
-            </div>
-
-            <div class="toggle" onclick="toggleDetalles('${detalleId}')">
-              Ver detalles ▼
-            </div>
-
-          </div>
-
-        </div>
-
-        <div class="details" id="${detalleId}">
-          Duración estimada: 1h 10m – Vuelo directo
+      grid.innerHTML += `
+        <div class="${clase}" onclick="selectDate('${anio}-${mes.getMonth()+1}-${d}')">
+          ${d}
         </div>
       `;
-    });
+    }
+  }
+}
 
-    html += `</div>`;
+function selectDate(fecha){
+
+  let partes = fecha.split("-");
+  let fechaReal = new Date(partes[0], partes[1]-1, partes[2]);
+
+  // NUEVO FORMATO NUMÉRICO DD/MM/YYYY
+  let dia = ("0" + fechaReal.getDate()).slice(-2);
+  let mes = ("0" + (fechaReal.getMonth() + 1)).slice(-2);
+  let anio = fechaReal.getFullYear();
+
+  let texto = `${dia}/${mes}/${anio}`;
+
+  if(tipoFecha === "ida"){
+    document.getElementById("idaInput").value = texto;
+    fechaIdaSeleccionada = fechaReal;
+    document.getElementById("vueltaInput").value = "";
+  } 
+  else {
+    document.getElementById("vueltaInput").value = texto;
   }
 
-  html += `
-    <div class="card">
-      <div class="price" id="precioFinal">
-
-        <div class="price-row">
-          <img src="https://tu360compras.bancolombia.com/themes/child/img/favicon-bancolombia.svg">
-          <span class="promo-badge">5% Off</span>
-          <b>COP $ 0</b>
-        </div>
-
-      </div>
-
-      <button class="btn-select" onclick="irADetalle()">
-  Confirmar selección
-</button>
-
-    </div>
-  `;
-
-  box.innerHTML = html;
+  closeCalendar();
 }
+function irAResultados(){
 
-cargarResultados();
+  let origen = document.getElementById("origenInput").value;
+  let destino = document.getElementById("destinoInput").value;
+  let ida = document.getElementById("idaInput").value;
+  let vuelta = document.getElementById("vueltaInput").value;
+  let pasajeros = document.getElementById("passengerInput").value;
 
-  function lugaresAleatorios(){
-  return Math.floor(Math.random() * 10) + 1;
-}
-
-function toggleDetalles(id){
-  let d = document.getElementById(id);
-  d.style.display = d.style.display === "block" ? "none" : "block";
-}
-
-function marcarSeleccion(clase, elemento){
-  document.querySelectorAll("." + clase).forEach(e => {
-    e.classList.remove("selected");
-  });
-
-  elemento.closest(".option").classList.add("selected");
-}
-function irADetalle(){
-
-  if(precioIda === 0){
-    alert("Debes seleccionar un vuelo de ida");
+  if(!origen || !destino || !ida){
+    alert("Completa origen, destino y fecha de ida");
     return;
   }
 
-  if(tipo !== "oneway" && precioVuelta === 0){
-    alert("Debes seleccionar un vuelo de vuelta");
-    return;
-  }
-
-  let url = "detalle.html?" +
+  let url = "resultados.html?" +
     "origen=" + encodeURIComponent(origen) +
     "&destino=" + encodeURIComponent(destino) +
     "&ida=" + encodeURIComponent(ida) +
     "&vuelta=" + encodeURIComponent(vuelta) +
-    "&tipo=" + encodeURIComponent(tipo) +
-    "&pasajeros=" + encodeURIComponent(pasajeros) +
-    "&precioIda=" + encodeURIComponent(precioIda) +
-    "&precioVuelta=" + encodeURIComponent(precioVuelta);
-
+    "&pasajeros=" + encodeURIComponent(pasajeros);
 
   window.location.href = url;
 }
 
 
 </script>
-
 
 </body>
 </html>

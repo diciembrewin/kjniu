@@ -235,6 +235,39 @@ body{
   }
 }
 
+  .flight-header{
+  display:flex;
+  border-bottom:1px solid #ddd;
+  margin-bottom:10px;
+}
+
+.flight-header-left{
+  background:#f0f0f0;
+  padding:10px;
+  flex:1;
+  border-top-left-radius:10px;
+  font-weight:bold;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.flight-header-right{
+  padding:10px;
+  text-align:right;
+  font-weight:bold;
+  flex:1;
+}
+
+.ida-bar{
+  border-left:5px solid #00b5e2;
+}
+
+.vuelta-bar{
+  border-left:5px solid #ff6b00;
+}
+
+
 
 
 </style>
@@ -365,8 +398,20 @@ function cargarResultados(){
 
   let box = document.getElementById("resultBox");
 
-  let html = `<div class="card">
-  <h3>IDA – ${ida}</h3>`;
+  let html = `
+<div class="card">
+
+  <div class="flight-header">
+    <div class="flight-header-left ida-bar">
+      <i class="fa fa-plane"></i> IDA
+    </div>
+
+    <div class="flight-header-right">
+      ${ida}
+    </div>
+  </div>
+`;
+;
 
   opciones.forEach((v) => {
 
@@ -395,8 +440,19 @@ function cargarResultados(){
 
   if(tipo !== "oneway"){
 
-    html += `<div class="card">
-    <h3>VUELTA – ${vuelta}</h3>`;
+   html += `
+<div class="card">
+
+  <div class="flight-header">
+    <div class="flight-header-left vuelta-bar">
+      <i class="fa fa-plane fa-rotate-180"></i> VUELTA
+    </div>
+
+    <div class="flight-header-right">
+      ${vuelta}
+    </div>
+  </div>
+`;
 
     opciones.forEach((v) => {
 

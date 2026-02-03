@@ -280,6 +280,33 @@ body{
   pointer-events:none;
 }
 
+  .flight-card{
+  background:#fff;
+  border-radius:16px;
+  padding:16px;
+  box-shadow:0 4px 12px rgba(0,0,0,.1);
+}
+
+.flight-header{
+  display:flex;
+  justify-content:space-between;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.flight-body{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:10px 0;
+}
+
+.price-box{
+  text-align:center;
+  margin-top:20px;
+}
+
+
 </style>
 </head>
 
@@ -316,6 +343,60 @@ body{
       Solo ida
     </label>
   </div>
+
+  <div id="resultsView" style="display:none; padding:20px;">
+
+  <div class="flight-card">
+
+    <div class="flight-header">
+      <div><i class="fa fa-plane"></i> IDA</div>
+      <div id="resultIdaFecha"></div>
+    </div>
+
+    <div class="flight-body">
+      <div>
+        <b id="resultOrigen"></b><br>
+        <span id="resultHoraIda">10:00</span>
+      </div>
+
+      <div>Directo</div>
+
+      <div>
+        <b id="resultDestino"></b><br>
+        <span id="resultHoraVuelta">11:30</span>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="flight-header">
+      <div><i class="fa fa-plane"></i> VUELTA</div>
+      <div id="resultVueltaFecha"></div>
+    </div>
+
+    <div class="flight-body">
+      <div>
+        <b id="resultDestino2"></b><br>
+        <span>06:35</span>
+      </div>
+
+      <div>Directo</div>
+
+      <div>
+        <b id="resultOrigen2"></b><br>
+        <span>07:37</span>
+      </div>
+    </div>
+
+    <div class="price-box">
+      <h3 id="precioFinal"></h3>
+      <button class="btn">Seleccionar Vuelos</button>
+    </div>
+
+  </div>
+
+</div>
+
 
   <!-- ===== MODAL CIUDADES ===== -->
 <div class="city-modal" id="cityModal">
@@ -373,7 +454,7 @@ body{
     <input id="passengerInput" value="1 pasajero" readonly>
   </div>
 
-  <button class="btn">Buscar</button>
+<button class="btn" onclick="buscarVuelos()">Buscar</button>
 
 </div>
 
@@ -628,7 +709,48 @@ function selectDate(fecha){
 
   closeCalendar();
 }
+function buscarVuelos(){
 
+  // Tomar valores del formulario
+  let origen = document.getElementById("origenInput").value;
+  let destino = document.getElementById("destinoInput").value;
+  let ida = document.getElementById("idaInput").value;
+  let vuelta = document.getElementById("vueltaInput").value;
+  let pasajeros = document.getElementById("passengerInput").value;
+
+  if(!origen || !destino || !ida){
+    alert("Por favor completa origen, destino y fecha de ida");
+    return;
+  }
+
+  // Ocultar formulario
+  document.querySelector(".form-container").style.display = "none";
+
+  // Mostrar resultados
+  document.getElementById("resultsView").style.display = "block";
+
+  // Llenar datos en la vista
+  document.getElementById("resultOrigen").innerText = origen;
+  document.getElementById("resultDestino").innerText = destino;
+
+  document.getElementById("resultOrigen2").innerText = origen;
+  document.getElementById("resultDestino2").innerText = destino;
+
+  document.getElementById("resultIdaFecha").innerText = ida;
+
+  if(tipoViaje === "round"){
+    document.getElementById("resultVueltaFecha").innerText = vuelta;
+  }else{
+    document.getElementById("resultVueltaFecha").innerText = "Solo ida";
+  }
+
+  // Simular precio
+  let precio = 1500000 + Math.floor(Math.random() * 500000);
+  document.getElementById("precioFinal").innerText =
+    "COP $ " + precio.toLocaleString();
+
+}
+  
 
 
 </script>

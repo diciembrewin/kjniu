@@ -23,6 +23,8 @@ body{
 
 .container{
   padding:14px;
+  max-width: 900px;
+  margin: auto;
 }
 
 .card{
@@ -51,27 +53,32 @@ body{
   margin-bottom:10px;
 }
 
-.icon{
-  font-size:20px;
-}
-
 .row{
   display:flex;
   gap:10px;
   margin-bottom:10px;
   flex-wrap:wrap;
-}
-
-input, select{
-  padding:10px;
-  border:1px solid #ddd;
-  border-radius:8px;
-  width:100%;
+  align-items:center;
 }
 
 .col{
-  flex:1;
-  min-width:120px;
+  flex: none;
+}
+
+label{
+  font-size:13px;
+  color:#444;
+  display:block;
+  margin-bottom:4px;
+}
+
+input, select{
+  padding:8px;
+  border:1px solid #ccc;
+  border-radius:8px;
+  min-width: 160px;
+  max-width: 220px;
+  font-size:14px;
 }
 
 .btn{
@@ -153,13 +160,13 @@ input, select{
 
     <div class="row">
       <div class="col">
-        <input type="email" id="email" placeholder="E-mail">
+        <label>Email</label>
+        <input type="email" id="email" placeholder="correo@ejemplo.com">
       </div>
-    </div>
 
-    <div class="row">
       <div class="col">
-        <input type="tel" id="telefono" placeholder="Teléfono">
+        <label>Teléfono</label>
+        <input type="tel" id="telefono" placeholder="Número de contacto">
       </div>
     </div>
 
@@ -250,21 +257,23 @@ function cargarFormularios(){
     <div class="card">
 
       <div class="title">
-        Pasajero ${i} – Adulto
+        Pasajero ${i}
       </div>
 
       <div class="row">
+
         <div class="col">
+          <label>Nombre</label>
           <input type="text" id="nombre${i}" placeholder="Nombre">
         </div>
 
         <div class="col">
+          <label>Apellido</label>
           <input type="text" id="apellido${i}" placeholder="Apellido">
         </div>
-      </div>
 
-      <div class="row">
         <div class="col">
+          <label>Tipo documento</label>
           <select id="tipoDoc${i}">
             <option>Cédula</option>
             <option>Pasaporte</option>
@@ -272,14 +281,15 @@ function cargarFormularios(){
         </div>
 
         <div class="col">
-          <input type="text" id="documento${i}" placeholder="Número documento">
+          <label>Número documento</label>
+          <input type="text" id="documento${i}" placeholder="Documento">
         </div>
-      </div>
 
-      <div class="row">
         <div class="col">
+          <label>Fecha nacimiento</label>
           <input type="date" id="nacimiento${i}">
         </div>
+
       </div>
 
     </div>
@@ -291,7 +301,7 @@ function cargarFormularios(){
 }
 
 
-// ===== GUARDAR DATOS (DEMO) =====
+// ===== GUARDAR DATOS =====
 
 function guardarDatos(){
 

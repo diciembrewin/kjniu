@@ -685,7 +685,8 @@ function cargarResultados(){
 
   html += `</div>`;
 
-  if(tipo !== "oneway"){
+  if(tipo === "round"){
+
 
     html += `
     <div class="card">
@@ -795,6 +796,11 @@ function irADetalle(){
     alert("Debes seleccionar un vuelo de ida");
     return;
   }
+
+  if(tipo === "oneway"){
+  precioVuelta = 0;
+}
+
 
   if(tipo !== "oneway" && precioVuelta === 0){
     alert("Debes seleccionar un vuelo de vuelta");

@@ -171,6 +171,114 @@ body{
   margin-top:auto;
   padding:16px;
 }
+/* -------- MODAL CIUDADES -------- */
+.city-modal{
+  position:fixed;
+  inset:0;
+  background:#f4f4f4;
+  z-index:9998;
+  display:none;
+  flex-direction:column;
+}
+
+.city-modal.active{
+  display:flex;
+}
+
+.city-header{
+  background:#2b2b2b;
+  color:#fff;
+  padding:16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.city-search{
+  background:#2b2b2b;
+  padding:12px;
+}
+
+.city-search input{
+  width:100%;
+  padding:10px;
+  border-radius:8px;
+}
+
+.city-list{
+  background:#fff;
+  margin:12px;
+  border-radius:12px;
+  overflow:auto;
+}
+
+.city-item{
+  padding:14px;
+  border-bottom:1px solid #eee;
+  cursor:pointer;
+}
+
+/* -------- MODAL CALENDARIO -------- */
+.calendar-modal{
+  position:fixed;
+  inset:0;
+  background:#f4f4f4;
+  z-index:9997;
+  display:none;
+  flex-direction:column;
+}
+
+.calendar-modal.active{
+  display:flex;
+}
+
+.calendar-header{
+  background:#2b2b2b;
+  color:#fff;
+  padding:16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.calendar-container{
+  background:#fff;
+  padding:20px;
+  height:calc(100vh - 70px);
+  overflow-y:scroll;
+}
+
+.calendar-month{
+  margin-bottom:30px;
+}
+
+.calendar-title{
+  font-weight:bold;
+  margin-bottom:10px;
+  text-transform:capitalize;
+}
+
+.calendar-grid{
+  display:grid;
+  grid-template-columns:repeat(7, 1fr);
+  gap:6px;
+  text-align:center;
+}
+
+.day{
+  padding:10px;
+  cursor:pointer;
+  border-radius:6px;
+}
+
+.day:hover{
+  background:#ffd100;
+}
+
+.day.disabled{
+  color:#ccc;
+  pointer-events:none;
+}
 
 </style>
 </head>
@@ -208,6 +316,35 @@ body{
       Solo ida
     </label>
   </div>
+
+  <!-- ===== MODAL CIUDADES ===== -->
+<div class="city-modal" id="cityModal">
+
+  <div class="city-header">
+    <span id="cityTitle"></span>
+    <button onclick="closeCityModal()">✕</button>
+  </div>
+
+  <div class="city-search">
+    <input placeholder="Buscar ciudad" onkeyup="filtrarCiudades(this.value)">
+  </div>
+
+  <div class="city-list" id="cityList"></div>
+
+</div>
+
+<!-- ===== MODAL CALENDARIO ===== -->
+<div class="calendar-modal" id="calendarModal">
+
+  <div class="calendar-header">
+    <span id="calendarTitle"></span>
+    <button onclick="closeCalendar()">✕</button>
+  </div>
+
+  <div class="calendar-container" id="calendarBox"></div>
+
+</div>
+
 
   <div class="field" onclick="openCityModal('origen')">
     <i class="fa fa-dot-circle-o"></i>
@@ -324,6 +461,173 @@ function applyPassengers(){
 
   closePassengerModal();
 }
+  // ===== AEROPUERTOS DE COLOMBIA =====
+const aeropuertos = [
+"Bogotá - El Dorado (BOG)",
+"Medellín - José María Córdova (MDE)",
+"Cali - Alfonso Bonilla Aragón (CLO)",
+"Cartagena - Rafael Núñez (CTG)",
+"Barranquilla - Ernesto Cortissoz (BAQ)",
+"Bucaramanga - Palonegro (BGA)",
+"Pereira - Matecaña (PEI)",
+"Santa Marta - Simón Bolívar (SMR)",
+"Cúcuta - Camilo Daza (CUC)",
+"Montería - Los Garzones (MTR)",
+"Valledupar - Alfonso López (VUP)",
+"Armenia - El Edén (AXM)",
+"Manizales - La Nubia (MZL)",
+"Neiva - Benito Salas (NVA)",
+"Villavicencio - Vanguardia (VVC)",
+"San Andrés - Gustavo Rojas Pinilla (ADZ)"
+];
+
+let campoActivo = "";
+
+function openCityModal(tipo){
+  campoActivo = tipo;
+
+  document.getElementById("cityTitle").innerText =
+    tipo === "origen" ? "Ciudad de Origen" : "Ciudad de Destino";
+
+  renderCities(aeropuertos);
+
+  document.getElementById("cityModal").classList.add("active");
+}
+
+function closeCityModal(){
+  document.getElementById("cityModal").classList.remove("active");
+}
+
+function renderCities(lista){
+  const box = document.getElementById("cityList");
+  box.innerHTML = "";
+
+  lista.forEach(c => {
+    box.innerHTML += `
+      <div class="city-item" onclick="selectCity('${c}')">
+        ${c}
+      </div>
+    `;
+  });
+}
+
+function filtrarCiudades(t){
+  const f = aeropuertos.filter(a =>
+    a.toLowerCase().includes(t.toLowerCase())
+  );
+  renderCities(f);
+}
+
+function selectCity(c){
+  document.getElementById(
+    campoActivo === "origen" ? "origenInput" : "destinoInput"
+  ).value = c;
+
+  closeCityModal();
+}
+
+// ===== CALENDARIO REAL =====
+
+let tipoFecha = "";
+let fechaIdaSeleccionada = null;
+
+function openCalendar(tipo){
+  tipoFecha = tipo;
+
+  document.getElementById("calendarTitle").innerText =
+    tipo === "ida" ? "Fecha de ida" : "Fecha de vuelta";
+
+  generarCalendario();
+
+  document.getElementById("calendarModal").classList.add("active");
+}
+
+function closeCalendar(){
+  document.getElementById("calendarModal").classList.remove("active");
+}
+
+function generarCalendario(){
+
+  let box = document.getElementById("calendarBox");
+  box.innerHTML = "";
+
+  let hoy = new Date();
+  hoy.setHours(0,0,0,0);
+
+  for(let m = 0; m < 12; m++){
+
+    let mes = new Date(hoy.getFullYear(), hoy.getMonth() + m, 1);
+
+    let diasEnMes = new Date(
+      mes.getFullYear(),
+      mes.getMonth() + 1,
+      0
+    ).getDate();
+
+    let nombreMes = mes.toLocaleString("es", { month: "long" });
+    let anio = mes.getFullYear();
+
+    box.innerHTML += `
+      <div class="calendar-month">
+        <div class="calendar-title">
+          ${nombreMes} ${anio}
+        </div>
+
+        <div class="calendar-grid" id="grid-${m}"></div>
+      </div>
+    `;
+
+    let grid = document.getElementById(`grid-${m}`);
+
+    for(let d = 1; d <= diasEnMes; d++){
+
+      let fechaDia = new Date(anio, mes.getMonth(), d);
+      fechaDia.setHours(0,0,0,0);
+
+      let clase = "day";
+
+      if(fechaDia < hoy){
+        clase += " disabled";
+      }
+
+      if(tipoFecha === "vuelta" && fechaIdaSeleccionada){
+        if(fechaDia <= fechaIdaSeleccionada){
+          clase += " disabled";
+        }
+      }
+
+      grid.innerHTML += `
+        <div class="${clase}" onclick="selectDate('${anio}-${mes.getMonth()+1}-${d}')">
+          ${d}
+        </div>
+      `;
+    }
+  }
+}
+
+function selectDate(fecha){
+
+  let partes = fecha.split("-");
+  let fechaReal = new Date(partes[0], partes[1]-1, partes[2]);
+
+  let texto = fechaReal.toLocaleDateString("es", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric"
+  });
+
+  if(tipoFecha === "ida"){
+    document.getElementById("idaInput").value = texto;
+    fechaIdaSeleccionada = fechaReal;
+    document.getElementById("vueltaInput").value = "";
+  } 
+  else {
+    document.getElementById("vueltaInput").value = texto;
+  }
+
+  closeCalendar();
+}
+
 
 </script>
 

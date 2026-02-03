@@ -610,11 +610,12 @@ function selectDate(fecha){
   let partes = fecha.split("-");
   let fechaReal = new Date(partes[0], partes[1]-1, partes[2]);
 
-  let texto = fechaReal.toLocaleDateString("es", {
-    day: "2-digit",
-    month: "long",
-    year: "numeric"
-  });
+  // NUEVO FORMATO NUMÉRICO DD/MM/YYYY
+  let dia = ("0" + fechaReal.getDate()).slice(-2);
+  let mes = ("0" + (fechaReal.getMonth() + 1)).slice(-2);
+  let anio = fechaReal.getFullYear();
+
+  let texto = `${dia}/${mes}/${anio}`;
 
   if(tipoFecha === "ida"){
     document.getElementById("idaInput").value = texto;
@@ -627,6 +628,7 @@ function selectDate(fecha){
 
   closeCalendar();
 }
+
 
 
 </script>

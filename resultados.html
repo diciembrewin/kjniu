@@ -292,26 +292,33 @@ const logosAerolineas = {
   "Wingo": "https://reservas.bancolombia.com/Images/Airlines/air_P5logo.gif"
 };
 
+// ===== MUCHAS HORAS POR AEROLÍNEA =====
 const opciones = [
+
+  // ===== AVIANCAS =====
   { aerolinea: "Avianca", idaHora: "06:00", idaLlegada: "07:10", vueltaHora: "09:30", vueltaLlegada: "10:40" },
   { aerolinea: "Avianca", idaHora: "08:45", idaLlegada: "09:55", vueltaHora: "12:15", vueltaLlegada: "13:25" },
   { aerolinea: "Avianca", idaHora: "14:20", idaLlegada: "15:30", vueltaHora: "17:40", vueltaLlegada: "18:50" },
   { aerolinea: "Avianca", idaHora: "19:10", idaLlegada: "20:20", vueltaHora: "21:45", vueltaLlegada: "22:55" },
 
+  // ===== LATAM =====
   { aerolinea: "LATAM Airlines", idaHora: "05:50", idaLlegada: "07:00", vueltaHora: "08:20", vueltaLlegada: "09:30" },
   { aerolinea: "LATAM Airlines", idaHora: "11:15", idaLlegada: "12:25", vueltaHora: "15:10", vueltaLlegada: "16:20" },
   { aerolinea: "LATAM Airlines", idaHora: "16:30", idaLlegada: "17:40", vueltaHora: "19:00", vueltaLlegada: "20:10" },
   { aerolinea: "LATAM Airlines", idaHora: "20:50", idaLlegada: "22:00", vueltaHora: "22:40", vueltaLlegada: "23:50" },
 
+  // ===== JETSMART =====
   { aerolinea: "JetSMART", idaHora: "06:15", idaLlegada: "07:25", vueltaHora: "10:10", vueltaLlegada: "11:20" },
   { aerolinea: "JetSMART", idaHora: "12:40", idaLlegada: "13:50", vueltaHora: "15:20", vueltaLlegada: "16:30" },
   { aerolinea: "JetSMART", idaHora: "15:50", idaLlegada: "17:00", vueltaHora: "18:40", vueltaLlegada: "19:50" },
   { aerolinea: "JetSMART", idaHora: "22:10", idaLlegada: "23:20", vueltaHora: "23:40", vueltaLlegada: "00:50" },
 
+  // ===== WINGO =====
   { aerolinea: "Wingo", idaHora: "07:10", idaLlegada: "08:20", vueltaHora: "09:40", vueltaLlegada: "10:50" },
   { aerolinea: "Wingo", idaHora: "13:30", idaLlegada: "14:40", vueltaHora: "16:10", vueltaLlegada: "17:20" },
   { aerolinea: "Wingo", idaHora: "18:45", idaLlegada: "19:55", vueltaHora: "20:30", vueltaLlegada: "21:40" },
   { aerolinea: "Wingo", idaHora: "23:00", idaLlegada: "00:10", vueltaHora: "05:30", vueltaLlegada: "06:40" }
+
 ];
 
 function calcularPrecio(hora){
@@ -325,12 +332,6 @@ function calcularPrecio(hora){
 
 let precioIda = 0;
 let precioVuelta = 0;
-  
-let horaIda = "";
-let horaVuelta = "";
-
-let horaIdaSeleccionada = "";
-let horaVueltaSeleccionada = "";
 
 function actualizarPrecio(){
 
@@ -350,15 +351,13 @@ function actualizarPrecio(){
   `;
 }
 
-function seleccionarIda(valor, hora){
+function seleccionarIda(valor){
   precioIda = parseInt(valor);
-  horaIda = hora;
   actualizarPrecio();
 }
 
-function seleccionarVuelta(valor, hora){
+function seleccionarVuelta(valor){
   precioVuelta = parseInt(valor);
-  horaVuelta = hora;
   actualizarPrecio();
 }
 
@@ -366,48 +365,28 @@ function cargarResultados(){
 
   let box = document.getElementById("resultBox");
 
-  let html = `
-  <div class="card">
+  let html = `<div class="card">
+  <h3>IDA – ${ida}</h3>`;
 
-    <div class="flight-header">
-      <div class="flight-header-left ida-bar">
-        <i class="fa fa-plane"></i> IDA
-      </div>
-
-      <div class="flight-header-right">
-        ${ida}
-      </div>
-    </div>
-  `;
-
-  opciones.forEach((v,i) => {
+  opciones.forEach((v) => {
 
     let precio = calcularPrecio(v.idaHora);
-    let lugares = lugaresAleatorios();
-    let detalleId = "detIda" + i;
 
     html += `
-      <div class="option option-ida">
-
-        <input type="radio" name="ida"
-          onclick="seleccionarIda(${precio}, '${v.idaHora}');
-
+      <div class="option">
+        <input type="radio" name="ida" onclick="seleccionarIda(${precio})">
 
         <div class="airline-row">
           <img src="${logosAerolineas[v.aerolinea]}" alt="">
           <div>
             <b>${v.aerolinea}</b><br>
-            ${origen} <b>${v.idaHora}</b> → ${destino} <b>${v.idaLlegada}</b>
+            ${origen} ${v.idaHora} → ${destino} ${v.idaLlegada}
           </div>
         </div>
 
-        <div style="margin-left:auto; text-align:right">
+        <div style="margin-left:auto">
           COP $ ${precio.toLocaleString()}
-          <div class="lugares">
-            quedan ${lugares} lugares
-          </div>
         </div>
-
       </div>
     `;
   });
@@ -416,47 +395,28 @@ function cargarResultados(){
 
   if(tipo !== "oneway"){
 
-    html += `
-    <div class="card">
+    html += `<div class="card">
+    <h3>VUELTA – ${vuelta}</h3>`;
 
-      <div class="flight-header">
-        <div class="flight-header-left vuelta-bar">
-          <i class="fa fa-plane fa-rotate-180"></i> VUELTA
-        </div>
-
-        <div class="flight-header-right">
-          ${vuelta}
-        </div>
-      </div>
-    `;
-
-    opciones.forEach((v,i) => {
+    opciones.forEach((v) => {
 
       let precio = calcularPrecio(v.vueltaHora);
-      let lugares = lugaresAleatorios();
 
       html += `
-        <div class="option option-vuelta">
-
-          <input type="radio" name="vuelta"
-           onclick="seleccionarVuelta(${precio}, '${v.vueltaHora}');
-
+        <div class="option">
+          <input type="radio" name="vuelta" onclick="seleccionarVuelta(${precio})">
 
           <div class="airline-row">
             <img src="${logosAerolineas[v.aerolinea]}" alt="">
             <div>
               <b>${v.aerolinea}</b><br>
-              ${destino} <b>${v.vueltaHora}</b> → ${origen} <b>${v.vueltaLlegada}</b>
+              ${destino} ${v.vueltaHora} → ${origen} ${v.vueltaLlegada}
             </div>
           </div>
 
-          <div style="margin-left:auto; text-align:right">
+          <div style="margin-left:auto">
             COP $ ${precio.toLocaleString()}
-            <div class="lugares">
-              quedan ${lugares} lugares
-            </div>
           </div>
-
         </div>
       `;
     });
@@ -465,60 +425,28 @@ function cargarResultados(){
   }
 
   html += `
-  <div class="card" id="precioFinal">
-    <b>COP $ 0</b>
-  </div>
+    <div class="card">
+      <div class="price" id="precioFinal">
 
-  <button class="btn-select" onclick="irADetalle()">
-    Confirmar selección
-  </button>
+        <div class="price-row">
+          <img src="https://tu360compras.bancolombia.com/themes/child/img/favicon-bancolombia.svg">
+          <span class="promo-badge">5% Off</span>
+          <b>COP $ 0</b>
+        </div>
+
+      </div>
+
+      <button class="btn-select">Confirmar selección</button>
+    </div>
   `;
 
   box.innerHTML = html;
 }
 
-function lugaresAleatorios(){
-  return Math.floor(Math.random() * 10) + 1;
-}
-
-function marcarSeleccion(clase, elemento){
-  document.querySelectorAll("." + clase).forEach(e => {
-    e.classList.remove("selected");
-  });
-
-  elemento.closest(".option").classList.add("selected");
-}
-
-function irADetalle(){
-
-  if(precioIda === 0){
-    alert("Debes seleccionar un vuelo de ida");
-    return;
-  }
-
-  if(tipo !== "oneway" && precioVuelta === 0){
-    alert("Debes seleccionar un vuelo de vuelta");
-    return;
-  }
-
-  let url = "detalle.html?" +
-    "origen=" + encodeURIComponent(origen) +
-    "&destino=" + encodeURIComponent(destino) +
-    "&ida=" + encodeURIComponent(ida) +
-    "&vuelta=" + encodeURIComponent(vuelta) +
-    "&tipo=" + encodeURIComponent(tipo) +
-    "&pasajeros=" + encodeURIComponent(pasajeros) +
-    "&precioIda=" + encodeURIComponent(precioIda) +
-    "&precioVuelta=" + encodeURIComponent(precioVuelta) +
-    "&horaIda=" + encodeURIComponent(horaIdaSeleccionada) +
-    "&horaVuelta=" + encodeURIComponent(horaVueltaSeleccionada);
-
-  window.location.href = url;
-}
-
 cargarResultados();
 
 </script>
+
 
 
 </body>

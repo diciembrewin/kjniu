@@ -200,98 +200,121 @@ small{
     width:48%;
   }
 }
-/* ===== BLOQUE TÉRMINOS Y CONDICIONES ===== */
+/* ===== TÉRMINOS Y CONDICIONES - ESTILO AJUSTADO ===== */
 
-#TermsAndConditions{
-  background:#fff;
-  border-radius:16px;
-  padding:18px;
-  margin:20px auto;
-  max-width:900px;
-  box-shadow:0 4px 12px rgba(0,0,0,.08);
-  font-size:14px;
-  color:#333;
+#TermsAndConditions {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 900px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #2b2b2b;
 }
 
-#TermsAndConditions .heading{
-  font-size:18px;
-  font-weight:bold;
-  margin-bottom:10px;
-  color:#2b2b2b;
-  border-bottom:2px solid #ffd100;
-  padding-bottom:6px;
+/* Título */
+
+#TermsAndConditions .heading {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #ffd100;
 }
 
-#TermsAndConditions p{
-  margin:8px 0;
-  line-height:1.5;
+/* Contenido textual */
+
+#divTermsAndConditionsText {
+  line-height: 1.5;
+  margin-bottom: 10px;
 }
 
-#TermsAndConditions a{
-  color:#0077cc;
-  text-decoration:none;
-  font-weight:bold;
+#divTermsAndConditionsText p {
+  margin: 8px 0;
 }
 
-#TermsAndConditions a:hover{
-  text-decoration:underline;
+#divTermsAndConditionsText a {
+  color: #0077cc;
+  text-decoration: none;
+  font-weight: bold;
 }
 
-#TermsAndConditions hr{
-  border:0;
-  border-top:1px solid #eee;
-  margin:12px 0;
+#divTermsAndConditionsText a:hover {
+  text-decoration: underline;
 }
 
-/* Estilo de checkboxes */
+/* Línea divisora */
 
-#TermsAndConditions .row{
-  margin-top:10px;
+#TermsAndConditions hr {
+  border: none;
+  border-top: 1px solid #eaeaea;
+  margin: 10px 0;
 }
 
-#TermsAndConditions input[type="checkbox"]{
-  margin-right:8px;
-  transform:scale(1.1);
-  cursor:pointer;
+/* Contenedor de checkboxes */
+
+#TermsAndConditions .row.column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
 }
 
-#TermsAndConditions label{
-  font-size:13px;
-  color:#2b2b2b;
-  cursor:pointer;
-  line-height:1.4;
+/* Cada bloque de checkbox */
+
+#TermsAndConditions .row.column > div {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
 }
 
-#TermsAndConditions .text-danger{
-  color:#c00;
-  font-size:12px;
+/* Checkboxes */
+
+#TermsAndConditions input[type="checkbox"] {
+  margin-top: 3px;
+  transform: scale(1.1);
+  cursor: pointer;
 }
 
-/* Mensajes de error */
+/* Labels */
 
-#TermsAndConditions .field-validation-error{
-  display:block;
-  margin-top:4px;
-  font-size:12px;
+#TermsAndConditions label {
+  font-size: 13px;
+  line-height: 1.4;
+  cursor: pointer;
+  display: block;
 }
 
-/* Responsive */
+/* Errores */
 
-@media (max-width: 600px){
+#TermsAndConditions .text-danger {
+  color: #c00;
+  font-size: 12px;
+}
 
-  #TermsAndConditions{
-    margin:12px;
-    padding:14px;
-    font-size:13px;
+#TermsAndConditions .field-validation-error {
+  margin-top: 4px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 600px) {
+
+  #TermsAndConditions {
+    margin: 12px;
+    padding: 16px;
   }
 
-  #TermsAndConditions .heading{
-    font-size:16px;
+  #TermsAndConditions .heading {
+    font-size: 16px;
   }
 
-  #TermsAndConditions label{
-    font-size:12px;
+  #TermsAndConditions label {
+    font-size: 12px;
   }
+
 }
 
 </style>

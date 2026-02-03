@@ -51,10 +51,6 @@ body{
   margin-bottom:10px;
 }
 
-.icon{
-  font-size:20px;
-}
-
 .row{
   display:flex;
   gap:10px;
@@ -88,6 +84,12 @@ input, select{
 .small{
   font-size:13px;
   color:#666;
+}
+
+small{
+  display:block;
+  margin-bottom:4px;
+  color:#555;
 }
 
 </style>
@@ -178,8 +180,6 @@ function getParam(name){
   return new URL(window.location.href).searchParams.get(name);
 }
 
-// ===== FUNCIONES NUEVAS =====
-
 function generarVuelo(){
   let letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   let codigo = "";
@@ -197,8 +197,6 @@ function generarAsiento(){
   return fila + letra;
 }
 
-// ===== LEER PARÁMETROS =====
-
 let origen = getParam("origen");
 let destino = getParam("destino");
 
@@ -208,8 +206,6 @@ let vuelta = getParam("vuelta");
 let tipo = getParam("tipo");
 
 let pasajeros = parseInt(getParam("pasajeros") || 1);
-
-// ===== MOSTRAR ITINERARIO =====
 
 document.getElementById("rutaIda").innerText =
   origen + " → " + destino;
@@ -233,9 +229,6 @@ if(tipo === "oneway"){
   document.getElementById("vueloVuelta").innerText = generarVuelo();
   document.getElementById("asientoVuelta").innerText = generarAsiento();
 }
-
-
-// ===== GENERAR FORMULARIOS SEGÚN PASAJEROS =====
 
 function cargarFormularios(){
 
@@ -278,6 +271,7 @@ function cargarFormularios(){
 
       <div class="row">
         <div class="col">
+          <small>Fecha de nacimiento</small>
           <input type="date" id="nacimiento${i}">
         </div>
       </div>
@@ -289,9 +283,6 @@ function cargarFormularios(){
 
   box.innerHTML = html;
 }
-
-
-// ===== GUARDAR DATOS (DEMO) =====
 
 function guardarDatos(){
 

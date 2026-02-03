@@ -280,6 +280,33 @@ body{
   color:#ccc;
   pointer-events:none;
 }
+/* ===== RESULTADOS ===== */
+.flight-card{
+  background:#fff;
+  border-radius:16px;
+  padding:16px;
+  box-shadow:0 4px 12px rgba(0,0,0,.1);
+  margin-top:20px;
+}
+
+.flight-header{
+  display:flex;
+  justify-content:space-between;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.flight-body{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:10px 0;
+}
+
+.price-box{
+  text-align:center;
+  margin-top:20px;
+}
 
 
 </style>
@@ -346,7 +373,66 @@ body{
     <input id="passengerInput" value="1 pasajero" readonly>
   </div>
 
-  <button class="btn">Buscar</button>
+ <button class="btn" onclick="irAResultados()">Buscar</button>
+
+
+
+</div>
+<!-- ===== RESULTADOS DE BÚSQUEDA ===== -->
+<div id="resultsView" style="display:none; padding:20px;">
+
+  <div class="flight-card">
+
+    <div class="flight-header">
+      <div><i class="fa fa-plane"></i> IDA</div>
+      <div id="resIdaFecha"></div>
+    </div>
+
+    <div class="flight-body">
+      <div>
+        <b id="resOrigen"></b><br>
+        <span>21:37</span>
+      </div>
+
+      <div>Directo</div>
+
+      <div>
+        <b id="resDestino"></b><br>
+        <span>22:30</span>
+      </div>
+    </div>
+
+    <hr>
+
+    <div id="vueltaBloque">
+
+      <div class="flight-header">
+        <div><i class="fa fa-plane"></i> VUELTA</div>
+        <div id="resVueltaFecha"></div>
+      </div>
+
+      <div class="flight-body">
+        <div>
+          <b id="resDestino2"></b><br>
+          <span>06:35</span>
+        </div>
+
+        <div>Directo</div>
+
+        <div>
+          <b id="resOrigen2"></b><br>
+          <span>07:37</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="price-box">
+      <h3 id="precioFinal"></h3>
+      <button class="btn">Seleccionar Vuelos</button>
+    </div>
+
+  </div>
 
 </div>
 
@@ -630,6 +716,28 @@ function selectDate(fecha){
   }
 
   closeCalendar();
+}
+function irAResultados(){
+
+  let origen = document.getElementById("origenInput").value;
+  let destino = document.getElementById("destinoInput").value;
+  let ida = document.getElementById("idaInput").value;
+  let vuelta = document.getElementById("vueltaInput").value;
+  let pasajeros = document.getElementById("passengerInput").value;
+
+  if(!origen || !destino || !ida){
+    alert("Completa origen, destino y fecha de ida");
+    return;
+  }
+
+  let url = "resultados.html?" +
+    "origen=" + encodeURIComponent(origen) +
+    "&destino=" + encodeURIComponent(destino) +
+    "&ida=" + encodeURIComponent(ida) +
+    "&vuelta=" + encodeURIComponent(vuelta) +
+    "&pasajeros=" + encodeURIComponent(pasajeros);
+
+  window.location.href = url;
 }
 
 

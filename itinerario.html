@@ -200,42 +200,117 @@ small{
     width:48%;
   }
 }
-/* ===== TÉRMINOS Y CONDICIONES - TEXTO MÁS PEQUEÑO ===== */
+/* ===== BLOQUE TÉRMINOS Y CONDICIONES – MEJORADO ===== */
 
 #TermsAndConditions {
-  font-size: 12px;          /* antes 14 */
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 16px;
+  margin: 18px auto;
+  max-width: 880px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+  font-size: 12px;               /* más compacto */
+  color: #2b2b2b;
+  line-height: 1.45;
 }
+
+/* Título principal */
 
 #TermsAndConditions .heading {
-  font-size: 14px;          /* antes 18 */
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #1a1a1a;
+  border-bottom: 2px solid #ffd100;
+  padding-bottom: 6px;
 }
 
-#divTermsAndConditionsText {
+/* Contenido de texto */
+
+#TermsAndConditions p {
+  margin: 6px 0;
   font-size: 12px;
-  line-height: 1.4;
 }
 
-#divTermsAndConditionsText p {
-  font-size: 12px;
+#TermsAndConditions a {
+  color: #0066cc;
+  text-decoration: none;
+  font-weight: 600;
 }
+
+#TermsAndConditions a:hover {
+  text-decoration: underline;
+}
+
+/* Línea divisora */
+
+#TermsAndConditions hr {
+  border: none;
+  border-top: 1px solid #eaeaea;
+  margin: 10px 0;
+}
+
+/* Contenedor de checkboxes bien alineados */
+
+#TermsAndConditions .row.column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+/* Cada fila de checkbox */
+
+#TermsAndConditions .row.column > div {
+  display: flex;
+  flex-direction: row-reverse;      /* checkbox a la derecha */
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 6px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+/* Checkboxes */
+
+#TermsAndConditions input[type="checkbox"] {
+  transform: scale(1.05);
+  cursor: pointer;
+  margin: 0;
+}
+
+/* Textos de los checkbox */
 
 #TermsAndConditions label {
-  font-size: 11px;          /* texto de checkboxes más pequeño */
+  flex: 1;
+  font-size: 11px;
+  color: #2b2b2b;
+  cursor: pointer;
+  line-height: 1.35;
+  text-align: left;
 }
 
+/* Mensajes de error */
+
 #TermsAndConditions .text-danger {
-  font-size: 11px;
+  color: #c00;
+  font-size: 10px;
 }
 
 #TermsAndConditions .field-validation-error {
-  font-size: 11px;
+  display: block;
+  margin-top: 4px;
+  font-size: 10px;
+  text-align: right;
 }
 
-/* Responsive aún más compacto */
+/* Ajustes responsive */
 
-@media (max-width: 600px) {
+@media (max-width: 600px){
 
   #TermsAndConditions {
+    margin: 10px;
+    padding: 12px;
     font-size: 11px;
   }
 
@@ -247,6 +322,9 @@ small{
     font-size: 10px;
   }
 
+  #TermsAndConditions .row.column > div {
+    padding: 5px 0;
+  }
 }
 
 

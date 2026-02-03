@@ -200,6 +200,99 @@ small{
     width:48%;
   }
 }
+/* ===== BLOQUE TÉRMINOS Y CONDICIONES ===== */
+
+#TermsAndConditions{
+  background:#fff;
+  border-radius:16px;
+  padding:18px;
+  margin:20px auto;
+  max-width:900px;
+  box-shadow:0 4px 12px rgba(0,0,0,.08);
+  font-size:14px;
+  color:#333;
+}
+
+#TermsAndConditions .heading{
+  font-size:18px;
+  font-weight:bold;
+  margin-bottom:10px;
+  color:#2b2b2b;
+  border-bottom:2px solid #ffd100;
+  padding-bottom:6px;
+}
+
+#TermsAndConditions p{
+  margin:8px 0;
+  line-height:1.5;
+}
+
+#TermsAndConditions a{
+  color:#0077cc;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+#TermsAndConditions a:hover{
+  text-decoration:underline;
+}
+
+#TermsAndConditions hr{
+  border:0;
+  border-top:1px solid #eee;
+  margin:12px 0;
+}
+
+/* Estilo de checkboxes */
+
+#TermsAndConditions .row{
+  margin-top:10px;
+}
+
+#TermsAndConditions input[type="checkbox"]{
+  margin-right:8px;
+  transform:scale(1.1);
+  cursor:pointer;
+}
+
+#TermsAndConditions label{
+  font-size:13px;
+  color:#2b2b2b;
+  cursor:pointer;
+  line-height:1.4;
+}
+
+#TermsAndConditions .text-danger{
+  color:#c00;
+  font-size:12px;
+}
+
+/* Mensajes de error */
+
+#TermsAndConditions .field-validation-error{
+  display:block;
+  margin-top:4px;
+  font-size:12px;
+}
+
+/* Responsive */
+
+@media (max-width: 600px){
+
+  #TermsAndConditions{
+    margin:12px;
+    padding:14px;
+    font-size:13px;
+  }
+
+  #TermsAndConditions .heading{
+    font-size:16px;
+  }
+
+  #TermsAndConditions label{
+    font-size:12px;
+  }
+}
 
 </style>
 </head>
@@ -281,7 +374,49 @@ small{
   </button>
 
 </div>
+<div id="TermsAndConditions" class="callout information">
 
+                        <div class="heading">
+                            <span class="fontNormal bold">Términos y Condiciones</span>
+                        </div>
+
+                        <div id="divTermsAndConditionsText">
+<p>Manifiesto haber leído cuidadosamente las políticas de cancelación, debajo de cada itinerario y estoy de acuerdo con la información incluida en el itinerario, datos de pasajeros y tarifa.</p><p><br></p><p>Leí y&nbsp;estoy de acuerdo con el tratamiento de mis datos personales, por lo tanto acepto la política de privacidad, la cual se puede consultar <a href="http://viajestu360compras.bancolombia.com/politica-de-privacidad?_gl=1*13fx99u*_gcl_aw*R0NMLjE3NzAwODk4NzcuQ2p3S0NBaUFzNEhNQmhCSkVpd0FDcmZOWmNUUDVITGdXZUxkbEVqQmpoODJsck5GMFUwR1FTSDZfVlQzZjJ2Tnp3UHVJOGs1ZE1MT1Nob0NOOXNRQXZEX0J3RQ..*_gcl_au*MTI0MDk3NzM0OS4xNzY5NjUyNzgw*_ga*NjYyMjc0NTEyLjE3Njk2NTI3Nzk.*_ga_B6YXBDTWFL*czE3NzAwODgzMDckbzEkZzEkdDE3NzAwOTE5OTckajM1JGwwJGgw" rel="noopener noreferrer" target="_blank">aquí</a></p><p><br></p><p>Para conocer términos y condiciones de la prestación de nuestros servicios, haz clic <a href="http://viajestu360compras.bancolombia.com/Portals/27/Documentos/T%C3%A9rminos_y_condiciones_netviajes.pdf?_gl=1*144gqgi*_gcl_aw*R0NMLjE3NzAwODk4NzcuQ2p3S0NBaUFzNEhNQmhCSkVpd0FDcmZOWmNUUDVITGdXZUxkbEVqQmpoODJsck5GMFUwR1FTSDZfVlQzZjJ2Tnp3UHVJOGs1ZE1MT1Nob0NOOXNRQXZEX0J3RQ..*_gcl_au*MTI0MDk3NzM0OS4xNzY5NjUyNzgw*_ga*NjYyMjc0NTEyLjE3Njk2NTI3Nzk.*_ga_B6YXBDTWFL*czE3NzAwODgzMDckbzEkZzEkdDE3NzAwOTE5OTckajM1JGwwJGgw" rel="noopener noreferrer" target="_blank">aquí</a></p>                        </div>
+
+                        <div class="row column">
+                            <hr style="border-color: #fafafa; margin: 0.3em 1.35em 1em;">
+                        </div>
+
+                        <div class="row column">
+                                <div>
+                                    <input data-val="true" data-val-ischecked="Debe aceptar los términos y condiciones" data-val-required="The TermsAndConditions field is required." id="chkTermsAndConditions" name="TermsAndConditions" type="checkbox" value="true" class="valid"><input name="TermsAndConditions" type="hidden" value="false">
+                                    <label for="chkTermsAndConditions">Declaro aceptar los términos y condiciones</label>
+                                    <span class="field-validation-valid" data-valmsg-for="TermsAndConditions" data-valmsg-replace="true"></span>
+                                </div>
+                                        <div>
+                                            <input data-val="True" data-val-ischecked="Debe aceptar los términos y condiciones" data-val-required="The TermsUserAccept field is required." id="chkTermsUserAccept" name="TermsUserAccept" type="checkbox" value="true"><input name="TermsUserAccept" type="hidden" value="false">
+
+                                            <label style="display: -webkit-inline-box;">
+                                                Recuerda que la aerolínea Avianca no permite viajar solos a los niños de 14 años o menos, siempre deben viajar con un adulto responsable. En caso contrario, la aerolínea podrá negar el abordaje.
+                                            </label>
+
+                                            <span class="field-validation-error" id="acceptTermsUserAccept" style="display:none;">
+                                                <span class="text-danger">Debe aceptar los términos y condiciones</span>
+                                            </span>
+                                        </div>
+<div>
+                                            <input data-val="true" data-val-required="Debe aceptar los términos y condiciones." id="chkTermsAcceptPassData" name="TermsAcceptPassData" type="checkbox" value="true" class="valid"><input name="TermsAcceptPassData" type="hidden" value="false">
+
+                                            <label style="display: -webkit-inline-box;">
+                                                He leído y acepto el tratamiento de mis datos personales
+                                            </label>
+                                            <span class="field-validation-error" id="acceptTermsAcceptPassData" style="display:none;">
+                                                <span class="text-danger">Debe aceptar los términos y condiciones para Compartir Datos</span>
+                                            </span>
+                                        </div>
+
+                        </div>
+                    </div>
   <footer class=" footer-net-3 bg-custom">
   <div class="footer-net">
     <div class="net-accordion">

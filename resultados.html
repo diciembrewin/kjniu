@@ -390,7 +390,8 @@ function cargarResultados(){
       <div class="option option-ida">
 
         <input type="radio" name="ida"
-          onclick="seleccionarIda(${precio}, '${v.idaHora}'); marcarSeleccion('option-ida', this)">
+          onclick="seleccionarIda(${precio}, '${v.idaHora}');
+
 
         <div class="airline-row">
           <img src="${logosAerolineas[v.aerolinea]}" alt="">
@@ -438,7 +439,8 @@ function cargarResultados(){
         <div class="option option-vuelta">
 
           <input type="radio" name="vuelta"
-            onclick="seleccionarVuelta(${precio}, '${v.vueltaHora}'); marcarSeleccion('option-vuelta', this)">
+           onclick="seleccionarVuelta(${precio}, '${v.vueltaHora}');
+
 
           <div class="airline-row">
             <img src="${logosAerolineas[v.aerolinea]}" alt="">

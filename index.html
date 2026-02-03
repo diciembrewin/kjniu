@@ -1108,7 +1108,8 @@ function irAResultados(){
     "&destino=" + encodeURIComponent(destino) +
     "&ida=" + encodeURIComponent(ida) +
     "&vuelta=" + encodeURIComponent(vuelta) +
-    "&pasajeros=" + encodeURIComponent(pasajeros);
+    "&pasajeros=" + encodeURIComponent(pasajeros) +
+    "&tipo=" + encodeURIComponent(tipoViaje);   // 👈 ESTO FALTABA
 
   window.location.href = url;
 }

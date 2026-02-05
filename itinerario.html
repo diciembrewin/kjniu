@@ -12,7 +12,6 @@ body{
   background:#f2f2f2;
 }
 
-/* ===== HEADER ===== */
 .header{
   background:#fff;
   padding:14px;
@@ -71,87 +70,6 @@ body{
   box-shadow:0 2px 8px rgba(0,0,0,.1);
 }
 
-/* ===== VUELOS SIMPLES ===== */
-.flight{
-  display:flex;
-  gap:10px;
-  margin-bottom:10px;
-  font-size:14px;
-  color:#555;
-}
-
-.flight b{
-  color:#000;
-}
-
-.small{
-  font-size:13px;
-  color:#666;
-}
-
-/* ===== ITINERARIO AEROLÍNEA ===== */
-.itinerario-card{
-  background:#fff;
-  border-radius:14px;
-  padding:16px;
-  margin-bottom:14px;
-  box-shadow:0 2px 8px rgba(0,0,0,.1);
-}
-
-.itinerario-precio-row{
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:6px;
-  font-size:14px;
-}
-
-.itinerario-total{
-  display:flex;
-  justify-content:space-between;
-  font-size:22px;
-  font-weight:bold;
-  margin-top:10px;
-}
-
-.itinerario-section{
-  background:#2b2b2b;
-  color:#fff;
-  padding:10px 14px;
-  border-radius:10px;
-  margin-top:16px;
-  display:flex;
-  justify-content:space-between;
-}
-
-.itinerario-airline{
-  display:flex;
-  justify-content:space-between;
-  font-size:14px;
-  color:#555;
-  margin-top:14px;
-}
-
-.itinerario-ruta{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin:14px 0;
-}
-
-.itinerario-ciudad{
-  text-align:center;
-}
-
-.itinerario-ciudad b{
-  font-size:22px;
-}
-
-.itinerario-info{
-  font-size:12px;
-  color:#666;
-}
-
-/* ===== PRECIOS ===== */
 .total{
   text-align:right;
   margin-top:10px;
@@ -179,6 +97,61 @@ body{
   font-weight:bold;
   margin-top:10px;
 }
+
+/* ===== ITINERARIO ===== */
+
+.itinerario-card{
+  background:#fff;
+  border-radius:14px;
+  padding:16px;
+  margin-bottom:14px;
+  box-shadow:0 2px 8px rgba(0,0,0,.1);
+}
+
+.itinerario-row{
+  display:flex;
+  justify-content:space-between;
+  font-size:14px;
+  margin-bottom:6px;
+}
+
+.itinerario-total{
+  display:flex;
+  justify-content:space-between;
+  font-size:22px;
+  font-weight:bold;
+  margin-top:10px;
+}
+
+.itinerario-section{
+  background:#2b2b2b;
+  color:#fff;
+  padding:10px 14px;
+  border-radius:10px;
+  margin-top:16px;
+  display:flex;
+  justify-content:space-between;
+}
+
+.itinerario-ruta{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:14px 0;
+}
+
+.itinerario-ciudad{
+  text-align:center;
+}
+
+.itinerario-ciudad b{
+  font-size:22px;
+}
+
+.itinerario-info{
+  font-size:12px;
+  color:#666;
+}
 </style>
 </head>
 
@@ -203,45 +176,22 @@ body{
 
 <div class="container">
 
-  <!-- VUELOS RESUMEN -->
-  <div class="card">
-    <h4>Vuelos seleccionados:</h4>
-
-    <div class="flight">
-      ✈️
-      <div>
-        <span id="rutaIda"></span><br>
-        <b id="detalleIda"></b><br>
-        <span class="small" id="duracionIda"></span>
-      </div>
-    </div>
-
-    <hr id="separador">
-
-    <div class="flight" id="bloqueVuelta">
-      ✈️
-      <div>
-        <span id="rutaVuelta"></span><br>
-        <b id="detalleVuelta"></b><br>
-        <span class="small" id="duracionVuelta"></span>
-      </div>
-    </div>
-  </div>
-
-  <!-- ITINERARIO DISEÑO AEROLÍNEA -->
+  <!-- ITINERARIO -->
   <div class="itinerario-card">
 
-    <h3>Su Itinerario</h3>
+    <h3>Su itinerario</h3>
 
-    <div class="itinerario-precio-row">
+    <div class="itinerario-row">
       <span>Tarifa:</span>
       <span>COP $ <span id="tarifaBase"></span></span>
     </div>
-    <div class="itinerario-precio-row">
+
+    <div class="itinerario-row">
       <span>Impuestos y tasas:</span>
       <span>COP $ 72.740</span>
     </div>
-    <div class="itinerario-precio-row">
+
+    <div class="itinerario-row">
       <span>Cargos:</span>
       <span>COP $ 2.860</span>
     </div>
@@ -252,13 +202,8 @@ body{
     </div>
 
     <div class="itinerario-section">
-      <span><b>IDA</b></span>
+      <b>IDA</b>
       <span>Directo</span>
-    </div>
-
-    <div class="itinerario-airline">
-      <span>Vuelo 4324 · LATAM Airlines</span>
-      <span>Económica</span>
     </div>
 
     <div class="itinerario-ruta">
@@ -276,16 +221,31 @@ body{
     </div>
 
     <div class="itinerario-info">
-      Equipaje no incluido · Airbus A320 · Tarifa BASIC
+      Equipaje no incluido · Tarifa BASIC
     </div>
+
   </div>
 
   <!-- PRECIOS -->
   <div class="card">
-    <div class="total">Tarifa: COP $ <span id="precio"></span></div>
-    <div class="total">Impuestos y tasas: COP $ 72.740</div>
-    <div class="total big">Total: COP $ <span id="total"></span></div>
-    <div class="total big"><span class="off">5% OFF</span> COP $ <span id="totalOff"></span></div>
+
+    <div class="total">
+      Tarifa: COP $ <span id="precio"></span>
+    </div>
+
+    <div class="total">
+      Impuestos y tasas: COP $ 72.740
+    </div>
+
+    <div class="total big">
+      Total: COP $ <span id="total"></span>
+    </div>
+
+    <div class="total big">
+      <span class="off">5% OFF</span>
+      COP $ <span id="totalOff"></span>
+    </div>
+
   </div>
 
   <button class="btn" onclick="irAItinerario()">Compra ahora</button>
@@ -303,32 +263,25 @@ let ida = getParam("ida");
 let vuelta = getParam("vuelta");
 let tipo = getParam("tipo");
 
-let precio = parseInt(getParam("precioFinal") || 0);
-let precioOff = getParam("precioOff") || 0;
+let precio = getParam("precioFinal");
+let precioOff = getParam("precioOff");
 
-document.getElementById("titulo").innerText = "Paquete a " + destino + ", Colombia";
+document.getElementById("titulo").innerText =
+  "Paquete a " + destino + ", Colombia";
 
-document.getElementById("rutaIda").innerText = origen + " → " + destino;
-document.getElementById("detalleIda").innerText = "Salida: " + ida;
-document.getElementById("duracionIda").innerText = "Duración aproximada: 53 min";
+document.getElementById("textoIncluye").innerText =
+  tipo === "oneway"
+  ? "Vuelo solo ida para tu viaje"
+  : "Vuelos de ida y vuelta para tu viaje";
 
-if(tipo === "oneway"){
-  document.getElementById("bloqueVuelta").style.display = "none";
-  document.getElementById("separador").style.display = "none";
-  document.getElementById("textoIncluye").innerText = "Vuelo solo ida para tu viaje";
-}else{
-  document.getElementById("rutaVuelta").innerText = destino + " → " + origen;
-  document.getElementById("detalleVuelta").innerText = "Regreso: " + vuelta;
-  document.getElementById("duracionVuelta").innerText = "Duración aproximada: 53 min";
-  document.getElementById("textoIncluye").innerText = "Vuelos de ida y vuelta para tu viaje";
-}
-
-document.getElementById("precio").innerText = precio.toLocaleString();
-document.getElementById("total").innerText = (precio + 72740).toLocaleString();
+document.getElementById("precio").innerText = precio;
+document.getElementById("total").innerText =
+  (parseInt(precio) + 72740).toLocaleString();
 document.getElementById("totalOff").innerText = precioOff;
 
-document.getElementById("tarifaBase").innerText = precio.toLocaleString();
-document.getElementById("totalItinerario").innerText = (precio + 72740 + 2860).toLocaleString();
+document.getElementById("tarifaBase").innerText = precio;
+document.getElementById("totalItinerario").innerText =
+  (parseInt(precio) + 72740 + 2860).toLocaleString();
 
 document.getElementById("origenCode").innerText = origen;
 document.getElementById("destinoCode").innerText = destino;
@@ -336,7 +289,18 @@ document.getElementById("horaSalida").innerText = ida;
 document.getElementById("horaLlegada").innerText = "22:30";
 
 function irAItinerario(){
-  window.location.href = "itinerario.html?origen="+origen+"&destino="+destino;
+  let pasajeros = getParam("pasajeros") || 1;
+
+  let url = "itinerario.html?" +
+    "origen=" + encodeURIComponent(origen) +
+    "&destino=" + encodeURIComponent(destino) +
+    "&ida=" + encodeURIComponent(ida) +
+    "&vuelta=" + encodeURIComponent(vuelta) +
+    "&tipo=" + encodeURIComponent(tipo) +
+    "&pasajeros=" + encodeURIComponent(pasajeros) +
+    "&precioFinal=" + encodeURIComponent(precio);
+
+  window.location.href = url;
 }
 </script>
 

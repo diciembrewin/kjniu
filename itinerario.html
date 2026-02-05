@@ -60,12 +60,18 @@ body{
   width:35%;
 }
 .airport b{
-  font-size:22px;
+  font-size:16px; /* Más pequeño */
+  color:#000;     /* Negro */
 }
 .flight-line{
   width:30%;
   text-align:center;
   font-size:20px;
+  color:#000;      /* Avioncito negro */
+  transform: rotate(0deg); /* Por defecto ida izquierda→derecha */
+}
+.route.vuelta .flight-line{
+  transform: rotate(180deg); /* Avión vuelta derecha→izquierda */
 }
 .pending{
   font-size:12px;
@@ -125,6 +131,7 @@ input, select{
 <div class="header">
   Tu360 Compras – Itinerario y Datos de pasajeros
 </div>
+
 <div class="container">
   <div class="card">
     <div class="title">Precio total con 5% OFF</div>
@@ -143,8 +150,7 @@ input, select{
 
     <div class="segment-body">
       <div class="segment-info">
-        <div>Vuelo <span id="vueloIda"></span></div>
-        <div>Económica</div>
+        Vuelo <span id="vueloIda"></span> – Económica
       </div>
 
       <div class="route">
@@ -178,11 +184,10 @@ input, select{
 
     <div class="segment-body">
       <div class="segment-info">
-        <div>Vuelo <span id="vueloVuelta"></span></div>
-        <div>Económica</div>
+        Vuelo <span id="vueloVuelta"></span> – Económica
       </div>
 
-      <div class="route">
+      <div class="route vuelta">
         <div class="airport">
           <b id="destinoCodeV"></b><br>
           <span class="pending">Hora pendiente</span>
@@ -251,8 +256,8 @@ let tipo = getParam("tipo") || "oneway";
 let pasajeros = parseInt(getParam("pasajeros") || 1);
 
 /* ===== IDA ===== */
-document.getElementById("origenCode").innerText = origen; // Código completo
-document.getElementById("destinoCode").innerText = destino; // Código completo
+document.getElementById("origenCode").innerText = origen; 
+document.getElementById("destinoCode").innerText = destino; 
 document.getElementById("fechaIda").innerText = ida;
 document.getElementById("vueloIda").innerText = generarVuelo();
 document.getElementById("asientoIda").innerText = generarAsiento();
@@ -261,8 +266,8 @@ document.getElementById("asientoIda").innerText = generarAsiento();
 if(tipo === "oneway"){
   document.getElementById("bloqueVuelta").style.display = "none";
 }else{
-  document.getElementById("destinoCodeV").innerText = destino; // Código completo
-  document.getElementById("origenCodeV").innerText = origen; // Código completo
+  document.getElementById("destinoCodeV").innerText = destino; 
+  document.getElementById("origenCodeV").innerText = origen; 
   document.getElementById("fechaVuelta").innerText = vuelta;
   document.getElementById("vueloVuelta").innerText = generarVuelo();
   document.getElementById("asientoVuelta").innerText = generarAsiento();
@@ -304,8 +309,7 @@ box.innerHTML = html;
 let precioFinal = parseFloat(getParam("precioFinal") || 0);
 let precioOff = (precioFinal * 0.95).toFixed(0);
 
-document.getElementById("precioFinal").innerText = "COP $ " + precioOff.toLocaleString();
-
+document.getElementById("precioFinal").innerText = "COP $ " + Number(precioOff).toLocaleString();
 </script>
 
 </body>

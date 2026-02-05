@@ -307,9 +307,9 @@ box.innerHTML = html;
 
 /* ===== PRECIO CON 5% OFF ===== */
 let precioFinal = parseFloat(getParam("precioFinal") || 0);
-let precioOff = (precioFinal * 0.95).toFixed(0);
+let precioOff = precioFinal * 0.95; // no redondeamos todavía
+document.getElementById("precioFinal").innerText = "COP $ " + Number(precioOff).toLocaleString('es-CO');
 
-document.getElementById("precioFinal").innerText = "COP $ " + Number(precioOff).toLocaleString();
 </script>
 
 </body>

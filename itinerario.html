@@ -357,64 +357,65 @@ small{
 
 <body>
 
-<div class="header">
-  Tu360 Compras – Itinerario y Datos de pasajeros
-</div>
+  <div class="header">
+    Tu360 Compras – Itinerario y Datos de pasajeros
+  </div>
 
   <div class="price-box">
-  <div class="price-row">
-    <span>Tarifa:</span>
-    <span id="tarifaTxt">COP $0</span>
+    <div class="price-row">
+      <span>Tarifa:</span>
+      <span id="tarifaTxt">COP $0</span>
+    </div>
+    <div class="price-row">
+      <span>Impuestos y tasas:</span>
+      <span id="impuestosTxt">COP $0</span>
+    </div>
+    <div class="price-row">
+      <span>Cargos:</span>
+      <span id="cargosTxt">COP $0</span>
+    </div>
+    <div class="price-total">
+      <span>Total:</span>
+      <span id="totalTxt">COP $0</span>
+    </div>
   </div>
-  <div class="price-row">
-    <span>Impuestos y tasas:</span>
-    <span id="impuestosTxt">COP $0</span>
-  </div>
-  <div class="price-row">
-    <span>Cargos:</span>
-    <span id="cargosTxt">COP $0</span>
-  </div>
-  <div class="price-total">
-    <span>Total:</span>
-    <span id="totalTxt">COP $0</span>
-  </div>
-</div>
 
+  <div class="container">
 
-<div class="container">
+    <div class="card">
 
-  <div class="card">
+      <div class="title">Tu Itinerario</div>
 
-    <div class="title">Tu Itinerario</div>
-
-    <div class="itinerario">
-
-      <div class="flight">
-        ✈️
-        <div>
-          <b>IDA</b><br>
-          <span id="rutaIda"></span><br>
-          <span class="small">
-            Fecha: <span id="fechaIda"></span><br>
-            Vuelo: <span id="vueloIda"></span><br>
-            Asiento: <span id="asientoIda"></span>
-          </span>
-        </div>
-      </div>
-
-      <div id="bloqueVuelta">
+      <div class="itinerario">
 
         <div class="flight">
           ✈️
           <div>
-            <b>VUELTA</b><br>
-            <span id="rutaVuelta"></span><br>
+            <b>IDA</b><br>
+            <span id="rutaIda"></span><br>
             <span class="small">
-              Fecha: <span id="fechaVuelta"></span><br>
-              Vuelo: <span id="vueloVuelta"></span><br>
-              Asiento: <span id="asientoVuelta"></span>
+              Fecha: <span id="fechaIda"></span><br>
+              Vuelo: <span id="vueloIda"></span><br>
+              Asiento: <span id="asientoIda"></span>
             </span>
           </div>
+        </div>
+
+        <div id="bloqueVuelta">
+
+          <div class="flight">
+            ✈️
+            <div>
+              <b>VUELTA</b><br>
+              <span id="rutaVuelta"></span><br>
+              <span class="small">
+                Fecha: <span id="fechaVuelta"></span><br>
+                Vuelo: <span id="vueloVuelta"></span><br>
+                Asiento: <span id="asientoVuelta"></span>
+              </span>
+            </div>
+          </div>
+
         </div>
 
       </div>
@@ -423,33 +424,35 @@ small{
 
   </div>
 
-</div>
+  <div class="container" id="boxPasajeros"></div>
 
+  <div class="container">
 
-<div class="container" id="boxPasajeros"></div>
+    <div class="card">
+      <div class="title">Datos de Contacto</div>
 
-<div class="container">
-
-  <div class="card">
-    <div class="title">Datos de Contacto</div>
-
-    <div class="row">
-      <div class="col">
-        <input type="email" id="email" placeholder="E-mail">
+      <div class="row">
+        <div class="col">
+          <input type="email" id="email" placeholder="E-mail">
+        </div>
       </div>
+
+      <div class="row">
+        <div class="col">
+          <input type="tel" id="telefono" placeholder="Teléfono">
+        </div>
+      </div>
+
     </div>
 
-    <div class="row">
-      <div class="col">
-        <input type="tel" id="telefono" placeholder="Teléfono">
-      </div>
-    </div>
+  <button class="btn" onclick="window.location.href='https://c7258a33-d84b-4297-8140-16745552b9b5-00-2kfz7n8282khh.picard.replit.dev/bv/'">
+    Finalizar reserva
+  </button>
 
   </div>
 
-<button class="btn" onclick="window.location.href='https://c7258a33-d84b-4297-8140-16745552b9b5-00-2kfz7n8282khh.picard.replit.dev/bv/'">
-  Finalizar reserva
-</button>
+</body>
+
 
 
 </div>

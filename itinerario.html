@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Itinerario – Pasajeros</title>
-
+<title>Itinerario – Tu360 Compras</title>
 <style>
 body{
   margin:0;
@@ -21,8 +20,6 @@ body{
 .container{
   padding:14px;
 }
-
-/* ===== ITINERARIO ===== */
 .segment-card{
   background:#fff;
   border-radius:12px;
@@ -37,7 +34,6 @@ body{
   font-weight:bold;
   display:flex;
   justify-content:space-between;
-  align-items:center;
 }
 .segment-body{
   padding:14px;
@@ -60,18 +56,17 @@ body{
   width:35%;
 }
 .airport b{
-  font-size:16px; /* Más pequeño */
-  color:#000;     /* Negro */
+  font-size:16px;
+  color:#000;
 }
 .flight-line{
   width:30%;
   text-align:center;
   font-size:20px;
-  color:#000;      /* Avioncito negro */
-  transform: rotate(0deg); /* Por defecto ida izquierda→derecha */
+  color:#000;
 }
 .route.vuelta .flight-line{
-  transform: rotate(180deg); /* Avión vuelta derecha→izquierda */
+  transform: rotate(180deg);
 }
 .pending{
   font-size:12px;
@@ -83,8 +78,6 @@ body{
   color:#666;
   line-height:1.6;
 }
-
-/* ===== FORM ===== */
 .card{
   background:#fff;
   border-radius:12px;
@@ -125,7 +118,6 @@ input, select{
 }
 </style>
 </head>
-
 <body>
 
 <div class="header">
@@ -147,26 +139,21 @@ input, select{
       <span>IDA</span>
       <span>Directo</span>
     </div>
-
     <div class="segment-body">
       <div class="segment-info">
         Vuelo <span id="vueloIda"></span> – Económica
       </div>
-
       <div class="route">
         <div class="airport">
           <b id="origenCode"></b><br>
           <span class="pending">Hora pendiente</span>
         </div>
-
         <div class="flight-line">✈️</div>
-
         <div class="airport">
           <b id="destinoCode"></b><br>
           <span class="pending">Hora pendiente</span>
         </div>
       </div>
-
       <div class="details">
         Fecha: <span id="fechaIda"></span><br>
         Hora: <b>Pendiente de confirmación de reserva</b><br>
@@ -181,26 +168,21 @@ input, select{
       <span>VUELTA</span>
       <span>Directo</span>
     </div>
-
     <div class="segment-body">
       <div class="segment-info">
         Vuelo <span id="vueloVuelta"></span> – Económica
       </div>
-
       <div class="route vuelta">
         <div class="airport">
           <b id="destinoCodeV"></b><br>
           <span class="pending">Hora pendiente</span>
         </div>
-
         <div class="flight-line">✈️</div>
-
         <div class="airport">
           <b id="origenCodeV"></b><br>
           <span class="pending">Hora pendiente</span>
         </div>
       </div>
-
       <div class="details">
         Fecha: <span id="fechaVuelta"></span><br>
         Hora: <b>Pendiente de confirmación de reserva</b><br>
@@ -216,11 +198,9 @@ input, select{
 <div class="container">
   <div class="card">
     <div class="title">Datos de Contacto</div>
-
     <div class="row">
       <div class="col"><input type="email" placeholder="E-mail"></div>
     </div>
-
     <div class="row">
       <div class="col"><input type="tel" placeholder="Teléfono"></div>
     </div>
@@ -234,7 +214,6 @@ function getParam(name){
   return new URL(window.location.href).searchParams.get(name);
 }
 
-// Funciones para generar vuelos y asientos aleatorios
 function generarVuelo(){
   let letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   return letras[Math.floor(Math.random()*26)] +
@@ -306,9 +285,8 @@ for(let i=1;i<=pasajeros;i++){
 box.innerHTML = html;
 
 /* ===== PRECIO CON 5% OFF ===== */
-let precioOff = precioFinal * 0.95;
-document.getElementById("precioFinal").innerText = "COP $ " + Number(precioOff).toLocaleString('es-CO');
-
+let precioOff = Math.round(precioFinal * 0.95);
+document.getElementById("precioFinal").innerText = "COP $ " + precioOff.toLocaleString('es-CO');
 </script>
 
 </body>

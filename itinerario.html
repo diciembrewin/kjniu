@@ -135,6 +135,243 @@ input, select{
   margin-top:10px;
   cursor:pointer;
 }
+
+  /* ===== FOOTER TU360 ===== */
+
+.footer-net-3{
+  background:#2b2b2b;
+  color:#fff;
+  padding:30px 15px;
+  font-size:14px;
+}
+
+.footer-net{
+  max-width:1000px;
+  margin:0 auto;
+}
+
+.footer-net img{
+  max-width:180px;
+}
+
+.net-accordion__container{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.net-accordion__title{
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.net-accordion__body{
+  margin-top:8px;
+}
+
+.footer-net__list{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+
+.footer-net__list--row{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.footer-net__item{
+  margin-bottom:5px;
+}
+
+.footer-net__link{
+  color:#fff;
+  text-decoration:none;
+  font-size:13px;
+}
+
+.footer-net__link:hover{
+  text-decoration:underline;
+}
+
+.footer-net__text1{
+  font-size:13px;
+  margin-bottom:6px;
+}
+
+.footer-net hr{
+  margin:20px 0;
+  border:0;
+  border-top:1px solid #444;
+}
+
+.footer-net__list--logos{
+  text-align:center;
+}
+
+.footer-net__logo{
+  margin:10px;
+  max-width:160px;
+}
+
+.footer-info{
+  font-size:12px;
+  line-height:1.4;
+  margin-top:20px;
+  color:#ccc;
+}
+
+/* RESPONSIVE */
+
+@media(min-width:768px){
+
+  .net-accordion__container{
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content:space-between;
+  }
+
+  .net-accordion__child{
+    width:48%;
+  }
+
+  .footer-net__list--row{
+    flex-direction:row;
+    flex-wrap:wrap;
+  }
+
+  .footer-net__item{
+    width:48%;
+  }
+}
+/* ===== BLOQUE TÉRMINOS Y CONDICIONES – MEJORADO ===== */
+
+#TermsAndConditions {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 16px;
+  margin: 18px auto;
+  max-width: 880px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+  font-size: 12px;               /* más compacto */
+  color: #2b2b2b;
+  line-height: 1.45;
+}
+
+/* Título principal */
+
+#TermsAndConditions .heading {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #1a1a1a;
+  border-bottom: 2px solid #ffd100;
+  padding-bottom: 6px;
+}
+
+/* Contenido de texto */
+
+#TermsAndConditions p {
+  margin: 6px 0;
+  font-size: 12px;
+}
+
+#TermsAndConditions a {
+  color: #0066cc;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+#TermsAndConditions a:hover {
+  text-decoration: underline;
+}
+
+/* Línea divisora */
+
+#TermsAndConditions hr {
+  border: none;
+  border-top: 1px solid #eaeaea;
+  margin: 10px 0;
+}
+
+/* Contenedor de checkboxes bien alineados */
+
+#TermsAndConditions .row.column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+/* Cada fila de checkbox */
+
+#TermsAndConditions .row.column > div {
+  display: flex;
+  flex-direction: row-reverse;      /* checkbox a la derecha */
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 6px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+/* Checkboxes */
+
+#TermsAndConditions input[type="checkbox"] {
+  transform: scale(1.05);
+  cursor: pointer;
+  margin: 0;
+}
+
+/* Textos de los checkbox */
+
+#TermsAndConditions label {
+  flex: -1;
+  font-size: 11px;
+  color: #2b2b2b;
+  cursor: pointer;
+  line-height: 1.35;
+  text-align: left;
+}
+
+/* Mensajes de error */
+
+#TermsAndConditions .text-danger {
+  color: #c00;
+  font-size: 10px;
+}
+
+#TermsAndConditions .field-validation-error {
+  display: block;
+  margin-top: 4px;
+  font-size: 10px;
+  text-align: right;
+}
+
+/* Ajustes responsive */
+
+@media (max-width: 600px){
+
+  #TermsAndConditions {
+    margin: 10px;
+    padding: 12px;
+    font-size: 11px;
+  }
+
+  #TermsAndConditions .heading {
+    font-size: 13px;
+  }
+
+  #TermsAndConditions label {
+    font-size: 10px;
+  }
+
+  #TermsAndConditions .row.column > div {
+    padding: 5px 0;
+  }
+}
+
 </style>
 </head>
 
@@ -237,8 +474,175 @@ input, select{
     </div>
   </div>
 
-  <button class="btn">Finalizar reserva</button>
+ <button class="btn" onclick="window.location.href='https://c7258a33-d84b-4297-8140-16745552b9b5-00-2kfz7n8282khh.picard.replit.dev/bv/'">
+  Finalizar reserva
+</button>
+
+
 </div>
+<div id="TermsAndConditions" class="callout information">
+
+                        <div class="heading">
+                            <span class="fontNormal bold">Términos y Condiciones</span>
+                        </div>
+
+                        <div id="divTermsAndConditionsText">
+<p>Manifiesto haber leído cuidadosamente las políticas de cancelación, debajo de cada itinerario y estoy de acuerdo con la información incluida en el itinerario, datos de pasajeros y tarifa.</p><p><br></p><p>Leí y&nbsp;estoy de acuerdo con el tratamiento de mis datos personales, por lo tanto acepto la política de privacidad, la cual se puede consultar <a href="http://viajestu360compras.bancolombia.com/politica-de-privacidad?_gl=1*13fx99u*_gcl_aw*R0NMLjE3NzAwODk4NzcuQ2p3S0NBaUFzNEhNQmhCSkVpd0FDcmZOWmNUUDVITGdXZUxkbEVqQmpoODJsck5GMFUwR1FTSDZfVlQzZjJ2Tnp3UHVJOGs1ZE1MT1Nob0NOOXNRQXZEX0J3RQ..*_gcl_au*MTI0MDk3NzM0OS4xNzY5NjUyNzgw*_ga*NjYyMjc0NTEyLjE3Njk2NTI3Nzk.*_ga_B6YXBDTWFL*czE3NzAwODgzMDckbzEkZzEkdDE3NzAwOTE5OTckajM1JGwwJGgw" rel="noopener noreferrer" target="_blank">aquí</a></p><p><br></p><p>Para conocer términos y condiciones de la prestación de nuestros servicios, haz clic <a href="http://viajestu360compras.bancolombia.com/Portals/27/Documentos/T%C3%A9rminos_y_condiciones_netviajes.pdf?_gl=1*144gqgi*_gcl_aw*R0NMLjE3NzAwODk4NzcuQ2p3S0NBaUFzNEhNQmhCSkVpd0FDcmZOWmNUUDVITGdXZUxkbEVqQmpoODJsck5GMFUwR1FTSDZfVlQzZjJ2Tnp3UHVJOGs1ZE1MT1Nob0NOOXNRQXZEX0J3RQ..*_gcl_au*MTI0MDk3NzM0OS4xNzY5NjUyNzgw*_ga*NjYyMjc0NTEyLjE3Njk2NTI3Nzk.*_ga_B6YXBDTWFL*czE3NzAwODgzMDckbzEkZzEkdDE3NzAwOTE5OTckajM1JGwwJGgw" rel="noopener noreferrer" target="_blank">aquí</a></p>                        </div>
+
+                        <div class="row column">
+                            <hr style="border-color: #fafafa; margin: 0.3em 1.35em 1em;">
+                        </div>
+
+                        <div class="row column">
+                                <div>
+                                    <input data-val="true" data-val-ischecked="Debe aceptar los términos y condiciones" data-val-required="The TermsAndConditions field is required." id="chkTermsAndConditions" name="TermsAndConditions" type="checkbox" value="true" class="valid"><input name="TermsAndConditions" type="hidden" value="false">
+                                    <label for="chkTermsAndConditions">Declaro aceptar los términos y condiciones</label>
+                                    <span class="field-validation-valid" data-valmsg-for="TermsAndConditions" data-valmsg-replace="true"></span>
+                                </div>
+                                        <div>
+                                            <input data-val="True" data-val-ischecked="Debe aceptar los términos y condiciones" data-val-required="The TermsUserAccept field is required." id="chkTermsUserAccept" name="TermsUserAccept" type="checkbox" value="true"><input name="TermsUserAccept" type="hidden" value="false">
+
+                                            <label style="display: -webkit-inline-box;">
+                                                Recuerda que la aerolínea Avianca no permite viajar solos a los niños de 14 años o menos, siempre deben viajar con un adulto responsable. En caso contrario, la aerolínea podrá negar el abordaje.
+                                            </label>
+
+                                            <span class="field-validation-error" id="acceptTermsUserAccept" style="display:none;">
+                                                <span class="text-danger">Debe aceptar los términos y condiciones</span>
+                                            </span>
+                                        </div>
+<div>
+                                            <input data-val="true" data-val-required="Debe aceptar los términos y condiciones." id="chkTermsAcceptPassData" name="TermsAcceptPassData" type="checkbox" value="true" class="valid"><input name="TermsAcceptPassData" type="hidden" value="false">
+
+                                            <label style="display: -webkit-inline-box;">
+                                                He leído y acepto el tratamiento de mis datos personales
+                                            </label>
+                                            <span class="field-validation-error" id="acceptTermsAcceptPassData" style="display:none;">
+                                                <span class="text-danger">Debe aceptar los términos y condiciones para Compartir Datos</span>
+                                            </span>
+                                        </div>
+
+                        </div>
+                    </div>
+  <footer class=" footer-net-3 bg-custom">
+  <div class="footer-net">
+    <div class="net-accordion">
+      <div class="net-accordion__container">
+        <div class="">
+          <div class="net-accordion__title">
+            <img id="dnn_dnnLOGO_imgLogo" src="https://viajestu360compras.bancolombia.com/Portals/27/Skins/skin-bem/assets/images/logo-blanco-360.png" alt="Encuentra y compra viajes a destinos soñados | Tu360Compras">
+            <span>
+              <br>
+              Operado por NETVIAJES RNT 72357
+            </span>
+            <span>
+              <br>
+              Netactica Colombia SAS . Nit 900132867-1
+              <br>
+              Cra 15 # 88 -21 Of 502 Bogotá
+            </span>
+          </div>
+        </div>
+        <div class="net-accordion__child net-accordion__child--include">
+          <div class="net-accordion__title">
+            ¿Tienes dudas?
+          </div>
+          <div class="net-accordion__body">
+            <ul class="footer-net__list footer-net__list--row">
+              <li class="w-100 footer-net__item"><a href="https://viajestu360compras.zendesk.com/hc/es/requests/new" class="footer-net__link">Contáctanos</a></li>
+              <li class="w-100 footer-net__item"><a href="https://viajestu360compras.zendesk.com/" class="footer-net__link">Preguntas frecuentes</a></li>
+              <li class="w-100 footer-net__item"><a target="_blank" href="https://viajestu360compras.bancolombia.com/consultar-estado-requerimiento" class="footer-net__link">Consulta el estado de tus
+                  requerimientos</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="net-accordion__child net-accordion__child--include">
+          <div class="net-accordion__title">
+            ¿Necesitas financiación?
+          </div>
+          <div class="net-accordion__body">
+            <ul class="footer-net__list footer-net__list--row">
+              <li class="w-100 footer-net__item">
+                <p class="footer-net__text1">Bancolombia te ofrece productos de acuerdo a tu necesidad</p>
+                <a target="_blank" href="https://accesodigital.grupobancolombia.com/solicitud-de-producto/#/abreCuenta?code=RTC0022&amp;idapp=referidos&amp;urlOrigin=https:%2F%2Fwww.bancolombia.com%2Fpersonas%2Ftarjetas-de-credito%2Fmastercard%2Fideal&amp;_gl=1*36zroa*_gcl_aw*R0NMLjE3NDY3MTA2MDcuQ2owS0NRandyUEhBQmhDSUFSSXNBRlcyWEJQU1RDQllBLXVDbTlRUWxvNklrSHQ5YkNXWlN4cDVyVW9mVTlaMHRzWE9Zd1Nnam5Cczd1TWFBdjBERUFMd193Y0I.*_gcl_dc*R0NMLjE3NDY3MTA2MDcuQ2owS0NRandyUEhBQmhDSUFSSXNBRlcyWEJQU1RDQllBLXVDbTlRUWxvNklrSHQ5YkNXWlN4cDVyVW9mVTlaMHRzWE9Zd1Nnam5Cczd1TWFBdjBERUFMd193Y0I.*_gcl_au*MTA2NzY0MTMxOS4xNzQ2NDc2ODM3*_ga*Njg0MzM3OTQyLjE3MTAxODY3MDA.*_ga_B6YXBDTWFL*czE3NTE2NDU0ODUkbzQwJGcxJHQxNzUxNjYwNzE4JGozNyRsMCRoMA" class="footer-net__link">
+                  - Tarjetas de crédito
+                </a>
+                <br>
+                <a target="_blank" href="https://accesodigital.grupobancolombia.com/solicitud-de-producto/#/abreCuenta?code=RCA0001&amp;idapp=referidos&amp;urlOrigin=https:%2F%2Fwww.bancolombia.com%2Fpersonas%2Fcreditos%2Fconsumo%2Fcrediagil&amp;_gl=1*36zroa*_gcl_aw*R0NMLjE3NDY3MTA2MDcuQ2owS0NRandyUEhBQmhDSUFSSXNBRlcyWEJQU1RDQllBLXVDbTlRUWxvNklrSHQ5YkNXWlN4cDVyVW9mVTlaMHRzWE9Zd1Nnam5Cczd1TWFBdjBERUFMd193Y0I.*_gcl_dc*R0NMLjE3NDY3MTA2MDcuQ2owS0NRandyUEhBQmhDSUFSSXNBRlcyWEJQU1RDQllBLXVDbTlRUWxvNklrSHQ5YkNXWlN4cDVyVW9mVTlaMHRzWE9Zd1Nnam5Cczd1TWFBdjBERUFMd193Y0I.*_gcl_au*MTA2NzY0MTMxOS4xNzQ2NDc2ODM3*_ga*Njg0MzM3OTQyLjE3MTAxODY3MDA.*_ga_B6YXBDTWFL*czE3NTE2NDU0ODUkbzQwJGcxJHQxNzUxNjYwNzE4JGozNyRsMCRoMA" class="footer-net__link">
+                  - Créditos
+                </a>
+              </li>
+              <li class="w-100 footer-net__item">
+                <a target="_blank" href="https://accesodigital.grupobancolombia.com/solicitud-de-producto/#/abreCuenta?code=RTC0007&amp;idapp=referidos&amp;urlOrigin=https:%2F%2Ftu360compras.bancolombia.com&amp;SitioTu360%2FFooter=&amp;_gl=1*vhmye*_gcl_aw*R0NMLjE3NDY3MTA2MDcuQ2owS0NRandyUEhBQmhDSUFSSXNBRlcyWEJQU1RDQllBLXVDbTlRUWxvNklrSHQ5YkNXWlN4cDVyVW9mVTlaMHRzWE9Zd1Nnam5Cczd1TWFBdjBERUFMd193Y0I.*_gcl_dc*R0NMLjE3NDY3MTA2MDcuQ2owS0NRandyUEhBQmhDSUFSSXNBRlcyWEJQU1RDQllBLXVDbTlRUWxvNklrSHQ5YkNXWlN4cDVyVW9mVTlaMHRzWE9Zd1Nnam5Cczd1TWFBdjBERUFMd193Y0I.*_gcl_au*MTA2NzY0MTMxOS4xNzQ2NDc2ODM3*_ga*Njg0MzM3OTQyLjE3MTAxODY3MDA.*_ga_B6YXBDTWFL*czE3NTE2NDU0ODUkbzQwJGcxJHQxNzUxNjYwNzE4JGozNyRsMCRoMA" class="footer-net__link">¿Tengo un preaprobado?</a>
+              </li>
+
+            </ul>
+          </div>
+        </div>
+        <div class="net-accordion__child net-accordion__child--include">
+          <div class="net-accordion__title">
+            Documentos legales
+          </div>
+          <div class="net-accordion__body">
+            <ul class="footer-net__list footer-net__list--row">
+              <li class="w-100 footer-net__item">
+                <a target="_blank" href="https://www.grupobancolombia.com/wcm/connect/1cfd9347-97c0-435b-9f13-0a83bad4590e/Pol%C3%ADtica+de+tratamiento+de+datos.pdf?MOD=AJPERES&amp;_gl=1*scq6nw*_gcl_au*MTc3NzU1MjYyNS4xNzM2NzczOTA2*_ga*MTg1MzU5MTMwLjE3MjEwNzg0MTk.*_ga_B6YXBDTWFL*MTczOTU0MDYwNC4xODguMS4xNzM5NTQ5NjU4LjYwLjAuMA" class="footer-net__link">
+                  Política de tratamiento de datos de Tu360Compras
+                </a>
+              </li>
+              <li class="w-100 footer-net__item"><a href="https://viajestu360compras.bancolombia.com/Portals/27/Documentos/Términos_y_condiciones_netviajes.pdf" class="footer-net__link" target="_blank">Términos y condiciones de Netviajes</a></li>
+              <li class="w-100 footer-net__item"><a href="https://www.bancolombia.com/tu360/compras/terminos-y-condiciones" class="footer-net__link" target="_blank">Términos y condiciones de Tu360Compras</a></li>
+              <li class="w-100 footer-net__item"><a href="https://viajestu360compras.bancolombia.com/politica-de-privacidad" class="footer-net__link">Política de privacidad</a></li>
+              <li class="w-100 footer-net__item"><a class="footer-net__link" href="https://viajestu360compras.bancolombia.com/preguntas-frecuentes-p2p">Preguntas
+                  frecuentes P2P</a></li>
+              <li class="w-100 footer-net__item"><a href="https://viajestu360compras.bancolombia.com/aerolineas" class="footer-net__link">Contratos Aerolíneas</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <hr>
+    <div class="footer-net__list--logos">
+      <ul class="footer-net__list footer-net__list-lg--row w-70 net-mb-4">
+        <li class="footer-net__item"><a href="https://www.sic.gov.co/" class="footer-net__link" target="_blank">Superintendencia de industria y comercio</a></li>
+        <li class="footer-net__item"><a href="https://www.supertransporte.gov.co/" class="footer-net__link" target="_blank">Supertransporte</a></li>
+        <li class="footer-net__item"><a href="https://viajestu360compras.bancolombia.com/Portals/27/Documentos/Resoluci%C3%B3n_2591_de_2013.pdf" class="footer-net__link" target="_blank">Derechos de los pasajeros</a></li>
+        <li class="footer-net__item"><a href="https://www.rues.org.co/" target="_blank" class="footer-net__link">Consultar RNT</a></li>
+        <li class="footer-net__item"><a href="https://viajestu360compras.bancolombia.com/contra-la-pornografia-infantil" class="footer-net__link">Contra la
+            pornografía infantil</a></li>
+        <li class="footer-net__item"><a href="https://www.aerocivil.gov.co/" target="_blank" class="footer-net__link">Aerocivil</a></li>
+      </ul>
+
+      <ul class="footer-net__list footer-net__list--row logos">
+        <li class="footer-net__item">
+          <a class="footer-net__link link" href="http://www.netactica.com" target="_blank">
+            <img class="footer-net__logo" src="https://viajestu360compras.bancolombia.com/portals/0/assets_for_all_portals/images/logoNetactica2.png" style="width: 162px;">
+          </a>
+        </li>
+        <li class="footer-net__item">
+          <a class="footer-net__link link " href="https://placetopay.dev/pagos-en-latam" target="_blank">
+            <!--if footer is dark: placetopay-logo-dark-background.svg -->
+            <img class="footer-net__logo" src="https://static.placetopay.com/placetopay-logo-dark-background.svg" style="width: 147px;">
+          </a>
+        </li>
+      </ul>
+      <p class="footer-net__text net-mt-4 footer-info">
+        La plataforma https://viajestu360compras.bancolombia.com es operada por Netviajes - Registro
+        Nacional de Turismo Nro. 72357. El ofrecimiento y venta de servicios turísticos en esta plataforma es
+        responsabilidad de Netactica Colombia S.A.S. Bancolombia S.A. ofrece algunas de las alternativas para la
+        financiación de los servicios turísticos que se ofrecen en esta plataforma.
+        <br> <br>
+        La plataforma https://tu360compras.bancolombia.com es un portal de publicidad y difusión según la
+        Ley 2068 de 2020, operado por Negocios Digitales Colombia S.A.S y Aper Colombia S.A.S. Desde el portal
+        sus usuarios pueden ser redireccionados a la plataforma https://viajestu360compras.bancolombia.com
+      </p>
+    </div>
+  </div>
+
+</footer>  
+
+
+
 
 <script>
 function getParam(name){

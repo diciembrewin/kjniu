@@ -20,31 +20,8 @@ body{
   border-bottom:1px solid #ddd;
 }
 
-.container{ padding:14px; }
-
-/* ===== RESUMEN PRECIO ===== */
-
-.price-card{
-  background:#fff;
-  border-radius:12px;
+.container{
   padding:14px;
-  margin-bottom:16px;
-  box-shadow:0 2px 8px rgba(0,0,0,.1);
-}
-
-.price-row{
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:8px;
-  color:#555;
-}
-
-.price-total{
-  display:flex;
-  justify-content:space-between;
-  margin-top:12px;
-  font-size:20px;
-  font-weight:bold;
 }
 
 /* ===== ITINERARIO ===== */
@@ -64,9 +41,13 @@ body{
   font-weight:bold;
   display:flex;
   justify-content:space-between;
+  align-items:center;
 }
 
-.segment-body{ padding:14px; font-size:13px; }
+.segment-body{
+  padding:14px;
+  font-size:13px;
+}
 
 .segment-info{
   display:flex;
@@ -87,7 +68,9 @@ body{
   width:35%;
 }
 
-.airport b{ font-size:22px; }
+.airport b{
+  font-size:22px;
+}
 
 .flight-line{
   width:30%;
@@ -130,7 +113,10 @@ body{
   flex-wrap:wrap;
 }
 
-.col{ flex:1; min-width:120px; }
+.col{
+  flex:1;
+  min-width:120px;
+}
 
 input, select{
   width:100%;
@@ -160,27 +146,6 @@ input, select{
 
 <div class="container">
 
-  <!-- RESUMEN DE VALOR -->
-  <div class="price-card">
-    <div class="price-row">
-      <span>Tarifa:</span>
-      <span id="tarifa"></span>
-    </div>
-    <div class="price-row">
-      <span>Impuestos y tasas:</span>
-      <span id="impuestos"></span>
-    </div>
-    <div class="price-row">
-      <span>Cargos:</span>
-      <span id="cargos"></span>
-    </div>
-
-    <div class="price-total">
-      <span>Total:</span>
-      <span id="total"></span>
-    </div>
-  </div>
-
   <!-- IDA -->
   <div class="segment-card">
     <div class="segment-header">
@@ -197,6 +162,7 @@ input, select{
       <div class="route">
         <div class="airport">
           <b id="origenCode"></b><br>
+          <small id="origenNombre"></small><br>
           <span class="pending">Hora pendiente</span>
         </div>
 
@@ -204,6 +170,7 @@ input, select{
 
         <div class="airport">
           <b id="destinoCode"></b><br>
+          <small id="destinoNombre"></small><br>
           <span class="pending">Hora pendiente</span>
         </div>
       </div>
@@ -216,63 +183,142 @@ input, select{
     </div>
   </div>
 
+  <!-- VUELTA -->
+  <div class="segment-card" id="bloqueVuelta">
+    <div class="segment-header">
+      <span>VUELTA</span>
+      <span>Directo</span>
+    </div>
+
+    <div class="segment-body">
+      <div class="segment-info">
+        <div>Vuelo <span id="vueloVuelta"></span></div>
+        <div>Económica</div>
+      </div>
+
+      <div class="route">
+        <div class="airport">
+          <b id="destinoCodeV"></b><br>
+          <small id="destinoNombreV"></small><br>
+          <span class="pending">Hora pendiente</span>
+        </div>
+
+        <div class="flight-line">✈️</div>
+
+        <div class="airport">
+          <b id="origenCodeV"></b><br>
+          <small id="origenNombreV"></small><br>
+          <span class="pending">Hora pendiente</span>
+        </div>
+      </div>
+
+      <div class="details">
+        Fecha: <span id="fechaVuelta"></span><br>
+        Hora: <b>Pendiente de confirmación de reserva</b><br>
+        Asiento: <span id="asientoVuelta"></span>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <div class="container" id="boxPasajeros"></div>
 
 <div class="container">
+  <div class="card">
+    <div class="title">Datos de Contacto</div>
+
+    <div class="row">
+      <div class="col"><input type="email" placeholder="E-mail"></div>
+    </div>
+
+    <div class="row">
+      <div class="col"><input type="tel" placeholder="Teléfono"></div>
+    </div>
+  </div>
+
   <button class="btn">Finalizar reserva</button>
 </div>
 
 <script>
-function formatCOP(valor){
-  return "COP $" + valor.toLocaleString("es-CO");
+function getParam(name){
+  return new URL(window.location.href).searchParams.get(name);
 }
 
 function generarVuelo(){
-  let l="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  return l[Math.floor(Math.random()*26)] +
-         l[Math.floor(Math.random()*26)] +
+  let letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  return letras[Math.floor(Math.random()*26)] +
+         letras[Math.floor(Math.random()*26)] +
          Math.floor(100 + Math.random()*900);
 }
 
 function generarAsiento(){
-  return Math.floor(1+Math.random()*30) +
-         ["A","B","C","D","E","F"][Math.floor(Math.random()*6)];
+  let fila = Math.floor(1 + Math.random()*30);
+  let letra = ["A","B","C","D","E","F"][Math.floor(Math.random()*6)];
+  return fila + letra;
 }
 
-/* ===== VALORES ===== */
-let tarifa = 52000;
-let impuestos = 33880;
-let cargos = 2860;
-let total = tarifa + impuestos + cargos;
+/* ===== PARAMS ===== */
+let origen = getParam("origen") || "CLO";
+let destino = getParam("destino") || "MDE";
+let ida = getParam("ida") || "26 Feb";
+let vuelta = getParam("vuelta");
+let tipo = getParam("tipo") || "oneway";
+let pasajeros = parseInt(getParam("pasajeros") || 1);
 
-document.getElementById("tarifa").innerText = formatCOP(tarifa);
-document.getElementById("impuestos").innerText = formatCOP(impuestos);
-document.getElementById("cargos").innerText = formatCOP(cargos);
-document.getElementById("total").innerText = formatCOP(total);
-
-/* ===== ITINERARIO ===== */
-let origen = "CLO";
-let destino = "MDE";
-let ida = "26 Feb";
-
+/* ===== IDA ===== */
 document.getElementById("origenCode").innerText = origen;
 document.getElementById("destinoCode").innerText = destino;
+document.getElementById("origenNombre").innerText = "Origen";
+document.getElementById("destinoNombre").innerText = "Destino";
 document.getElementById("fechaIda").innerText = ida;
 document.getElementById("vueloIda").innerText = generarVuelo();
 document.getElementById("asientoIda").innerText = generarAsiento();
 
+/* ===== VUELTA ===== */
+if(tipo === "oneway"){
+  document.getElementById("bloqueVuelta").style.display = "none";
+}else{
+  document.getElementById("destinoCodeV").innerText = destino;
+  document.getElementById("origenCodeV").innerText = origen;
+  document.getElementById("destinoNombreV").innerText = "Destino";
+  document.getElementById("origenNombreV").innerText = "Origen";
+  document.getElementById("fechaVuelta").innerText = vuelta;
+  document.getElementById("vueloVuelta").innerText = generarVuelo();
+  document.getElementById("asientoVuelta").innerText = generarAsiento();
+}
+
 /* ===== PASAJEROS ===== */
 let box = document.getElementById("boxPasajeros");
-box.innerHTML = `
+let html = "";
+
+for(let i=1;i<=pasajeros;i++){
+  html += `
   <div class="card">
-    <div class="title">Pasajero 1 – Adulto</div>
+    <div class="title">Pasajero ${i} – Adulto</div>
     <div class="row">
-      <div class="col"><input placeholder="Nombre"></div>
-      <div class="col"><input placeholder="Apellido"></div>
+      <div class="col"><input type="text" placeholder="Nombre"></div>
+      <div class="col"><input type="text" placeholder="Apellido"></div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <select>
+          <option>Cédula</option>
+          <option>Pasaporte</option>
+        </select>
+      </div>
+      <div class="col"><input type="text" placeholder="Número documento"></div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <small>Fecha de nacimiento</small>
+        <input type="date">
+      </div>
     </div>
   </div>`;
+}
+
+box.innerHTML = html;
 </script>
 
 </body>

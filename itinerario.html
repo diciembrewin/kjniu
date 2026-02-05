@@ -3,277 +3,224 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Itinerario – Pasajeros</title>
+<title>Su Itinerario</title>
 
 <style>
 body{
   margin:0;
-  font-family:Arial, sans-serif;
+  font-family:Arial, Helvetica, sans-serif;
   background:#f2f2f2;
+  color:#222;
 }
 
-.header{
-  background:#fff;
-  padding:14px;
-  font-size:18px;
-  font-weight:bold;
-  border-bottom:1px solid #ddd;
+.container{
+  padding:16px;
+  max-width:900px;
+  margin:auto;
 }
-
-.container{ padding:14px; }
 
 /* ===== RESUMEN PRECIO ===== */
 
-.price-card{
+.price-box{
   background:#fff;
-  border-radius:12px;
-  padding:14px;
-  margin-bottom:16px;
-  box-shadow:0 2px 8px rgba(0,0,0,.1);
+  border-radius:14px;
+  padding:20px;
+  margin-bottom:20px;
+  box-shadow:0 2px 10px rgba(0,0,0,.08);
 }
 
 .price-row{
   display:flex;
   justify-content:space-between;
-  margin-bottom:8px;
-  color:#555;
+  margin-bottom:10px;
+  font-size:15px;
+}
+
+.price-row span:last-child{
+  font-weight:bold;
 }
 
 .price-total{
   display:flex;
   justify-content:space-between;
-  margin-top:12px;
-  font-size:20px;
+  margin-top:16px;
+  font-size:28px;
   font-weight:bold;
 }
 
 /* ===== ITINERARIO ===== */
 
-.segment-card{
+.flight-card{
   background:#fff;
-  border-radius:12px;
-  margin-bottom:16px;
+  border-radius:14px;
+  box-shadow:0 2px 10px rgba(0,0,0,.08);
   overflow:hidden;
-  box-shadow:0 2px 8px rgba(0,0,0,.1);
 }
 
-.segment-header{
+/* HEADER NEGRO */
+.flight-header{
   background:#2b2b2b;
   color:#fff;
-  padding:12px 14px;
+  padding:16px;
+  display:flex;
+  justify-content:space-between;
   font-weight:bold;
-  display:flex;
-  justify-content:space-between;
 }
 
-.segment-body{ padding:14px; font-size:13px; }
-
-.segment-info{
+/* INFO AEROLÍNEA */
+.flight-airline{
   display:flex;
   justify-content:space-between;
-  color:#555;
-  margin-bottom:10px;
+  padding:16px;
+  font-size:14px;
+  color:#444;
+  border-bottom:1px solid #eee;
 }
 
-.route{
+/* RUTA */
+.flight-route{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  margin:14px 0;
+  padding:20px 16px;
 }
 
 .airport{
-  text-align:center;
   width:35%;
 }
 
-.airport b{ font-size:22px; }
-
-.flight-line{
-  width:30%;
-  text-align:center;
-  font-size:20px;
+.airport small{
+  color:#666;
+  display:block;
 }
 
-.pending{
-  font-size:12px;
-  color:#c00;
+.airport .code{
+  font-size:36px;
   font-weight:bold;
 }
 
-.details{
-  font-size:12px;
-  color:#666;
-  line-height:1.6;
-}
-
-/* ===== FORM ===== */
-
-.card{
-  background:#fff;
-  border-radius:12px;
-  margin-bottom:14px;
-  padding:14px;
-  box-shadow:0 2px 8px rgba(0,0,0,.1);
-}
-
-.title{
+.airport .time{
   font-size:18px;
   font-weight:bold;
-  margin-bottom:10px;
+  margin-top:6px;
 }
 
-.row{
-  display:flex;
-  gap:10px;
-  margin-bottom:10px;
-  flex-wrap:wrap;
+.route-line{
+  width:30%;
+  text-align:center;
+  position:relative;
 }
 
-.col{ flex:1; min-width:120px; }
-
-input, select{
-  width:100%;
-  padding:8px;
-  border:1px solid #ddd;
-  border-radius:8px;
+.route-line:before{
+  content:"";
+  position:absolute;
+  top:50%;
+  left:0;
+  right:0;
+  height:2px;
+  background:#999;
 }
 
-.btn{
-  width:100%;
+.route-line span{
+  position:relative;
   background:#fff;
-  border:1px solid #000;
-  border-radius:30px;
-  padding:12px;
-  font-size:16px;
-  margin-top:10px;
-  cursor:pointer;
+  padding:0 10px;
+  font-size:22px;
+}
+
+/* DURACIÓN */
+.duration{
+  text-align:center;
+  font-size:14px;
+  color:#666;
+  margin-bottom:10px;
+}
+
+/* DETALLES */
+.flight-details{
+  padding:14px 16px 20px;
+  font-size:13px;
+  color:#555;
+  line-height:1.6;
+  border-top:1px solid #eee;
 }
 </style>
 </head>
 
 <body>
 
-<div class="header">
-  Tu360 Compras – Itinerario y Datos de pasajeros
-</div>
-
 <div class="container">
 
-  <!-- RESUMEN DE VALOR -->
-  <div class="price-card">
+  <!-- RESUMEN -->
+  <div class="price-box">
     <div class="price-row">
       <span>Tarifa:</span>
-      <span id="tarifa"></span>
+      <span>COP $52.000</span>
     </div>
     <div class="price-row">
       <span>Impuestos y tasas:</span>
-      <span id="impuestos"></span>
+      <span>COP $33.880</span>
     </div>
     <div class="price-row">
       <span>Cargos:</span>
-      <span id="cargos"></span>
+      <span>COP $2.860</span>
     </div>
 
     <div class="price-total">
       <span>Total:</span>
-      <span id="total"></span>
+      <span>COP $88.740</span>
     </div>
   </div>
 
-  <!-- IDA -->
-  <div class="segment-card">
-    <div class="segment-header">
+  <!-- ITINERARIO -->
+  <div class="flight-card">
+
+    <div class="flight-header">
       <span>IDA</span>
       <span>Directo</span>
     </div>
 
-    <div class="segment-body">
-      <div class="segment-info">
-        <div>Vuelo <span id="vueloIda"></span></div>
-        <div>Económica</div>
+    <div class="flight-airline">
+      <div>Vuelo 4324 de LATAM Airlines</div>
+      <div>Operado por: Lan Colombia Airlines</div>
+      <div>Económica</div>
+    </div>
+
+    <div class="flight-route">
+      <div class="airport">
+        <small>Salida</small>
+        <div class="code">CLO</div>
+        <small>Cali</small>
+        <small>Alfonso Bonilla Aragón</small>
+        <div class="time">21:37 hs</div>
+        <small>Jue, 26 Feb</small>
       </div>
 
-      <div class="route">
-        <div class="airport">
-          <b id="origenCode"></b><br>
-          <span class="pending">Hora pendiente</span>
-        </div>
-
-        <div class="flight-line">✈️</div>
-
-        <div class="airport">
-          <b id="destinoCode"></b><br>
-          <span class="pending">Hora pendiente</span>
-        </div>
+      <div class="route-line">
+        <span>✈</span>
       </div>
 
-      <div class="details">
-        Fecha: <span id="fechaIda"></span><br>
-        Hora: <b>Pendiente de confirmación de reserva</b><br>
-        Asiento: <span id="asientoIda"></span>
+      <div class="airport" style="text-align:right">
+        <small>Llegada</small>
+        <div class="code">MDE</div>
+        <small>Medellín</small>
+        <small>José María Córdova</small>
+        <div class="time">22:30 hs</div>
+        <small>Jue, 26 Feb</small>
       </div>
     </div>
+
+    <div class="duration">0hs 53m</div>
+
+    <div class="flight-details">
+      Equipaje: 0 Pieza(s) por pasajero adulto<br>
+      Equipaje de mano: No incluido | Tipo de avión: Airbus A320<br>
+      Base tarifaria: A20QPGDB | Familia tarifaria: BASIC
+    </div>
+
   </div>
 
 </div>
-
-<div class="container" id="boxPasajeros"></div>
-
-<div class="container">
-  <button class="btn">Finalizar reserva</button>
-</div>
-
-<script>
-function formatCOP(valor){
-  return "COP $" + valor.toLocaleString("es-CO");
-}
-
-function generarVuelo(){
-  let l="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  return l[Math.floor(Math.random()*26)] +
-         l[Math.floor(Math.random()*26)] +
-         Math.floor(100 + Math.random()*900);
-}
-
-function generarAsiento(){
-  return Math.floor(1+Math.random()*30) +
-         ["A","B","C","D","E","F"][Math.floor(Math.random()*6)];
-}
-
-/* ===== VALORES ===== */
-let tarifa = 52000;
-let impuestos = 33880;
-let cargos = 2860;
-let total = tarifa + impuestos + cargos;
-
-document.getElementById("tarifa").innerText = formatCOP(tarifa);
-document.getElementById("impuestos").innerText = formatCOP(impuestos);
-document.getElementById("cargos").innerText = formatCOP(cargos);
-document.getElementById("total").innerText = formatCOP(total);
-
-/* ===== ITINERARIO ===== */
-let origen = "CLO";
-let destino = "MDE";
-let ida = "26 Feb";
-
-document.getElementById("origenCode").innerText = origen;
-document.getElementById("destinoCode").innerText = destino;
-document.getElementById("fechaIda").innerText = ida;
-document.getElementById("vueloIda").innerText = generarVuelo();
-document.getElementById("asientoIda").innerText = generarAsiento();
-
-/* ===== PASAJEROS ===== */
-let box = document.getElementById("boxPasajeros");
-box.innerHTML = `
-  <div class="card">
-    <div class="title">Pasajero 1 – Adulto</div>
-    <div class="row">
-      <div class="col"><input placeholder="Nombre"></div>
-      <div class="col"><input placeholder="Apellido"></div>
-    </div>
-  </div>`;
-</script>
 
 </body>
 </html>

@@ -143,6 +143,12 @@ input, select{
 <div class="header">
   Tu360 Compras – Itinerario y Datos de pasajeros
 </div>
+<div class="container">
+  <div class="card">
+    <div class="title">Precio total con impuestos</div>
+    <div id="precioFinal">Cargando...</div>
+  </div>
+</div>
 
 <div class="container">
 
@@ -319,7 +325,29 @@ for(let i=1;i<=pasajeros;i++){
 }
 
 box.innerHTML = html;
+
+  // Traer precio desde resumen.html
+fetch('resumen.html')
+  .then(response => response.text())
+  .then(html => {
+    // Parsear el HTML como documento
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+
+    // Tomar el precio del elemento con id 'precioTotal'
+    const precio = doc.getElementById('precioTotal').innerText;
+
+    // Mostrarlo en nuestra página
+    document.getElementById('precioFinal').innerText = precio;
+  })
+  .catch(error => {
+    console.error('Error al traer el precio:', error);
+    document.getElementById('precioFinal').innerText = 'No disponible';
+  });
+
 </script>
+
+  
 
 </body>
 </html>

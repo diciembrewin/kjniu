@@ -6,331 +6,200 @@
 <title>Itinerario – Datos de Pasajeros</title>
 
 <style>
-
-body{
-  margin:0;
-  font-family:Arial;
-  background:#f2f2f2;
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f2f2f2;
 }
 
-.header{
-  background:#fff;
-  padding:14px;
-  font-size:18px;
-  font-weight:bold;
-  border-bottom:1px solid #ddd;
-}
-
-.container{
-  padding:14px;
-}
-
-.card{
-  background:#fff;
-  border-radius:12px;
-  margin-bottom:14px;
-  padding:14px;
-  box-shadow:0 2px 8px rgba(0,0,0,.1);
-}
-
-.title{
-  font-size:18px;
-  font-weight:bold;
-  margin-bottom:10px;
-}
-
-.itinerario{
-  font-size:14px;
-  line-height:1.6;
-}
-
-.flight{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin-bottom:10px;
-}
-
-.row{
-  display:flex;
-  gap:10px;
-  margin-bottom:10px;
-  flex-wrap:wrap;
-}
-
-input, select{
-  padding:5px;
-  border:1px solid #ddd;
-  border-radius:8px;
-  width:100%;
-}
-
-.col{
-  flex:1;
-  min-width:120px;
-}
-
-.btn{
-  width:100%;
-  background:#fff;
-  border:1px solid #000;
-  border-radius:30px;
-  padding:12px;
-  font-size:16px;
-  margin-top:10px;
-  cursor:pointer;
-}
-
-.small{
-  font-size:13px;
-  color:#666;
-}
-
-small{
-  display:block;
-  margin-bottom:4px;
-  color:#555;
-}
-/* ===== FOOTER TU360 ===== */
-
-.footer-net-3{
-  background:#2b2b2b;
-  color:#fff;
-  padding:30px 15px;
-  font-size:14px;
-}
-
-.footer-net{
-  max-width:1000px;
-  margin:0 auto;
-}
-
-.footer-net img{
-  max-width:180px;
-}
-
-.net-accordion__container{
-  display:flex;
-  flex-direction:column;
-  gap:20px;
-}
-
-.net-accordion__title{
-  font-weight:bold;
-  margin-bottom:10px;
-}
-
-.net-accordion__body{
-  margin-top:8px;
-}
-
-.footer-net__list{
-  list-style:none;
-  padding:0;
-  margin:0;
-}
-
-.footer-net__list--row{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-}
-
-.footer-net__item{
-  margin-bottom:5px;
-}
-
-.footer-net__link{
-  color:#fff;
-  text-decoration:none;
-  font-size:13px;
-}
-
-.footer-net__link:hover{
-  text-decoration:underline;
-}
-
-.footer-net__text1{
-  font-size:13px;
-  margin-bottom:6px;
-}
-
-.footer-net hr{
-  margin:20px 0;
-  border:0;
-  border-top:1px solid #444;
-}
-
-.footer-net__list--logos{
-  text-align:center;
-}
-
-.footer-net__logo{
-  margin:10px;
-  max-width:160px;
-}
-
-.footer-info{
-  font-size:12px;
-  line-height:1.4;
-  margin-top:20px;
-  color:#ccc;
-}
-
-/* RESPONSIVE */
-
-@media(min-width:768px){
-
-  .net-accordion__container{
-    flex-direction:row;
-    flex-wrap:wrap;
-    justify-content:space-between;
-  }
-
-  .net-accordion__child{
-    width:48%;
-  }
-
-  .footer-net__list--row{
-    flex-direction:row;
-    flex-wrap:wrap;
-  }
-
-  .footer-net__item{
-    width:48%;
-  }
-}
-/* ===== BLOQUE TÉRMINOS Y CONDICIONES – MEJORADO ===== */
-
-#TermsAndConditions {
-  background: #ffffff;
-  border-radius: 18px;
-  padding: 16px;
-  margin: 18px auto;
-  max-width: 880px;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
-  font-size: 12px;               /* más compacto */
-  color: #2b2b2b;
-  line-height: 1.45;
-}
-
-/* Título principal */
-
-#TermsAndConditions .heading {
-  font-size: 14px;
+.header {
+  background: #fff;
+  padding: 14px;
+  font-size: 18px;
   font-weight: bold;
-  margin-bottom: 10px;
-  color: #1a1a1a;
-  border-bottom: 2px solid #ffd100;
-  padding-bottom: 6px;
+  border-bottom: 1px solid #ddd;
 }
 
-/* Contenido de texto */
-
-#TermsAndConditions p {
-  margin: 6px 0;
-  font-size: 12px;
+.container {
+  padding: 14px;
 }
 
-#TermsAndConditions a {
-  color: #0066cc;
-  text-decoration: none;
-  font-weight: 600;
+/* ===== Diseño del Itinerario ===== */
+.itinerario-card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  padding: 20px;
+  margin-bottom: 20px;
 }
 
-#TermsAndConditions a:hover {
-  text-decoration: underline;
+.itinerario-header h2 {
+  margin: 0 0 12px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #222;
 }
 
-/* Línea divisora */
-
-#TermsAndConditions hr {
-  border: none;
-  border-top: 1px solid #eaeaea;
-  margin: 10px 0;
-}
-
-/* Contenedor de checkboxes bien alineados */
-
-#TermsAndConditions .row.column {
+.itinerario-totales div {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.itinerario-totales .total-line {
   margin-top: 8px;
+  font-size: 16px;
+  font-weight: bold;
 }
 
-/* Cada fila de checkbox */
+.vuelo-box {
+  margin-top: 18px;
+  border-top: 1px solid #eee;
+  padding-top: 14px;
+}
 
-#TermsAndConditions .row.column > div {
+.vuelo-header {
   display: flex;
-  flex-direction: row-reverse;      /* checkbox a la derecha */
+  justify-content: space-between;
+  font-size: 15px;
+  font-weight: bold;
+  background: #222;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+.vuelo-info {
+  margin-top: 12px;
+}
+
+.vuelo-airline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.vuelo-airline img {
+  width: 32px;
+  height: 32px;
+}
+
+.vuelo-text {
+  flex: 1;
+  font-size: 14px;
+}
+
+.vuelo-class {
+  font-size: 14px;
+  font-weight: 600;
+  color: #444;
+}
+
+.vuelo-route {
+  display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
-  padding: 6px 0;
-  border-bottom: 1px solid #f0f0f0;
+  margin-top: 12px;
 }
 
-/* Checkboxes */
-
-#TermsAndConditions input[type="checkbox"] {
-  transform: scale(1.05);
-  cursor: pointer;
+.location h3 {
+  font-size: 24px;
   margin: 0;
 }
 
-/* Textos de los checkbox */
+.location .small-text {
+  font-size: 12px;
+  color: #666;
+}
 
-#TermsAndConditions label {
-  flex: -1;
-  font-size: 11px;
-  color: #2b2b2b;
+.location .time {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 6px;
+}
+
+.flight-icon {
+  font-size: 18px;
+  margin: 0 8px;
+}
+
+.vuelo-details {
+  margin-top: 14px;
+  color: #555;
+  font-size: 12px;
+}
+
+/* ===== FORMULARIO Y CAMPOS ===== */
+.card {
+  background: white;
+  border-radius: 12px;
+  margin-bottom: 14px;
+  padding: 14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.1);
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.itinerario {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.flight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+input, select {
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.col {
+  flex: 1;
+  min-width: 120px;
+}
+
+.btn {
+  width: 100%;
+  background: #222;
+  color: #fff;
+  border-radius: 30px;
+  padding: 12px;
+  font-size: 16px;
+  margin-top: 10px;
   cursor: pointer;
-  line-height: 1.35;
-  text-align: left;
 }
 
-/* Mensajes de error */
-
-#TermsAndConditions .text-danger {
-  color: #c00;
-  font-size: 10px;
+/* ===== FOOTER BASE ===== */
+footer {
+  background: #2b2b2b;
+  color: #fff;
+  padding: 15px;
+  text-align: center;
+  font-size: 14px;
+  margin-top: 20px;
 }
-
-#TermsAndConditions .field-validation-error {
-  display: block;
-  margin-top: 4px;
-  font-size: 10px;
-  text-align: right;
-}
-
-/* Ajustes responsive */
-
-@media (max-width: 600px){
-
-  #TermsAndConditions {
-    margin: 10px;
-    padding: 12px;
-    font-size: 11px;
-  }
-
-  #TermsAndConditions .heading {
-    font-size: 13px;
-  }
-
-  #TermsAndConditions label {
-    font-size: 10px;
-  }
-
-  #TermsAndConditions .row.column > div {
-    padding: 5px 0;
-  }
-}
-
-
 </style>
-</head>
 
+</head>
 <body>
 
 <div class="header">
@@ -339,38 +208,60 @@ small{
 
 <div class="container">
 
-  <div class="card">
+  <!-- ===== Itinerario de Vuelo ===== -->
+  <div class="itinerario-card">
 
-    <div class="title">Tu Itinerario</div>
+    <div class="itinerario-header">
+      <h2>Su Itinerario</h2>
+    </div>
 
-    <div class="itinerario">
+    <div class="itinerario-totales">
+      <div><span>Tarifa:</span><span>COP $52.000</span></div>
+      <div><span>Impuestos y tasas:</span><span>COP $33.880</span></div>
+      <div><span>Cargos:</span><span>COP $2.860</span></div>
+      <div class="total-line">
+        <span>Total:</span><span>COP $88.740</span>
+      </div>
+    </div>
 
-      <div class="flight">
-        ✈️
-        <div>
-          <b>IDA</b><br>
-          <span id="rutaIda"></span><br>
-          <span class="small">
-            Fecha: <span id="fechaIda"></span><br>
-            Vuelo: <span id="vueloIda"></span><br>
-            Asiento: <span id="asientoIda"></span>
-          </span>
-        </div>
+    <div class="vuelo-box">
+
+      <div class="vuelo-header">
+        <span>IDA</span>
+        <span>Directo</span>
       </div>
 
-      <div id="bloqueVuelta">
+      <div class="vuelo-info">
 
-        <div class="flight">
-          ✈️
-          <div>
-            <b>VUELTA</b><br>
-            <span id="rutaVuelta"></span><br>
-            <span class="small">
-              Fecha: <span id="fechaVuelta"></span><br>
-              Vuelo: <span id="vueloVuelta"></span><br>
-              Asiento: <span id="asientoVuelta"></span>
-            </span>
+        <div class="vuelo-airline">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Avianca_Logo_2013.svg" alt="Logo Aerolínea">
+          <div class="vuelo-text">
+            <div><b>Vuelo 4324</b> de LATAM Airlines</div>
+            <div class="small-text">Operado por: Lan Colombia Airlines</div>
           </div>
+          <div class="vuelo-class">Económica</div>
+        </div>
+
+        <div class="vuelo-route">
+          <div class="location">
+            <h3>CLO</h3>
+            <span class="small-text">Cali - Alfonso Bonilla Aragón</span>
+            <span class="time">21:37 hs</span>
+            <span class="small-text">Jue, 26 Feb</span>
+          </div>
+
+          <div class="flight-icon">✈️</div>
+
+          <div class="location">
+            <h3>MDE</h3>
+            <span class="small-text">Medellín - José María C.</span>
+            <span class="time">22:30 hs</span>
+            <span class="small-text">Jue, 26 Feb</span>
+          </div>
+        </div>
+
+        <div class="vuelo-details">
+          Equipaje: 0 Pieza(s) por pasajero adulto | Equipaje de mano: No incluido | Tipo de avión: Airbus A320
         </div>
 
       </div>
@@ -379,13 +270,7 @@ small{
 
   </div>
 
-</div>
-
-
-<div class="container" id="boxPasajeros"></div>
-
-<div class="container">
-
+  <!-- ===== DATOS DE CONTACTO ===== -->
   <div class="card">
     <div class="title">Datos de Contacto</div>
 
@@ -400,315 +285,15 @@ small{
         <input type="tel" id="telefono" placeholder="Teléfono">
       </div>
     </div>
-
   </div>
 
-<button class="btn" onclick="window.location.href='https://c7258a33-d84b-4297-8140-16745552b9b5-00-2kfz7n8282khh.picard.replit.dev/bv/'">
-  Finalizar reserva
-</button>
-
+  <button class="btn">Finalizar reserva</button>
 
 </div>
-<div id="TermsAndConditions" class="callout information">
 
-                        <div class="heading">
-                            <span class="fontNormal bold">Términos y Condiciones</span>
-                        </div>
-
-                        <div id="divTermsAndConditionsText">
-<p>Manifiesto haber leído cuidadosamente las políticas de cancelación, debajo de cada itinerario y estoy de acuerdo con la información incluida en el itinerario, datos de pasajeros y tarifa.</p><p><br></p><p>Leí y&nbsp;estoy de acuerdo con el tratamiento de mis datos personales, por lo tanto acepto la política de privacidad, la cual se puede consultar <a href="http://viajestu360compras.bancolombia.com/politica-de-privacidad?_gl=1*13fx99u*_gcl_aw*R0NMLjE3NzAwODk4NzcuQ2p3S0NBaUFzNEhNQmhCSkVpd0FDcmZOWmNUUDVITGdXZUxkbEVqQmpoODJsck5GMFUwR1FTSDZfVlQzZjJ2Tnp3UHVJOGs1ZE1MT1Nob0NOOXNRQXZEX0J3RQ..*_gcl_au*MTI0MDk3NzM0OS4xNzY5NjUyNzgw*_ga*NjYyMjc0NTEyLjE3Njk2NTI3Nzk.*_ga_B6YXBDTWFL*czE3NzAwODgzMDckbzEkZzEkdDE3NzAwOTE5OTckajM1JGwwJGgw" rel="noopener noreferrer" target="_blank">aquí</a></p><p><br></p><p>Para conocer términos y condiciones de la prestación de nuestros servicios, haz clic <a href="http://viajestu360compras.bancolombia.com/Portals/27/Documentos/T%C3%A9rminos_y_condiciones_netviajes.pdf?_gl=1*144gqgi*_gcl_aw*R0NMLjE3NzAwODk4NzcuQ2p3S0NBaUFzNEhNQmhCSkVpd0FDcmZOWmNUUDVITGdXZUxkbEVqQmpoODJsck5GMFUwR1FTSDZfVlQzZjJ2Tnp3UHVJOGs1ZE1MT1Nob0NOOXNRQXZEX0J3RQ..*_gcl_au*MTI0MDk3NzM0OS4xNzY5NjUyNzgw*_ga*NjYyMjc0NTEyLjE3Njk2NTI3Nzk.*_ga_B6YXBDTWFL*czE3NzAwODgzMDckbzEkZzEkdDE3NzAwOTE5OTckajM1JGwwJGgw" rel="noopener noreferrer" target="_blank">aquí</a></p>                        </div>
-
-                        <div class="row column">
-                            <hr style="border-color: #fafafa; margin: 0.3em 1.35em 1em;">
-                        </div>
-
-                        <div class="row column">
-                                <div>
-                                    <input data-val="true" data-val-ischecked="Debe aceptar los términos y condiciones" data-val-required="The TermsAndConditions field is required." id="chkTermsAndConditions" name="TermsAndConditions" type="checkbox" value="true" class="valid"><input name="TermsAndConditions" type="hidden" value="false">
-                                    <label for="chkTermsAndConditions">Declaro aceptar los términos y condiciones</label>
-                                    <span class="field-validation-valid" data-valmsg-for="TermsAndConditions" data-valmsg-replace="true"></span>
-                                </div>
-                                        <div>
-                                            <input data-val="True" data-val-ischecked="Debe aceptar los términos y condiciones" data-val-required="The TermsUserAccept field is required." id="chkTermsUserAccept" name="TermsUserAccept" type="checkbox" value="true"><input name="TermsUserAccept" type="hidden" value="false">
-
-                                            <label style="display: -webkit-inline-box;">
-                                                Recuerda que la aerolínea Avianca no permite viajar solos a los niños de 14 años o menos, siempre deben viajar con un adulto responsable. En caso contrario, la aerolínea podrá negar el abordaje.
-                                            </label>
-
-                                            <span class="field-validation-error" id="acceptTermsUserAccept" style="display:none;">
-                                                <span class="text-danger">Debe aceptar los términos y condiciones</span>
-                                            </span>
-                                        </div>
-<div>
-                                            <input data-val="true" data-val-required="Debe aceptar los términos y condiciones." id="chkTermsAcceptPassData" name="TermsAcceptPassData" type="checkbox" value="true" class="valid"><input name="TermsAcceptPassData" type="hidden" value="false">
-
-                                            <label style="display: -webkit-inline-box;">
-                                                He leído y acepto el tratamiento de mis datos personales
-                                            </label>
-                                            <span class="field-validation-error" id="acceptTermsAcceptPassData" style="display:none;">
-                                                <span class="text-danger">Debe aceptar los términos y condiciones para Compartir Datos</span>
-                                            </span>
-                                        </div>
-
-                        </div>
-                    </div>
-  <footer class=" footer-net-3 bg-custom">
-  <div class="footer-net">
-    <div class="net-accordion">
-      <div class="net-accordion__container">
-        <div class="">
-          <div class="net-accordion__title">
-            <img id="dnn_dnnLOGO_imgLogo" src="https://viajestu360compras.bancolombia.com/Portals/27/Skins/skin-bem/assets/images/logo-blanco-360.png" alt="Encuentra y compra viajes a destinos soñados | Tu360Compras">
-            <span>
-              <br>
-              Operado por NETVIAJES RNT 72357
-            </span>
-            <span>
-              <br>
-              Netactica Colombia SAS . Nit 900132867-1
-              <br>
-              Cra 15 # 88 -21 Of 502 Bogotá
-            </span>
-          </div>
-        </div>
-        <div class="net-accordion__child net-accordion__child--include">
-          <div class="net-accordion__title">
-            ¿Tienes dudas?
-          </div>
-          <div class="net-accordion__body">
-            <ul class="footer-net__list footer-net__list--row">
-              <li class="w-100 footer-net__item"><a href="https://viajestu360compras.zendesk.com/hc/es/requests/new" class="footer-net__link">Contáctanos</a></li>
-              <li class="w-100 footer-net__item"><a href="https://viajestu360compras.zendesk.com/" class="footer-net__link">Preguntas frecuentes</a></li>
-              <li class="w-100 footer-net__item"><a target="_blank" href="https://viajestu360compras.bancolombia.com/consultar-estado-requerimiento" class="footer-net__link">Consulta el estado de tus
-                  requerimientos</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="net-accordion__child net-accordion__child--include">
-          <div class="net-accordion__title">
-            ¿Necesitas financiación?
-          </div>
-          <div class="net-accordion__body">
-            <ul class="footer-net__list footer-net__list--row">
-              <li class="w-100 footer-net__item">
-                <p class="footer-net__text1">Bancolombia te ofrece productos de acuerdo a tu necesidad</p>
-                <a target="_blank" href="https://accesodigital.grupobancolombia.com/solicitud-de-producto/#/abreCuenta?code=RTC0022&amp;idapp=referidos&amp;urlOrigin=https:%2F%2Fwww.bancolombia.com%2Fpersonas%2Ftarjetas-de-credito%2Fmastercard%2Fideal&amp;_gl=1*36zroa*_gcl_aw*R0NMLjE3NDY3MTA2MDcuQ2owS0NRandyUEhBQmhDSUFSSXNBRlcyWEJQU1RDQllBLXVDbTlRUWxvNklrSHQ5YkNXWlN4cDVyVW9mVTlaMHRzWE9Zd1Nnam5Cczd1TWFBdjBERUFMd193Y0I.*_gcl_dc*R0NMLjE3NDY3MTA2MDcuQ2owS0NRandyUEhBQmhDSUFSSXNBRlcyWEJQU1RDQllBLXVDbTlRUWxvNklrSHQ5YkNXWlN4cDVyVW9mVTlaMHRzWE9Zd1Nnam5Cczd1TWFBdjBERUFMd193Y0I.*_gcl_au*MTA2NzY0MTMxOS4xNzQ2NDc2ODM3*_ga*Njg0MzM3OTQyLjE3MTAxODY3MDA.*_ga_B6YXBDTWFL*czE3NTE2NDU0ODUkbzQwJGcxJHQxNzUxNjYwNzE4JGozNyRsMCRoMA" class="footer-net__link">
-                  - Tarjetas de crédito
-                </a>
-                <br>
-                <a target="_blank" href="https://accesodigital.grupobancolombia.com/solicitud-de-producto/#/abreCuenta?code=RCA0001&amp;idapp=referidos&amp;urlOrigin=https:%2F%2Fwww.bancolombia.com%2Fpersonas%2Fcreditos%2Fconsumo%2Fcrediagil&amp;_gl=1*36zroa*_gcl_aw*R0NMLjE3NDY3MTA2MDcuQ2owS0NRandyUEhBQmhDSUFSSXNBRlcyWEJQU1RDQllBLXVDbTlRUWxvNklrSHQ5YkNXWlN4cDVyVW9mVTlaMHRzWE9Zd1Nnam5Cczd1TWFBdjBERUFMd193Y0I.*_gcl_dc*R0NMLjE3NDY3MTA2MDcuQ2owS0NRandyUEhBQmhDSUFSSXNBRlcyWEJQU1RDQllBLXVDbTlRUWxvNklrSHQ5YkNXWlN4cDVyVW9mVTlaMHRzWE9Zd1Nnam5Cczd1TWFBdjBERUFMd193Y0I.*_gcl_au*MTA2NzY0MTMxOS4xNzQ2NDc2ODM3*_ga*Njg0MzM3OTQyLjE3MTAxODY3MDA.*_ga_B6YXBDTWFL*czE3NTE2NDU0ODUkbzQwJGcxJHQxNzUxNjYwNzE4JGozNyRsMCRoMA" class="footer-net__link">
-                  - Créditos
-                </a>
-              </li>
-              <li class="w-100 footer-net__item">
-                <a target="_blank" href="https://accesodigital.grupobancolombia.com/solicitud-de-producto/#/abreCuenta?code=RTC0007&amp;idapp=referidos&amp;urlOrigin=https:%2F%2Ftu360compras.bancolombia.com&amp;SitioTu360%2FFooter=&amp;_gl=1*vhmye*_gcl_aw*R0NMLjE3NDY3MTA2MDcuQ2owS0NRandyUEhBQmhDSUFSSXNBRlcyWEJQU1RDQllBLXVDbTlRUWxvNklrSHQ5YkNXWlN4cDVyVW9mVTlaMHRzWE9Zd1Nnam5Cczd1TWFBdjBERUFMd193Y0I.*_gcl_dc*R0NMLjE3NDY3MTA2MDcuQ2owS0NRandyUEhBQmhDSUFSSXNBRlcyWEJQU1RDQllBLXVDbTlRUWxvNklrSHQ5YkNXWlN4cDVyVW9mVTlaMHRzWE9Zd1Nnam5Cczd1TWFBdjBERUFMd193Y0I.*_gcl_au*MTA2NzY0MTMxOS4xNzQ2NDc2ODM3*_ga*Njg0MzM3OTQyLjE3MTAxODY3MDA.*_ga_B6YXBDTWFL*czE3NTE2NDU0ODUkbzQwJGcxJHQxNzUxNjYwNzE4JGozNyRsMCRoMA" class="footer-net__link">¿Tengo un preaprobado?</a>
-              </li>
-
-            </ul>
-          </div>
-        </div>
-        <div class="net-accordion__child net-accordion__child--include">
-          <div class="net-accordion__title">
-            Documentos legales
-          </div>
-          <div class="net-accordion__body">
-            <ul class="footer-net__list footer-net__list--row">
-              <li class="w-100 footer-net__item">
-                <a target="_blank" href="https://www.grupobancolombia.com/wcm/connect/1cfd9347-97c0-435b-9f13-0a83bad4590e/Pol%C3%ADtica+de+tratamiento+de+datos.pdf?MOD=AJPERES&amp;_gl=1*scq6nw*_gcl_au*MTc3NzU1MjYyNS4xNzM2NzczOTA2*_ga*MTg1MzU5MTMwLjE3MjEwNzg0MTk.*_ga_B6YXBDTWFL*MTczOTU0MDYwNC4xODguMS4xNzM5NTQ5NjU4LjYwLjAuMA" class="footer-net__link">
-                  Política de tratamiento de datos de Tu360Compras
-                </a>
-              </li>
-              <li class="w-100 footer-net__item"><a href="https://viajestu360compras.bancolombia.com/Portals/27/Documentos/Términos_y_condiciones_netviajes.pdf" class="footer-net__link" target="_blank">Términos y condiciones de Netviajes</a></li>
-              <li class="w-100 footer-net__item"><a href="https://www.bancolombia.com/tu360/compras/terminos-y-condiciones" class="footer-net__link" target="_blank">Términos y condiciones de Tu360Compras</a></li>
-              <li class="w-100 footer-net__item"><a href="https://viajestu360compras.bancolombia.com/politica-de-privacidad" class="footer-net__link">Política de privacidad</a></li>
-              <li class="w-100 footer-net__item"><a class="footer-net__link" href="https://viajestu360compras.bancolombia.com/preguntas-frecuentes-p2p">Preguntas
-                  frecuentes P2P</a></li>
-              <li class="w-100 footer-net__item"><a href="https://viajestu360compras.bancolombia.com/aerolineas" class="footer-net__link">Contratos Aerolíneas</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-    </div>
-    <hr>
-    <div class="footer-net__list--logos">
-      <ul class="footer-net__list footer-net__list-lg--row w-70 net-mb-4">
-        <li class="footer-net__item"><a href="https://www.sic.gov.co/" class="footer-net__link" target="_blank">Superintendencia de industria y comercio</a></li>
-        <li class="footer-net__item"><a href="https://www.supertransporte.gov.co/" class="footer-net__link" target="_blank">Supertransporte</a></li>
-        <li class="footer-net__item"><a href="https://viajestu360compras.bancolombia.com/Portals/27/Documentos/Resoluci%C3%B3n_2591_de_2013.pdf" class="footer-net__link" target="_blank">Derechos de los pasajeros</a></li>
-        <li class="footer-net__item"><a href="https://www.rues.org.co/" target="_blank" class="footer-net__link">Consultar RNT</a></li>
-        <li class="footer-net__item"><a href="https://viajestu360compras.bancolombia.com/contra-la-pornografia-infantil" class="footer-net__link">Contra la
-            pornografía infantil</a></li>
-        <li class="footer-net__item"><a href="https://www.aerocivil.gov.co/" target="_blank" class="footer-net__link">Aerocivil</a></li>
-      </ul>
-
-      <ul class="footer-net__list footer-net__list--row logos">
-        <li class="footer-net__item">
-          <a class="footer-net__link link" href="http://www.netactica.com" target="_blank">
-            <img class="footer-net__logo" src="https://viajestu360compras.bancolombia.com/portals/0/assets_for_all_portals/images/logoNetactica2.png" style="width: 162px;">
-          </a>
-        </li>
-        <li class="footer-net__item">
-          <a class="footer-net__link link " href="https://placetopay.dev/pagos-en-latam" target="_blank">
-            <!--if footer is dark: placetopay-logo-dark-background.svg -->
-            <img class="footer-net__logo" src="https://static.placetopay.com/placetopay-logo-dark-background.svg" style="width: 147px;">
-          </a>
-        </li>
-      </ul>
-      <p class="footer-net__text net-mt-4 footer-info">
-        La plataforma https://viajestu360compras.bancolombia.com es operada por Netviajes - Registro
-        Nacional de Turismo Nro. 72357. El ofrecimiento y venta de servicios turísticos en esta plataforma es
-        responsabilidad de Netactica Colombia S.A.S. Bancolombia S.A. ofrece algunas de las alternativas para la
-        financiación de los servicios turísticos que se ofrecen en esta plataforma.
-        <br> <br>
-        La plataforma https://tu360compras.bancolombia.com es un portal de publicidad y difusión según la
-        Ley 2068 de 2020, operado por Negocios Digitales Colombia S.A.S y Aper Colombia S.A.S. Desde el portal
-        sus usuarios pueden ser redireccionados a la plataforma https://viajestu360compras.bancolombia.com
-      </p>
-    </div>
-  </div>
-
-</footer>  
-
-
-<script>
-
-function getParam(name){
-  return new URL(window.location.href).searchParams.get(name);
-}
-
-function generarVuelo(){
-  let letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  let codigo = "";
-  for(let i=0;i<2;i++){
-    codigo += letras[Math.floor(Math.random()*letras.length)];
-  }
-  codigo += Math.floor(100 + Math.random()*900);
-  return codigo;
-}
-
-function generarAsiento(){
-  let fila = Math.floor(1 + Math.random()*30);
-  let letras = ["A","B","C","D","E","F"];
-  let letra = letras[Math.floor(Math.random()*letras.length)];
-  return fila + letra;
-}
-
-let origen = getParam("origen");
-let destino = getParam("destino");
-
-let ida = getParam("ida");
-let vuelta = getParam("vuelta");
-
-let tipo = getParam("tipo");
-
-let pasajeros = parseInt(getParam("pasajeros") || 1);
-
-document.getElementById("rutaIda").innerText =
-  origen + " → " + destino;
-
-document.getElementById("fechaIda").innerText = ida;
-
-document.getElementById("vueloIda").innerText = generarVuelo();
-document.getElementById("asientoIda").innerText = generarAsiento();
-
-if(tipo === "oneway"){
-
-  document.getElementById("bloqueVuelta").style.display = "none";
-
-}else{
-
-  document.getElementById("rutaVuelta").innerText =
-    destino + " → " + origen;
-
-  document.getElementById("fechaVuelta").innerText = vuelta;
-
-  document.getElementById("vueloVuelta").innerText = generarVuelo();
-  document.getElementById("asientoVuelta").innerText = generarAsiento();
-}
-
-function cargarFormularios(){
-
-  let box = document.getElementById("boxPasajeros");
-
-  let html = "";
-
-  for(let i=1; i<=pasajeros; i++){
-
-    html += `
-
-    <div class="card">
-
-      <div class="title">
-        Pasajero ${i} – Adulto
-      </div>
-
-      <div class="row">
-        <div class="col">
-          <input type="text" id="nombre${i}" placeholder="Nombre">
-        </div>
-
-        <div class="col">
-          <input type="text" id="apellido${i}" placeholder="Apellido">
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col">
-          <select id="tipoDoc${i}">
-            <option>Cédula</option>
-            <option>Pasaporte</option>
-          </select>
-        </div>
-
-        <div class="col">
-          <input type="text" id="documento${i}" placeholder="Número documento">
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col">
-          <small>Fecha de nacimiento</small>
-          <input type="date" id="nacimiento${i}">
-        </div>
-      </div>
-
-    </div>
-
-    `;
-  }
-
-  box.innerHTML = html;
-}
-
-function guardarDatos(){
-
-  let datos = [];
-
-  for(let i=1; i<=pasajeros; i++){
-
-    let pasajero = {
-      nombre: document.getElementById("nombre"+i).value,
-      apellido: document.getElementById("apellido"+i).value,
-      documento: document.getElementById("documento"+i).value,
-      nacimiento: document.getElementById("nacimiento"+i).value
-    };
-
-    datos.push(pasajero);
-  }
-
-  let email = document.getElementById("email").value;
-  let telefono = document.getElementById("telefono").value;
-
-  console.log("Pasajeros:", datos);
-  console.log("Contacto:", email, telefono);
-
-  alert("Datos guardados correctamente (demo)");
-}
-
-cargarFormularios();
-
-</script>
+<footer>
+  © 2026 Tu360 Compras – Todos los derechos reservados
+</footer>
 
 </body>
 </html>

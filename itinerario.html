@@ -3,64 +3,94 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Resumen – Tu360 Compras</title>
+<title>Itinerario – Pasajeros</title>
 
 <style>
 body{
   margin:0;
-  font-family:Arial;
+  font-family:Arial, sans-serif;
   background:#f2f2f2;
 }
 
 .header{
   background:#fff;
   padding:14px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+  font-size:18px;
+  font-weight:bold;
   border-bottom:1px solid #ddd;
 }
 
-.actions{
-  display:flex;
-  gap:10px;
+.container{
   padding:14px;
-  background:#fff;
 }
 
-.btn-dark{
+/* ===== ITINERARIO ===== */
+
+.segment-card{
+  background:#fff;
+  border-radius:12px;
+  margin-bottom:16px;
+  overflow:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.1);
+}
+
+.segment-header{
   background:#2b2b2b;
   color:#fff;
-  border:none;
-  padding:10px 14px;
-  border-radius:30px;
+  padding:12px 14px;
+  font-weight:bold;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
-.btn-light{
-  background:#fff;
-  color:#000;
-  border:1px solid #000;
-  padding:10px 14px;
-  border-radius:30px;
+.segment-body{
+  padding:14px;
+  font-size:13px;
 }
 
-.title{
-  padding:10px 14px;
-  font-size:18px;
+.segment-info{
+  display:flex;
+  justify-content:space-between;
+  color:#555;
+  margin-bottom:10px;
+}
+
+.route{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin:14px 0;
+}
+
+.airport{
+  text-align:center;
+  width:35%;
+}
+
+.airport b{
+  font-size:22px;
+}
+
+.flight-line{
+  width:30%;
+  text-align:center;
+  font-size:20px;
+}
+
+.pending{
+  font-size:12px;
+  color:#c00;
   font-weight:bold;
 }
 
-.resumen{
-  background:#3b3b3b;
-  color:#fff;
-  margin:10px 14px;
-  padding:14px;
-  border-radius:12px;
+.details{
+  font-size:12px;
+  color:#666;
+  line-height:1.6;
 }
 
-.container{
-  padding:10px 14px;
-}
+/* ===== FORM ===== */
 
 .card{
   background:#fff;
@@ -70,21 +100,29 @@ body{
   box-shadow:0 2px 8px rgba(0,0,0,.1);
 }
 
-.flight{
+.title{
+  font-size:18px;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.row{
   display:flex;
   gap:10px;
   margin-bottom:10px;
-  font-size:14px;
-  color:#555;
+  flex-wrap:wrap;
 }
 
-.flight b{
-  color:#000;
+.col{
+  flex:1;
+  min-width:120px;
 }
 
-.small{
-  font-size:13px;
-  color:#666;
+input, select{
+  width:100%;
+  padding:8px;
+  border:1px solid #ddd;
+  border-radius:8px;
 }
 
 .btn{
@@ -92,42 +130,10 @@ body{
   background:#fff;
   border:1px solid #000;
   border-radius:30px;
-  padding:14px;
-  font-size:18px;
-  font-weight:bold;
+  padding:12px;
+  font-size:16px;
   margin-top:10px;
-}
-
-/* ===== ITINERARIO ===== */
-
-.itinerario-title{
-  font-size:18px;
-  margin:12px 0;
-}
-
-.itinerario-precio{
-  background:#f7f7f7;
-  padding:14px;
-  border-radius:12px;
-  margin-bottom:14px;
-  font-size:14px;
-}
-
-.itinerario-precio .row{
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:6px;
-}
-
-.itinerario-precio .row.total{
-  font-size:20px;
-  font-weight:bold;
-}
-
-.itinerario-precio hr{
-  border:0;
-  border-top:1px solid #ddd;
-  margin:10px 0;
+  cursor:pointer;
 }
 </style>
 </head>
@@ -135,75 +141,103 @@ body{
 <body>
 
 <div class="header">
-  <div><b>Tu360 Compras</b></div>
-  <div>Menu</div>
-</div>
-
-<div class="actions">
-  <button class="btn-dark" onclick="window.history.back()">Nueva búsqueda</button>
-  <button class="btn-light">Filtrar</button>
-</div>
-
-<div class="title" id="titulo"></div>
-
-<div class="resumen">
-  <b>El precio incluye:</b>
-  <p id="textoIncluye"></p>
+  Tu360 Compras – Itinerario y Datos de pasajeros
 </div>
 
 <div class="container">
 
-  <!-- CARD ITINERARIO -->
-  <div class="card">
-
-    <div class="itinerario-precio">
-      <div class="row">
-        <span>Tarifa:</span>
-        <span>COP $ <b id="tarifaBase"></b></span>
-      </div>
-      <div class="row">
-        <span>Impuestos y tasas:</span>
-        <span>COP $ <b>33.880</b></span>
-      </div>
-      <div class="row">
-        <span>Cargos:</span>
-        <span>COP $ <b>2.860</b></span>
-      </div>
-
-      <hr>
-
-      <div class="row total">
-        <span>Total:</span>
-        <span>COP $ <b id="totalItinerario"></b></span>
-      </div>
+  <!-- IDA -->
+  <div class="segment-card">
+    <div class="segment-header">
+      <span>IDA</span>
+      <span>Directo</span>
     </div>
 
-    <h4 class="itinerario-title">Su Itinerario</h4>
+    <div class="segment-body">
+      <div class="segment-info">
+        <div>Vuelo <span id="vueloIda"></span></div>
+        <div>Económica</div>
+      </div>
 
-    <div class="flight">
-      ✈️
-      <div>
-        <span id="rutaIda"></span><br>
-        <b id="detalleIda"></b><br>
-        <span class="small" id="duracionIda"></span>
+      <div class="route">
+        <div class="airport">
+          <b id="origenCode"></b><br>
+          <small id="origenNombre"></small><br>
+          <span class="pending">Hora pendiente</span>
+        </div>
+
+        <div class="flight-line">✈️</div>
+
+        <div class="airport">
+          <b id="destinoCode"></b><br>
+          <small id="destinoNombre"></small><br>
+          <span class="pending">Hora pendiente</span>
+        </div>
+      </div>
+
+      <div class="details">
+        Fecha: <span id="fechaIda"></span><br>
+        Hora: <b>Pendiente de confirmación de reserva</b><br>
+        Asiento: <span id="asientoIda"></span>
       </div>
     </div>
-
-    <hr id="separador">
-
-    <div class="flight" id="bloqueVuelta">
-      ✈️
-      <div>
-        <span id="rutaVuelta"></span><br>
-        <b id="detalleVuelta"></b><br>
-        <span class="small" id="duracionVuelta"></span>
-      </div>
-    </div>
-
   </div>
 
-  <button class="btn" onclick="irAItinerario()">Compra ahora</button>
+  <!-- VUELTA -->
+  <div class="segment-card" id="bloqueVuelta">
+    <div class="segment-header">
+      <span>VUELTA</span>
+      <span>Directo</span>
+    </div>
 
+    <div class="segment-body">
+      <div class="segment-info">
+        <div>Vuelo <span id="vueloVuelta"></span></div>
+        <div>Económica</div>
+      </div>
+
+      <div class="route">
+        <div class="airport">
+          <b id="destinoCodeV"></b><br>
+          <small id="destinoNombreV"></small><br>
+          <span class="pending">Hora pendiente</span>
+        </div>
+
+        <div class="flight-line">✈️</div>
+
+        <div class="airport">
+          <b id="origenCodeV"></b><br>
+          <small id="origenNombreV"></small><br>
+          <span class="pending">Hora pendiente</span>
+        </div>
+      </div>
+
+      <div class="details">
+        Fecha: <span id="fechaVuelta"></span><br>
+        Hora: <b>Pendiente de confirmación de reserva</b><br>
+        Asiento: <span id="asientoVuelta"></span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="container" id="boxPasajeros"></div>
+
+<div class="container">
+  <div class="card">
+    <div class="title">Datos de Contacto</div>
+
+    <div class="row">
+      <div class="col"><input type="email" placeholder="E-mail"></div>
+    </div>
+
+    <div class="row">
+      <div class="col"><input type="tel" placeholder="Teléfono"></div>
+    </div>
+  </div>
+
+  <button class="btn">Finalizar reserva</button>
 </div>
 
 <script>
@@ -211,55 +245,80 @@ function getParam(name){
   return new URL(window.location.href).searchParams.get(name);
 }
 
-let origen = getParam("origen");
-let destino = getParam("destino");
-let ida = getParam("ida");
+function generarVuelo(){
+  let letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  return letras[Math.floor(Math.random()*26)] +
+         letras[Math.floor(Math.random()*26)] +
+         Math.floor(100 + Math.random()*900);
+}
+
+function generarAsiento(){
+  let fila = Math.floor(1 + Math.random()*30);
+  let letra = ["A","B","C","D","E","F"][Math.floor(Math.random()*6)];
+  return fila + letra;
+}
+
+/* ===== PARAMS ===== */
+let origen = getParam("origen") || "CLO";
+let destino = getParam("destino") || "MDE";
+let ida = getParam("ida") || "26 Feb";
 let vuelta = getParam("vuelta");
-let tipo = getParam("tipo");
+let tipo = getParam("tipo") || "oneway";
+let pasajeros = parseInt(getParam("pasajeros") || 1);
 
-let precio = parseInt(getParam("precioFinal")) || 52000;
+/* ===== IDA ===== */
+document.getElementById("origenCode").innerText = origen;
+document.getElementById("destinoCode").innerText = destino;
+document.getElementById("origenNombre").innerText = "Origen";
+document.getElementById("destinoNombre").innerText = "Destino";
+document.getElementById("fechaIda").innerText = ida;
+document.getElementById("vueloIda").innerText = generarVuelo();
+document.getElementById("asientoIda").innerText = generarAsiento();
 
-document.getElementById("titulo").innerText =
-  "Paquete a " + destino + ", Colombia";
-
-document.getElementById("rutaIda").innerText =
-  origen + " → " + destino;
-
-document.getElementById("detalleIda").innerText =
-  "Salida: " + ida;
-
-document.getElementById("duracionIda").innerText =
-  "Duración aproximada: 0h 53m";
-
+/* ===== VUELTA ===== */
 if(tipo === "oneway"){
   document.getElementById("bloqueVuelta").style.display = "none";
-  document.getElementById("separador").style.display = "none";
-  document.getElementById("textoIncluye").innerText =
-    "Vuelo solo ida para tu viaje";
 }else{
-  document.getElementById("rutaVuelta").innerText =
-    destino + " → " + origen;
-
-  document.getElementById("detalleVuelta").innerText =
-    "Regreso: " + vuelta;
-
-  document.getElementById("duracionVuelta").innerText =
-    "Duración aproximada: 0h 53m";
-
-  document.getElementById("textoIncluye").innerText =
-    "Vuelos de ida y vuelta para tu viaje";
+  document.getElementById("destinoCodeV").innerText = destino;
+  document.getElementById("origenCodeV").innerText = origen;
+  document.getElementById("destinoNombreV").innerText = "Destino";
+  document.getElementById("origenNombreV").innerText = "Origen";
+  document.getElementById("fechaVuelta").innerText = vuelta;
+  document.getElementById("vueloVuelta").innerText = generarVuelo();
+  document.getElementById("asientoVuelta").innerText = generarAsiento();
 }
 
-/* PRECIOS */
-document.getElementById("tarifaBase").innerText =
-  precio.toLocaleString();
+/* ===== PASAJEROS ===== */
+let box = document.getElementById("boxPasajeros");
+let html = "";
 
-document.getElementById("totalItinerario").innerText =
-  (precio + 33880 + 2860).toLocaleString();
-
-function irAItinerario(){
-  window.location.href = "resumen.html";
+for(let i=1;i<=pasajeros;i++){
+  html += `
+  <div class="card">
+    <div class="title">Pasajero ${i} – Adulto</div>
+    <div class="row">
+      <div class="col"><input type="text" placeholder="Nombre"></div>
+      <div class="col"><input type="text" placeholder="Apellido"></div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <select>
+          <option>Cédula</option>
+          <option>Pasaporte</option>
+        </select>
+      </div>
+      <div class="col"><input type="text" placeholder="Número documento"></div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <small>Fecha de nacimiento</small>
+        <input type="date">
+      </div>
+    </div>
+  </div>`;
 }
+
+box.innerHTML = html;
 </script>
 
 </body>

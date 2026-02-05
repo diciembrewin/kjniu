@@ -234,6 +234,7 @@ function getParam(name){
   return new URL(window.location.href).searchParams.get(name);
 }
 
+// Funciones para generar vuelos y asientos aleatorios
 function generarVuelo(){
   let letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   return letras[Math.floor(Math.random()*26)] +
@@ -254,6 +255,7 @@ let ida = getParam("ida") || "26 Feb";
 let vuelta = getParam("vuelta");
 let tipo = getParam("tipo") || "oneway";
 let pasajeros = parseInt(getParam("pasajeros") || 1);
+let precioFinal = parseFloat(getParam("precioFinal") || 0);
 
 /* ===== IDA ===== */
 document.getElementById("origenCode").innerText = origen; 
@@ -276,7 +278,6 @@ if(tipo === "oneway"){
 /* ===== PASAJEROS ===== */
 let box = document.getElementById("boxPasajeros");
 let html = "";
-
 for(let i=1;i<=pasajeros;i++){
   html += `
   <div class="card">
@@ -302,12 +303,10 @@ for(let i=1;i<=pasajeros;i++){
     </div>
   </div>`;
 }
-
 box.innerHTML = html;
 
 /* ===== PRECIO CON 5% OFF ===== */
-let precioFinal = parseFloat(getParam("precioFinal") || 0);
-let precioOff = precioFinal * 0.95; // no redondeamos todavía
+let precioOff = precioFinal * 0.95;
 document.getElementById("precioFinal").innerText = "COP $ " + Number(precioOff).toLocaleString('es-CO');
 
 </script>

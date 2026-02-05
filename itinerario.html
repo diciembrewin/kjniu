@@ -82,21 +82,9 @@ body{
   color:#000;
 }
 
-.total{
-  text-align:right;
-  margin-top:10px;
-}
-
-.big{
-  font-size:22px;
-  font-weight:bold;
-}
-
-.off{
-  background:#2b2b2b;
-  color:#fff;
-  padding:4px 8px;
-  border-radius:8px;
+.small{
+  font-size:13px;
+  color:#666;
 }
 
 .btn{
@@ -110,9 +98,36 @@ body{
   margin-top:10px;
 }
 
-.small{
-  font-size:13px;
-  color:#666;
+/* ===== ITINERARIO ===== */
+
+.itinerario-title{
+  font-size:18px;
+  margin:12px 0;
+}
+
+.itinerario-precio{
+  background:#f7f7f7;
+  padding:14px;
+  border-radius:12px;
+  margin-bottom:14px;
+  font-size:14px;
+}
+
+.itinerario-precio .row{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:6px;
+}
+
+.itinerario-precio .row.total{
+  font-size:20px;
+  font-weight:bold;
+}
+
+.itinerario-precio hr{
+  border:0;
+  border-top:1px solid #ddd;
+  margin:10px 0;
 }
 </style>
 </head>
@@ -138,10 +153,32 @@ body{
 
 <div class="container">
 
-  <!-- ITINERARIO (ANTES VUELOS SELECCIONADOS) -->
+  <!-- CARD ITINERARIO -->
   <div class="card">
 
-    <h4>Itinerario</h4>
+    <div class="itinerario-precio">
+      <div class="row">
+        <span>Tarifa:</span>
+        <span>COP $ <b id="tarifaBase"></b></span>
+      </div>
+      <div class="row">
+        <span>Impuestos y tasas:</span>
+        <span>COP $ <b>33.880</b></span>
+      </div>
+      <div class="row">
+        <span>Cargos:</span>
+        <span>COP $ <b>2.860</b></span>
+      </div>
+
+      <hr>
+
+      <div class="row total">
+        <span>Total:</span>
+        <span>COP $ <b id="totalItinerario"></b></span>
+      </div>
+    </div>
+
+    <h4 class="itinerario-title">Su Itinerario</h4>
 
     <div class="flight">
       ✈️
@@ -165,28 +202,6 @@ body{
 
   </div>
 
-  <!-- PRECIOS (SE QUEDAN ABAJO) -->
-  <div class="card">
-
-    <div class="total">
-      Tarifa: COP $ <span id="precio"></span>
-    </div>
-
-    <div class="total">
-      Impuestos y tasas: COP $ 72.740
-    </div>
-
-    <div class="total big">
-      Total: COP $ <span id="total"></span>
-    </div>
-
-    <div class="total big">
-      <span class="off">5% OFF</span>
-      COP $ <span id="totalOff"></span>
-    </div>
-
-  </div>
-
   <button class="btn" onclick="irAItinerario()">Compra ahora</button>
 
 </div>
@@ -202,8 +217,7 @@ let ida = getParam("ida");
 let vuelta = getParam("vuelta");
 let tipo = getParam("tipo");
 
-let precio = getParam("precioFinal");
-let precioOff = getParam("precioOff");
+let precio = parseInt(getParam("precioFinal")) || 52000;
 
 document.getElementById("titulo").innerText =
   "Paquete a " + destino + ", Colombia";
@@ -215,7 +229,7 @@ document.getElementById("detalleIda").innerText =
   "Salida: " + ida;
 
 document.getElementById("duracionIda").innerText =
-  "Duración aproximada: 1h 10m";
+  "Duración aproximada: 0h 53m";
 
 if(tipo === "oneway"){
   document.getElementById("bloqueVuelta").style.display = "none";
@@ -230,30 +244,21 @@ if(tipo === "oneway"){
     "Regreso: " + vuelta;
 
   document.getElementById("duracionVuelta").innerText =
-    "Duración aproximada: 1h 10m";
+    "Duración aproximada: 0h 53m";
 
   document.getElementById("textoIncluye").innerText =
     "Vuelos de ida y vuelta para tu viaje";
 }
 
-document.getElementById("precio").innerText = precio;
-document.getElementById("total").innerText =
-  (parseInt(precio) + 72740).toLocaleString();
-document.getElementById("totalOff").innerText = precioOff;
+/* PRECIOS */
+document.getElementById("tarifaBase").innerText =
+  precio.toLocaleString();
+
+document.getElementById("totalItinerario").innerText =
+  (precio + 33880 + 2860).toLocaleString();
 
 function irAItinerario(){
-  let pasajeros = getParam("pasajeros") || 1;
-
-  let url = "itinerario.html?" +
-    "origen=" + encodeURIComponent(origen) +
-    "&destino=" + encodeURIComponent(destino) +
-    "&ida=" + encodeURIComponent(ida) +
-    "&vuelta=" + encodeURIComponent(vuelta) +
-    "&tipo=" + encodeURIComponent(tipo) +
-    "&pasajeros=" + encodeURIComponent(pasajeros) +
-    "&precioFinal=" + encodeURIComponent(precio);
-
-  window.location.href = url;
+  window.location.href = "resumen.html";
 }
 </script>
 

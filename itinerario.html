@@ -371,11 +371,64 @@ input, select{
     padding: 5px 0;
   }
 }
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    background: #fff;
+  }
 
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  }
+
+  .logo {
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .logo span {
+    font-weight: normal;
+  }
+
+  .menu {
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  .container {
+    padding: 20px;
+  }
+
+  .back {
+    color: #555;
+    text-decoration: underline;
+    margin-bottom: 20px;
+    display: inline-block;
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 32px;
+    font-weight: 800;
+    margin: 0;
+  }
 </style>
 </head>
 
 <body>
+
+   <div class="header">
+    <div class="logo">Tu360<span>Compras</span></div>
+    <div class="menu">⋮</div>
+  </div>
+
+  <div class="container">
+    <a href="#" class="back">☰ Regresar a los resultados de búsqueda</a>
+    <h1>Complete su reserva: Agregue la información de pasajeros</h1>
+  </div>
 
 <div class="header">
   Tu360 Compras – Itinerario y Datos de pasajeros

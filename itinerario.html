@@ -6,200 +6,196 @@
 <title>Itinerario – Datos de Pasajeros</title>
 
 <style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f2f2f2;
+
+/* ===== BASE ===== */
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#f2f2f2;
 }
 
-.header {
-  background: #fff;
-  padding: 14px;
-  font-size: 18px;
-  font-weight: bold;
-  border-bottom: 1px solid #ddd;
+.header{
+  background:#fff;
+  padding:14px;
+  font-size:18px;
+  font-weight:bold;
+  border-bottom:1px solid #ddd;
 }
 
-.container {
-  padding: 14px;
+.container{
+  padding:14px;
 }
 
-/* ===== Diseño del Itinerario ===== */
+/* ===== ITINERARIO DISEÑO ===== */
 .itinerario-card {
   background: #fff;
   border-radius: 14px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
   padding: 20px;
   margin-bottom: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
 }
 
 .itinerario-header h2 {
-  margin: 0 0 12px;
-  font-size: 20px;
-  font-weight: bold;
-  color: #222;
+  margin:0;
+  font-size:20px;
+  font-weight:bold;
+  color:#222;
+  margin-bottom:10px;
+}
+
+.itinerario-totales {
+  font-size:14px;
+  margin-bottom: 12px;
 }
 
 .itinerario-totales div {
   display: flex;
   justify-content: space-between;
-  font-size: 14px;
-  margin-bottom: 6px;
+  margin:4px 0;
 }
 
 .itinerario-totales .total-line {
-  margin-top: 8px;
-  font-size: 16px;
-  font-weight: bold;
+  font-weight:bold;
+  margin-top:6px;
 }
 
 .vuelo-box {
-  margin-top: 18px;
-  border-top: 1px solid #eee;
-  padding-top: 14px;
+  margin-top: 14px;
+  border-top:1px solid #eee;
+  padding-top:12px;
 }
 
 .vuelo-header {
-  display: flex;
-  justify-content: space-between;
-  font-size: 15px;
-  font-weight: bold;
-  background: #222;
-  color: white;
-  padding: 8px 12px;
-  border-radius: 6px;
+  display:flex;
+  justify-content:space-between;
+  background:#222;
+  color:#fff;
+  padding:8px 12px;
+  border-radius:6px;
+  font-size:15px;
+  font-weight:bold;
 }
 
 .vuelo-info {
-  margin-top: 12px;
+  margin-top:12px;
 }
 
 .vuelo-airline {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 10px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:10px;
 }
 
 .vuelo-airline img {
-  width: 32px;
-  height: 32px;
+  width:32px;
+  height:32px;
 }
 
 .vuelo-text {
-  flex: 1;
-  font-size: 14px;
+  flex:1;
+  font-size:14px;
 }
 
 .vuelo-class {
-  font-size: 14px;
-  font-weight: 600;
-  color: #444;
+  font-size:14px;
+  font-weight:600;
+  color:#444;
 }
 
 .vuelo-route {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:10px;
 }
 
 .location h3 {
-  font-size: 24px;
-  margin: 0;
+  font-size:24px;
+  margin:0;
 }
 
 .location .small-text {
-  font-size: 12px;
-  color: #666;
+  font-size:12px;
+  color:#666;
 }
 
 .location .time {
-  font-size: 18px;
-  font-weight: bold;
-  margin-top: 6px;
+  font-size:18px;
+  font-weight:bold;
 }
 
 .flight-icon {
-  font-size: 18px;
-  margin: 0 8px;
+  font-size:18px;
+  margin:0 8px;
 }
 
 .vuelo-details {
-  margin-top: 14px;
-  color: #555;
-  font-size: 12px;
+  font-size:12px;
+  color:#555;
+  margin-top:10px;
 }
 
 /* ===== FORMULARIO Y CAMPOS ===== */
-.card {
-  background: white;
-  border-radius: 12px;
-  margin-bottom: 14px;
-  padding: 14px;
-  box-shadow: 0 2px 8px rgba(0,0,0,.1);
+.card{
+  background:#fff;
+  border-radius:12px;
+  margin-bottom:14px;
+  padding:14px;
+  box-shadow:0 2px 8px rgba(0,0,0,.1);
 }
 
-.title {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 10px;
+.title{
+  font-size:18px;
+  font-weight:bold;
+  margin-bottom:10px;
 }
 
-.itinerario {
-  font-size: 14px;
-  line-height: 1.6;
+.row{
+  display:flex;
+  gap:10px;
+  margin-bottom:10px;
+  flex-wrap:wrap;
 }
 
-.flight {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
+input, select{
+  padding:5px;
+  border:1px solid #ddd;
+  border-radius:8px;
+  width:100%;
 }
 
-.row {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
-  flex-wrap: wrap;
+.col{
+  flex:1;
+  min-width:120px;
 }
 
-input, select {
-  padding: 5px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  width: 100%;
+.btn{
+  width:100%;
+  background:#222;
+  color:#fff;
+  border-radius:30px;
+  padding:12px;
+  font-size:16px;
+  margin-top:10px;
+  cursor:pointer;
 }
 
-.col {
-  flex: 1;
-  min-width: 120px;
+/* ===== SMALL TEXT ===== */
+.small{
+  font-size:13px;
+  color:#666;
 }
 
-.btn {
-  width: 100%;
-  background: #222;
-  color: #fff;
-  border-radius: 30px;
-  padding: 12px;
-  font-size: 16px;
-  margin-top: 10px;
-  cursor: pointer;
-}
-
-/* ===== FOOTER BASE ===== */
-footer {
-  background: #2b2b2b;
-  color: #fff;
-  padding: 15px;
-  text-align: center;
-  font-size: 14px;
-  margin-top: 20px;
+small{
+  display:block;
+  margin-bottom:4px;
+  color:#555;
 }
 </style>
 
 </head>
+
 <body>
 
 <div class="header">
@@ -208,7 +204,7 @@ footer {
 
 <div class="container">
 
-  <!-- ===== Itinerario de Vuelo ===== -->
+  <!-- ===== ITINERARIO CARD ===== -->
   <div class="itinerario-card">
 
     <div class="itinerario-header">
@@ -216,84 +212,147 @@ footer {
     </div>
 
     <div class="itinerario-totales">
-      <div><span>Tarifa:</span><span>COP $52.000</span></div>
-      <div><span>Impuestos y tasas:</span><span>COP $33.880</span></div>
-      <div><span>Cargos:</span><span>COP $2.860</span></div>
-      <div class="total-line">
-        <span>Total:</span><span>COP $88.740</span>
-      </div>
+      <div><span>Tarifa:</span><span id="tarifaTxt">COP $0</span></div>
+      <div><span>Impuestos y tasas:</span><span id="impuestosTxt">COP $0</span></div>
+      <div><span>Cargos:</span><span id="cargosTxt">COP $0</span></div>
+      <div class="total-line"><span>Total:</span><span id="totalTxt">COP $0</span></div>
     </div>
 
     <div class="vuelo-box">
 
       <div class="vuelo-header">
         <span>IDA</span>
-        <span>Directo</span>
+        <span id="tipoTxt">Directo</span>
       </div>
 
       <div class="vuelo-info">
 
         <div class="vuelo-airline">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Avianca_Logo_2013.svg" alt="Logo Aerolínea">
+          <img id="logoAirline" src="" alt="Logo Aerolínea">
           <div class="vuelo-text">
-            <div><b>Vuelo 4324</b> de LATAM Airlines</div>
-            <div class="small-text">Operado por: Lan Colombia Airlines</div>
+            <div><b id="vueloIdaTxt"></b> de <span id="airlineTxt"></span></div>
+            <div class="small-text" id="operadoTxt"></div>
           </div>
-          <div class="vuelo-class">Económica</div>
+          <div class="vuelo-class" id="claseTxt"></div>
         </div>
 
         <div class="vuelo-route">
           <div class="location">
-            <h3>CLO</h3>
-            <span class="small-text">Cali - Alfonso Bonilla Aragón</span>
-            <span class="time">21:37 hs</span>
-            <span class="small-text">Jue, 26 Feb</span>
+            <h3 id="origCode"></h3>
+            <span class="small-text" id="origName"></span>
+            <span class="time" id="origTime"></span>
+            <span class="small-text" id="origDate"></span>
           </div>
 
           <div class="flight-icon">✈️</div>
 
           <div class="location">
-            <h3>MDE</h3>
-            <span class="small-text">Medellín - José María C.</span>
-            <span class="time">22:30 hs</span>
-            <span class="small-text">Jue, 26 Feb</span>
+            <h3 id="destCode"></h3>
+            <span class="small-text" id="destName"></span>
+            <span class="time" id="destTime"></span>
+            <span class="small-text" id="destDate"></span>
           </div>
         </div>
 
-        <div class="vuelo-details">
-          Equipaje: 0 Pieza(s) por pasajero adulto | Equipaje de mano: No incluido | Tipo de avión: Airbus A320
-        </div>
+        <div class="vuelo-details" id="vueloDetailsTxt"></div>
 
       </div>
 
     </div>
 
   </div>
+
+
+  <!-- ===== DATOS DE PASAJEROS ===== -->
+  <div class="container" id="boxPasajeros"></div>
 
   <!-- ===== DATOS DE CONTACTO ===== -->
-  <div class="card">
-    <div class="title">Datos de Contacto</div>
+  <div class="container">
 
-    <div class="row">
-      <div class="col">
-        <input type="email" id="email" placeholder="E-mail">
+    <div class="card">
+      <div class="title">Datos de Contacto</div>
+
+      <div class="row">
+        <div class="col">
+          <input type="email" id="email" placeholder="E-mail">
+        </div>
       </div>
+
+      <div class="row">
+        <div class="col">
+          <input type="tel" id="telefono" placeholder="Teléfono">
+        </div>
+      </div>
+
     </div>
 
-    <div class="row">
-      <div class="col">
-        <input type="tel" id="telefono" placeholder="Teléfono">
-      </div>
-    </div>
+    <button class="btn">Finalizar reserva</button>
+
   </div>
-
-  <button class="btn">Finalizar reserva</button>
 
 </div>
 
-<footer>
-  © 2026 Tu360 Compras – Todos los derechos reservados
-</footer>
+
+<script>
+
+// ===== OBTIENE PARAMETROS DE URL =====
+function getParam(name){
+  return new URL(window.location.href).searchParams.get(name);
+}
+
+// ===== GENERA DATOS RANDOM =====
+function generarVuelo(){
+  let letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  let codigo = "";
+  for(let i=0;i<2;i++){
+    codigo += letras[Math.floor(Math.random()*letras.length)];
+  }
+  codigo += Math.floor(100 + Math.random()*900);
+  return codigo;
+}
+
+function generarAsiento(){
+  let fila = Math.floor(1 + Math.random()*30);
+  let letras = ["A","B","C","D","E","F"];
+  let letra = letras[Math.floor(Math.random()*letras.length)];
+  return fila + letra;
+}
+
+// ===== RELLENA DATOS =====
+let origen = getParam("origen") || "CLO";
+let destino = getParam("destino") || "MDE";
+let ida = getParam("ida") || "26 Feb";
+let vueloIda = generarVuelo();
+let asientoIda = generarAsiento();
+
+// Asigna al HTML
+document.getElementById("origCode").innerText = origen;
+document.getElementById("destCode").innerText = destino;
+
+document.getElementById("origName").innerText = "Cali - Alfonso Bonilla Aragón";
+document.getElementById("destName").innerText = "Medellín - José María C.";
+
+document.getElementById("origTime").innerText = "21:37 hs";
+document.getElementById("destTime").innerText = "22:30 hs";
+
+document.getElementById("origDate").innerText = ida;
+document.getElementById("destDate").innerText = ida;
+
+document.getElementById("vueloIdaTxt").innerText = vueloIda;
+document.getElementById("airlineTxt").innerText = "LATAM Airlines";
+document.getElementById("operadoTxt").innerText = "Operado por: LATAM Colombia";
+document.getElementById("claseTxt").innerText = "Económica";
+
+document.getElementById("vueloDetailsTxt").innerText =
+  "Equipaje: 0 Pieza(s) adulto | Mano: No incluido | Tipo: Airbus A320";
+
+// Tarifas default
+document.getElementById("tarifaTxt").innerText = "COP $52.000";
+document.getElementById("impuestosTxt").innerText = "COP $33.880";
+document.getElementById("cargosTxt").innerText = "COP $2.860";
+document.getElementById("totalTxt").innerText = "COP $88.740";
+
+</script>
 
 </body>
 </html>

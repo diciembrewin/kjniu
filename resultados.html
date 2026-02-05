@@ -582,7 +582,7 @@ const opciones = [
 function calcularPrecio(hora){
   let h = parseInt(hora.split(":")[0]);
 
-  if (h >= 5 && h < 12) return 102531;
+  if (h >= 5 && h < 12) return 85531;
   if (h >= 12 && h < 18) return 168500;
 
   return Math.floor(Math.random() * (386458 - 240454)) + 240454;

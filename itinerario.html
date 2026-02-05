@@ -251,8 +251,8 @@ let tipo = getParam("tipo") || "oneway";
 let pasajeros = parseInt(getParam("pasajeros") || 1);
 
 /* ===== IDA ===== */
-document.getElementById("origenCode").innerText = origen[0]; // Solo inicial
-document.getElementById("destinoCode").innerText = destino[0]; // Solo inicial
+document.getElementById("origenCode").innerText = origen; // Código completo
+document.getElementById("destinoCode").innerText = destino; // Código completo
 document.getElementById("fechaIda").innerText = ida;
 document.getElementById("vueloIda").innerText = generarVuelo();
 document.getElementById("asientoIda").innerText = generarAsiento();
@@ -261,8 +261,8 @@ document.getElementById("asientoIda").innerText = generarAsiento();
 if(tipo === "oneway"){
   document.getElementById("bloqueVuelta").style.display = "none";
 }else{
-  document.getElementById("destinoCodeV").innerText = destino[0];
-  document.getElementById("origenCodeV").innerText = origen[0];
+  document.getElementById("destinoCodeV").innerText = destino; // Código completo
+  document.getElementById("origenCodeV").innerText = origen; // Código completo
   document.getElementById("fechaVuelta").innerText = vuelta;
   document.getElementById("vueloVuelta").innerText = generarVuelo();
   document.getElementById("asientoVuelta").innerText = generarAsiento();

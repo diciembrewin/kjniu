@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Itinerario – Datos de Pasajeros</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Itinerario – Pasajeros</title>
 
 <style>
 body{
   margin:0;
-  font-family:Arial;
+  font-family:Arial, sans-serif;
   background:#f2f2f2;
 }
 
@@ -20,9 +20,94 @@ body{
   border-bottom:1px solid #ddd;
 }
 
-.container{
+.container{ padding:14px; }
+
+/* ===== RESUMEN PRECIO ===== */
+
+.price-card{
+  background:#fff;
+  border-radius:12px;
   padding:14px;
+  margin-bottom:16px;
+  box-shadow:0 2px 8px rgba(0,0,0,.1);
 }
+
+.price-row{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:8px;
+  color:#555;
+}
+
+.price-total{
+  display:flex;
+  justify-content:space-between;
+  margin-top:12px;
+  font-size:20px;
+  font-weight:bold;
+}
+
+/* ===== ITINERARIO ===== */
+
+.segment-card{
+  background:#fff;
+  border-radius:12px;
+  margin-bottom:16px;
+  overflow:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.1);
+}
+
+.segment-header{
+  background:#2b2b2b;
+  color:#fff;
+  padding:12px 14px;
+  font-weight:bold;
+  display:flex;
+  justify-content:space-between;
+}
+
+.segment-body{ padding:14px; font-size:13px; }
+
+.segment-info{
+  display:flex;
+  justify-content:space-between;
+  color:#555;
+  margin-bottom:10px;
+}
+
+.route{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin:14px 0;
+}
+
+.airport{
+  text-align:center;
+  width:35%;
+}
+
+.airport b{ font-size:22px; }
+
+.flight-line{
+  width:30%;
+  text-align:center;
+  font-size:20px;
+}
+
+.pending{
+  font-size:12px;
+  color:#c00;
+  font-weight:bold;
+}
+
+.details{
+  font-size:12px;
+  color:#666;
+  line-height:1.6;
+}
+
+/* ===== FORM ===== */
 
 .card{
   background:#fff;
@@ -38,18 +123,6 @@ body{
   margin-bottom:10px;
 }
 
-.itinerario{
-  font-size:14px;
-  line-height:1.6;
-}
-
-.flight{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin-bottom:10px;
-}
-
 .row{
   display:flex;
   gap:10px;
@@ -57,16 +130,13 @@ body{
   flex-wrap:wrap;
 }
 
+.col{ flex:1; min-width:120px; }
+
 input, select{
-  padding:5px;
+  width:100%;
+  padding:8px;
   border:1px solid #ddd;
   border-radius:8px;
-  width:100%;
-}
-
-.col{
-  flex:1;
-  min-width:120px;
 }
 
 .btn{
@@ -79,282 +149,6 @@ input, select{
   margin-top:10px;
   cursor:pointer;
 }
-
-.small{
-  font-size:13px;
-  color:#666;
-}
-
-small{
-  display:block;
-  margin-bottom:4px;
-  color:#555;
-}
-
-/* ===== BLOQUE PRECIOS ITINERARIO ===== */
-
-.price-box{
-  background:#fff;
-  border-radius:14px;
-  padding:16px;
-  margin-bottom:14px;
-  box-shadow:0 2px 8px rgba(0,0,0,.1);
-}
-
-.price-row{
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:8px;
-  font-size:14px;
-}
-
-.price-row span:last-child{
-  font-weight:bold;
-}
-
-.price-total{
-  display:flex;
-  justify-content:space-between;
-  margin-top:12px;
-  font-size:22px;
-  font-weight:bold;
-}
-
-/* ===== FOOTER TU360 ===== */
-
-.footer-net-3{
-  background:#2b2b2b;
-  color:#fff;
-  padding:30px 15px;
-  font-size:14px;
-}
-
-.footer-net{
-  max-width:1000px;
-  margin:0 auto;
-}
-
-.footer-net img{
-  max-width:180px;
-}
-
-.net-accordion__container{
-  display:flex;
-  flex-direction:column;
-  gap:20px;
-}
-
-.net-accordion__title{
-  font-weight:bold;
-  margin-bottom:10px;
-}
-
-.net-accordion__body{
-  margin-top:8px;
-}
-
-.footer-net__list{
-  list-style:none;
-  padding:0;
-  margin:0;
-}
-
-.footer-net__list--row{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-}
-
-.footer-net__item{
-  margin-bottom:5px;
-}
-
-.footer-net__link{
-  color:#fff;
-  text-decoration:none;
-  font-size:13px;
-}
-
-.footer-net__link:hover{
-  text-decoration:underline;
-}
-
-.footer-net__text1{
-  font-size:13px;
-  margin-bottom:6px;
-}
-
-.footer-net hr{
-  margin:20px 0;
-  border:0;
-  border-top:1px solid #444;
-}
-
-.footer-net__list--logos{
-  text-align:center;
-}
-
-.footer-net__logo{
-  margin:10px;
-  max-width:160px;
-}
-
-.footer-info{
-  font-size:12px;
-  line-height:1.4;
-  margin-top:20px;
-  color:#ccc;
-}
-
-/* RESPONSIVE */
-
-@media(min-width:768px){
-
-  .net-accordion__container{
-    flex-direction:row;
-    flex-wrap:wrap;
-    justify-content:space-between;
-  }
-
-  .net-accordion__child{
-    width:48%;
-  }
-
-  .footer-net__list--row{
-    flex-direction:row;
-    flex-wrap:wrap;
-  }
-
-  .footer-net__item{
-    width:48%;
-  }
-}
-/* ===== BLOQUE TÉRMINOS Y CONDICIONES – MEJORADO ===== */
-
-#TermsAndConditions {
-  background: #ffffff;
-  border-radius: 18px;
-  padding: 16px;
-  margin: 18px auto;
-  max-width: 880px;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
-  font-size: 12px;               /* más compacto */
-  color: #2b2b2b;
-  line-height: 1.45;
-}
-
-/* Título principal */
-
-#TermsAndConditions .heading {
-  font-size: 14px;
-  font-weight: bold;
-  margin-bottom: 10px;
-  color: #1a1a1a;
-  border-bottom: 2px solid #ffd100;
-  padding-bottom: 6px;
-}
-
-/* Contenido de texto */
-
-#TermsAndConditions p {
-  margin: 6px 0;
-  font-size: 12px;
-}
-
-#TermsAndConditions a {
-  color: #0066cc;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-#TermsAndConditions a:hover {
-  text-decoration: underline;
-}
-
-/* Línea divisora */
-
-#TermsAndConditions hr {
-  border: none;
-  border-top: 1px solid #eaeaea;
-  margin: 10px 0;
-}
-
-/* Contenedor de checkboxes bien alineados */
-
-#TermsAndConditions .row.column {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 8px;
-}
-
-/* Cada fila de checkbox */
-
-#TermsAndConditions .row.column > div {
-  display: flex;
-  flex-direction: row-reverse;      /* checkbox a la derecha */
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 6px 0;
-  border-bottom: 1px solid #f0f0f0;
-}
-
-/* Checkboxes */
-
-#TermsAndConditions input[type="checkbox"] {
-  transform: scale(1.05);
-  cursor: pointer;
-  margin: 0;
-}
-
-/* Textos de los checkbox */
-
-#TermsAndConditions label {
-  flex: -1;
-  font-size: 11px;
-  color: #2b2b2b;
-  cursor: pointer;
-  line-height: 1.35;
-  text-align: left;
-}
-
-/* Mensajes de error */
-
-#TermsAndConditions .text-danger {
-  color: #c00;
-  font-size: 10px;
-}
-
-#TermsAndConditions .field-validation-error {
-  display: block;
-  margin-top: 4px;
-  font-size: 10px;
-  text-align: right;
-}
-
-/* Ajustes responsive */
-
-@media (max-width: 600px){
-
-  #TermsAndConditions {
-    margin: 10px;
-    padding: 12px;
-    font-size: 11px;
-  }
-
-  #TermsAndConditions .heading {
-    font-size: 13px;
-  }
-
-  #TermsAndConditions label {
-    font-size: 10px;
-  }
-
-  #TermsAndConditions .row.column > div {
-    padding: 5px 0;
-  }
-}
 </style>
 </head>
 
@@ -366,67 +160,60 @@ small{
 
 <div class="container">
 
-  <!-- BLOQUE DE PRECIOS -->
-  <div class="price-box">
+  <!-- RESUMEN DE VALOR -->
+  <div class="price-card">
     <div class="price-row">
       <span>Tarifa:</span>
-      <span id="tarifaTxt">COP $0</span>
+      <span id="tarifa"></span>
     </div>
-
     <div class="price-row">
       <span>Impuestos y tasas:</span>
-      <span id="impuestosTxt">COP $0</span>
+      <span id="impuestos"></span>
     </div>
-
     <div class="price-row">
       <span>Cargos:</span>
-      <span id="cargosTxt">COP $0</span>
+      <span id="cargos"></span>
     </div>
 
     <div class="price-total">
       <span>Total:</span>
-      <span id="totalTxt">COP $0</span>
+      <span id="total"></span>
     </div>
   </div>
 
-  <div class="card">
-
-    <div class="title">Tu Itinerario</div>
-
-    <div class="itinerario">
-
-      <div class="flight">
-        ✈️
-        <div>
-          <b>IDA</b><br>
-          <span id="rutaIda"></span><br>
-          <span class="small">
-            Fecha: <span id="fechaIda"></span><br>
-            Vuelo: <span id="vueloIda"></span><br>
-            Asiento: <span id="asientoIda"></span>
-          </span>
-        </div>
-      </div>
-
-      <div id="bloqueVuelta">
-
-        <div class="flight">
-          ✈️
-          <div>
-            <b>VUELTA</b><br>
-            <span id="rutaVuelta"></span><br>
-            <span class="small">
-              Fecha: <span id="fechaVuelta"></span><br>
-              Vuelo: <span id="vueloVuelta"></span><br>
-              Asiento: <span id="asientoVuelta"></span>
-            </span>
-          </div>
-        </div>
-
-      </div>
-
+  <!-- IDA -->
+  <div class="segment-card">
+    <div class="segment-header">
+      <span>IDA</span>
+      <span>Directo</span>
     </div>
 
+    <div class="segment-body">
+      <div class="segment-info">
+        <div>Vuelo <span id="vueloIda"></span></div>
+        <div>Económica</div>
+      </div>
+
+      <div class="route">
+        <div class="airport">
+          <b id="origenCode"></b><br>
+          <span class="pending">Hora pendiente</span>
+        </div>
+
+        <div class="flight-line">✈️</div>
+
+        <div class="airport">
+          <b id="destinoCode"></b><br>
+          <span class="pending">Hora pendiente</span>
+        </div>
+      </div>
+
+      <div class="details">
+        Fecha: <span id="fechaIda"></span><br>
+        Hora: <b>Pendiente de confirmación de reserva</b><br>
+        Asiento: <span id="asientoIda"></span>
+      </div>
+    </div>
   </div>
 
 </div>
@@ -434,196 +221,58 @@ small{
 <div class="container" id="boxPasajeros"></div>
 
 <div class="container">
-
-  <div class="card">
-    <div class="title">Datos de Contacto</div>
-
-    <div class="row">
-      <div class="col">
-        <input type="email" id="email" placeholder="E-mail">
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col">
-        <input type="tel" id="telefono" placeholder="Teléfono">
-      </div>
-    </div>
-
-  </div>
-
-<button class="btn" onclick="window.location.href='https://c7258a33-d84b-4297-8140-16745552b9b5-00-2kfz7n8282khh.picard.replit.dev/bv/'">
-  Finalizar reserva
-</button>
-
+  <button class="btn">Finalizar reserva</button>
 </div>
-
-<div id="TermsAndConditions" class="callout information">
-
-  <div class="heading">
-    <span class="fontNormal bold">Términos y Condiciones</span>
-  </div>
-
-  <div id="divTermsAndConditionsText">
-    <p>Manifiesto haber leído cuidadosamente las políticas de cancelación, debajo de cada itinerario y estoy de acuerdo con la información incluida en el itinerario, datos de pasajeros y tarifa.</p><p><br></p><p>Leí y&nbsp;estoy de acuerdo con el tratamiento de mis datos personales, por lo tanto acepto la política de privacidad, la cual se puede consultar <a href="http://viajestu360compras.bancolombia.com/politica-de-privacidad?_gl=1*13fx99u*_gcl_aw*R0NMLjE3NzAwODk4NzcuQ2p3S0NBaUFzNEhNQmhCSkVpd0FDcmZOWmNUUDVITGdXZUxkbEVqQmpoODJsck5GMFUwR1FTSDZfVlQzZjJ2Tnp3UHVJOGs1ZE1MT1Nob0NOOXNRQXZEX0J3RQ..*_gcl_au*MTI0MDk3NzM0OS4xNzY5NjUyNzgw*_ga*NjYyMjc0NTEyLjE3Njk2NTI3Nzk.*_ga_B6YXBDTWFL*czE3NzAwODgzMDckbzEkZzEkdDE3NzAwOTE5OTckajM1JGwwJGgw" rel="noopener noreferrer" target="_blank">aquí</a></p><p><br></p><p>Para conocer términos y condiciones de la prestación de nuestros servicios, haz clic <a href="http://viajestu360compras.bancolombia.com/Portals/27/Documentos/T%C3%A9rminos_y_condiciones_netviajes.pdf?_gl=1*144gqgi*_gcl_aw*R0NMLjE3NzAwODk4NzcuQ2p3S0NBaUFzNEhNQmhCSkVpd0FDcmZOWmNUUDVITGdXZUxkbEVqQmpoODJsck5GMFUwR1FTSDZfVlQzZjJ2Tnp3UHVJOGs1ZE1MT1Nob0NOOXNRQXZEX0J3RQ..*_gcl_au*MTI0MDk3NzM0OS4xNzY5NjUyNzgw*_ga*NjYyMjc0NTEyLjE3Njk2NTI3Nzk.*_ga_B6YXBDTWFL*czE3NzAwODgzMDckbzEkZzEkdDE3NzAwOTE5OTckajM1JGwwJGgw" rel="noopener noreferrer" target="_blank">aquí</a></p>
-  </div>
-
-  <div class="row column">
-    <hr style="border-color: #fafafa; margin: 0.3em 1.35em 1em;">
-  </div>
-
-  <div class="row column">
-    <div>
-      <input data-val="true" data-val-ischecked="Debe aceptar los términos y condiciones" data-val-required="The TermsAndConditions field is required." id="chkTermsAndConditions" name="TermsAndConditions" type="checkbox" value="true" class="valid"><input name="TermsAndConditions" type="hidden" value="false">
-      <label for="chkTermsAndConditions">Declaro aceptar los términos y condiciones</label>
-      <span class="field-validation-valid" data-valmsg-for="TermsAndConditions" data-valmsg-replace="true"></span>
-    </div>
-    <div>
-      <input data-val="True" data-val-ischecked="Debe aceptar los términos y condiciones" data-val-required="The TermsUserAccept field is required." id="chkTermsUserAccept" name="TermsUserAccept" type="checkbox" value="true"><input name="TermsUserAccept" type="hidden" value="false">
-
-      <label style="display: -webkit-inline-box;">
-        Recuerda que la aerolínea Avianca no permite viajar solos a los niños de 14 años o menos, siempre deben viajar con un adulto responsable. En caso contrario, la aerolínea podrá negar el abordaje.
-      </label>
-
-      <span class="field-validation-error" id="acceptTermsUserAccept" style="display:none;">
-        <span class="text-danger">Debe aceptar los términos y condiciones</span>
-      </span>
-    </div>
-    <div>
-      <input data-val="true" data-val-required="Debe aceptar los términos y condiciones." id="chkTermsAcceptPassData" name="TermsAcceptPassData" type="checkbox" value="true" class="valid"><input name="TermsAcceptPassData" type="hidden" value="false">
-
-      <label style="display: -webkit-inline-box;">
-        He leído y acepto el tratamiento de mis datos personales
-      </label>
-      <span class="field-validation-error" id="acceptTermsAcceptPassData" style="display:none;">
-        <span class="text-danger">Debe aceptar los términos y condiciones para Compartir Datos</span>
-      </span>
-    </div>
-
-  </div>
-</div>
-
-<footer class=" footer-net-3 bg-custom">
-  <div class="footer-net">
-    <div class="net-accordion">
-      <div class="net-accordion__container">
-        <div class="">
-          <div class="net-accordion__title">
-            <img id="dnn_dnnLOGO_imgLogo" src="https://viajestu360compras.bancolombia.com/Portals/27/Skins/skin-bem/assets/images/logo-blanco-360.png" alt="Encuentra y compra viajes a destinos soñados | Tu360Compras" />
-            <span>
-              <br />
-              Operado por NETVIAJES RNT 72357
-            </span>
-            <span>
-              <br />
-              Netactica Colombia SAS . Nit 900132867-1
-              <br />
-              Cra 15 # 88 -21 Of 502 Bogotá
-            </span>
-          </div>
-        </div>
-        <div class="net-accordion__child net-accordion__child--include">
-          <div class="net-accordion__title">
-            ¿Tienes dudas?
-          </div>
-          <div class="net-accordion__body">
-            <ul class="footer-net__list footer-net__list--row">
-              <li class="w-100 footer-net__item"><a href="https://viajestu360compras.zendesk.com/hc/es/requests/new" class="footer-net__link">Contáctanos</a></li>
-              <li class="w-100 footer-net__item"><a href="https://viajestu360compras.zendesk.com/" class="footer-net__link">Preguntas frecuentes</a></li>
-              <li class="w-100 footer-net__item"><a target="_blank" href="https://viajestu360compras.bancolombia.com/consultar-estado-requerimiento" class="footer-net__link">Consulta el estado de tus requerimientos</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="net-accordion__child net-accordion__child--include">
-          <div class="net-accordion__title">
-            ¿Necesitas financiación?
-          </div>
-          <div class="net-accordion__body">
-            <ul class="footer-net__list footer-net__list--row">
-              <li class="w-100 footer-net__item">
-                <p class="footer-net__text1">Bancolombia te ofrece productos de acuerdo a tu necesidad</p>
-                <a target="_blank" href="https://accesodigital.grupobancolombia.com/servicios/credito-personal-sin-garantia/" class="footer-net__link">Crédito Personal</a>
-              </li>
-              <li class="w-100 footer-net__item">
-                <a target="_blank" href="https://www.bancolombia.com/personas/productos/tarjetas-de-credito" class="footer-net__link">Tarjetas de Crédito</a>
-              </li>
-              <li class="w-100 footer-net__item">
-                <a target="_blank" href="https://www.bancolombia.com/personas/productos/tarjetas-de-credito/tarjetas-de-credito-bancolombia/tarjeta-bancolombia-visa-credito" class="footer-net__link">Visa Crédito</a>
-              </li>
-              <li class="w-100 footer-net__item">
-                <a target="_blank" href="https://www.bancolombia.com/personas/productos/tarjetas-de-credito/tarjetas-de-credito-bancolombia/tarjeta-bancolombia-mastercard-credito" class="footer-net__link">Mastercard Crédito</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-    <hr />
-    <div class="footer-net__list footer-net__list--logos">
-      <a target="_blank" href="https://www.bancolombia.com/"><img alt="Bancolombia" class="footer-net__logo" src="https://viajestu360compras.bancolombia.com/Portals/27/Skins/skin-bem/assets/images/iso-9001-2015.png" /></a>
-      <a target="_blank" href="https://superintendencia.bancolombia.com/"><img alt="Supersubsidios" class="footer-net__logo" src="https://viajestu360compras.bancolombia.com/Portals/27/Skins/skin-bem/assets/images/superintendencia-de-vigilancia.png" /></a>
-    </div>
-    <p class="footer-info">
-      Esta página es propiedad de Netactica Colombia SAS Nit 900132867-1 con dirección
-      Calle 15 # 88-21, Bogotá Colombia. Derechos reservados 2023.
-      <br />No permitida la reproducción total o parcial de su contenido, imágenes, marcas,
-      diagramación o estructura de información.
-      <br />Certificado SSL emitido por DigiCert para viajes Tu360Compras.
-    </p>
-  </div>
-</footer>
 
 <script>
-function getQueryParams() {
-  const params = {};
-  const queryString = window.location.search.substring(1);
-  const pairs = queryString.split("&");
-  for (const pair of pairs) {
-    if (!pair) continue;
-    const [key, value] = pair.split("=");
-    params[decodeURIComponent(key)] = decodeURIComponent(value || "");
-  }
-  return params;
+function formatCOP(valor){
+  return "COP $" + valor.toLocaleString("es-CO");
 }
 
-function formatCOP(number) {
-  // Aseguramos que number sea un número
-  const n = Number(number);
-  if (isNaN(n)) return "COP $0";
-  // Formatear con separador de miles
-  return "COP $" + n.toLocaleString("es-CO");
+function generarVuelo(){
+  let l="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  return l[Math.floor(Math.random()*26)] +
+         l[Math.floor(Math.random()*26)] +
+         Math.floor(100 + Math.random()*900);
 }
 
-function main() {
-  const params = getQueryParams();
-
-  // Mostrar itinerario
-  document.getElementById("rutaIda").innerText = params["rutaIda"] || "";
-  document.getElementById("fechaIda").innerText = params["fechaIda"] || "";
-  document.getElementById("vueloIda").innerText = params["vueloIda"] || "";
-  document.getElementById("asientoIda").innerText = params["asientoIda"] || "";
-
-  if(params["rutaVuelta"] && params["fechaVuelta"]){
-    document.getElementById("rutaVuelta").innerText = params["rutaVuelta"];
-    document.getElementById("fechaVuelta").innerText = params["fechaVuelta"];
-    document.getElementById("vueloVuelta").innerText = params["vueloVuelta"] || "";
-    document.getElementById("asientoVuelta").innerText = params["asientoVuelta"] || "";
-  } else {
-    document.getElementById("bloqueVuelta").style.display = "none";
-  }
-
-  // Mostrar precios
-  const tarifa = Number(params["tarifa"]) || 0;
-  const impuestos = Number(params["impuestos"]) || 0;
-  const cargos = Number(params["cargos"]) || 0;
-  const total = tarifa + impuestos + cargos;
-
-  document.getElementById("tarifaTxt").innerText = formatCOP(tarifa);
-  document.getElementById("impuestosTxt").innerText = formatCOP(impuestos);
-  document.getElementById("cargosTxt").innerText = formatCOP(cargos);
-  document.getElementById("totalTxt").innerText = formatCOP(total);
+function generarAsiento(){
+  return Math.floor(1+Math.random()*30) +
+         ["A","B","C","D","E","F"][Math.floor(Math.random()*6)];
 }
-window.onload = main;
+
+/* ===== VALORES ===== */
+let tarifa = 52000;
+let impuestos = 33880;
+let cargos = 2860;
+let total = tarifa + impuestos + cargos;
+
+document.getElementById("tarifa").innerText = formatCOP(tarifa);
+document.getElementById("impuestos").innerText = formatCOP(impuestos);
+document.getElementById("cargos").innerText = formatCOP(cargos);
+document.getElementById("total").innerText = formatCOP(total);
+
+/* ===== ITINERARIO ===== */
+let origen = "CLO";
+let destino = "MDE";
+let ida = "26 Feb";
+
+document.getElementById("origenCode").innerText = origen;
+document.getElementById("destinoCode").innerText = destino;
+document.getElementById("fechaIda").innerText = ida;
+document.getElementById("vueloIda").innerText = generarVuelo();
+document.getElementById("asientoIda").innerText = generarAsiento();
+
+/* ===== PASAJEROS ===== */
+let box = document.getElementById("boxPasajeros");
+box.innerHTML = `
+  <div class="card">
+    <div class="title">Pasajero 1 – Adulto</div>
+    <div class="row">
+      <div class="col"><input placeholder="Nombre"></div>
+      <div class="col"><input placeholder="Apellido"></div>
+    </div>
+  </div>`;
 </script>
 
 </body>

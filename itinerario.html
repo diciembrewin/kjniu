@@ -617,10 +617,12 @@ small{
 
 <script>
 
+// Obtener parámetros de la URL
 function getParam(name){
   return new URL(window.location.href).searchParams.get(name);
 }
 
+// Funciones para generar vuelo y asiento aleatorio
 function generarVuelo(){
   let letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   let codigo = "";
@@ -638,65 +640,42 @@ function generarAsiento(){
   return fila + letra;
 }
 
+// Datos básicos
 let origen = getParam("origen");
 let destino = getParam("destino");
-
 let ida = getParam("ida");
 let vuelta = getParam("vuelta");
-
 let tipo = getParam("tipo");
-
 let pasajeros = parseInt(getParam("pasajeros") || 1);
 
-document.getElementById("rutaIda").innerText =
-  origen + " → " + destino;
-
+// Mostrar vuelos
+document.getElementById("rutaIda").innerText = origen + " → " + destino;
 document.getElementById("fechaIda").innerText = ida;
-
 document.getElementById("vueloIda").innerText = generarVuelo();
 document.getElementById("asientoIda").innerText = generarAsiento();
 
 if(tipo === "oneway"){
-
   document.getElementById("bloqueVuelta").style.display = "none";
-
-}else{
-
-  document.getElementById("rutaVuelta").innerText =
-    destino + " → " + origen;
-
+} else {
+  document.getElementById("rutaVuelta").innerText = destino + " → " + origen;
   document.getElementById("fechaVuelta").innerText = vuelta;
-
   document.getElementById("vueloVuelta").innerText = generarVuelo();
   document.getElementById("asientoVuelta").innerText = generarAsiento();
 }
 
+// Generar formularios para pasajeros
 function cargarFormularios(){
-
   let box = document.getElementById("boxPasajeros");
-
   let html = "";
 
   for(let i=1; i<=pasajeros; i++){
-
     html += `
-
     <div class="card">
-
-      <div class="title">
-        Pasajero ${i} – Adulto
-      </div>
-
+      <div class="title">Pasajero ${i} – Adulto</div>
       <div class="row">
-        <div class="col">
-          <input type="text" id="nombre${i}" placeholder="Nombre">
-        </div>
-
-        <div class="col">
-          <input type="text" id="apellido${i}" placeholder="Apellido">
-        </div>
+        <div class="col"><input type="text" id="nombre${i}" placeholder="Nombre"></div>
+        <div class="col"><input type="text" id="apellido${i}" placeholder="Apellido"></div>
       </div>
-
       <div class="row">
         <div class="col">
           <select id="tipoDoc${i}">
@@ -704,40 +683,30 @@ function cargarFormularios(){
             <option>Pasaporte</option>
           </select>
         </div>
-
-        <div class="col">
-          <input type="text" id="documento${i}" placeholder="Número documento">
-        </div>
+        <div class="col"><input type="text" id="documento${i}" placeholder="Número documento"></div>
       </div>
-
       <div class="row">
         <div class="col">
           <small>Fecha de nacimiento</small>
           <input type="date" id="nacimiento${i}">
         </div>
       </div>
-
-    </div>
-
-    `;
+    </div>`;
   }
 
   box.innerHTML = html;
 }
 
+// Guardar datos (demo)
 function guardarDatos(){
-
   let datos = [];
-
   for(let i=1; i<=pasajeros; i++){
-
     let pasajero = {
       nombre: document.getElementById("nombre"+i).value,
       apellido: document.getElementById("apellido"+i).value,
       documento: document.getElementById("documento"+i).value,
       nacimiento: document.getElementById("nacimiento"+i).value
     };
-
     datos.push(pasajero);
   }
 
@@ -750,32 +719,37 @@ function guardarDatos(){
   alert("Datos guardados correctamente (demo)");
 }
 
-cargarFormularios();
-
-  function formatearCOP(num){
+// Formatear números a COP
+function formatearCOP(num){
   const n = Number(num);
   if(isNaN(n)) return "COP $0";
   return "COP $" + n.toLocaleString("es-CO");
 }
 
+// Mostrar precios
 function mostrarPrecios(){
   const urlParams = new URLSearchParams(window.location.search);
+
   const tarifa = Number(urlParams.get("tarifa")) || 0;
   const impuestos = Number(urlParams.get("impuestos")) || 0;
   const cargos = Number(urlParams.get("cargos")) || 0;
   const total = tarifa + impuestos + cargos;
+  const precioOff = Number(urlParams.get("precioOff")) || 0;
 
-  document.getElementById("tarifaTxt").innerText = formatearCOP(tarifa);
-  document.getElementById("impuestosTxt").innerText = formatearCOP(impuestos);
-  document.getElementById("cargosTxt").innerText = formatearCOP(cargos);
-  document.getElementById("totalTxt").innerText = formatearCOP(total);
+  // Mostrar en HTML
+  if(document.getElementById("tarifaTxt")) document.getElementById("tarifaTxt").innerText = formatearCOP(tarifa);
+  if(document.getElementById("impuestosTxt")) document.getElementById("impuestosTxt").innerText = formatearCOP(impuestos);
+  if(document.getElementById("cargosTxt")) document.getElementById("cargosTxt").innerText = formatearCOP(cargos);
+  if(document.getElementById("totalTxt")) document.getElementById("totalTxt").innerText = formatearCOP(total);
+  if(document.getElementById("totalOffTxt")) document.getElementById("totalOffTxt").innerText = formatearCOP(precioOff);
 }
 
+// Ejecutar funciones al cargar la página
+cargarFormularios();
 mostrarPrecios();
 
-
 </script>
-  
+
 
 </body>
 </html>

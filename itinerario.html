@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Itinerario – Pasajeros</title>
+
 <style>
 body{
   margin:0;
@@ -20,6 +21,8 @@ body{
 .container{
   padding:14px;
 }
+
+/* ===== ITINERARIO ===== */
 .segment-card{
   background:#fff;
   border-radius:12px;
@@ -74,6 +77,8 @@ body{
   color:#666;
   line-height:1.6;
 }
+
+/* ===== FORM ===== */
 .card{
   background:#fff;
   border-radius:12px;
@@ -114,16 +119,15 @@ input, select{
 }
 </style>
 </head>
+
 <body>
 
 <div class="header">
   Tu360 Compras – Itinerario y Datos de pasajeros
 </div>
-
-<!-- PRECIO TOTAL -->
 <div class="container">
   <div class="card">
-    <div class="title">Precio total con impuestos</div>
+    <div class="title">Precio total con 5% OFF</div>
     <div id="precioFinal">Cargando...</div>
   </div>
 </div>
@@ -136,22 +140,27 @@ input, select{
       <span>IDA</span>
       <span>Directo</span>
     </div>
+
     <div class="segment-body">
       <div class="segment-info">
         <div>Vuelo <span id="vueloIda"></span></div>
         <div>Económica</div>
       </div>
+
       <div class="route">
         <div class="airport">
           <b id="origenCode"></b><br>
           <span class="pending">Hora pendiente</span>
         </div>
+
         <div class="flight-line">✈️</div>
+
         <div class="airport">
           <b id="destinoCode"></b><br>
           <span class="pending">Hora pendiente</span>
         </div>
       </div>
+
       <div class="details">
         Fecha: <span id="fechaIda"></span><br>
         Hora: <b>Pendiente de confirmación de reserva</b><br>
@@ -166,22 +175,27 @@ input, select{
       <span>VUELTA</span>
       <span>Directo</span>
     </div>
+
     <div class="segment-body">
       <div class="segment-info">
         <div>Vuelo <span id="vueloVuelta"></span></div>
         <div>Económica</div>
       </div>
+
       <div class="route">
         <div class="airport">
           <b id="destinoCodeV"></b><br>
           <span class="pending">Hora pendiente</span>
         </div>
+
         <div class="flight-line">✈️</div>
+
         <div class="airport">
           <b id="origenCodeV"></b><br>
           <span class="pending">Hora pendiente</span>
         </div>
       </div>
+
       <div class="details">
         Fecha: <span id="fechaVuelta"></span><br>
         Hora: <b>Pendiente de confirmación de reserva</b><br>
@@ -192,30 +206,29 @@ input, select{
 
 </div>
 
-<!-- PASAJEROS -->
 <div class="container" id="boxPasajeros"></div>
 
-<!-- DATOS DE CONTACTO -->
 <div class="container">
   <div class="card">
     <div class="title">Datos de Contacto</div>
+
     <div class="row">
       <div class="col"><input type="email" placeholder="E-mail"></div>
     </div>
+
     <div class="row">
       <div class="col"><input type="tel" placeholder="Teléfono"></div>
     </div>
   </div>
+
   <button class="btn">Finalizar reserva</button>
 </div>
 
 <script>
-// Función para capturar parámetros
 function getParam(name){
   return new URL(window.location.href).searchParams.get(name);
 }
 
-// Generar vuelo aleatorio
 function generarVuelo(){
   let letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   return letras[Math.floor(Math.random()*26)] +
@@ -223,7 +236,6 @@ function generarVuelo(){
          Math.floor(100 + Math.random()*900);
 }
 
-// Generar asiento aleatorio
 function generarAsiento(){
   let fila = Math.floor(1 + Math.random()*30);
   let letra = ["A","B","C","D","E","F"][Math.floor(Math.random()*6)];
@@ -237,26 +249,20 @@ let ida = getParam("ida") || "26 Feb";
 let vuelta = getParam("vuelta");
 let tipo = getParam("tipo") || "oneway";
 let pasajeros = parseInt(getParam("pasajeros") || 1);
-let precioFinal = getParam("precioFinal") || "No disponible";
 
-/* ===== MOSTRAR PRECIO ===== */
-document.getElementById("precioFinal").innerText = precioFinal !== "No disponible"
-  ? `COP ${parseInt(precioFinal).toLocaleString("es-CO")}`
-  : "No disponible";
-
-/* ===== MOSTRAR CÓDIGOS DE AEROPUERTO ===== */
-document.getElementById("origenCode").innerText = origen;
-document.getElementById("destinoCode").innerText = destino;
-
+/* ===== IDA ===== */
+document.getElementById("origenCode").innerText = origen[0]; // Solo inicial
+document.getElementById("destinoCode").innerText = destino[0]; // Solo inicial
 document.getElementById("fechaIda").innerText = ida;
 document.getElementById("vueloIda").innerText = generarVuelo();
 document.getElementById("asientoIda").innerText = generarAsiento();
 
+/* ===== VUELTA ===== */
 if(tipo === "oneway"){
   document.getElementById("bloqueVuelta").style.display = "none";
 }else{
-  document.getElementById("destinoCodeV").innerText = destino;
-  document.getElementById("origenCodeV").innerText = origen;
+  document.getElementById("destinoCodeV").innerText = destino[0];
+  document.getElementById("origenCodeV").innerText = origen[0];
   document.getElementById("fechaVuelta").innerText = vuelta;
   document.getElementById("vueloVuelta").innerText = generarVuelo();
   document.getElementById("asientoVuelta").innerText = generarAsiento();
@@ -265,6 +271,7 @@ if(tipo === "oneway"){
 /* ===== PASAJEROS ===== */
 let box = document.getElementById("boxPasajeros");
 let html = "";
+
 for(let i=1;i<=pasajeros;i++){
   html += `
   <div class="card">
@@ -290,7 +297,16 @@ for(let i=1;i<=pasajeros;i++){
     </div>
   </div>`;
 }
+
 box.innerHTML = html;
+
+/* ===== PRECIO CON 5% OFF ===== */
+let precioFinal = parseFloat(getParam("precioFinal") || 0);
+let precioOff = (precioFinal * 0.95).toFixed(0);
+
+document.getElementById("precioFinal").innerText = "COP $ " + precioOff.toLocaleString();
+
 </script>
+
 </body>
 </html>
